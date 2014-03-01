@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  institution_id: 1
+  year_from: 2014-03-01
+  year_to: 2014-03-01
+  office: MyString
+
+two:
+  user_id: 1
+  institution_id: 1
+  year_from: 2014-03-01
+  year_to: 2014-03-01
+  office: MyString

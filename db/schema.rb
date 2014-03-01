@@ -11,10 +11,151 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140301025814) do
+ActiveRecord::Schema.define(version: 20140301050631) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "attendances", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "institution_id"
+    t.date     "year_from"
+    t.date     "year_to"
+    t.string   "office"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "base_matches", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "target_id"
+    t.boolean  "gender_fit"
+    t.boolean  "age_fit"
+    t.boolean  "smoking_fit"
+    t.boolean  "drinking_fit"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "books", force: true do |t|
+    t.string   "name"
+    t.string   "cover"
+    t.string   "author"
+    t.text     "synopsis"
+    t.date     "release_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "books_users", id: false, force: true do |t|
+    t.integer "user_id", null: false
+    t.integer "book_id", null: false
+  end
+
+  create_table "criterions", force: true do |t|
+    t.integer  "user_id"
+    t.boolean  "male"
+    t.integer  "minage"
+    t.integer  "maxage"
+    t.string   "smoking"
+    t.string   "drinking"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "demographics", force: true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.boolean  "male"
+    t.string   "religion"
+    t.date     "dob"
+    t.string   "smoking"
+    t.string   "drinking"
+    t.text     "description"
+    t.text     "goal"
+    t.integer  "diffthresh"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "expectations", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "question_id"
+    t.integer  "rating_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "institutions", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "interests", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "interests_users", id: false, force: true do |t|
+    t.integer "user_id",     null: false
+    t.integer "interest_id", null: false
+  end
+
+  create_table "mind_matches", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "target_id"
+    t.integer  "question_id"
+    t.integer  "valuediff"
+    t.boolean  "mind_fit"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "movies", force: true do |t|
+    t.string   "name"
+    t.string   "poster"
+    t.text     "description"
+    t.date     "release_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "movies_users", id: false, force: true do |t|
+    t.integer "user_id",  null: false
+    t.integer "movie_id", null: false
+  end
+
+  create_table "personalities", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "personalities_users", id: false, force: true do |t|
+    t.integer "user_id",        null: false
+    t.integer "personality_id", null: false
+  end
+
+  create_table "professions", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "professions_users", id: false, force: true do |t|
+    t.integer "user_id",       null: false
+    t.integer "profession_id", null: false
+  end
+
+  create_table "questions", force: true do |t|
+    t.integer  "rating_scale_id"
+    t.text     "revelation_style"
+    t.text     "expectation_style"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "rails_admin_histories", force: true do |t|
     t.text     "message"
@@ -28,6 +169,59 @@ ActiveRecord::Schema.define(version: 20140301025814) do
   end
 
   add_index "rails_admin_histories", ["item", "table", "month", "year"], name: "index_rails_admin_histories", using: :btree
+
+  create_table "rating_scales", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "ratings", force: true do |t|
+    t.integer  "rating_scale_id"
+    t.text     "revelation_style"
+    t.text     "expectation_style"
+    t.integer  "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "revelations", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "question_id"
+    t.integer  "rating_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "site_contents", force: true do |t|
+    t.string   "key"
+    t.string   "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "songs", force: true do |t|
+    t.string   "name"
+    t.string   "album"
+    t.string   "band"
+    t.text     "lyrics"
+    t.date     "release_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "songs_users", id: false, force: true do |t|
+    t.integer "user_id", null: false
+    t.integer "song_id", null: false
+  end
+
+  create_table "total_matches", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "target_id"
+    t.integer  "total_fit"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

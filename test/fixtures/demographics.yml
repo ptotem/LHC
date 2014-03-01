@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  name: MyString
+  male: false
+  religion: MyString
+  dob: 2014-03-01
+  smoking: MyString
+  drinking: MyString
+  description: MyText
+  goal: MyText
+  diffthresh: 1
+
+two:
+  user_id: 1
+  name: MyString
+  male: false
+  religion: MyString
+  dob: 2014-03-01
+  smoking: MyString
+  drinking: MyString
+  description: MyText
+  goal: MyText
+  diffthresh: 1

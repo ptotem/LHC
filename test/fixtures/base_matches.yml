@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  target_id: 1
+  gender_fit: false
+  age_fit: false
+  smoking_fit: false
+  drinking_fit: false
+
+two:
+  user_id: 1
+  target_id: 1
+  gender_fit: false
+  age_fit: false
+  smoking_fit: false
+  drinking_fit: false

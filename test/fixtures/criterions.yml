@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  male: false
+  minage: 1
+  maxage: 1
+  smoking: MyString
+  drinking: MyString
+
+two:
+  user_id: 1
+  male: false
+  minage: 1
+  maxage: 1
+  smoking: MyString
+  drinking: MyString

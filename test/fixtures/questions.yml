@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  rating_scale_id: 1
+  revelation_style: MyText
+  expectation_style: MyText
+
+two:
+  rating_scale_id: 1
+  revelation_style: MyText
+  expectation_style: MyText
