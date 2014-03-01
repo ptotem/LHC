@@ -6,5 +6,8 @@ class Attendance < ActiveRecord::Base
   #t.date :year_to
   #t.string :office
 
+  belongs_to :user
+  belongs_to :institution
+
 
 end
