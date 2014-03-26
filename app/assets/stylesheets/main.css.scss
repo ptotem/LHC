@@ -1141,8 +1141,8 @@ h5 {
 
 #sign_up_section {
     /*background: url("/assets/background.jpeg") no-repeat;*/
-    /*background: url('background.jpeg') no-repeat;*/
-    background: image-url("background.jpeg") no-repeat;
+    background: url('background.jpeg') no-repeat;
+//    background: image-url("background.jpeg") no-repeat;
     background-size: 100% auto;
     padding-bottom: 80px;
     padding-top: 80px;
