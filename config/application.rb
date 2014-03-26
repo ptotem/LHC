@@ -18,8 +18,31 @@ module Lhc
 
     config.assets.enabled=true
     config.assets.initialize_on_precompile = false
-    config.assets.precompile += ['rails_admin/rails_admin.css', 'rails_admin/rails_admin.js']
-    config.assets.paths << "#{Rails.root}/app/assets/fonts"
+    config.assets.precompile += ['rails_admin/rails_admin.css',
+                                 'rails_admin/rails_admin.js']
+
+    config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif,
+                                  "fontawesome-webfont.ttf",
+                                 "fontawesome-webfont.eot",
+                                 "fontawesome-webfont.svg",
+                                 "fontawesome-webfont.woff")
+
+    config.assets.precompile << Proc.new do |path|
+      if path =~ /\.(css|js)\z/
+        full_path = Rails.application.assets.resolve(path).to_path
+        app_assets_path = Rails.root.join('app', 'assets').to_path
+        if full_path.starts_with? app_assets_path
+          puts "including asset: " + full_path
+          true
+        else
+          puts "excluding asset: " + full_path
+          false
+        end
+      else
+        false
+      end
+    end
+
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
