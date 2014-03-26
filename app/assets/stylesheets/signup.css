@@ -1,0 +1,26 @@
+.sign-up-btn{
+    font-size:1.7em;
+    font-weight: bold;
+}
+
+.facebook
+{
+    color:#38c8e0
+}
+
+.form_container
+{
+    margin-top: 17%;
+}
+
+.sign_in_btn
+{
+    font-size: 1.7em;
+    font-weight: bold;
+    background: #e30000;
+    color:white
+}
+
+.no_edges{
+    border-radius: 0;
+}

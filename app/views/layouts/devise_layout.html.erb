@@ -101,16 +101,35 @@
 
 <%= render "layouts/topbar" %>
 
-<!--<section id="content">-->
-  <!--<div class="container">-->
-    <!--<div class="row">-->
-      <!--<div class="col-md-12">-->
-        <%= yield %>
-        <%#= render "layouts/about_us" %>
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
-<!--</section>-->
+<section id="sign_up_section">
+  <div class="container">
 
+    <div class="row form_container ">
+
+
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xs-offset-6 col-sm-offset-6 col-md-offset-6 col-lg-offset-6 text-center form-container transparent-black">
+        <h5><b style="font-size: 1.5em">Sign up with   </b><a class="facebook" href="/users/auth/facebook" target="_self"><i class="fa fa-facebook fa-3x"></i></a></h5>
+
+
+
+
+        <hr>
+
+    <%= yield %>
+
+      </div><!--End Col 6-->
+
+    </div><!--End Row-->
+
+  </div>
+</section>
+
+<%= render "layouts/three_cols_desc_section" %>
+
+<%= render "layouts/icons_section" %>
+
+<%= render "layouts/message_section" %>
+
+<%= render "layouts/bottom_section" %>
 </body>
 </html>

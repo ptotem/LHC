@@ -5,6 +5,9 @@ development:
   timeout: 5000
   username: postgres
   password: 19loki76
+#  username: nilesh
+#  password: p20o20e13
+
 test:
   adapter: postgresql
   database: lhcmocks_test
@@ -12,6 +15,8 @@ test:
   timeout: 5000
   username: postgres
   password: 19loki76
+#  username: nilesh
+#  password: p20o20e13
 
 production:
   adapter: postgresql
@@ -20,3 +25,11 @@ production:
   timeout: 5000
   username: postgres
   password: 19loki76
+#  username: nilesh
+#  password: p20o20e13
+
+
+#sudo -u postgres psql postgres -> as user postgres
+#psql -d lhcmocks_development -U nilesh -W
+
+#TODO: Change username & pwd before pushing on server

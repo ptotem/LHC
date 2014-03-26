@@ -1,0 +1,45 @@
+
+
+<!--<section id="sign_in_section">-->
+        <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => "form-horizontal"}) do |f| %>
+            <%= devise_error_messages! %>
+
+            <div class="control-group">
+              <div class="controls">
+                <div class="row">
+                  <%= f.email_field :email, :autofocus => true, :class => "input-xlarge col-xs-8 col-xs-offset-2", :placeholder => "Email" %>
+                </div>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <div class="controls">
+                <div class="row">
+                  <%= f.password_field :password, :class => "input-xlarge col-xs-8 col-xs-offset-2", :placeholder => "Password" %>
+                </div>
+              </div>
+            </div>
+
+            <% if devise_mapping.rememberable? -%>
+                <div class="control-group">
+                  <div class="controls" style="color:white">
+
+                    <%= f.check_box :remember_me %>
+                    <%= f.label :remember_me %>
+                  </div>
+                </div>
+            <% end -%>
+
+            <div class="control-group">
+              <div class="controls">
+                <%= f.submit "LOG IN", :class => "btn btn-lg sign_in_btn no_edges" %>
+              </div>
+            </div>
+
+        <% end %>
+
+        <div class="control-group">
+          <div class="controls">
+              <b style="color: white;">Not a member?</b> <a href="/" style="color: #38C8E0">Register Now</a>
+          </div>
+        </div>

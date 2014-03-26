@@ -2,7 +2,9 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable
+
+  has_many :authentications, :dependent => :destroy
 
   has_one :demographic, dependent: :destroy
 
@@ -22,5 +24,13 @@ class User < ActiveRecord::Base
   has_many :base_matches, dependent: :destroy
   has_many :mind_matches, dependent: :destroy
   has_many :total_matches, dependent: :destroy
+
+  accepts_nested_attributes_for :demographic
+  #accepts_nested_attributes_for :criterions
+
+  def demographic
+    super || build_demographic
+  end
+
 
 end

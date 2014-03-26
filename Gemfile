@@ -6,8 +6,6 @@ gem 'rails', '4.0.0'
 
 # Use sqlite3 as the database for Active Record
 #gem 'sqlite3'
-
-# Use sqlite3 as the database for Active Record
 gem 'pg'
 gem 'rails_admin'
 gem "rails_12factor"
@@ -23,6 +21,9 @@ gem 'coffee-rails', '~> 4.0.0'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
+
+gem 'execjs'
+gem 'therubyracer'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -52,3 +53,6 @@ end
 
 
 gem "devise"
+
+gem 'omniauth'
+gem 'omniauth-facebook'

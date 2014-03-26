@@ -1,12 +1,28 @@
 Lhc::Application.routes.draw do
   devise_for :users
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
+
   get "home/index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'home#index'
+  #root 'home#index'
+
+  devise_scope :user do
+    authenticated :user do
+      root 'home#index', as: :authenticated_root
+    end
+
+    unauthenticated do
+      root "devise/registrations#new", as: :unauthenticated_root
+    end
+  end
+
+  resources :authentications
+  get '/new_user_details/post_registration'=>'new_user_details#post_registration_details'
+
+  get '/users/auth/:provider/callback' => 'authentications#create'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
