@@ -1,0 +1,25 @@
+<h1>Listing ice_breakers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ice_breakers.each do |ice_breaker| %>
+      <tr>
+        <td><%= link_to 'Show', ice_breaker %></td>
+        <td><%= link_to 'Edit', edit_ice_breaker_path(ice_breaker) %></td>
+        <td><%= link_to 'Destroy', ice_breaker, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Ice breaker', new_ice_breaker_path %>

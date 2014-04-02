@@ -1,0 +1,75 @@
+<!-- ========================= Edit Profile Page Starts ========================= -->
+
+<section id="user_name_section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 title-blue">
+        <h2>Welcome, <%= @user_name %> </h2>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="edit_profile_section">
+  <div class="container">
+    <div class="row" style="padding-top: 3%;">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+        <%= form_for @user, :url => { :controller => "demographics", :action => "update_profile" }, :html => { :method => :post } do |f| %>
+            <!--Email :- -->
+            <%#= f.text_field :email %>
+            <!--<br>-->
+
+            <%= f.fields_for :demographic do |d| %>
+                <table>
+                      <tr>
+                        <th>Name :- </th>
+                        <td><%= d.text_field :name %></td>
+                      </tr>
+                      <tr>
+                        <th>Religion :- </th>
+                        <td><%= d.text_field :religion %></td>
+                      </tr>
+                      <tr>
+                        <th>DOB :- </th>
+                        <td><%= d.date_select :dob, :order => [:day, :month, :year] %></td>
+                      </tr>
+                      <tr>
+                          <th>Smoking :- </th>
+                          <td><%= d.select :smoking, ['Never','Socially','Often'] %></td>
+                      </tr>
+                      <tr>
+                        <th>Drinking :- </th>
+                        <td><%= d.select :drinking, ['Never','Socially','Often'] %></td>
+                      </tr>
+                      <tr>
+                        <th>Description :- </th>
+                        <td><%= d.text_area :description %></td>
+                      </tr>
+                      <tr>
+                        <th>Goal :- </th>
+                        <td><%= d.text_area :goal %></td>
+                      </tr>
+                      <tr>
+                        <th>Difference Threshold :- </th>
+                        <td>
+                          <%= d.text_field :diffthresh %>
+                        </td>
+                      </tr>
+                </table>
+
+            <% end %>
+
+            <div class="actions">
+              <%= f.submit :class=>"btn-main" %>
+            </div>
+
+        <% end %>
+
+
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ========================= Edit Profile Page Ends ========================= -->

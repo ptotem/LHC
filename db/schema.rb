@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140324081538) do
+ActiveRecord::Schema.define(version: 20140402102805) do
+
+  create_table "answers", force: true do |t|
+    t.string   "name"
+    t.integer  "quest_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "attendances", force: true do |t|
     t.integer  "user_id"
@@ -91,6 +98,16 @@ ActiveRecord::Schema.define(version: 20140324081538) do
     t.datetime "updated_at"
   end
 
+  create_table "ice_breakers", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "ice_breakers_users", id: false, force: true do |t|
+    t.integer "ice_breaker_id", null: false
+    t.integer "user_id",        null: false
+  end
+
   create_table "institutions", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -132,6 +149,13 @@ ActiveRecord::Schema.define(version: 20140324081538) do
     t.integer "movie_id", null: false
   end
 
+  create_table "options", force: true do |t|
+    t.string   "name"
+    t.integer  "quest_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "personalities", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -162,18 +186,25 @@ ActiveRecord::Schema.define(version: 20140324081538) do
     t.datetime "updated_at"
   end
 
+  create_table "quests", force: true do |t|
+    t.string   "name"
+    t.integer  "ice_breaker_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "rails_admin_histories", force: true do |t|
     t.text     "message"
     t.string   "username"
     t.integer  "item"
     t.string   "table"
     t.integer  "month",      limit: 2
-    t.integer  "year",       limit: 5
+    t.integer  "year",       limit: 8
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "rails_admin_histories", ["item", "table", "month", "year"], name: "index_rails_admin_histories"
+  add_index "rails_admin_histories", ["item", "table", "month", "year"], name: "index_rails_admin_histories", using: :btree
 
   create_table "rating_scales", force: true do |t|
     t.string   "name"
@@ -203,6 +234,10 @@ ActiveRecord::Schema.define(version: 20140324081538) do
     t.string   "value"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   create_table "songs", force: true do |t|
@@ -229,12 +264,12 @@ ActiveRecord::Schema.define(version: 20140324081538) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                  default: "",    null: false
+    t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -242,9 +277,10 @@ ActiveRecord::Schema.define(version: 20140324081538) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "uid"
+    t.boolean  "is_admin",               default: false
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end

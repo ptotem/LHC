@@ -1,0 +1,374 @@
+<style>
+    .me_drinking_radio {
+        /*display: none;*/
+    }
+    .hidden_elems {
+        display: none;
+    }
+
+    .criteria-fill-step {
+        display: none;
+    }
+
+    .blue-background {
+        background: #38c8e0;
+        padding-bottom: 20px;
+        padding-top: 20px;
+    }
+</style>
+
+<!-- ========================= Algo Page Starts ========================= -->
+
+<!--Page Title-->
+<section id="page-title">
+<!--<section id="match_criteria_page_title_section">  -->
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 title-white">
+        <h2>The Search begins...</h2>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--matching_criteria_section-->
+<section id="content">
+  <div class="container">
+    <div class="row margin-top-5per">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+        <%= form_for(@user, :html => {:class => "form-horizontal"}) do |u| %>
+            <% if @user.errors.any? %>
+                <div id="error_explanation">
+                  <h2><%= pluralize(@user.errors.count, "error") %> prohibited this criterion from being saved:</h2>
+
+                  <ul>
+                    <% @user.errors.full_messages.each do |msg| %>
+                        <li><%= msg %></li>
+                    <% end %>
+                  </ul>
+                </div>
+            <% end %>
+          
+            <div class="row criteria-fill-step" id="criteria_fill_step_1">
+              <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 blue-background text-center" style="position: relative">
+                <div class="gender-pic" style="position:absolute; top:-12%; left:41.5%;">
+                  <img class="thumbnail" src="//distilleryimage1.s3.amazonaws.com/2f657ca0abdb11e3aaf30e0373b3d96d_5.jpg" style="height: 80px; width: 80px">
+                  <h4 class="white">YOU</h4>
+                </div>
+                <div class="row" style="margin-top: 25%; padding-bottom: 15%;">
+                  <div class="col-lg-12">
+                    <div class="control-group">
+                      <div class="controls">
+                        <div class="row">
+                          <h4 class="white">DOB</h4>
+                          <%= u.fields_for :demographic do |d| %>
+                              <%= d.date_select :dob, :order => [:day, :month, :year] %>
+                          <% end %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1 blue-background text-center" style="position: relative">
+                <div class="gender-pic" style="position:absolute; top:-12%; left:41.5%;">
+                  <img class="thumbnail" src="//distilleryimage1.s3.amazonaws.com/2f657ca0abdb11e3aaf30e0373b3d96d_5.jpg" style="height: 80px; width: 80px">
+                  <h4 class="white">HER</h4>
+                </div>
+                <div class="row" style="margin-top: 25%; padding-bottom: 15%;">
+                  <div class="col-lg-12">
+                    <div class="control-group">
+                      <div class="controls">
+                        <div class="row">
+                          <h4 class="white">Age Range</h4>
+                          <% min_age = 18..28 %>
+                          <% max_age = 22..36 %>
+                          <%= f.select(:minage, min_age.collect {|d| [d.to_s,d.to_s]}, {:id => "min_age_dropdown"} ) %>
+                          <span class="white">to</span>
+                          <%= f.select(:maxage, max_age.collect {|d| [d.to_s,d.to_s]}, {:id => "max_age_dropdown"} ) %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row criteria-fill-step" id="criteria_fill_step_2">
+              <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 blue-background text-center" style="position: relative">
+                <div class="gender-pic" style="position:absolute; top:-12%; left:41.5%;">
+                  <img class="thumbnail" src="//distilleryimage1.s3.amazonaws.com/2f657ca0abdb11e3aaf30e0373b3d96d_5.jpg" style="height: 80px; width: 80px">
+                  <h4 class="white">YOU</h4>
+                </div>
+                <div class="row" style="margin-top: 18%;">
+                  <div class="col-lg-12">
+                    <div class="control-group">
+                      <div class="controls">
+                        <div class="row">
+                          <h4 class="white">Drinking</h4>
+                          <%= f.text_field :drinking, :id=>"me_drinking_textfield", :class=>"hidden_elems" %>
+                          <div class="carousel slide" id="carousel-drinking" data-interval="false" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                              <li class="active" data-slide-to="0" data-target="#carousel-drinking"></li>
+                              <li data-slide-to="1" data-target="#carousel-drinking" class=""></li>
+                              <li data-slide-to="2" data-target="#carousel-drinking" class=""></li>
+                            </ol>
+                            <div class="carousel-inner">
+                              <div class="item active">
+                                <img alt="Never" data-src="holder.js/900x500/auto/#777:#555/text:First slide" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5MDAiIGhlaWdodD0iNTAwIj48cmVjdCB3aWR0aD0iOTAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iIzc3NyIvPjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjQ1MCIgeT0iMjUwIiBzdHlsZT0iZmlsbDojNTU1O2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1zaXplOjU2cHg7Zm9udC1mYW1pbHk6QXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWY7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+Rmlyc3Qgc2xpZGU8L3RleHQ+PC9zdmc+">
+                                <%= radio_button_tag 'drinking', "Never", false, class: "me_drinking_radio hidden_elems" %>
+                              </div>
+                              <div class="item">
+                                <img alt="Socially" data-src="holder.js/900x500/auto/#666:#444/text:Second slide" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5MDAiIGhlaWdodD0iNTAwIj48cmVjdCB3aWR0aD0iOTAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iIzY2NiIvPjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjQ1MCIgeT0iMjUwIiBzdHlsZT0iZmlsbDojNDQ0O2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1zaXplOjU2cHg7Zm9udC1mYW1pbHk6QXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWY7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+U2Vjb25kIHNsaWRlPC90ZXh0Pjwvc3ZnPg==">
+                                <%= radio_button_tag 'drinking', "Socially", false,class: "me_drinking_radio hidden_elems" %>
+                              </div>
+                              <div class="item">
+                                <img alt="Often" data-src="holder.js/900x500/auto/#555:#333/text:Third slide" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5MDAiIGhlaWdodD0iNTAwIj48cmVjdCB3aWR0aD0iOTAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iIzU1NSIvPjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjQ1MCIgeT0iMjUwIiBzdHlsZT0iZmlsbDojMzMzO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1zaXplOjU2cHg7Zm9udC1mYW1pbHk6QXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWY7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+VGhpcmQgc2xpZGU8L3RleHQ+PC9zdmc+">
+                                <%= radio_button_tag 'drinking', "Often", false,class: "me_drinking_radio hidden_elems" %>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1 blue-background text-center" style="position: relative">
+                <div class="gender-pic" style="position:absolute; top:-6%; left:41.5%;">
+                  <img class="thumbnail" src="//distilleryimage1.s3.amazonaws.com/2f657ca0abdb11e3aaf30e0373b3d96d_5.jpg" style="height: 80px; width: 80px">
+                  <h4 class="white">HER</h4>
+                </div>
+                <div class="row" style="margin-top: 18%;">
+                  <div class="col-lg-12">
+                    <div class="control-group">
+                      <div class="controls">
+                        <div class="row">
+                          <h4 class="white">Drinking</h4>
+                          <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-3 text-center" style="background: white">
+                              <%= text_field_tag 'opposite-person-drinking', '', maxlength: 15, size: 20, class: "hidden_elems", :style=>"display:none;" %>
+                              <div class="row" style="margin-top: 8%;">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                  <div class="btn-main btn-small" onclick="get_my_text($(this),'drinking')">Often</div>
+                                </div>
+                              </div>
+                              <div class="row" style="margin-top: 2%;">
+                                <div class="col-lg-12">
+                                  <div class="btn-main btn-small" onclick="get_my_text($(this),'drinking')">Socially</div>
+                                </div>
+                              </div>
+                              <div class="row" style="margin-top: 2%;">
+                                <div class="col-lg-12">
+                                  <div class="btn-main btn-small" onclick="get_my_text($(this),'drinking')">Never</div>
+                                </div>
+                              </div>
+                              <div class="row" style="margin-top: 2%; margin-bottom: 9%;">
+                                <div class="col-lg-12">
+                                  <div class="btn-main btn-small" onclick="get_my_text($(this),'drinking')">Doesn't Matter</div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row criteria-fill-step" id="criteria_fill_step_3">
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 blue-background text-center" style="position: relative">
+                  <div class="gender-pic" style="position:absolute; top:-12%; left:41.5%;">
+                    <img class="thumbnail" src="//distilleryimage1.s3.amazonaws.com/2f657ca0abdb11e3aaf30e0373b3d96d_5.jpg" style="height: 80px; width: 80px">
+                    <h4 class="white">YOU</h4>
+                  </div>
+                  <div class="row" style="margin-top: 18%;">
+                    <div class="col-lg-12">
+                      <div class="control-group">
+                        <div class="controls">
+                          <div class="row">
+                            <h4 class="white">Smoking</h4>
+                            <%= f.text_field :smoking, :id=>"me_smoking_textfield", :class=>"hidden_elems", :style=>"display:none;" %>
+                            <div class="carousel slide" id="carousel-smoking" data-interval="false" data-ride="carousel">
+                              <ol class="carousel-indicators">
+                                <li class="active" data-slide-to="0" data-target="#carousel-smoking"></li>
+                                <li data-slide-to="1" data-target="#carousel-smoking" class=""></li>
+                                <li data-slide-to="2" data-target="#carousel-smoking" class=""></li>
+                              </ol>
+                              <div class="carousel-inner">
+                                <div class="item active">
+                                  <img alt="Never" data-src="holder.js/900x500/auto/#777:#555/text:First slide" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5MDAiIGhlaWdodD0iNTAwIj48cmVjdCB3aWR0aD0iOTAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iIzc3NyIvPjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjQ1MCIgeT0iMjUwIiBzdHlsZT0iZmlsbDojNTU1O2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1zaXplOjU2cHg7Zm9udC1mYW1pbHk6QXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWY7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+Rmlyc3Qgc2xpZGU8L3RleHQ+PC9zdmc+">
+                                  <%= radio_button_tag 'smoking', "Never", false, class: "me_smoking_radio hidden_elems" %>
+                                </div>
+                                <div class="item">
+                                  <img alt="Socially" data-src="holder.js/900x500/auto/#666:#444/text:Second slide" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5MDAiIGhlaWdodD0iNTAwIj48cmVjdCB3aWR0aD0iOTAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iIzY2NiIvPjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjQ1MCIgeT0iMjUwIiBzdHlsZT0iZmlsbDojNDQ0O2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1zaXplOjU2cHg7Zm9udC1mYW1pbHk6QXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWY7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+U2Vjb25kIHNsaWRlPC90ZXh0Pjwvc3ZnPg==">
+                                  <%= radio_button_tag 'smoking', "Socially", false, class: "me_smoking_radio hidden_elems" %>
+                                </div>
+                                <div class="item">
+                                  <img alt="Often" data-src="holder.js/900x500/auto/#555:#333/text:Third slide" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5MDAiIGhlaWdodD0iNTAwIj48cmVjdCB3aWR0aD0iOTAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iIzU1NSIvPjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjQ1MCIgeT0iMjUwIiBzdHlsZT0iZmlsbDojMzMzO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1zaXplOjU2cHg7Zm9udC1mYW1pbHk6QXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWY7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+VGhpcmQgc2xpZGU8L3RleHQ+PC9zdmc+">
+                                  <%= radio_button_tag 'smoking', "Often", false, class: "me_smoking_radio hidden_elems" %>
+                                </div>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1 blue-background text-center" style="position: relative">
+                  <div class="gender-pic" style="position:absolute; top:-6%; left:41.5%;">
+                    <img class="thumbnail" src="//distilleryimage1.s3.amazonaws.com/2f657ca0abdb11e3aaf30e0373b3d96d_5.jpg" style="height: 80px; width: 80px">
+                    <h4 class="white">HER</h4>
+                  </div>
+                  <div class="row" style="margin-top: 18%;">
+                    <div class="col-lg-12">
+                      <div class="control-group">
+                        <div class="controls">
+                          <div class="row">
+                            <h4 class="white">Smoking</h4>
+                            <div class="row">
+                              <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-3 text-center" style="background: white">
+                                <%= text_field_tag 'opposite-person-smoking', '', maxlength: 15, size: 20, class: "hidden_elems", :style=>"display:none;" %>
+                                <div class="row" style="margin-top: 8%;">
+                                  <div class="col-lg-12">
+                                    <div class="btn-main btn-small" onclick="get_my_text($(this),'smoking')">Often</div>
+                                  </div>
+                                </div>
+                                <div class="row" style="margin-top: 1%;">
+                                  <div class="col-lg-12">
+                                    <div class="btn-main btn-small" onclick="get_my_text($(this),'smoking')">Socially</div>
+                                  </div>
+                                </div>
+                                <div class="row" style="margin-top: 1%;">
+                                  <div class="col-lg-12">
+                                    <div class="btn-main btn-small" onclick="get_my_text($(this),'smoking')">Never</div>
+                                  </div>
+                                </div>
+                                <div class="row" style="margin-top: 1%; margin-bottom: 9%;">
+                                  <div class="col-lg-12">
+                                    <div class="btn-main btn-small" onclick="get_my_text($(this),'smoking')">Doesn't Matter</div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+          </div>
+
+            <div class="row" style="margin-top: 3%;">
+              <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                <a href="javascript:void(0)" class="btn-main criteria-fill-step-btn" id="criteria_fill_step_prev_btn">Back</a>
+              </div>
+              <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xs-offset-10 col-sm-offset-10 col-md-offset-10 col-lg-offset-10">
+                <a href="javascript:void(0)" class="btn-main criteria-fill-step-btn" id="criteria_fill_step_next_btn">Continue</a>
+              </div>
+            </div>
+
+            <div class="actions">
+              <%= f.submit :class=>"btn-main", :id=>"criteria_submit_btn", :style=>"display: none;" %>
+            </div>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ========================= Algo Page Ends ========================= -->
+
+<script>
+    $(function(){
+        var current_step = 0;
+        var total_steps;
+        total_steps = $('.criteria-fill-step').length;
+
+        $('.criteria-fill-step').eq(current_step).show();
+
+        $('.carousel').carousel();
+
+        // Criteria Fill Form Steps -> Navigation control - starts
+        $('#criteria_fill_step_next_btn').on('click', function(){
+            $('.criteria-fill-step').hide();
+            current_step = current_step + 1;
+            if ( current_step >= (total_steps-1) ) {
+                $('.criteria-fill-step').hide();
+                current_step = total_steps-1;
+                $('.criteria-fill-step').eq(current_step).show();
+                $('#criteria_submit_btn').show();
+            }
+            else{
+                $('.criteria-fill-step').eq(current_step).show();
+                $('#criteria_submit_btn').hide();
+            }
+        });
+
+        $('#criteria_fill_step_prev_btn').on('click', function(){
+            $('#criteria_submit_btn').hide();
+            $('.criteria-fill-step').hide();
+            current_step = current_step - 1;
+            if ( current_step <= 0 ) {
+                $('.criteria-fill-step').hide();
+                current_step = 0;
+                $('.criteria-fill-step').eq(current_step).show();
+            }
+            else{
+                $('.criteria-fill-step').eq(current_step).show();
+            }
+        });
+        // Criteria Fill Form Steps -> Navigation control - ends
+
+        // setting default val for me drinking, val is set by carousel sliding - starts
+        var drinking_carousel = $('#carousel-drinking');
+        var drinking_carousel_first_ele = $(drinking_carousel).find('.item').first();
+        var drinking_carousel_first_ele_radio_val = $(drinking_carousel_first_ele).find('.me_drinking_radio').val();
+        var me_default_drinking_val = drinking_carousel_first_ele_radio_val;
+        $('#me_drinking_textfield').val(me_default_drinking_val);
+
+
+        $(drinking_carousel).bind('slide.bs.carousel', function (e) {
+            var me_drinking_val;
+            setTimeout(function(){
+                me_drinking_val = $('div.active').find('.me_drinking_radio').val();
+                $('#me_drinking_textfield').val(me_drinking_val);
+            }, 1100);
+        });
+        // setting default val for me drinking, val is set by carousel sliding - ends
+
+        // setting default val for me smoking, val is set by carousel sliding - starts
+        var smoking_carousel = $('#carousel-smoking');
+        var smoking_carousel_first_ele = $(smoking_carousel).find('.item').first();
+        var smoking_carousel_first_ele_radio_val = $(smoking_carousel_first_ele).find('.me_smoking_radio').val();
+        var me_default_smoking_val = smoking_carousel_first_ele_radio_val;
+        $('#me_smoking_textfield').val(me_default_smoking_val);
+
+
+        $(smoking_carousel).bind('slide.bs.carousel', function (e) {
+            var me_smoking_val;
+            setTimeout(function(){
+                me_smoking_val = $('div.active').find('.me_smoking_radio').val();
+                $('#me_smoking_textfield').val(me_smoking_val);
+            }, 1100);
+        });
+        // setting default val for me smoking, val is set by carousel sliding - ends
+    });
+
+    //setting val for opposite person's drinking, smoking val - starts
+    function get_my_text(this_obj, which_step){
+        if ( which_step == "drinking" ) {
+            $('#opposite-person-drinking').val($(this_obj).text());
+        }
+        else if ( which_step == "smoking" ) {
+            $('#opposite-person-smoking').val($(this_obj).text());
+        }
+    }
+    //setting val for opposite person's drinking, smoking val - ends
+</script>

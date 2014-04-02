@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width">
   <title>Lhc</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
@@ -101,13 +102,25 @@
 
 <%= render "layouts/topbar" %>
 
-<!--<section id="content">-->
+<%= yield %>
+
+
+<!--About Content-->
+<!--<section id="blue-container">-->
   <!--<div class="container">-->
     <!--<div class="row">-->
-      <!--<div class="col-md-12">-->
-        <%= yield %>
-        <%#= render "layouts/about_us" %>
+
+      <!--<div class="col-md-6 margin-30">-->
+        <!--<h3>Here is why we are so amazing!</h3>-->
+        <!--<p class="lead">Vestibulum non turpis sed diam volutpat scelerisque.</p>-->
+        <!--<p class="white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pretium diam quis ante scelerisque interdum. Praesent non orci nunc. Nulla sit amet felis in nibh ultricies blandit vel vitae ipsum. Aenean at dolor arcu, a commodo metus. In purus purus, egestas a hendrerit non, euismod ut tortor. Maecenas placerat nunc at eros tincidunt sagittis. Quisque facilisis dapibus ullamcorper. Phasellus ac mauris libero, vel placerat felis. Vestibulum non turpis sed diam volutpat scelerisque.</p>-->
+        <!--<p class="white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pretium diam quis ante scelerisque interdum. Praesent non orci nunc. Nulla sit amet felis in nibh ultricies blandit vel vitae ipsum.</p>-->
       <!--</div>-->
+
+      <!--<div class="col-md-6 text-center">-->
+        <!--<img src="img/about-img.png" class="img-responsive" alt="Title">-->
+      <!--</div>-->
+
     <!--</div>-->
   <!--</div>-->
 <!--</section>-->

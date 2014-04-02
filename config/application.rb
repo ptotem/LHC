@@ -20,7 +20,7 @@ module Lhc
     config.assets.initialize_on_precompile = false
     config.assets.precompile += ['rails_admin/rails_admin.css',
                                  'rails_admin/rails_admin.js']
-
+    config.assets.paths << "#{Rails.root}/app/assets/fonts"
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif,
                                   "fontawesome-webfont.ttf",
                                  "fontawesome-webfont.eot",

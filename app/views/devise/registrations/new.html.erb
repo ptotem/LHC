@@ -1,69 +1,92 @@
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => "form-horizontal"}) do |f| %>
+    <%= devise_error_messages! %>
 
+    <% resource.build_demographic %>
+    <% resource.criterions.new() %>
+    <% resource.attendances.new() %>
 
-        <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => "form-horizontal"}) do |f| %>
-            <%= devise_error_messages! %>
+    <div class="control-group">
+      <div class="controls">
+        <div class="row">
+          <%= f.email_field :email, :autofocus => true, :class => "input-xlarge col-xs-8 col-xs-offset-2", :placeholder => "Email" %>
+        </div>
+      </div>
+    </div>
 
+    <div class="control-group">
+      <div class="controls">
+        <div class="row">
+          <%= f.password_field :password, :class => "input-xlarge col-xs-8 col-xs-offset-2", :placeholder => "Password" %>
+        </div>
+      </div>
+    </div>
 
-            <div class="control-group">
-              <div class="controls">
+    <div class="control-group">
+      <div class="controls">
+        <div class="row">
+          <%= f.password_field :password_confirmation, :class => "input-xlarge col-xs-8 col-xs-offset-2", :placeholder => "Password Confirmation" %>
+        </div>
+      </div>
+    </div>
+
+        <div class="control-group">
+          <div class="controls">
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <%= f.fields_for :demographic do |d| %>
+                    <%= d.text_field :name, :class => "input-xlarge col-xs-8 col-xs-offset-2", :placeholder => "Name" %>
+                <%# end %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-8 col-sm-9 col-md-8 col-md-offset-2 col-lg-8" style="background-color: #F1F4F5; color: #555555">
                 <div class="row">
-                  <%= f.email_field :email, :autofocus => true, :class => "input-xlarge col-xs-8 col-xs-offset-2", :placeholder => "Email" %>
+                  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <label class="control-label">I am a</label>
+                  </div>
+                  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <%= d.select(:male, [['Male', '1'], ['Female', '0']]) %>
+                    <% end %>
+                  </div>
+
+                  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <label class="control-label">Looking for</label>
+                  </div>
+                  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <%= f.fields_for :criterions do |c| %>
+                        <%= c.select(:male, [['Male', '1'], ['Female', '0']]) %>
+                    <% end %>
+                  </div>
                 </div>
               </div>
+
             </div>
+          </div>
+        </div>
 
-            <div class="control-group">
-              <div class="controls">
-                <div class="row">
-                  <%= f.password_field :password, :class => "input-xlarge col-xs-8 col-xs-offset-2", :placeholder => "Password" %>
-                </div>
-              </div>
+        <br>
+        <div class="control-group">
+          <div class="controls">
+            <div class="row">
+
+              <%= f.fields_for :attendances do |a| %>
+                  <%= a.collection_select(:institution_id, Institution.all, :id, :name, :prompt => 'Select') %>
+              <% end %>
+
             </div>
-
-            <div class="control-group">
-              <div class="controls">
-                <div class="row">
-                  <%= f.password_field :password_confirmation, :class => "input-xlarge col-xs-8 col-xs-offset-2", :placeholder => "Password Confirmation" %>
-                </div>
-              </div>
-            </div>
-            <%= f.fields_for :demographic do |d| %>
-            <div class="control-group">
-              <div class="controls">
-                <div class="row">
-
-                  <%= d.select :male,['male','female'] ,{},:class => "input-xlarge col-xs-2 col-xs-offset-4"%>
+          </div>
+        </div>
 
 
-                   <%= d.select :male,['male','female'] ,{},:class => "input-xlarge col-xs-2 col-xs-offset-2"%>
 
-                </div>
-              </div>
-            </div>
+    <div class="control-group">
+      <div class="controls">
+        <%= f.submit "SIGN UP", :class => "btn btn-info sign-up-btn no_edges" %>
+      </div>
+      <a class="small-message" href="/users/sign_in">
+        <small>Already Registered?</small>
+      </a>
+    </div>
 
-            <div class="control-group">
-              <div class="controls">
-                <div class="row">
-
-                  <%= d.text_field :male,:class => "input-xlarge col-xs-8 col-xs-offset-2",placeholder:"Your College"%>
-
-
-                </div>
-              </div>
-            </div>
-
-
-                <% end %>
-
-
-            <div class="control-group">
-              <div class="controls">
-                <%= f.submit "SIGN UP", :class => "btn btn-info sign-up-btn no_edges" %>
-              </div>
-              <a class="small-message" href="/users/sign_in">
-                <small>Already Registered?</small>
-              </a>
-            </div>
-
-        <% end %>
+<% end %>
 

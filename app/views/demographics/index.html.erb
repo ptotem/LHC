@@ -1,0 +1,25 @@
+<h1>Listing demographics</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @demographics.each do |demographic| %>
+      <tr>
+        <td><%= link_to 'Show', demographic %></td>
+        <td><%= link_to 'Edit', edit_demographic_path(demographic) %></td>
+        <td><%= link_to 'Destroy', demographic, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Demographic', new_demographic_path %>

@@ -1,0 +1,17 @@
+<%= form_for(@ice_breaker) do |f| %>
+  <% if @ice_breaker.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@ice_breaker.errors.count, "error") %> prohibited this ice_breaker from being saved:</h2>
+
+      <ul>
+      <% @ice_breaker.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

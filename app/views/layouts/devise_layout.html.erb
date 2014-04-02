@@ -4,7 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>Lhc</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
@@ -12,19 +13,19 @@
 
 <div id="fb-root"></div>
 <script>
-    window.fbAsyncInit = function() {
+    window.fbAsyncInit = function () {
         FB.init({
-            appId      : '628824307167447',
-            status     : true, // check login status
-            cookie     : true, // enable cookies to allow the server to access the session
-            xfbml      : true  // parse XFBML
+            appId: '628824307167447',
+            status: true, // check login status
+            cookie: true, // enable cookies to allow the server to access the session
+            xfbml: true  // parse XFBML
         });
 
         // Here we subscribe to the auth.authResponseChange JavaScript event. This event is fired
         // for any authentication related change, such as login, logout or session refresh. This means that
         // whenever someone who was previously logged out tries to log in again, the correct case below
         // will be handled.
-        FB.Event.subscribe('auth.authResponseChange', function(response) {
+        FB.Event.subscribe('auth.authResponseChange', function (response) {
             // Here we specify what we do with the response anytime this event occurs.
             if (response.status === 'connected') {
                 // The response object is returned with a status field that lets the app know the current
@@ -53,10 +54,14 @@
     };
 
     // Load the SDK asynchronously
-    (function(d){
+    (function (d) {
         var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
-        if (d.getElementById(id)) {return;}
-        js = d.createElement('script'); js.id = id; js.async = true;
+        if (d.getElementById(id)) {
+            return;
+        }
+        js = d.createElement('script');
+        js.id = id;
+        js.async = true;
         js.src = "//connect.facebook.net/en_US/all.js";
         ref.parentNode.insertBefore(js, ref);
     }(document));
@@ -65,15 +70,15 @@
     // This testAPI() function is only called in those cases.
     function testAPI() {
         console.log('Welcome!  Fetching your information.... ');
-        FB.api('/me', function(response) {
+        FB.api('/me', function (response) {
             console.log('Good to see you, ' + response.name + '.');
         });
         console.log("myCheck() called from testAPI()");
         myCheck();
     }
 
-    function myCheck(){
-        FB.getLoginStatus(function(response) {
+    function myCheck() {
+        FB.getLoginStatus(function (response) {
             if (response.status === 'connected') {
                 // the user is logged in and has authenticated your
                 // app, and response.authResponse supplies
@@ -101,25 +106,26 @@
 
 <%= render "layouts/topbar" %>
 
-<section id="sign_up_section">
+<section id="sign_up_section" style=" background: url('/assets/background.jpeg') no-repeat scroll 0 0 / 100% 100% rgba(0, 0, 0, 0); margin-top: 8%; padding-bottom: 16.4%; padding-top: 8%;">
   <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 col-sm-offset-6 col-md-6 col-md-offset-6 col-lg-6 col-lg-offset-6 text-center" style="background-color: #000000; opacity: 0.65; color: #ffffff; padding: 1% 0% 2% 0%;">
+        <div class="row">
+          <div class="col-xs-6 col-sm-6 col-sm-offset-6 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4 text-center">
+            <h5 class="white">
+              <span style="font-weight: bold">Sign up with</span>
+              <a class="facebook" href="/users/auth/facebook" target="_self"><i class="fa fa-facebook fa-3x blue"></i></a>
+            </h5>
+          </div>
+        </div>
 
-    <div class="row form_container ">
+        <%= yield %>
 
+      </div>
+      <!--End Col 6-->
 
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xs-offset-6 col-sm-offset-6 col-md-offset-6 col-lg-offset-6 text-center form-container transparent-black">
-        <h5><b style="font-size: 1.5em">Sign up with   </b><a class="facebook" href="/users/auth/facebook" target="_self"><i class="fa fa-facebook fa-3x"></i></a></h5>
-
-
-
-
-        <hr>
-
-    <%= yield %>
-
-      </div><!--End Col 6-->
-
-    </div><!--End Row-->
+    </div>
+    <!--End Row-->
 
   </div>
 </section>

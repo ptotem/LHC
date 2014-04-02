@@ -1,0 +1,17 @@
+<%= form_for(@demographic) do |f| %>
+  <% if @demographic.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@demographic.errors.count, "error") %> prohibited this demographic from being saved:</h2>
+
+      <ul>
+      <% @demographic.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
