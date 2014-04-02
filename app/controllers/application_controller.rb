@@ -7,10 +7,10 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
 
-  rescue_from CanCan::AccessDenied do |exception|
-    flash[:error] = "Access denied."
-    redirect_to "/", :alert => exception.message
-  end
+  #rescue_from CanCan::AccessDenied do |exception|
+  #  flash[:error] = "Access denied."
+  #  redirect_to "/", :alert => exception.message
+  #end
 
 
   layout :layout_by_resource
@@ -43,10 +43,10 @@ class ApplicationController < ActionController::Base
     end
 
     devise_parameter_sanitizer.for(:sign_up) do |u|
-      u.permit(:email, :password, :password_confirmation, :is_admin, :demographic_attributes=>[:male, :name], :criterions_attributes=>[:male], :attendances_attributes=>[:user_id, :institution_id])
+      u.permit(:email, :password, :password_confirmation, :demographic_attributes=>[:male, :name], :criterions_attributes=>[:male], :attendances_attributes=>[:user_id, :institution_id])
     end
     devise_parameter_sanitizer.for(:sign_in) do |u|
-      u.permit(:username,:email,:password,:password_confirmation , :is_admin,:phone, :validate_username, :avatar_cache, :remove_avatar, :current_password,:remember_me)
+      u.permit(:username,:email,:password,:password_confirmation , :phone, :validate_username, :avatar_cache, :remove_avatar, :current_password,:remember_me)
     end
 
     devise_parameter_sanitizer.for(:account_update) do |u|
