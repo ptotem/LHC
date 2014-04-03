@@ -510,7 +510,8 @@ li.sign-up:hover {
 }
 
 #team {
-  background: url("../img/team-bg.jpg") no-repeat scroll center center #ffffff;
+  /*background: url("../img/team-bg.jpg") no-repeat scroll center center #ffffff;*/
+  background: url("/assets/team-bg.jpg") no-repeat scroll center center #ffffff;
   padding-top: 80px;
   padding-bottom: 0px;
   background-size: cover;

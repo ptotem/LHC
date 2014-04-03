@@ -1,5 +1,6 @@
 class DemographicsController < ApplicationController
   before_action :set_demographic, only: [:show, :edit, :update, :destroy]
+  layout 'dashboard_and_profile_layout'
 
   # GET /demographics
   # GET /demographics.json
@@ -49,8 +50,8 @@ class DemographicsController < ApplicationController
   def search_movies_themoviedb
     #https://github.com/ahmetabdi/themoviedb
 
-    @movie_search_text = "Agneepath"
-    #@movie_search_text = params[:movie_search_text][0]
+    #@movie_search_text = "Agneepath"
+    @movie_search_text = params[:movie_search_text][0]
     #render :text => @movie_search_text
 
     Tmdb::Api.key("a69e2d8b3e5942d8850c9d17e2dbc126")

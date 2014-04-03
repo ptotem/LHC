@@ -15,4 +15,5 @@
 //= require turbolinks
 //= require jquery.ui.all
 //= require chosen-jquery
+//= require scaffold
 //= require_tree .

@@ -1,6 +1,6 @@
 class DashboardsController < ApplicationController
   before_action :set_dashboard, only: [:show, :edit, :update, :destroy]
-  layout 'dashboard_layout'
+  layout 'dashboard_and_profile_layout'
 
   # GET /dashboards
   # GET /dashboards.json
