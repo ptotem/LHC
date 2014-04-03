@@ -29,8 +29,73 @@
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="row">
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <h4 class="blue"><%= @user_nick_name %></h4>
+            <table style="width: 65%; color: white;">
+              <tr>
+                <td style="font-size: 1.3em; width: 30%;"><i class="fa fa-user"></i></td>
+                <td style="font-size: 1.3em;"><%= @user_gender %></td>
+              </tr>
+              <tr>
+                <td style="font-size: 1.3em; width: 30%;"><i class="fa fa-lightbulb-o"></i></td>
+                <td style="font-size: 1.3em;"><%= @user_religion %></td>
+              </tr>
+              <tr>
+                <td style="font-size: 1.3em; width: 30%;"><i class="fa fa-globe"></i></td>
+                <td style="font-size: 1.3em;">User, Location</td>
+              </tr>
+            </table>
+          </div>
+          <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="background-color: #38C8E0;">
+            <i class="fa fa-glass fa-3x"></i>
+            <p class="text-center"><%= @user_drinking %></p>
+          </div>
+          <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="background-color: #38C8E0;">
+            <i class="fa fa-camera fa-3x"></i>
+            <p class="text-center"><%= @user_smoking %></p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            <h5 class="white" style="background-color: #38C8E0; padding: 2%; font-size: 1.3em;">About myself</h5>
+            <p class="white"><%= @user_desc %></p>
+          </div>
+        </div>
+        <div class="row">
           <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-            <h4 class="blue">Blackhawk down</h4>
+            <h5 class="white" style="background-color: #38C8E0; padding: 2%; font-size: 1.3em">Hobbies</h5>
+            <div class="row">
+              <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 white">
+                <i class="fa fa-thumbs-o-up fa-5x blue"></i>
+              </div>
+              <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 white">
+                <p>Reading</p>
+                <p>Writing</p>
+                <p>Sleeping</p>
+                <p>Drinking</p>
+                <p>Movies</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            <h5 class="white" style="background-color: #38C8E0; padding: 2%; font-size: 1.3em">How my friends Describe me</h5>
+            <div class="row">
+              <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 white">
+                <i class="fa fa-comments-o fa-5x blue"></i>
+              </div>
+              <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 white">
+                <p>Artistic</p>
+                <p>Athletic</p>
+                <p>Emotinal</p>
+                <p>Sensitive</p>
+                <p>Sexy</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <%= link_to 'Edit My Profile', edit_profile_path(current_user.id), :class=>"white" %>
           </div>
         </div>
       </div>

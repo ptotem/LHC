@@ -49,7 +49,7 @@ Lhc::Application.routes.draw do
   get '/take_test/(:test_id)', to: 'tests#take_test'
 
   get '/profile', to: 'demographics#profile'
-  get '/edit_profile/(:id)', to: 'demographics#edit_profile'
+  get '/edit_profile/(:id)', to: 'demographics#edit_profile', as: :edit_profile
   post '/update_profile', to: 'demographics#update_profile'
 
   get '/search_movies_ruby', to: 'demographics#search_movies_ruby'

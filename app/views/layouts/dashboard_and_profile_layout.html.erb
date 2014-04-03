@@ -49,19 +49,23 @@
           </div>
           <%#= params[:action] %>
           <% if params[:action] == "profile" %>
-              <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+              <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                <%= yield %>
+              </div>
+          <% elsif params[:action] == "edit_profile" %>
+              <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                 <%= yield %>
               </div>
           <% elsif params[:action] == "conversations" %>
-              <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 white-background">
+              <div class="col-xs-8 col-sm-9 col-md-9 col-lg-9 white-background">
                 <%= yield %>
               </div>
           <% elsif params[:action] == "quick_matches" %>
-              <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+              <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                 <%= yield %>
               </div>
           <% elsif params[:action] == "user_verification" %>
-              <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 blue-background">
+              <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 blue-background">
                 <%= yield %>
               </div>
           <% end %>

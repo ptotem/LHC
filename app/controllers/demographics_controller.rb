@@ -16,6 +16,16 @@ class DemographicsController < ApplicationController
   def profile
     @user = current_user
     @user_name = current_user.demographic.name
+    if current_user.demographic.male?
+      @user_gender = "Male"
+    else
+      @user_gender = "Female"
+    end
+    @user_nick_name = current_user.demographic.nickname
+    @user_religion = current_user.demographic.religion
+    @user_smoking = current_user.demographic.smoking
+    @user_drinking = current_user.demographic.smoking
+    @user_desc = current_user.demographic.description
   end
 
   def search_movies_ruby
@@ -104,6 +114,13 @@ class DemographicsController < ApplicationController
   def edit_profile
     @user = current_user
     #@user = User.find(current_user.id)
+    @user.build_demographic
+    @user.criterions.new
+    @user.attendances.new
+    @user.professions.new
+    @user.revelations.new
+    @user.expectations.new
+
     @user_name = current_user.demographic.name
     @user_demographics = @user.demographic
   end
