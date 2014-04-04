@@ -71,3 +71,6 @@ gem 'omniauth-facebook'
 gem 'themoviedb', '~> 0.0.21'
 
 gem 'gmusic'
+gem 'goodreads'
+gem 'omniauth'
+gem 'omniauth-linkedin'

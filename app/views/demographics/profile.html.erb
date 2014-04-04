@@ -6,19 +6,7 @@
     }
 </style>
 
-
-<section id="user_name_section">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12 title-blue">
-        <h2>Welcome, <%= @user_name %> </h2>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- Display Movies, Music, Books here -->
-
 <section id="view_profile_section">
   <div class="container">
     <div class="row" style="padding-top: 3%;">
@@ -29,8 +17,20 @@
           <%= select_tag "movies_search_textfield", "".html_safe, multiple: true, class: 'chosen-select ui-autocomplete-input' %>
         </div>
 
-        <ul id="demo8" name="demo8"></ul>
+      </div>
+    </div>
 
+    <div class="row" style="padding-top: 3%;">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="ui-widget">
+          <label for="music">Search Music :- </label>
+          <ul id="myTags">
+            <!-- Existing list items will be pre-added to the tags -->
+            <li>Tag1</li>
+            <li>Tag2</li>
+          </ul>
+          <%#= select_tag "music_search_textfield", "".html_safe, multiple: true, class: 'chosen-select ui-autocomplete-input' %>
+        </div>
       </div>
     </div>
   </div>
@@ -40,6 +40,8 @@
 
 <script>
     $(function() {
+        $("#myTags").tagit();
+
 
 
         var availableTags = [
@@ -137,6 +139,40 @@
                     }
             }
         });
+
+
+
+
+
+        $('#myTags').find('.ui-widget-content').on('keypress',function(e){
+
+
+
+            var music_search_text = $(this).val()
+            var music_search_text_len = music_search_text.length;
+
+            if ( (music_search_text_len >= 5) ) {
+            var data = {music_search_text: []};
+            data["music_search_text"].push(music_search_text);
+
+            $.ajax({
+                url: "/search_music_db",
+                type: "post",
+                async: false,
+                data: JSON.stringify(data),
+                contentType: "application/json",
+                success: function (data) {
+                    $.each(data, function (i, obj) {
+//                        $('#myTags').find('.tagit-new').append(obj)
+                    });
+
+                }
+            });
+            }
+
+        })
+
+
 
     });
 
