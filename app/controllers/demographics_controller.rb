@@ -24,7 +24,7 @@ class DemographicsController < ApplicationController
     @user_nick_name = current_user.demographic.nickname
     @user_religion = current_user.demographic.religion
     @user_smoking = current_user.demographic.smoking
-    @user_drinking = current_user.demographic.smoking
+    @user_drinking = current_user.demographic.drinking
     @user_desc = current_user.demographic.description
   end
 
