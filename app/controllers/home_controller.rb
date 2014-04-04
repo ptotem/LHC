@@ -5,11 +5,17 @@ class HomeController < ApplicationController
 
   def index
     @current_user_sign_in_count = current_user.sign_in_count
-    if @current_user_sign_in_count > 1
-      redirect_to my_dashboard_path
+
+    if current_user.is_admin?
+      redirect_to "/admin"
     else
-      redirect_to fill_matching_criteria_path
+      if @current_user_sign_in_count > 1
+        redirect_to my_dashboard_path
+      else
+        redirect_to fill_matching_criteria_path
+      end
     end
+
   end
 
   def about_us

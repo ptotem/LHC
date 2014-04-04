@@ -85,7 +85,7 @@
                                 <div class="controls">
                                   <div class="row">
                                     <h4 class="white">DOB</h4>
-                                    <%= d.date_select :dob, :order => [:day, :month, :year] %>
+                                    <%= d.date_select :dob, :order => [:day, :month, :year], :start_year=>(Time.now.year-35), :end_year=>(Time.now.year) %>
                                   </div>
                                 </div>
                               </div>
