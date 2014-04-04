@@ -92,24 +92,45 @@ class DemographicsController < ApplicationController
     return
   end
 
+
+
+  def search_music_db
+
+    require 'net/http'
+    @music_search_text = params[:music_search_text][0]
+    result = Net::HTTP.get(URI.parse('http://api.rovicorp.com/search/v2.1/music/autocomplete?entitytype=song&query='+ @music_search_text +'&country=US&language=en&size=20&format=json&apikey=7bwskaxgu2twtrzwwmjy9cra&sig=986400ec97abd579bdeeb3687b77d442'))
+
+    render :json => result
+    return
+  end
+
+
+
   def search_music_gmusic
     require 'gmusic'
 
-    #result = GMusic.search(:title => 'Pink Floyd', :artist => 'michael jackson')
-    #
-    #puts result.class
-    ## => Array
-    #
-    #result.first.keys
-    ## => [:artist, :album, :format, :size, :url, :id, :lyrics, :title]
-    #
-    #render :text => result.first.keys
+    result = GMusic.search(:title => 'heal the world', :artist => 'michael jackson')
 
-    require 'open-uri'
-    doc = open("http://www.ptotem.com/") { |f| Hpricot(f) }
-    render :text => doc
+    result.first.keys
+    render :text => result.class
     return
   end
+
+
+  def search_book_db
+    client = Goodreads::Client.new(:api_key => 'WsRZQw8XBqoIQpHQuG0wMQ', :api_secret => '49eUFUgkFHYyskIKTMTCsbn6XkA0ssr4U9Wp61pC0b8')
+    search = client.search_books('The Lord Of The Rings')
+    @movies_hash = Hash.new
+    search.results.work.each_with_index do |book,index|
+      book.id        # => book id
+      book.title     # => book title
+      @movies_hash[index] = { "title"=>book.best_book.title,"id" => book.id}
+    end
+    render :json =>@movies_hash
+    return
+
+  end
+
 
   def edit_profile
     @user = current_user

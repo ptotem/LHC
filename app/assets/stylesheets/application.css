@@ -11,5 +11,6 @@
  *= require_self
  *= require jquery.ui.all
  *= require chosen
+ *= require jquery.tagit
  *= require_tree .
  */
