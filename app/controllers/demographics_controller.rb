@@ -14,19 +14,47 @@ class DemographicsController < ApplicationController
   end
 
   def profile
-    @user = current_user
-    @user_name = current_user.demographic.name
-    if current_user.demographic.male?
+    #@user = current_user
+    @user = User.find(params[:id])
+    @user_name = @user.demographic.name
+    @user_nick_name = @user.demographic.nickname
+    if @user.demographic.male?
       @user_gender = "Male"
     else
       @user_gender = "Female"
     end
-    @user_nick_name = current_user.demographic.nickname
-    @user_religion = current_user.demographic.religion
-    @user_smoking = current_user.demographic.smoking
-    @user_drinking = current_user.demographic.drinking
-    @user_desc = current_user.demographic.description
+    @user_religion = @user.demographic.religion
+    @user_smoking = @user.demographic.smoking
+    @user_drinking = @user.demographic.drinking
+    @user_desc = @user.demographic.description
+    @user_email = @user.email
   end
+
+  def edit_profile
+    #render :text => "#{current_user.id}, #{current_user.email}, #{params[:id]}"
+    #return
+    if params[:id].to_s != (current_user.id).to_s
+      render :text => "You can't edit others profile"
+      return
+    else
+      @user = current_user
+      @user.build_demographic
+      @user.criterions.new
+      @user.attendances.new
+      @user.professions.new
+      @user.revelations.new
+      @user.expectations.new
+
+      @user_name = current_user.demographic.name
+      @user_demographics = @user.demographic
+    end
+  end
+
+  def update_profile
+    render :json => params
+    return
+  end
+
 
   def search_movies_ruby
     #TMDB API Key: a69e2d8b3e5942d8850c9d17e2dbc126
@@ -131,25 +159,6 @@ class DemographicsController < ApplicationController
 
   end
 
-
-  def edit_profile
-    @user = current_user
-    #@user = User.find(current_user.id)
-    @user.build_demographic
-    @user.criterions.new
-    @user.attendances.new
-    @user.professions.new
-    @user.revelations.new
-    @user.expectations.new
-
-    @user_name = current_user.demographic.name
-    @user_demographics = @user.demographic
-  end
-
-  def update_profile
-    render :json => params
-    return
-  end
 
   # GET /demographics/new
   def new

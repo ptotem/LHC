@@ -26,7 +26,9 @@ class User < ActiveRecord::Base
   has_many :mind_matches, dependent: :destroy
   has_many :total_matches, dependent: :destroy
 
-  #accepts_nested_attributes_for :demographic
+  has_many :recipients, :dependent => :destroy
+  has_many :messages, :through => :recipients
+
   accepts_nested_attributes_for :demographic
   accepts_nested_attributes_for :criterions
   accepts_nested_attributes_for :attendances
@@ -40,29 +42,22 @@ class User < ActiveRecord::Base
     birthday = self.demographic.dob
     now.year - birthday.year - (birthday.to_date.change(:year => now.year) > now ? 1 : 0)
   end
+
   def find_matches
-
-    case self.criterions.smoking
-      when "Doesn't Matter"
-    end
-
-
-    if self.criterions.smoking == "Doesn't Matter" and self.criterions.drinking == "Doesn't Matter"
-      reduced_users =  Demographic.where(:male=>false).map(&:user).map{|i| return i if (self.criterions.first.minage..self.criterions.first.maxage).include?(i.age)}
+    if self.criterions.first.smoking == "Doesn't Matter" and self.criterions.first.drinking == "Doesn't Matter"
+      reduced_users =  Demographic.where(:male=>self.criterions.first.male).map(&:user).map{|i| return i if (self.criterions.first.minage..self.criterions.first.maxage).include?(i.age)}
       return
     else
-      if self.criterions.smoking == "Doesn't Matter"
-       reduced_users =  Demographic.where(:male=>false,:drinking => self.criterions.first.drinking).map(&:user).map{|i| return i if (self.criterions.first.minage..self.criterions.first.maxage).include?(i.age)}
+      if self.criterions.first.smoking == "Doesn't Matter"
+       reduced_users =  Demographic.where(:male=>self.criterions.first.male, :drinking => self.criterions.first.drinking).map(&:user).map{|i| return i if (self.criterions.first.minage..self.criterions.first.maxage).include?(i.age)}
        return
       end
-      if self.criterions.drinking == "Doesn't Matter"
-        reduced_users =  Demographic.where(:male=>false,:smoking=> self.criterions.first.smoking).map(&:user).map{|i| return i if (self.criterions.first.minage..self.criterions.first.maxage).include?(i.age)}
-       return
+      if self.criterions.first.drinking == "Doesn't Matter"
+        reduced_users =  Demographic.where(:male=>self.criterions.first.male, :smoking=> self.criterions.first.smoking).map(&:user).map{|i| return i if (self.criterions.first.minage..self.criterions.first.maxage).include?(i.age)}
+        return
       end
-      return reduced_users =  Demographic.where(:male=>false,:drinking => self.criterions.first.drinking,:smoking=> self.criterions.first.smoking).map(&:user).map{|i| return i if (self.criterions.first.minage..self.criterions.first.maxage).include?(i.age)}
+      return reduced_users =  Demographic.where(:male=>self.criterions.first.male, :drinking => self.criterions.first.drinking, :smoking=> self.criterions.first.smoking).map(&:user).map{|i| return i if (self.criterions.first.minage..self.criterions.first.maxage).include?(i.age)}
     end
-
-
   end
 
 

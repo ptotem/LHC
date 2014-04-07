@@ -20,12 +20,12 @@ class CriterionsController < ApplicationController
   def fill_matching_criteria
     @user = current_user
     #@user = User.find(current_user.id)
-    @user_demographic = @user.build_demographic
-    @user_criterion = @user.criterions.build
+    #@user_demographic = @user.build_demographic
+    #@user_criterion = @user.criterions.build
   end
 
   def create_matching_criteria
-    #TODO: update_attribues, don't create, and permit params
+    #TODO: update_attribues, don't create, and use permit params
     @user = current_user
 
     @user_demographic_date = params[:user][:demographic]["dob(3i)"]

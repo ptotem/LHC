@@ -15,34 +15,35 @@
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <!--<button class="lhc-btn btn-large gray">Profile</button>-->
-        <%= link_to "Profile", profile_path, class: "btn-main", :style=>"font-size: 1.1em; padding: 5% 77% 5% 5%; text-transform: none;" %>
+        <%#= link_to "Profile", profile_path, class: "btn-main", :style=>"font-size: 1.1em; padding: 5% 77% 5% 5%; text-transform: none;" %>
       </div>
     </div>
 
     <div class="row" style="margin-top: 12%">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <%= link_to "Conversations", conversations_path, class: "btn-main", :style=>"font-size: 1.1em; padding: 5% 55% 5% 5%; text-transform: none;" %>
+        <%= link_to "Conversations", conversations_path, class: "btn-main", :style=>"font-size: 1.1em; text-transform: none;" %>
+        <a href="#"><%= Recipient.where(:user_id => current_user.id,:status => false).map {|r| r.message}.reverse.count %></a>
       </div>
     </div>
 
     <div class="row" style="margin-top: 12%">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <!--<button class="lhc-btn btn-large gray">Quick Match</button>-->
-        <%= link_to "Quick Matches", quick_matches_path, class: "btn-main btn-large", :style=>"font-size: 1.1em; padding: 5% 53.5% 5% 5%; text-transform: none;" %>
+        <%= link_to "Quick Matches", quick_matches_path, class: "btn-main btn-large", :style=>"font-size: 1.1em; text-transform: none;" %>
       </div>
     </div>
 
     <div class="row" style="margin-top: 12%">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <!--<button class="lhc-btn btn-large gray">Mutual Likes</button>-->
-        <%= link_to "Mutual Likes", "#", class: "btn-main btn-large", :style=>"font-size: 1.1em; padding: 5% 59.5% 5% 5%; text-transform: none;" %>
+        <%= link_to "Mutual Likes", "#", class: "btn-main btn-large", :style=>"font-size: 1.1em; text-transform: none;" %>
       </div>
     </div>
 
     <div class="row" style="margin-top: 12%">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <!--<button class="lhc-btn btn-large gray">Questions</button>-->
-        <%= link_to "Questions", "#", class: "btn-main btn-large", :style=>"font-size: 1.1em; padding: 5% 66.5% 5% 5%; text-transform: none;" %>
+        <%= link_to "Questions", "#", class: "btn-main btn-large", :style=>"font-size: 1.1em; text-transform: none;" %>
       </div>
     </div>
 

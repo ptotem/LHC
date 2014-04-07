@@ -11,6 +11,28 @@ class DashboardsController < ApplicationController
   def my_dashboard
     @user = current_user
     @user_name = current_user.demographic.name
+
+    #render :json => @user.find_matches
+    #return
+
+    @current_user_base_matches = BaseMatch.where(:user_id=>current_user.id)
+    @current_user_base_matches.each_with_index do |base_match, index|
+      BaseMatch.delete(base_match)
+    end
+
+    #render :json => "nil? :- #{@user.find_matches.nil?}, find_matches :- #{@user.find_matches==[nil]}, [0] :- #{@user.find_matches[0]}"
+    #return
+
+    if !(@user.find_matches.nil? or (@user.find_matches.size == 1 and @user.find_matches[0] == nil))
+      #render :text => "Sunny"
+      #return
+      @match = BaseMatch.create!(:user_id=>current_user.id, :target_id=>(@user.find_matches["id"]).to_i, :gender_fit=>true, :age_fit=>true, :smoking_fit=>true, :drinking_fit=>true)
+      @match.save!
+    else
+      #render :text => "No Match Found..."
+      #return
+    end
+
   end
 
   def user_verification
@@ -23,18 +45,17 @@ class DashboardsController < ApplicationController
     #return
   end
 
+  def start_ice_breaker
+    @opposite_user = User.find(params[:id])
+
+    @message = Message.new
+  end
+
+
   def quick_matches
-    #@last_user = User.last
-    #@last_user_demographic = @last_user.demographic
-    #@last_user.build_criterion(:male=>true)
-    #@last_user.criterions.create(:male=>true)
-    #@last_user_criterion = @last_user.criterions.first
-
-    #postgres quries
-    #select id, email from users;
-    #select name, male, dob, smoking, drinking from demographics;
-    #select male, minage, maxage, smoking, drinking from criterions;
-
+    @current_user_quick_matches = BaseMatch.where(:user_id=>current_user.id)
+    #render :json => @current_user_quick_matches
+    #return
   end
 
   # GET /dashboards/1

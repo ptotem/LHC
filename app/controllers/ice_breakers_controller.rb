@@ -1,5 +1,6 @@
 class IceBreakersController < ApplicationController
   before_action :set_ice_breaker, only: [:show, :edit, :update, :destroy]
+  layout 'dashboard_and_profile_layout'
 
   # GET /ice_breakers
   # GET /ice_breakers.json

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140403093205) do
+ActiveRecord::Schema.define(version: 20140404110850) do
 
   create_table "answers", force: true do |t|
     t.string   "name"
@@ -126,6 +126,13 @@ ActiveRecord::Schema.define(version: 20140403093205) do
     t.integer "interest_id", null: false
   end
 
+  create_table "messages", force: true do |t|
+    t.text     "body"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "mind_matches", force: true do |t|
     t.integer  "user_id"
     t.integer  "target_id"
@@ -220,6 +227,14 @@ ActiveRecord::Schema.define(version: 20140403093205) do
     t.integer  "value"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "recipients", force: true do |t|
+    t.integer  "message_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "status"
   end
 
   create_table "revelations", force: true do |t|

@@ -1,0 +1,18 @@
+
+<% if params[:action]=="conversations" %>
+    <% @message = Message.new %>
+    <%= params %>
+<% end %>
+
+<%= form_for(@message) do |f| %>
+
+    <%= f.text_area :body,:required => true %>
+
+    <%= hidden_field_tag 'to_user_id', params[:id] %>
+
+    <div class="row">
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <%= f.submit  :class=>"btn btn-main" %>
+      </div>
+    </div>
+<% end %>

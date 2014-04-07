@@ -1,4 +1,8 @@
 Lhc::Application.routes.draw do
+  resources :recipients
+
+  resources :messages
+
   resources :answers
 
   resources :options
@@ -46,11 +50,12 @@ Lhc::Application.routes.draw do
   get '/conversations', to: 'dashboards#conversations', as: :conversations
   get '/quick_matches', to: 'dashboards#quick_matches', as: :quick_matches
   get '/user_verification', to: 'dashboards#user_verification', as: :user_verification
+  get '/start_ice_breaker/:id/(:prev_msg)', to: 'dashboards#start_ice_breaker', as: :start_ice_breaker
 
   get '/take_test/(:test_id)', to: 'tests#take_test'
 
-  get '/profile', to: 'demographics#profile'
-  get '/edit_profile/(:id)', to: 'demographics#edit_profile', as: :edit_profile
+  get '/profile/:id', to: 'demographics#profile'
+  get '/edit_profile/:id', to: 'demographics#edit_profile', as: :edit_profile
   post '/update_profile', to: 'demographics#update_profile'
 
   get '/search_movies_ruby', to: 'demographics#search_movies_ruby'

@@ -30,7 +30,13 @@
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="row">
           <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-            <h4 class="blue"><%= @user_nick_name %></h4>
+            <h4 class="blue">
+              <% if params[:id].to_s != (current_user.id).to_s %>
+                  <%= @user_nick_name %>
+              <% else %>
+                  <%= @user_name %>
+              <% end %>
+            </h4>
             <table style="width: 65%; color: white;">
               <tr>
                 <td style="font-size: 1.3em; width: 30%;"><i class="fa fa-user"></i></td>

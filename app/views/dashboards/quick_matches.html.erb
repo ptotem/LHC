@@ -1,10 +1,8 @@
 <section id="dashboard_matches_section">
-  <% 2.times do |match| %>
-      <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-          <ul class="list-inline portfolio text-center">
-
-            <!--Project Thumbnail-->
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <ul class="list-inline portfolio text-center">
+        <% @current_user_quick_matches.each_with_index do |quick_match, index| %>
             <li data-tag="graphics">
               <div class="thumbs">
                 <img src="/assets/portfolio1.jpg" class="img-responsive" alt="Image Size 430x280">
@@ -16,44 +14,12 @@
               </div>
 
               <div class="project-title margin-30">
-                <h5>Breakroom</h5>
+                <!--<h5>Breakroom</h5>-->
+                <a target="_blank" href="profile/<%= quick_match.target_id %>"> <%= User.find(quick_match.target_id).demographic.nickname %></a>
               </div>
             </li>
-
-            <!--Project Thumbnail-->
-            <li data-tag="web">
-              <div class="thumbs">
-                <img src="/assets/portfolio2.jpg" class="img-responsive" alt="Image Size 430x280">
-                <a href="individual-work.html">
-          				<span class="title">
-          					<span><i class="fa fa-link fa-2x"></i></span>
-          				</span>
-                </a>
-              </div>
-
-              <div class="project-title margin-30">
-                <h5>White Sneaker</h5>
-              </div>
-            </li>
-
-            <!--Project Thumbnail-->
-            <li data-tag="videos">
-              <div class="thumbs">
-                <img src="/assets/portfolio3.jpg" class="img-responsive" alt="Image Size 430x280">
-                <a href="individual-work.html">
-          				<span class="title">
-          					<span><i class="fa fa-link fa-2x"></i></span>
-          				</span>
-                </a>
-              </div>
-
-              <div class="project-title margin-30">
-                <h5>Theme Armada</h5>
-              </div>
-            </li>
-
-          </ul><!--End Work List-->
-        </div>
-      </div>
-  <% end %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
 </section>
