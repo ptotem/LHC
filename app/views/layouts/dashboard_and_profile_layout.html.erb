@@ -21,6 +21,124 @@
           padding-bottom: 20px;
           padding-top: 20px;
       }
+
+      .page-header1 {
+        font-size: 3em;
+        color: #FFFFFF;
+        vertical-align: text-top;
+      }
+
+      .section-head1{
+          color:#3E4549;
+          text-align: right;
+          font-size: 1.3em;
+      }
+
+      .whiteblock{
+          background-color: #FFFFFF;
+          height: 80px;
+          margin-top: 1%;
+          padding: 0.5%;
+      }
+
+      .recentactivitydate{
+          text-align: right;
+          font-size: 0.9em;
+          color: #3E4549;
+      }
+
+      .recentactivityimg{
+          width: 100%;
+      }
+
+      .recentactivitytext{
+          vertical-align:bottom;
+          text-align: left;
+          font-size: 1.2em;
+          color: #3E4549;
+          margin-top: 5%;
+      }
+
+      .countdown{
+        width: 30%;
+        height: 80px;
+        margin-left:25%;
+        background-color: #FFFFFF;
+
+      }
+
+      .countdown1{
+        margin-top: 2%;
+        margin-left: 21%;
+      }
+
+      .countdowntext{
+          /*margin-top: 45%;*/
+          font-size: 5em;
+          text-align: center;
+          padding-top: 32%;
+          color: #38c8e0;
+      }
+
+      .countdowntexthr{
+          color: #38c8e0;
+          text-align: center;
+          margin-top: 18%;
+      }
+
+      .countdowntext1{
+          font-size: 1.5em;
+          color: #fff;
+          font-weight: bold;
+          font-family: 'Open Sans', sans-serif;
+          /*text-align: center;*/
+      }
+
+      .match_text{
+          font-size: 1.2em;
+          margin-left: 8%;
+          margin-top: 4%;
+          font-family: 'Open Sans', sans-serif;
+      }
+
+      .iconstyle{
+          margin-left: 31%;
+          margin-top: 10%;
+      }
+
+      .invitefriend{
+          margin-left: 22%;
+          color: #FFFFFF;
+          font-family: 'Open Sans', sans-serif;
+
+      }.try_out_quiz{
+          margin-left: 18%;
+          margin-top: 5%;
+          color: #FFFFFF;
+          font-family: 'Open Sans', sans-serif;
+          font-size: 21px;
+          font-weight: bold;
+
+      }
+
+
+      .try_out_quiz_text{
+           margin-left: 10%;
+          margin-top: 5%;
+           font-family: 'Open Sans', sans-serif;
+           font-size: 13px;
+
+
+       }
+          #try_img{
+              margin-left: 20%;
+              margin-top: 5%;
+          }
+          #footer_color{
+              height: 30px;
+              background-color: #ffffff;
+          }
+
   </style>
 </head>
 
@@ -41,7 +159,7 @@
     </section>
 
     <!--dashboard_section-->
-    <section id="blue-container" style="padding-top: 0;">
+    <section id="blue-container" style="padding-top: 0;overflow-x: hidden;">
       <div class="container">
         <div class="row blue-background" style="padding-top: 3%;">
           <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -85,7 +203,25 @@
               <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 blue-background">
                 <%= yield %>
               </div>
+          <% else %>
+            <%= render :partial =>"recent_activity" %>
           <% end %>
+        </div>
+
+
+      </div>
+      <!--<div class="row">-->
+        <!--<div class="col-lg-12" id="footer_color">-->
+        <!--</div>-->
+      <!--</div>-->
+    </section>
+
+    <section id="footer" style="background-color: #FFFFFF">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <p></p>
+          </div>
         </div>
       </div>
     </section>

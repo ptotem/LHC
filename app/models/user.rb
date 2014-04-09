@@ -26,14 +26,11 @@ class User < ActiveRecord::Base
   has_many :mind_matches, dependent: :destroy
   has_many :total_matches, dependent: :destroy
 
-  #has_many :recipients, :dependent => :destroy
-  #has_many :messages, :through => :recipients
-
-  has_many :recipients, class_name: 'Recipient', foreign_key: 'sender_id'
-  has_many :sent_messages, through: :recipients, foreign_key: 'message_id', class_name:'Message', source: :sender
+  has_many :recipients, foreign_key: 'sender_id', :dependent => :destroy
+  has_many :messages, :through => :recipients, foreign_key: 'sender_id'
 
   has_many :reverse_recipients, class_name: 'Recipient', foreign_key: 'receiver_id'
-  has_many :received_messages, through: :reverse_recipients, foreign_key: 'message_id', class_name: 'Message', source: :receiver
+  has_many :received_messages, through: :reverse_recipients, foreign_key: 'receiver_id', class_name: 'Message', source: :message
 
 
   accepts_nested_attributes_for :demographic

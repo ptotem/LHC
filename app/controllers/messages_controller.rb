@@ -33,9 +33,10 @@ class MessagesController < ApplicationController
     @message = Message.new(message_params)
     @message.user_id = current_user.id
     @message.body = params[:message][:body]
-
-    @message.recipients.build(:user_id=>params[:to_user_id],:status=>false)
     @message.save
+
+    Recipient.create!(:message_id=>@message.id, :user_id=>params[:to_user_id],:sender_id => current_user.id, :receiver_id => params[:to_user_id],:status=>false)
+
     redirect_to "/profile/#{current_user.id}"
   end
 
