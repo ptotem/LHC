@@ -26,8 +26,8 @@ class DashboardsController < ApplicationController
     if !(@user.find_matches.nil? or (@user.find_matches.size == 1 and @user.find_matches[0] == nil))
       #render :text => "Sunny"
       #return
-      @match = BaseMatch.create!(:user_id=>current_user.id, :target_id=>(@user.find_matches["id"]).to_i, :gender_fit=>true, :age_fit=>true, :smoking_fit=>true, :drinking_fit=>true)
-      @match.save!
+      #@match = BaseMatch.create!(:user_id=>current_user.id, :target_id=>(@user.find_matches["id"]).to_i, :gender_fit=>true, :age_fit=>true, :smoking_fit=>true, :drinking_fit=>true)
+      #@match.save!
     else
       #render :text => "No Match Found..."
       #return
