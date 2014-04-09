@@ -6,44 +6,46 @@
 <section id="dashboard_messages_section">
 
   <div class="panel-group" id="accordion">
-    <% current_user.messages.each_with_index do |e,index| %>
+    <% @receivers.each_with_index do |receiver,index| %>
         <div class="panel panel-default">
           <div class="panel-heading">
             <h4 class="panel-title">
               <a data-toggle="collapse" data-parent="#accordion" href="#collapse<%= index %>">
-                <%= User.find(e.user_id).email %>
-                <%#= Recipient.where(:message_id => e.id).map{|i| User.find(i.user_id).email} %>
-                <%#= @msg_id = current_user.recipients.map{|i| i.message_id} %>
-                <%#= Message.where() %>
+                <%= User.find(receiver).email %>
               </a>
             </h4>
           </div>
 
           <%# if index == 0 %>
-              <div id="collapse<%= index %>" class="panel-collapse collapse in">
+          <div id="collapse<%= index %>" class="panel-collapse collapse in">
+        <% current_user.recipients.where(:receiver_id => receiver).each_with_index do |e,ind| %>
+
                 <div class="panel-body">
-                  <%= e.body %>
-                  <%= e.user_id %>
+                  <%= e.message.body %>
+                  <%= e.receiver_id %>
                   <%= e.id %>
                 </div>
-              </div>
-              <hr>
+
+        <% end %>
+          </div>
+          <hr>
           <button class="btn btn-main" onclick="display_reply_form($(this))">Reply</button>
           <div class="reply_message" style="display: none">
-            <%= render partial: "dashboards/message_form"  %>
+            <%= render partial: "dashboards/message_form", :locals => {:uid => receiver}  %>
           </div>
           <%# else %>
-              <!--<div id="collapse<%#= index %>" class="panel-collapse collapse">-->
-                <!--<div class="panel-body">-->
-                  <!--<%#= e.body %>-->
-                <!--</div>-->
-              <!--</div>-->
-              <!--<hr>-->
+          <!--<div id="collapse<%#= index %>" class="panel-collapse collapse">-->
+          <!--<div class="panel-body">-->
+          <!--<%#= e.body %>-->
+          <!--</div>-->
+          <!--</div>-->
+          <!--<hr>-->
           <%# end %>
 
 
         </div>
-    <% end %>
+    <% end  %>
+
 
 
   </div>

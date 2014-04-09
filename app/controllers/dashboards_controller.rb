@@ -41,7 +41,9 @@ class DashboardsController < ApplicationController
   end
 
   def conversations
-    #render :text => params
+    @conversions = current_user.recipients
+    @receivers = @conversions.map{|i| i.receiver_id}.uniq!
+    #render :text => @receivers
     #return
   end
 
