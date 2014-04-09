@@ -8,6 +8,10 @@ class DashboardsController < ApplicationController
     @dashboards = Dashboard.all
   end
 
+  def welcome_dashboard
+
+  end
+  
   def my_dashboard
     @user = current_user
     @user_name = current_user.demographic.name

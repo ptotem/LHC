@@ -1,23 +1,30 @@
 <!--three_cols_desc_section-->
-<section id="blue-container">
+<section id="three_col_desc_section">
   <div class="container">
 
     <div class="row">
       <div class="col-sm-4 col-md-4 text-center home-box">
         <i class="fa fa-mobile-phone fa-3x"></i>
-        <h3>Section Title</h3>
-        <p class="white">Lorem ipsum dolor sit amet, <a href="#">consectetur</a> adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <h3><%= raw(SiteContent.where(:key=>"scrolldown1").first.value) %></h3>
+        <p class="white">
+          <%= raw(SiteContent.where(:key=>"scrolldown1a").first.value) %>
+        </p>
       </div>
 
       <div class="col-sm-4 col-md-4 text-center home-box">
         <i class="fa fa-thumbs-up fa-3x"></i>
-        <h3>Section Title</h3>
-        <p class="white">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <h3><%= raw(SiteContent.where(:key=>"scrolldown2").first.value) %></h3>
+        <p class="white">
+          <%= raw(SiteContent.where(:key=>"scrolldown2a").first.value) %>
+        </p>
       </div>
 
       <div class="col-sm-4 col-md-4 text-center home-box">
-        <h3>Section Title</h3>
-        <p class="white">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <i class="fa fa-thumbs-up fa-3x"></i>
+        <h3><%= raw(SiteContent.where(:key=>"scrolldown3").first.value) %></h3>
+        <p class="white">
+          <%= raw(SiteContent.where(:key=>"scrolldown3a").first.value) %>
+        </p>
       </div>
 
     </div><!--End Row-->

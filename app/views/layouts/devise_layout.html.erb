@@ -106,16 +106,17 @@
 
 <%= render "layouts/topbar" %>
 
-<section id="sign_up_section" style=" background: url('/assets/background.jpeg') no-repeat scroll 0 0 / 100% 100% rgba(0, 0, 0, 0); margin-top: 8%; padding-bottom: 16.4%; padding-top: 8%;">
+<section id="sign_up_section">
   <div class="container">
     <div class="row">
       <div class="col-xs-12 col-sm-6 col-sm-offset-6 col-md-6 col-md-offset-6 col-lg-6 col-lg-offset-6 text-center" style="background-color: #000000; opacity: 0.65; color: #ffffff; padding: 1% 0% 2% 0%;">
         <div class="row">
           <div class="col-xs-6 col-sm-6 col-sm-offset-6 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4 text-center">
-            <h5 class="white">
-              <span style="font-weight: bold">Sign up with</span>
-              <a class="facebook" href="/users/auth/facebook" target="_self"><i class="fa fa-facebook fa-3x blue"></i></a>
+            <h5 class="white" style="position: relative">
+              <span id="sign_up_with_text">Sign up with</span>
+              <a style="margin-left:65px" class="facebook" href="/users/auth/facebook" target="_self"><i class="fa fa-facebook fa-3x blue"></i></a>
             </h5>
+            <h5 class="white" id="sign_up_or_text">OR</h5>
           </div>
         </div>
 

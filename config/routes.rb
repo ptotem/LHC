@@ -42,10 +42,12 @@ Lhc::Application.routes.draw do
   get '/new_user_details/post_registration'=>'new_user_details#post_registration_details'
 
   get '/about_us'=>'home#about_us', as: :about_us
+  get '/contact_us'=>'home#contact_us', as: :contact_us
 
   get '/fill_matching_criteria', to: 'criterions#fill_matching_criteria', as: :fill_matching_criteria
   post '/create_matching_criteria', to: 'criterions#create_matching_criteria', as: :create_matching_criteria
 
+  get '/welcome_dashboard', to: 'dashboards#welcome_dashboard', as: :welcome_dashboard
   get '/my_dashboard', to: 'dashboards#my_dashboard', as: :my_dashboard
   get '/conversations', to: 'dashboards#conversations', as: :conversations
   get '/quick_matches', to: 'dashboards#quick_matches', as: :quick_matches
