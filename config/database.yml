@@ -1,15 +1,16 @@
 development:
   adapter: postgresql
   database: lhcmocks_development
+  host: localhost
   pool: 5
   timeout: 5000
   username: rakesh
   password: p20o20e13
 
-
 test:
   adapter: postgresql
   database: lhcmocks_test
+  host: localhost
   pool: 5
   timeout: 5000
   host: localhost
