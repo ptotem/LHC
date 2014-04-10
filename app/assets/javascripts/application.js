@@ -15,6 +15,8 @@
 //= require turbolinks
 //= require jquery.ui.all
 //= require chosen-jquery
+//= require jquery.multiselect
+//= require jquery.multiselect.filter
 //= require tag-it
 //= require scaffold
 //= require_tree .
