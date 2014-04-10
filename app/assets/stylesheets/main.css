@@ -184,43 +184,37 @@ iframe {
 }
 
 .white {
-  color: #ffffff;
+    color: #ffffff;
 }
-.criterion_field
-{
+
+.criterion_field {
     font-weight: bold;
     font-size: 1.7em;
 }
 
-.between_text
-{
+.between_text {
     font-size: 1.3em;
 }
 
-.grey-btn
-{
-    background:#778489
+.grey-btn {
+    background: #778489
 }
 
-
-.red-btn
-{
-    background:#e30000
+.red-btn {
+    background: #e30000
 }
 
-.my-carousel-indicator li
-{
+.my-carousel-indicator li {
     border-radius: 36px;
     height: 20px;
-    width:20px;
-}
-.my-carousel-indicator li.active
-{
-    border-radius: 36px;
-    height: 20px;
-    width:20px;
+    width: 20px;
 }
 
+.my-carousel-indicator li.active {
+    border-radius: 36px;
+    height: 20px;
+    width: 20px;
+}
 
 /* ==========================================================================
    Navigation Styles
@@ -1129,7 +1123,7 @@ ul.social-icons li a:hover {
     -webkit-transition: all 0.35s ease-in-out;
 }
 
-.lhc-red-btn{
+.lhc-red-btn {
     background-color: #e30000;
 }
 
@@ -1170,7 +1164,7 @@ ul.social-icons li a:hover {
     text-align: left;
 }
 
-.lhc-dropdown{
+.lhc-dropdown {
     width: 275px;
     height: 30px;
 }
@@ -1179,7 +1173,7 @@ ul.social-icons li a:hover {
     background: #38c8e0;
 }
 
-#icons_section{
+#icons_section {
     padding-bottom: 50px;
     padding-top: 50px;
 }
@@ -1219,47 +1213,49 @@ ul.social-icons li a:hover {
     padding-top: 120px;
 }
 
-#relationship_test_page_title_section{
+#relationship_test_page_title_section {
     background: #3E4549;
     padding-top: 120px;
 }
 
-#test_section{
+#test_section {
     background-color: #38c8e0;
 }
 
-.custom-container{
+.custom-container {
     width: 100%;
     overflow: hidden;
 }
 
-.lhc-pointer{
+.lhc-pointer {
     cursor: pointer;
 }
 
-.lhc-text{
+.lhc-text {
     font-size: 1.8em;
     color: #FFFFFF;
     line-height: 1.3em;
 }
 
-
-#verify_text{
+#verify_text {
     font-size: 50px;
     margin-top: 20px;
 }
-#yourself_text{
+
+#yourself_text {
     font-size: 25px;
 }
 
-#verify_buttn{
+#verify_buttn {
     height: 30px;
     width: 100px;
-    background-color: red;
+    background-color: #e30000;
     color:#ffffff;
+    border: none;
+
 }
 
-.blue-background{
+.blue-background {
     background-color: #38c8e0;
     padding-bottom: 20px;
     padding-top: 20px;
@@ -1311,61 +1307,155 @@ ul.social-icons li a:hover {
     /*-webkit-transition: opacity 0.30s ease-in-out 0s, bottom 0.4s cubic-bezier(0.25, 0.500, 0, 1) 0s;*/
 }
 
-.upper-case{
+.upper-case {
     text-transform: uppercase;
 }
+
 /* Test page - portfolio thumbs - ends */
-
-
 
 #take_test_blue-container {
     background: #38c8e0;
 }
 
-.ans_btn{
+.ans_btn {
     padding: 9px 50px;
     background: #e30000;
     color: white
 }
 
-.test_step{
+.test_step {
     color: white;
     font-size: 1.1em;
 }
 
-.test_ul{
+.test_ul {
     list-style: none;
     padding-left: 0;
     color: white;
 }
 
-
-.test_ul  li{
+.test_ul  li {
     padding-top: 4%;
     font-size: 2em;
 }
 
-.radio_text  {
+.radio_text {
     padding-left: 5%;
     padding-top: 0.7%;
     font-size: 0.6em;
 }
 
-.icon_font_size{
+.icon_font_size {
     font-size: 1.4em;
 }
 
-.thumb_up_color{
- color: #38c8e0;
+.thumb_up_color {
+    color: #38c8e0;
 }
 
-.thumb_down_color{
+.thumb_down_color {
     color: #e30000;
 }
+
 
 .chat-separtor
 {
 
     border-color: #e6e6e6;
     border-width:-1px 0
+}
+
+#icon_position {
+
+    margin-left: 5%;
+}
+
+#younme_1strow {
+    margin-top: 20px;
+}
+
+#you_img {
+    border-radius: 50%;
+    height: 80px;
+    width: 80px;
+    margin-left: 60px;
+}
+
+#me_img {
+    border-radius: 50%;
+    height: 80px;
+    width: 80px;
+    margin-left: 20px;
+}
+
+#you_text {
+    font-size: 22px;
+    color: white;
+    margin-left: 78px;
+    margin-top: 10px;
+}
+
+#me_text {
+    font-size: 22px;
+    color: white;
+    margin-left: 42px;
+    margin-top: 10px;
+}
+
+#you_me_text {
+    font-size: 25px;
+    color: red;
+    font-weight: bold;
+    margin-left: 10px;
+
+}
+
+#trite_text {
+    font-size: 25px;
+    color: red;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.first_box {
+    background-color: white;
+    color: deepskyblue;
+    text-align: center;
+    font-size: 50px;
+
+}
+
+.scnd_box {
+    background-color: white;
+    color: deepskyblue;
+    margin-left: 10px;
+}
+
+.trd_box {
+    background-color: white;
+    color: deepskyblue;
+    margin-left: 10px;
+    text-align: center;
+    font-size: 25px;
+}
+.p_text{
+    font-size: 16px;
+    margin-top: 36px;
+}
+
+.icon_position{
+    margin-left: 46%;
+    }
+.secend_boxtext{
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.tag_style{
+    padding-left: 2%;
+}
+
+.font_awesome_icon{
+    font-size: 8em;
 }
