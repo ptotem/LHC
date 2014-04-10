@@ -26,11 +26,11 @@
 <!--</section>-->
 
 <section id="view_profile_section" style="background-image: url('/assets/profile_back.jpg'); padding: 5%;">
-    <div class="row" style="padding-top: 3%;">
+    <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="row">
           <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-            <h4 class="blue">
+            <h4 class="blue" style="font-weight: bold">
               <% if params[:id].to_s != (current_user.id).to_s %>
                   <%= @user_nick_name %>
               <% else %>
