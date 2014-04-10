@@ -50,6 +50,7 @@ Lhc::Application.routes.draw do
   get '/welcome_dashboard', to: 'dashboards#welcome_dashboard', as: :welcome_dashboard
   get '/my_dashboard', to: 'dashboards#my_dashboard', as: :my_dashboard
   get '/conversations', to: 'dashboards#conversations', as: :conversations
+  get '/conversations_with_users', to: 'dashboards#conversations_with_users', as: :conversations_with_users
   get '/quick_matches', to: 'dashboards#quick_matches', as: :quick_matches
   get '/mutual_likes', to: 'dashboards#mutual_likes', as: :mutual_likes
   get '/snazzmeup', to: 'dashboards#snazzmeup', as: :snazzmeup

@@ -120,10 +120,14 @@ class DashboardsController < ApplicationController
 
  def mutual_likes
 
+
  end
  def snazzmeup
 
  end
+  def conversations_with_users
+
+  end
 
 
   private
