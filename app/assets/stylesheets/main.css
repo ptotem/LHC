@@ -1324,7 +1324,8 @@ ul.social-icons li a:hover {
 .ans_btn {
     padding: 9px 50px;
     background: #e30000;
-    color: white
+    color: white;
+    border:none;
 }
 
 .test_step {
@@ -1389,7 +1390,7 @@ ul.social-icons li a:hover {
     border-radius: 50%;
     height: 80px;
     width: 80px;
-    margin-left: 20px;
+    margin-left: 50px;
 }
 
 #you_text {
@@ -1402,7 +1403,7 @@ ul.social-icons li a:hover {
 #me_text {
     font-size: 22px;
     color: white;
-    margin-left: 42px;
+    margin-left: 75px;
     margin-top: 10px;
 }
 
