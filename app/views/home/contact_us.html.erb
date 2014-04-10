@@ -35,7 +35,7 @@
             <div class="control-group">
               <div class="controls">
                 <div class="row">
-                  <%= select_tag "subject", "<option>I want to add my college to let's have coffee!</option><option>I want to know more about let's have coffee!</option><option>I want to share my story</option><option>I have some interesting proposal for you</option>".html_safe, prompt: "Subject", class: 'input-xlarge col-xs-10 col-xs-offset-2 col-lg-10 col-lg-offset-2' %>
+                  <%= select_tag "subject", "<option>I want to share my story</option><option>I want to know more about Let's Have Coffee</option><option>I have an interesting proposal for you</option><option>I want to add my college to Let's Have Coffee</option><option>I just generally want to talk to you guys!</option>".html_safe, prompt: "Subject", class: 'input-xlarge col-xs-10 col-xs-offset-2 col-lg-10 col-lg-offset-2' %>
                 </div>
               </div>
             </div>
@@ -59,13 +59,9 @@
         <% end -%>
       </div>
       <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-        <span class="gray" style="font-size: 1.3em">Side Bar Title</span>
-        <br>
-        <br>
+
         <p>
-          lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-          lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-          lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+          <%= raw(SiteContent.where(:key=>"contactusside").first.value) %>
         </p>
       </div>
     </div>

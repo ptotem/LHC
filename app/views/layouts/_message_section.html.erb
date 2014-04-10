@@ -3,7 +3,8 @@
     <div class="row">
       <div class="col-md-10 col-md-offset-1 text-center">
         <h4 class="gray">
-          &quot; He was my cream, and i was his coffee - <br> And when you poured us together, it was <span class="red">something</span>. &quot;
+          <!--&quot; He was my cream, and i was his coffee - <br> And when you poured us together, it was <span class="red">something</span>. &quot;-->
+          <%= raw(SiteContent.where(:key=>"scrolldownquote").first.value) %>
         </h4>
       </div>
     </div>

@@ -22,7 +22,7 @@ class DemographicsController < ApplicationController
     else
       @user_gender = "Female"
     end
-    @user_age = @user.age
+    @user_age = @user.age rescue nil
     @user_religion = @user.demographic.religion
     @user_smoking = @user.demographic.smoking
     @user_drinking = @user.demographic.drinking
@@ -89,9 +89,10 @@ class DemographicsController < ApplicationController
     #https://github.com/ahmetabdi/themoviedb
 
     #@movie_search_text = "Agneepath"
-    @movie_search_text = params[:movie_search_text][0]
+    @movie_search_text = params['movie_search_text'][0]
+    #@movie_search_text = params[:movie_search_text]
     #render :text => @movie_search_text
-
+    #return
     Tmdb::Api.key("a69e2d8b3e5942d8850c9d17e2dbc126")
     Tmdb::Api.language("en")
 
