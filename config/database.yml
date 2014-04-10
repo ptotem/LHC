@@ -1,20 +1,24 @@
 development:
   adapter: postgresql
   database: lhcmocks_development
+  host: localhost
   pool: 5
   timeout: 5000
   username: postgres
-  password: 19loki76
-
+  #password: 19loki76
+  #username: nilesh
+  password: p20o20e13
 
 test:
   adapter: postgresql
   database: lhcmocks_test
+  host: localhost
   pool: 5
   timeout: 5000
-  host: localhost
   username: postgres
-  password: 19loki76
+  #password: 19loki76
+  #username: nilesh
+  password: p20o20e13
 
 production:
   adapter: postgresql
