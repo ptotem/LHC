@@ -6,8 +6,8 @@ development:
   timeout: 5000
   #username: postgres
   #password: 19loki76
-  username: nilesh
-  password: p20o20e13
+  username: postgres
+  password: 19loki76
 
 
 test:
@@ -17,8 +17,8 @@ test:
   pool: 5
   timeout: 5000
   host: localhost
-  username: rakesh
-  password: p20o20e13
+  username: postgres
+  password: 19loki76
 
 production:
   adapter: postgresql
@@ -26,5 +26,5 @@ production:
   pool: 5
   timeout: 5000
   host: localhost
-  username: rakesh
-  password: p20o20e13
+  username: postgres
+  password: 19loki76

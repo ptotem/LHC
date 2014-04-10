@@ -46,8 +46,8 @@ class DashboardsController < ApplicationController
 
   def conversations
     @conversions = current_user.recipients
-    @receivers = @conversions.map{|i| i.receiver_id}.uniq!
-    #render :text => @receivers
+    @receivers = @conversions.map{|i| i.receiver_id}.uniq
+    #render :text => @conversions.map{|i| i.receiver_id}.uniq
     #return
   end
 
@@ -118,6 +118,14 @@ class DashboardsController < ApplicationController
     end
   end
 
+ def mutual_likes
+
+ end
+ def snazzmeup
+
+ end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_dashboard
@@ -128,4 +136,6 @@ class DashboardsController < ApplicationController
     def dashboard_params
       params[:dashboard]
     end
+
+
 end

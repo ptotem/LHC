@@ -24,21 +24,21 @@
         width: 100%;
     }
 
-    #send_like_request_btn {
-        padding: 4% 37% 4% 5%;
-    }
+    /*#send_like_request_btn {*/
+        /*padding: 4% 37% 4% 5%;*/
+    /*}*/
 
-    #you_me_btn {
-        padding: 3% 66% 3% 5%;
-    }
+    /*#you_me_btn {*/
+        /*padding: 3% 66% 3% 5%;*/
+    /*}*/
 
-    #send_icebreaker_btn {
-        padding: 3% 42.7% 3% 5%;
-    }
+    /*#send_icebreaker_btn {*/
+        /*padding: 3% 42.7% 3% 5%;*/
+    /*}*/
 
-    #start_conversation_btn {
-        padding: 3% 35.5% 3% 5%;
-    }
+    /*#start_conversation_btn {*/
+        /*padding: 3% 35.5% 3% 5%;*/
+    /*}*/
 
 
 
@@ -48,7 +48,7 @@
     <div class="row" id="dashboard_user_profile_pic">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="thumbs">
-          <img alt="Image Size 430x280" class="img-responsive" src="/assets/portfolio1.jpg">
+          <img alt="Image Size 430x280" class="img-responsive" src="/assets/profile_pic.jpg">
           <a href="individual-work.html">
                 <span class="title">
                     <span><i class="fa fa-link fa-2x"></i></span>
@@ -59,28 +59,24 @@
     </div>
 
 
-    <div class="row" style="margin-top: 10%">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <%= link_to "Send Like Request", "#", class: "buttonmenu", :id=>"send_like_request_btn" %>
-      </div>
+    <div class="row" style="margin-top: 1%">
+      <button class="buttonmenu" onclick="window.location='/profile/'+<%= current_user.id %>">Send Like Request</button>
+        <%#= link_to "Send Like Request", "#", class: "buttonmenu", :id=>"send_like_request_btn" %>
     </div>
 
-    <div class="row" style="margin-top: 10%">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <%= link_to "You + Me", "#", class: "buttonmenu", :id=>"you_me_btn" %>
-      </div>
+    <div class="row" style="margin-top: 1%">
+      <button class="buttonmenu" onclick="window.location='/'">You + Me</button>
+        <%#= link_to "You + Me", "#", class: "buttonmenu", :id=>"you_me_btn" %>
     </div>
 
-    <div class="row" style="margin-top: 9%">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <%= link_to "Send Icebreaker", "#", class: "buttonmenu", :id=>"send_icebreaker_btn" %>
-      </div>
+    <div class="row" style="margin-top: 1%">
+      <button class="buttonmenu" onclick="window.location='<%= start_ice_breaker_path(params[:id]) %>'">Send Icebreaker</button>
+        <%#= link_to "Send Icebreaker", "#", class: "buttonmenu", :id=>"send_icebreaker_btn" %>
     </div>
 
-  <div class="row" style="margin-top: 9%">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-      <%= link_to "Start Conversation", start_ice_breaker_path(params[:id]), class: "buttonmenu", :id=>"start_conversation_btn" %>
-    </div>
+  <div class="row" style="margin-top: 1%">
+    <button class="buttonmenu" onclick="window.location='<%= start_ice_breaker_path(params[:id]) %>'">Conversations</button>
+      <%#= link_to "Start Conversation", start_ice_breaker_path(params[:id]), class: "buttonmenu", :id=>"start_conversation_btn" %>
   </div>
 
 
