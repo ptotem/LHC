@@ -1255,8 +1255,9 @@ ul.social-icons li a:hover {
 #verify_buttn{
     height: 30px;
     width: 100px;
-    background-color: red;
+    background-color: #e30000;
     color:#ffffff;
+    border: none;
 }
 
 .blue-background{
@@ -1363,3 +1364,10 @@ ul.social-icons li a:hover {
     color: #e30000;
 }
 
+.tag_style{
+    padding-left: 2%;
+}
+
+.font_awesome_icon{
+    font-size: 8em;
+}

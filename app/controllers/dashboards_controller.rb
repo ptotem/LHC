@@ -121,8 +121,14 @@ class DashboardsController < ApplicationController
  def mutual_likes
 
  end
+
+
  def snazzmeup
 
+ end
+
+ def under_construction
+   render :layout => false
  end
 
 

@@ -14,7 +14,6 @@ class DemographicsController < ApplicationController
   end
 
   def profile
-    #@user = current_user
     @user = User.find(params[:id])
     @user_name = @user.demographic.name
     @user_nick_name = @user.demographic.nickname

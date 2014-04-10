@@ -1,31 +1,5 @@
 <!-- ========================= Show Profile Page Starts ========================= -->
 
-
-<!--<style>-->
-<!--.chosen-container-multi .chosen-choices li.search-field input[type="text"] {-->
-<!--height: 25px;-->
-<!--}-->
-<!--</style>-->
-
-<!-- Display Movies, Music, Books here -->
-
-<!--<section id="view_profile_section">-->
-
-  <!--<div class="container">-->
-    <!--<div class="row" style="padding-top: 3%;">-->
-      <!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">-->
-        <!--<div class="ui-widget">-->
-          <!--<label for="movies">Search Movies :- </label>-->
-          <!--&lt;!&ndash;<input id="movies_search_textfield">&ndash;&gt;-->
-          <!--<%#= select_tag "movies_search_textfield", "".html_safe, multiple: true, class: 'chosen-select ui-autocomplete-input' %>-->
-        <!--</div>-->
-
-        <!--<ul id="demo8" name="demo8"></ul>-->
-
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
-
 <style>
     .name_text {
         font-weight: bold;
@@ -143,7 +117,7 @@
 
             <div class="row">
               <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 white">
-                <i class="fa fa-thumbs-up fa-5x blue"></i>
+                <i class="fa fa-info-circle  font_awesome_icon blue"></i>
               </div>
               <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 white">
                 <div class="hd_list">Reading</div>
@@ -160,7 +134,7 @@
 
             <div class="row">
               <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 white">
-                <i class="fa fa-comments fa-5x blue"></i>
+                <i class="fa fa-comments font_awesome_icon blue"></i>
               </div>
               <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 white">
                 <div class="hd_list">Artistic</div>
@@ -179,7 +153,10 @@
       </div>
     </div>
 
-    <div class="col-lg-3">
+
+
+    <% if params[:id].to_s == (current_user.id).to_s %>
+        <div class="col-lg-3">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
         <div class="row">
@@ -208,26 +185,52 @@
             <p class="white invitefriend">Invite A Friend</p>
           </div>
         </div>
-        <p id="edit_profile_text">
-          <%= link_to 'Edit My Profile', edit_profile_path(current_user.id), :class => "blue" %>
-        </p>
+
+            <p id="edit_profile_text">
+              <%= link_to 'Edit My Profile', edit_profile_path(current_user.id), :class => "blue" %>
+            </p>
+
+      </div>
+    </div>
+    <% end %>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="ui-widget tag_style">
+        <p class="white">Search Movies :- </p>
+        <ul class="myTags">
+          <li>Tag1</li>
+          <li>Tag2</li>
+        </ul>
       </div>
     </div>
   </div>
 
-  <div class="row" style="padding-top: 3%;">
+  <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-      <div class="ui-widget">
-        <label for="music">Search Music :- </label>
-        <ul id="myTags">
-          <!-- Existing list items will be pre-added to the tags -->
-          <li>Tag1</li>
+      <div class="ui-widget tag_style">
+        <p class="white">Search Music :- </p>
+        <ul class="myTags">
+            <li>Tag1</li>
           <li>Tag2</li>
         </ul>
-        <%#= select_tag "music_search_textfield", "".html_safe, multiple: true, class: 'chosen-select ui-autocomplete-input' %>
       </div>
     </div>
   </div>
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="ui-widget tag_style">
+        <p class="white">Search Books :- </p>
+        <ul class="myTags">
+          <li>Tag1</li>
+          <li>Tag2</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
 
 
 </section>
@@ -236,7 +239,7 @@
 <!--<script src="/assets/gauge.min.js"></script>-->
 <script>
     $(function () {
-        $("#myTags").tagit();
+        $(".myTags").tagit();
 
         $(".dial").knob();
 
