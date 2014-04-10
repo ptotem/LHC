@@ -6,6 +6,7 @@
 <section id="dashboard_messages_section">
 
   <div class="panel-group" id="accordion">
+    <% if !@receivers.nil? %>
     <% @receivers.each_with_index do |receiver,index| %>
         <div class="panel panel-default">
           <div class="panel-heading">
@@ -44,6 +45,9 @@
 
 
         </div>
+    <% end  %>
+    <% else %>
+        No message......
     <% end  %>
 
 
