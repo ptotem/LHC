@@ -3,8 +3,10 @@ development:
   database: lhcmocks_development
   pool: 5
   timeout: 5000
-  username: postgres
-  password: 19loki76
+  #username: postgres
+  #password: 19loki76
+  username: satya
+  password: p20o20e13
 
 
 test:
@@ -13,8 +15,10 @@ test:
   pool: 5
   timeout: 5000
   host: localhost
-  username: postgres
-  password: 19loki76
+  #username: postgres
+  #password: 19loki76
+  username: satya
+  password: p20o20e13
 
 production:
   adapter: postgresql
@@ -22,5 +26,7 @@ production:
   pool: 5
   timeout: 5000
   host: localhost
-  username: postgres
-  password: 19loki76
+  #username: postgres
+  #password: 19loki76
+  username: satya
+  password: p20o20e13
