@@ -14,7 +14,6 @@ class DemographicsController < ApplicationController
   end
 
   def profile
-    #@user = current_user
     @user = User.find(params[:id])
     @user_name = @user.demographic.name
     @user_nick_name = @user.demographic.nickname
@@ -23,7 +22,7 @@ class DemographicsController < ApplicationController
     else
       @user_gender = "Female"
     end
-    @user_age = @user.age
+    @user_age = @user.age rescue nil
     @user_religion = @user.demographic.religion
     @user_smoking = @user.demographic.smoking
     @user_drinking = @user.demographic.drinking

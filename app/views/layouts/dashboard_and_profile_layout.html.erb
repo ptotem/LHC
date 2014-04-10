@@ -11,6 +11,12 @@
 
   <!--TODO: move styles in external css-->
   <style>
+
+      .transparent-background {
+          background: transparent;
+          padding-bottom: 20px;
+          padding-top: 20px;
+      }
       .white-background {
           background: #ffffff;
           padding-bottom: 20px;
@@ -163,15 +169,10 @@
 
 
       <div class="row">
-        <div class="col-lg-3" style="padding: 6%;padding-top: 1%"><% if params[:action]=="profile" %>
-              <% if @user.id == current_user.id %>
-                  <%= render "dashboards/left_menu" %>
-              <% else %>
-                  <%= render "dashboards/left_menu_other" %>
-              <% end %>
-          <% else %>
-              <%= render "dashboards/left_menu" %>
-          <% end %></div>
+        <div class="col-lg-3" style="padding: 6%;padding-top: 1%">
+          <%= yield(:left_menu) %>
+
+       </div>
         <div class="col-lg-9" >
           <%= yield %>
 

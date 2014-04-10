@@ -1,70 +1,64 @@
+<%= content_for(:left_menu) do %>
+    <%= render :partial=>"left_menu" %>
+<% end %>
+
+
 <style>
   h4 {
       color:#000000;
   }
+        .message-item
+        {
+            cursor: pointer;
+        }
 </style>
 <section id="dashboard_messages_section">
 
-  <div class="panel-group" id="accordion">
+  <div class="row" style="margin-top: 2%">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 white-background" style="border-radius: 10px;">
+      <br>
+      <ul class="media-list">
+        <li class="media message-item">
+          <a class="pull-left" href="#">
+            <img class="img-circle img-responsive" src="/assets/male.png" height="80px" width="80px" >
+          </a>
 
-    <% if !@receivers.nil? %>
-    <% @receivers.each_with_index do |receiver,index| %>
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h4 class="panel-title">
-              <a data-toggle="collapse" data-parent="#accordion" href="#collapse<%= index %>">
-                <%= User.find(receiver).email %>
-              </a>
-            </h4>
+          <div class="media-body">
+            <h4 class="media-heading" style="color:darkcyan;">Persues  Vazifdar</h4>
+            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin
+            commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
           </div>
+        </li>
+ <li class="media message-item">
+          <a class="pull-left" href="#">
+            <img class="img-circle img-responsive" src="/assets/male.png" height="80px" width="80px" >
+          </a>
 
-          <%# if index == 0 %>
-          <div id="collapse<%= index %>" class="panel-collapse collapse in">
-        <% current_user.recipients.where(:receiver_id => receiver).each_with_index do |e,ind| %>
-
-                <div class="panel-body">
-                  <%= e.message.body %>
-                  <%= e.receiver_id %>
-                  <%= e.id %>
-                </div>
-
-        <% end %>
+          <div class="media-body">
+            <h4 class="media-heading" style="color:darkcyan;">Ashwin Kumar</h4>
+            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin
+            commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
           </div>
-          <hr>
-          <button class="btn btn-main" onclick="display_reply_form($(this))">Reply</button>
-          <div class="reply_message" style="display: none">
-            <%= render partial: "dashboards/message_form", :locals => {:uid => receiver}  %>
+        </li>
+
+
+
+        <li class="media message-item">
+          <a class="pull-left" href="#">
+            <img class="img-circle img-responsive" src="/assets/male.png" height="80px" width="80px"  >
+          </a>
+
+          <div class="media-body">
+            <h4 class="media-heading" style="color:darkcyan;">Sunny Singh</h4>
+            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin
+            commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
           </div>
-          <%# else %>
-          <!--<div id="collapse<%#= index %>" class="panel-collapse collapse">-->
-          <!--<div class="panel-body">-->
-          <!--<%#= e.body %>-->
-          <!--</div>-->
-          <!--</div>-->
-          <!--<hr>-->
-          <%# end %>
+        </li>
+      </ul>
 
-
-        </div>
-    <% end  %>
-    <% else %>
-        No message......
-    <% end  %>
-
-
-
+    </div>
   </div>
 
 
 </section>
 
-<script>
-  $(function(){
-
-  });
-
-  function display_reply_form(this_obj){
-        $(this_obj).next().show();
-        console.log($(this_obj).closest("form").attr("id"));
-  }
-</script>

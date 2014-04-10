@@ -9,7 +9,7 @@ namespace :data do
     SiteContent.create!(:key=>"scrolldown2a", :value=>"Like the matches you find interesting. We keep your identity anonymous.")
     SiteContent.create!(:key=>"scrolldown3", :value=>"We connect mutual likes")
     SiteContent.create!(:key=>"scrolldown3a", :value=>"Talk only to those who like you too! Use our rich profiles to have great conversations.")
-    SiteContent.create!(:key=>"scrolldownquote", :value=>"Good things happen over coffee Edwina Hayes")
+    SiteContent.create!(:key=>"scrolldownquote", :value=>"&quot;Good things happen over coffee.&quot; - Edwina Hayes")
     SiteContent.create!(:key=>"contactus1", :value=>"I want to share my story")
     SiteContent.create!(:key=>"contactus2", :value=>"I want to know more about Let's Have Coffee")
     SiteContent.create!(:key=>"contactus3", :value=>"I have an interesting proposal for you")
