@@ -19,7 +19,9 @@ class DashboardsController < ApplicationController
     #render :json => @user.find_matches
     #return
 
-    @current_user_base_matches = BaseMatch.where(:user_id=>current_user.id)
+    @current_user_base_match
+
+es = BaseMatch.where(:user_id=>current_user.id)
     @current_user_base_matches.each_with_index do |base_match, index|
       BaseMatch.delete(base_match)
     end
@@ -121,13 +123,21 @@ class DashboardsController < ApplicationController
  def mutual_likes
 
  end
+
+
  def snazzmeup
 
  end
 
+
   def younme
 
   end
+
+ def under_construction
+   render :layout => false
+ end
+
 
 
   private
