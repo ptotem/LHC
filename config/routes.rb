@@ -53,6 +53,7 @@ Lhc::Application.routes.draw do
   get '/quick_matches', to: 'dashboards#quick_matches', as: :quick_matches
   get '/mutual_likes', to: 'dashboards#mutual_likes', as: :mutual_likes
   get '/snazzmeup', to: 'dashboards#snazzmeup', as: :snazzmeup
+  get '/younme', to: 'dashboards#younme', as: :younme
   get '/user_verification', to: 'dashboards#user_verification', as: :user_verification
   get '/start_ice_breaker/:id/(:prev_msg)', to: 'dashboards#start_ice_breaker', as: :start_ice_breaker
 
