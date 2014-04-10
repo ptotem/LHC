@@ -1272,3 +1272,15 @@ ul.social-icons li a:hover {
     padding-top: 0.7%;
     font-size: 0.6em;
 }
+
+.icon_font_size{
+    font-size: 1.4em;
+}
+
+.thumb_up_color{
+ color: #38c8e0;
+}
+
+.thumb_down_color{
+    color: #e30000;
+}
