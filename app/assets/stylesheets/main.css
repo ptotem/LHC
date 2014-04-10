@@ -1154,8 +1154,12 @@ ul.social-icons li a:hover {
 }
 
 #college_block {
-    background-color: #F1F4F5;
-    color: #555555
+    /*background-color: #F1F4F5;*/
+    color: #ffffff
+}
+.chosen-container-single .chosen-single
+{
+    border-radius: 0;
 }
 
 #college_block .control-label {
