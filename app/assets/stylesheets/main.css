@@ -211,14 +211,14 @@ iframe {
 .my-carousel-indicator li
 {
     border-radius: 36px;
-    height: 36px;
-    width:36px;
+    height: 20px;
+    width:20px;
 }
 .my-carousel-indicator li.active
 {
     border-radius: 36px;
-    height: 36px;
-    width:36px;
+    height: 20px;
+    width:20px;
 }
 
 
@@ -1243,6 +1243,22 @@ ul.social-icons li a:hover {
     line-height: 1.3em;
 }
 
+
+#verify_text{
+    font-size: 50px;
+    margin-top: 20px;
+}
+#yourself_text{
+    font-size: 25px;
+}
+
+#verify_buttn{
+    height: 30px;
+    width: 100px;
+    background-color: red;
+    color:#ffffff;
+}
+
 .blue-background{
     background-color: #38c8e0;
     padding-bottom: 20px;
@@ -1346,3 +1362,4 @@ ul.social-icons li a:hover {
 .thumb_down_color{
     color: #e30000;
 }
+
