@@ -1,5 +1,6 @@
 <!-- ========================= Show Profile Page Starts ========================= -->
 
+
 <!--<style>-->
 <!--.chosen-container-multi .chosen-choices li.search-field input[type="text"] {-->
 <!--height: 25px;-->
@@ -46,9 +47,10 @@
         color: #f7f7f7;
     }
     .invitefriend{
-        margin-left: 22px;
+        margin-left: 30px;
         color: #FFFFFF;
         font-family: 'Open Sans', sans-serif;
+
 
     }
     #edit_profile_text{
@@ -76,6 +78,7 @@
         <div class="row">
           <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
             <div class="blue name_text">
+
               <% if params[:id].to_s != (current_user.id).to_s %>
                   <%= @user_nick_name %>
               <% else %>
@@ -177,6 +180,7 @@
 
     <div class="col-lg-3">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
         <div class="row">
           <div class="profilometer_text">
             PROFILE'O' METER
@@ -195,6 +199,7 @@
               </div>
           <p class="white">Stating to look good!</p>
          </div>
+
         </div>
         <div class="row">
           <div class="col-lg-12">
