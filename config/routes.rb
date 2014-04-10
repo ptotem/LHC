@@ -55,6 +55,7 @@ Lhc::Application.routes.draw do
   get '/start_ice_breaker/:id/(:prev_msg)', to: 'dashboards#start_ice_breaker', as: :start_ice_breaker
 
   get '/take_test/(:test_id)', to: 'tests#take_test'
+  get '/start_test/(:test_id)', to: 'tests#start_test'
 
   get '/profile/:id', to: 'demographics#profile'
   get '/edit_profile/:id', to: 'demographics#edit_profile', as: :edit_profile

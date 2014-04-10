@@ -1,5 +1,6 @@
 class TestsController < ApplicationController
   before_action :set_test, only: [:show, :edit, :update, :destroy]
+  layout 'dashboard_and_profile_layout'
 
   # GET /tests
   # GET /tests.json
@@ -14,6 +15,10 @@ class TestsController < ApplicationController
   end
 
   def take_test
+
+  end
+
+  def start_test
 
   end
   
