@@ -23,6 +23,7 @@ class DemographicsController < ApplicationController
     else
       @user_gender = "Female"
     end
+    @user_age = @user.age
     @user_religion = @user.demographic.religion
     @user_smoking = @user.demographic.smoking
     @user_drinking = @user.demographic.drinking

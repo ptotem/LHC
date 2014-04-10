@@ -8,7 +8,9 @@
     <div class="control-group">
       <div class="controls">
         <div class="row">
-          <%= f.email_field :email, :autofocus => true, :class => "input-xlarge col-xs-8 col-xs-offset-2", :placeholder => "Email" %>
+          <div class="col-lg-8 col-lg-offset-2">
+          <%= f.email_field :email, :autofocus => true, :class => "form-control", :placeholder => "Email" %>
+            </div>
         </div>
       </div>
     </div>
@@ -16,7 +18,9 @@
     <div class="control-group">
       <div class="controls">
         <div class="row">
-          <%= f.password_field :password, :class => "input-xlarge col-xs-8 col-xs-offset-2", :placeholder => "Password" %>
+          <div class="col-lg-8 col-lg-offset-2">
+          <%= f.password_field :password, :class => "form-control", :placeholder => "Password" %>
+          </div>
         </div>
       </div>
     </div>
@@ -24,7 +28,9 @@
     <div class="control-group">
       <div class="controls">
         <div class="row">
-          <%= f.password_field :password_confirmation, :class => "input-xlarge col-xs-8 col-xs-offset-2", :placeholder => "Password Confirmation" %>
+          <div class="col-lg-8 col-lg-offset-2">
+          <%= f.password_field :password_confirmation, :class => "form-control", :placeholder => "Password Confirmation" %>
+        </div>
         </div>
       </div>
     </div>
@@ -32,22 +38,24 @@
         <div class="control-group">
           <div class="controls">
             <div class="row">
+              <div class="col-lg-8 col-lg-offset-2">
               <!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">-->
                 <%= f.fields_for :demographic do |d| %>
-                    <%= d.text_field :name, :class => "input-xlarge col-xs-8 col-xs-offset-2", :placeholder => "Name", :size=>160 %>
+                    <%= d.text_field :name, :class => "form-control", :placeholder => "Name", :size=>160 %>
                 <%# end %>
               <!--</div>-->
             </div>
+            </div>
             <div class="row">
-              <div class="col-xs-8 col-sm-9 col-md-8 col-md-offset-2 col-lg-8" style="background-color: #F1F4F5; color: #555555">
-                <div class="row">
+              <div class="col-lg-8 col-lg-offset-2" style="background-color: #F1F4F5; color: #555555;">
+                <div class="row" >
                   <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                     <label class="control-label">I am a</label>
                   </div>
                   <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="padding-top: 5px;">
                         <%#= d.select(:male, [['Male', '1'], ['Female', '0']]) %>
-                        <i class="fa fa-male fa-2x lhc-pointer"></i>
-                        <i class="fa fa-female fa-2x lhc-pointer"></i>
+                        <i class="fa fa-male fa-2x lhc-pointer gender-icons"></i>
+                        <i class="fa fa-female fa-2x lhc-pointer gender-icons"></i>
                     <% end %>
                   </div>
 
@@ -56,8 +64,8 @@
                   </div>
                   <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="padding-top: 5px;">
                     <%= f.fields_for :criterions do |c| %>
-                        <i class="fa fa-male fa-2x lhc-pointer"></i>
-                        <i class="fa fa-female fa-2x lhc-pointer"></i>
+                        <i class="fa fa-male fa-2x lhc-pointer expected-gender-icons"></i>
+                        <i class="fa fa-female fa-2x lhc-pointer expected-gender-icons"></i>
                         <%#= c.select(:male, [['Male', '1'], ['Female', '0']]) %>
                     <% end %>
                   </div>
@@ -69,10 +77,8 @@
         </div>
 
 
-        <div class="control-group" style="margin-top: 10px">
-          <div class="controls">
-            <div class="row">
-              <div id="college_block" class="col-xs-8 col-sm-9 col-md-8 col-md-offset-2 col-lg-8">
+            <div class="row" style="margin-top:10px">
+              <div id="college_block" class="col-xs-8 col-sm-9 col-md-8 col-md-offset-2 col-lg-8" style="padding-bottom: 2%">
                 <label class="control-label">College</label>
                 <%= f.fields_for :attendances do |a| %>
                     <%= a.collection_select(:institution_id, Institution.all, :id, :name,{}, {:class=>"lhc-dropdown"}) %>
@@ -80,8 +86,7 @@
               </div>
 
             </div>
-          </div>
-        </div>
+
 
     <div class="row" style="margin-top: 10px">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -99,3 +104,24 @@
 
 <% end %>
 
+<style type="text/css">
+  .orange_button
+  {
+      color:#38C8E0;
+  }
+</style>
+<script type="text/javascript">
+    $(function(){
+        $(".lhc-dropdown").chosen()
+        $(".gender-icons").click(function(e){
+            $(".gender-icons").removeClass("orange_button");
+            $(this).addClass("orange_button")
+        });
+
+        $(".expected-gender-icons").click(function(e){
+            $(".expected-gender-icons").removeClass("orange_button");
+            $(this).addClass("orange_button")
+        });
+    });
+
+</script>

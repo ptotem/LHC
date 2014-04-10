@@ -1,60 +1,39 @@
 <section id="dashboard_matches_section">
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-      <ul class="list-inline portfolio text-center">
+     <div class="row">
+       <h4>Here are your new matches</h4>
+     </div>
 
-        <li data-tag="graphics">
-          <div class="thumbs">
-            <img src="/assets/portfolio1.jpg" class="img-responsive" alt="Image Size 430x280">
-            <a href="individual-work.html">
-          				<span class="title">
-          					<span><i class="fa fa-link fa-2x"></i></span>
-          				</span>
-            </a>
-          </div>
+      <div class="row margin-15">
+        <ul class="list-inline portfolio text-center">
+          <% 9.times do |test_ans_option| %>
+              <li data-tag="graphics">
+                <div class="thumbs">
+                  <img src="/assets/portfolio1.jpg" class="img-responsive" alt="Image Size 430x280">
+                  <a href="individual-work.html">
+                    <span class="title"><span>La Sara Kali</span></span>
+                  </a>
+                </div>
 
-          <div class="project-title margin-30">
-            <!--<h5>Breakroom</h5>-->
-            <a target="_blank" href="profile/2"> Rakeh</a>
-          </div>
-        </li>
-
-        <li data-tag="graphics">
-          <div class="thumbs">
-            <img src="/assets/portfolio1.jpg" class="img-responsive" alt="Image Size 430x280">
-            <a href="individual-work.html">
-          				<span class="title">
-          					<span><i class="fa fa-link fa-2x"></i></span>
-          				</span>
-            </a>
-          </div>
-
-          <div class="project-title margin-30">
-            <!--<h5>Breakroom</h5>-->
-            <a target="_blank" href="profile/1"> Nilesh</a>
-          </div>
-        </li>
-
-        <%# @current_user_quick_matches.each_with_index do |quick_match, index| %>
-            <!--<li data-tag="graphics">-->
-              <!--<div class="thumbs">-->
-                <!--<img src="/assets/portfolio1.jpg" class="img-responsive" alt="Image Size 430x280">-->
-                <!--<a href="individual-work.html">-->
-          				<!--<span class="title">-->
-          					<!--<span><i class="fa fa-link fa-2x"></i></span>-->
-          				<!--</span>-->
-                <!--</a>-->
-              <!--</div>-->
-
-              <!--<div class="project-title margin-30">-->
-                <!--&lt;!&ndash;<h5>Breakroom</h5>&ndash;&gt;-->
-                <!--<a target="_blank" href="profile/<%#= quick_match.target_id %>"> <%#= User.find(quick_match.target_id).demographic.nickname %></a>-->
-              <!--</div>-->
-            <!--</li>-->
+                <div class="project-title margin-30">
+                  <div class="row" style="padding-left: 2%;">
+                    <div class="col-lg-1 col-lg-offset-4">
+                      <i class="fa fa-thumbs-up icon_font_size thumb_up_color"></i>
+                    </div>
+                    <div class="col-lg-1">
+                      <i class="fa fa-thumbs-down icon_font_size thumb_down_color"></i>
+                    </div>
+                  </div>
+                </div>
+              </li>
+          <% end %>
 
 
-        <%# end %>
-      </ul>
+        </ul>
+      </div>
+
+
     </div>
   </div>
 </section>
