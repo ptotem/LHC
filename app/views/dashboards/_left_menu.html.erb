@@ -47,7 +47,7 @@
 
     <div class="row" style="margin-top: 1%">
       <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-        <button class="buttonmenu">Profile</button>
+        <button class="buttonmenu" onclick="window.location='/profile/'+<%= current_user.id %>">Profile</button>
         <!--<button class="lhc-btn btn-large gray">Profile</button>-->
         <%#= link_to "Profile", profile_path, class: "btn-main", :style=>"font-size: 1.1em; padding: 5% 77% 5% 5%; text-transform: none;" %>
       </div>
@@ -55,7 +55,7 @@
 
     <div class="row" style="margin-top: 1%">
       <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-        <button class="buttonmenu">Matches</button>
+        <button class="buttonmenu" onclick="window.location='/quick_matches'">Matches</button>
         <!--<%#= link_to "Conversations", conversations_path, class: "buttonmenu", :style=>"font-size: 1.1em; text-transform: none;" %>-->
         <!--<a href="#"><%#= Recipient.where(:user_id => current_user.id,:status => false).map {|r| r.message}.reverse.count %></a>-->
       </div>
@@ -71,7 +71,7 @@
 
     <div class="row" style="margin-top: 1%">
       <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-        <button class="buttonmenu">Conversations</button>
+        <button class="buttonmenu" onclick="window.location='/conversations'">Conversations</button>
         <!--<button class="lhc-btn btn-large gray">Mutual Likes</button>-->
         <!--<%#= link_to "Mutual Likes", "#", class: "btn-main btn-large", :style=>"font-size: 1.1em; text-transform: none;" %>-->
       </div>
