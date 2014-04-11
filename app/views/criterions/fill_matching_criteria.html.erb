@@ -17,6 +17,15 @@
     .criterion-fill-step {
         display: none;
     }
+
+    .criteria-fill-step-btn{
+        text-decoration: none;
+    }
+
+    .criteria-fill-step-btn:hover, #criteria_submit_btn:hover{
+        background-color: #e30000;
+        color: white;
+    }
     /*#demographic_fill_step_1 {*/
         /*display: none;*/
     /*}*/
@@ -110,7 +119,12 @@
                       <div class="row" >
                         <!-- col for me dob - starts -->
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center demographic-fill-step" id="demographic_fill_step_1" style="position: relative">
-                          <div class="row" style="margin-top: 20%; padding-bottom: 15%;">
+                          <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                              <img src="/assets/calendar_icon.png" style="width:40%;margin-top: 3%;">
+                            </div>
+                          </div>
+                          <div class="row" style="margin-top: 2%; padding-bottom: 15%;">
                             <div class="col-lg-12">
                               <div class="control-group">
                                 <div class="controls">
@@ -250,7 +264,12 @@
                       <div class="row" >
                         <!-- col for opposite person dob - starts -->
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center criterion-fill-step" id="criterion_fill_step_1" style="position: relative">
-                          <div class="row" style="margin-top: 20%; padding-bottom: 15%;">
+                          <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                              <img src="/assets/calendar_icon.png" style="width:40%;margin-top: 3%">
+                            </div>
+                          </div>
+                          <div class="row" style="margin-top: 2%; padding-bottom: 15%;">
                             <div class="col-lg-12">
                               <div class="control-group">
                                 <div class="controls">
@@ -277,7 +296,7 @@
                         <!-- col for opposite person dob - ends -->
 
                         <!-- col for opposite person drinking - starts -->
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center criterion-fill-step" id="criterion_fill_step_2" style="position: relative; padding-top: 1%;">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center criterion-fill-step" id="criterion_fill_step_2" style="position: relative; padding-top: 3%;">
                           <div class="control-group">
                             <div class="controls">
                               <h4 class="white">Drinking</h4>
@@ -285,7 +304,7 @@
                                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-3 text-center" style="background: white">
                                   <%= c.hidden_field :drinking, :id=>"opposite_person_drinking_textfield", :class=>"hidden_elems" %>
                                   <div class="row" >
-                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top:8px;">
                                       <div class="btn-main btn-small grey-btn" style="margin-top: 23px;" onclick="get_my_text($(this),'drinking')">Often</div>
                                     </div>
                                   </div>
@@ -312,7 +331,7 @@
                         <!-- col for opposite person drinking - ends -->
 
                         <!-- col for opposite person smoking - starts -->
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center criterion-fill-step" id="criterion_fill_step_3" style="position: relative; padding-top: 1%;">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center criterion-fill-step" id="criterion_fill_step_3" style="position: relative; padding-top: 3%;">
                           <div class="row">
                             <h4 class="white">Smoking</h4>
                             <div class="row">
@@ -355,10 +374,10 @@
 
                 <div class="row">
                   <div class="col-xs-6 col-sm-6 col-md-6 col-lg-12 text-center">
-                    <%= f.submit "Submit", :id=>"criteria_submit_btn", :class=>"btn btn-main", :style=>"display:none;" %>
+                    <%#= f.submit "Submit", :id=>"criteria_submit_btn", :class=>"btn btn-main", :style=>"display:none;" %>
                   </div>
                 </div>
-            <% end %>
+            <%# end %>
             </div>
         </div>
 
@@ -369,14 +388,15 @@
     <div class="row" style="margin-top: 3%;">
       <!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">-->
       <div class="pull-left">
-        <a href="javascript:void(0)" class="btn-main criteria-fill-step-btn red-btn" id="criteria_fill_step_prev_btn">Back</a>
+        <a href="javascript:void(0)" class="btn-main criteria-fill-step-btn red-btn" id="criteria_fill_step_prev_btn" style="padding-left: 100%; padding-right: 100%;">Back</a>
       </div>
       <div class="pull-right" >
         <a href="javascript:void(0)" class="btn-main criteria-fill-step-btn red-btn" id="criteria_fill_step_next_btn">Continue</a>
+        <%= f.submit "Submit", :id=>"criteria_submit_btn", :class=>"btn btn-main red-btn", :style=>"display:none; margin-top:-14%; padding-left: 25%; padding-right:25%;" %>
       </div>
     <!--</div>-->
     </div>
-
+    <% end %>
 </div>
 
 

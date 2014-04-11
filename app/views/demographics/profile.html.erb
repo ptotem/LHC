@@ -20,6 +20,7 @@
     }
 
     .profilometer_text {
+        text-align: center;
         font-weight: bold;
         font-size: 1.2em;
         color: #38C8E0;
@@ -53,10 +54,16 @@
     #edit_profile_text>a:link{color: #38C8E0;}
     #edit_profile_text>a:visited { color: #38C8E0;}
     #edit_profile_text>a:hover   { color: #38C8E0;}
-    #edit_profile_text>a:active  {color:yellow;}
+    #edit_profile_text>a:active  {color:#38C8E0;}
 
     .chosen-container-multi .chosen-choices li.search-field input[type="text"] {
         height: 25px;
+    }
+
+    .knob_text{
+        font-size:1.5em;
+        font-weight: bold;
+        text-align:center;
     }
 
     /*.prof-demo-container{*/
@@ -185,14 +192,10 @@
         <div class="row">
           <div class="col-lg-12">
               <div class="knob_container">
-              <input type="text" value="29" class="dial" data-width="150"
-                     data-fgColor="red"
-                     data-skin="tron"
-                     data-thickness=".4"
-                     data-bgColor="#FFFFFF"
-                     data-displayPrevious=true data-displayInput="false">
+                <!--<div id="myStat" data-dimension="200" data-text="35%" data-percent="46" data-info="" data-width="10" data-fontsize="38" data-percent="35" data-border="inline" data-fgcolor="#61a9dc" data-bgcolor="red" data-fill="#ddd" ></div>-->
+                <div id="myStat" data-dimension="180" data-text="72%" data-info="" data-width="10" data-fontsize="48" data-percent="46" data-fgcolor="red" data-bgcolor="#eee" data-fill="#ddd" data-total="150" data-part="72" data-border="inline" data-icon="users" data-icon-size="28" data-icon-color="#ccc"></div>
               </div>
-          <p class="white">Stating to look good!</p>
+          <p class="white knob_text">Stating to look good!</p>
          </div>
 
         </div>
@@ -285,9 +288,9 @@
         console.log(moviesTags);
 
         call_auto_suggest_movies();
+        $('#myStat').circliful();
 
-
-        $(".dial").knob();
+//        $(".dial").knob();
 
         var availableTags = [
             "ActionScript",

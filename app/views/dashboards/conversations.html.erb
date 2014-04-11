@@ -1,55 +1,92 @@
 <%= content_for(:left_menu) do %>
-    <%= render :partial=>"left_menu" %>
+    <%= render :partial => "left_menu" %>
 <% end %>
 
 
 <style>
-  h4 {
-      color:#000000;
-  }
-        .message-item
-        {
-            cursor: pointer;
-        }
+    /*h3, h4, h5 {*/
+        /*color: #000000;*/
+    /*}*/
+
+    .message-item {
+        cursor: pointer;
+    }
+
+    .hover-text:hover{
+        color: #38C8E0;
+    }
+    .media-heading{
+        font-size: 1.3em;
+    }
+    .date-time-text{
+        padding-right: 5px;
+    }
 </style>
 <section id="dashboard_messages_section">
 
-  <div class="row" style="margin-top: 2%">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 white-background" style="border-radius: 10px;">
+  <div class="row" style="margin-top: -1%">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <h3>Conversations</h3>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 white-background">
       <br>
       <ul class="media-list">
         <li class="media message-item">
           <a class="pull-left" href="#">
-            <img class="img-circle img-responsive" src="/assets/male.png" height="80px" width="80px" >
+            <img class="img-circle img-responsive" src="/assets/male.png" height="80px" width="80px">
           </a>
 
-          <div class="media-body">
-            <h4 class="media-heading" style="color:darkcyan;">Persues  Vazifdar</h4>
-            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin
-            commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
+          <div class="media-body hover-text">
+            <div class="row">
+              <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                <h5 class="media-heading hover-text">Persues Vazifdar</h5>
+              </div>
+              <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <p class="pull-right date-time-text hover-text">6 PM, 24<sup>th</sup> March 2014</p>
+              </div>
+            </div>
+            <span>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin
+            commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.</span>
           </div>
         </li>
- <li class="media message-item">
+        <hr class="chat-separtor">
+        <li class="media message-item">
           <a class="pull-left" href="#">
-            <img class="img-circle img-responsive" src="/assets/male.png" height="80px" width="80px" >
+            <img class="img-circle img-responsive" src="/assets/male.png" height="80px" width="80px">
           </a>
 
-          <div class="media-body">
-            <h4 class="media-heading" style="color:darkcyan;">Ashwin Kumar</h4>
+          <div class="media-body hover-text">
+            <div class="row">
+              <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                <h5 class="media-heading hover-text">Ashwin Kumar</h5>
+              </div>
+              <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <p class="pull-right date-time-text hover-text">6 PM, 24<sup>th</sup> March 2014</p>
+              </div>
+            </div>
             Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin
             commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
           </div>
         </li>
 
-
+        <hr class="chat-separtor">
 
         <li class="media message-item">
           <a class="pull-left" href="#">
-            <img class="img-circle img-responsive" src="/assets/male.png" height="80px" width="80px"  >
+            <img class="img-circle img-responsive" src="/assets/male.png" height="80px" width="80px">
           </a>
 
-          <div class="media-body">
-            <h4 class="media-heading" style="color:darkcyan;">Sunny Singh</h4>
+          <div class="media-body hover-text">
+            <div class="row">
+              <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                <h5 class="media-heading hover-text">Sunny Singh</h5>
+              </div>
+              <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <p class="pull-right date-time-text hover-text">6 PM, 24<sup>th</sup> March 2014</p>
+              </div>
+            </div>
             Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin
             commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
           </div>

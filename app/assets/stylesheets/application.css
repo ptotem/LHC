@@ -14,5 +14,6 @@
  *= require jquery.tagit
  *= require jquery.multiselect
  *= require jquery.multiselect.filter
+ *= require jquery.bxslider
  *= require_tree .
  */
