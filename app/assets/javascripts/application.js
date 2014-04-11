@@ -17,6 +17,7 @@
 //= require chosen-jquery
 //= require jquery.multiselect
 //= require jquery.multiselect.filter
+//= require jquery.bxslider.min
 //= require tag-it
 //= require scaffold
 //= require_tree .
