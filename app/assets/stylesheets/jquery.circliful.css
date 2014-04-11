@@ -1,0 +1,27 @@
+.circliful {
+    position: relative; 
+}
+
+.circle-text, .circle-info, .circle-text-half, .circle-info-half {
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    display: inline-block;
+}
+
+.circle-info, .circle-info-half {
+	color: #8d8d8d;
+    text-shadow: 10px 10px 10px #FF63B6;
+}
+
+.circle-text{
+    color: #8D8D8D;
+    font-weight: bold;
+    text-shadow: 0px 1px 0px rgba(255,255,255,.5); /* 50% white from bottom */
+}
+
+.circliful .fa {
+	margin: -10px 3px 0 3px;
+	position: relative;
+	bottom: 4px;
+}
