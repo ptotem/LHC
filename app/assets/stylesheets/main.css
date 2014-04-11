@@ -397,7 +397,7 @@ li.sign-up:hover {
 
 .bx-wrapper .bx-loading {
     min-height: 50px;
-    background: url(../img/bx_loader.gif) center center no-repeat transparent;
+    background: url(/assets/bx_loader.gif) center center no-repeat transparent;
     height: 100%;
     width: 100%;
     position: absolute;
@@ -410,12 +410,12 @@ li.sign-up:hover {
 
 .bx-wrapper .bx-prev {
     left: 10px;
-    background: url(../img/controls.png) no-repeat 0 -32px;
+    background: url(/assets/controls.png) no-repeat 0 -32px;
 }
 
 .bx-wrapper .bx-next {
     right: 10px;
-    background: url(../img/controls.png) no-repeat -43px -32px;
+    background: url(/assets/controls.png) no-repeat -43px -32px;
 }
 
 .bx-wrapper .bx-prev:hover {
@@ -447,9 +447,13 @@ li.sign-up:hover {
 }
 
 .bxslider li {
-    height: 560px;
-    overflow: hidden;
+    /*height: 560px;*/
+    /*overflow: hidden;*/
     left: 0;
+}
+
+.chosen-container{
+    text-align: left;
 }
 
 /* ==========================================================================
