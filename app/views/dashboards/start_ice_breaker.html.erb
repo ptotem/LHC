@@ -13,9 +13,42 @@
             font-size:1.5em;
             color:black;
         }
+
+  .popover
+  {
+      min-width: 21% ! important;
+      color: black;
+      font-size: 0.8em;
+  }
+
+  .popover h3 {
+      color: #000000;
+      text-align: center;
+  }
+
 </style>
 
-<div class="col-xs-6 col-sm-6 col-md-6 col-lg-12" style="margin-top: 4%">
+<script>
+  $(function(){
+      $('.font_awesome_ice_breaker').popover({
+          html: true
+
+      });
+
+//      $('.font_awesome_ice_breaker').on('click', function (e) {
+//          $('[data-toggle="popover"]').each(function () {
+//              //the 'is' for buttons that trigger popups
+//              //the 'has' for icons within a button that triggers a popup
+//              if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+//                  $(this).popover('hide');
+//              }
+//          });
+//      });
+
+  })
+</script>
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top: -1%">
 
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -24,37 +57,56 @@
   </div>
 
   <div class="row">
-    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-      <div class="white-background">
-        <span class="question_statment" ><label>
-          &nbsp;<input type="checkbox">
-        </label>
-          This is where questions will appear</span>
+    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10" style="padding-right: 0">
+      <div class="row">
+        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 white-background_ice_breaker">
+          <div class="blue-background_ice_breaker">
+            <h4 class="text_styling_ice_breaker"><label>
+              &nbsp;<input type="checkbox">
+            </label>
+              This is where questions will appear
+              <i class="fa fa-info-circle  font_awesome_ice_breaker pop_over_style" data-content="<ul><li>Option A</li><li>Option B</li><li>Option C</li><li>Option D</li></ul>" title="" data-toggle="popover" data-original-title="A Title"></i>
+            </h4>
+          </div>
+          <div class="blue-background_ice_breaker">
+            <h4 class="text_styling_ice_breaker"><label>
+              &nbsp;<input type="checkbox">
+            </label>
+              This is where questions will appear
+              <i class="fa fa-info-circle  font_awesome_ice_breaker pop_over_style" data-content="<ul><li>Option A</li><li>Option B</li><li>Option C</li><li>Option D</li></ul>" title="" data-toggle="popover" data-original-title="A Title"></i>
+            </h4>
+            
+          </div>
+          <div class="blue-background_ice_breaker">
+            <h4 class="text_styling_ice_breaker"><label>
+              &nbsp;<input type="checkbox">
+            </label>
+              This is where questions will appear
+              <i class="fa fa-info-circle  font_awesome_ice_breaker pop_over_style" data-content="<ul><li>Option A</li><li>Option B</li><li>Option C</li><li>Option D</li></ul>" title="" data-toggle="popover" data-original-title="A Title"></i>
+            </h4>
+          </div>
+          <div class="blue-background_ice_breaker">
+            <h4 class="text_styling_ice_breaker"><label>
+              &nbsp;<input type="checkbox">
+            </label>
+              This is where questions will appear
+              <i class="fa fa-info-circle  font_awesome_ice_breaker pop_over_style" data-content="<ul><li>Option A</li><li>Option B</li><li>Option C</li><li>Option D</li></ul>" title="" data-toggle="popover" data-original-title="A Title"></i>
+            </h4>
+          </div>
+          <div class="blue-background_ice_breaker">
+            <h4 class="text_styling_ice_breaker"><label>
+              &nbsp;<input type="checkbox">
+            </label>
+              This is where questions will appear
+              <i class="fa fa-info-circle  font_awesome_ice_breaker pop_over_style" data-content="<ul><li>Option A</li><li>Option B</li><li>Option C</li><li>Option D</li></ul>" title="" data-toggle="popover" data-original-title="A Title"></i>
+            </h4>
+          </div>
+        </div>
       </div>
-      <div class="white-background question" >
-        <span class="question_statment" ><label>
-          &nbsp;<input type="checkbox">
-        </label>
-          This is where questions will appear</span>
-      </div>
-      <div class="white-background question">
-        <span class="question_statment"><label>
-          &nbsp;<input type="checkbox">
-        </label>
-          This is where questions will appear</span>
-      </div>
-      <div class="white-background question">
-        <span class="question_statment"><label>
-          &nbsp;<input type="checkbox">
-        </label>
-          This is where questions will appear</span>
-      </div>
-      <div class="white-background question">
-        <span class="question_statment"><label>
-          &nbsp;<input type="checkbox">
-        </label>
-          This is where questions will appear</span>
-      </div>
+
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="margin-left: -6%;">
+      <%= render :partial => "demographics/right_coffee_menu" %>
     </div>
   </div>
 
