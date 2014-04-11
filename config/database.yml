@@ -7,7 +7,6 @@ development:
   username: postgres
   password: 19loki76
 
-
 test:
   adapter: postgresql
   database: lhcmocks_test
