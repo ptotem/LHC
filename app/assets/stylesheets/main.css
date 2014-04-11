@@ -528,7 +528,7 @@ li.sign-up:hover {
 #blue-container {
     background: #38c8e0;
     padding-top: 80px;
-    padding-bottom: 80px;
+    /*padding-bottom: 80px;*/
 }
 
 #team {
@@ -1239,6 +1239,10 @@ ul.social-icons li a:hover {
     font-size: 1.8em;
     color: #FFFFFF;
     line-height: 1.3em;
+}
+.dashboard_header_text
+{
+    font-size: 2.5em;
 }
 
 #verify_text {
