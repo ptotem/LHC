@@ -1,3 +1,27 @@
+<style>
+    #upload {
+        position: relative;
+    }
+
+    #upload .wrapper {
+        opacity: 0;
+        cursor: pointer;
+        position: absolute;
+        top: 0;
+        z-index: 2;
+    }
+
+    #upload .wrapper:hover
+    {
+        opacity: 1;
+    }
+
+
+
+
+</style>
+
+
 <%= content_for(:left_menu) do %>
     <%= render :partial=>"left_menu" %>
 <% end %>
@@ -50,12 +74,19 @@
           </div>
 
           <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-              <%= select_tag "doc_type", "<option>College Identity Card</option><option>College Mark Sheet</option><option>Degree</option>".html_safe, class: 'col-xs-6' %>
-              <%= file_field_tag "file", :class => "col-xs-4", :placeholder => "Enter your institute email" %>
+            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8" >
+              <%= select_tag "doc_type", "<option>College Identity Card</option><option>College Mark Sheet</option><option>Degree</option>".html_safe, class: 'form-control' %>
+              </div>
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" id="upload">
+              <!--<button id="verify_buttn">Verify</button>-->
+              <div class="wrapper">
+              <%= file_field_tag "file", :class => "verify_buttn", :placeholder => "Enter your institute email" %>
+
+                </div>
+              <button id="verify_buttn"  class="file_upload">Upload!</button>
             </div>
           </div>
-          <p class="white">(These document would be secure)</p>
+          <!--<p class="white">(These document would be secure)</p>-->
 
 
           <div class="row">

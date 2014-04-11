@@ -55,7 +55,7 @@ Lhc::Application.routes.draw do
   get '/mutual_likes', to: 'dashboards#mutual_likes', as: :mutual_likes
   get '/snazzmeup', to: 'dashboards#snazzmeup', as: :snazzmeup
 
-  get '/younme', to: 'dashboards#younme', as: :younme
+  get '/younme/:id', to: 'dashboards#younme', as: :younme
   get '/under_construction', to: 'dashboards#under_construction', as: :under_construction
 
   get '/user_verification', to: 'dashboards#user_verification', as: :user_verification
