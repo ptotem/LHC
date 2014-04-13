@@ -74,3 +74,40 @@
     font-size: 1.3em;
 
 }
+
+.page-left
+ {
+    display: inline-block;
+    width: 20%;
+    padding:2.5%;
+    padding-left:4%
+ }
+
+.page-right
+ {
+    display: inline-block;
+    width: 79%;
+    vertical-align: top;
+    padding:3%
+ }
+
+
+.no-padding{
+    padding:0;
+}
+
+.match_age
+{
+ font-size: 1.4em;
+}
+
+.match_city
+{
+font-size: 2.0em;
+    text-align: center;
+}
+
+.message-item
+{
+padding:10px;
+}

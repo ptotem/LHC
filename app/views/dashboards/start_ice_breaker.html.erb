@@ -2,6 +2,13 @@
     <%= render :partial=>"left_menu_other" %>
 <% end %>
 
+<%= content_for(:page_header) do %>
+    Start a conversation with monika !
+<% end %>
+<%= content_for(:dialogue_bar_header) do %>
+    Ice Breaker !
+<% end %>
+
 
 <style type="text/css">
   .question
@@ -52,16 +59,11 @@
   })
 </script>
 
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top: -1%">
+
+
 
   <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-left: 0">
-      <h3 style="color:white;font-weight: normal">Start a conversation with monika !</h3>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10" style="padding-right: 0">
+    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10" >
       <div class="row">
         <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 white-background_ice_breaker">
           <div class="blue-background_ice_breaker">
@@ -119,4 +121,3 @@
     <button class="btn btn-block ans_btn" onclick="window.location='<%= conversations_with_users_path %>'">Ask questions</button>
     </div>
   </div>
-    </div>

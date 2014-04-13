@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>Lhc</title>
+  <title><%= get_content_for("siteTitle") %></title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
@@ -100,7 +100,7 @@
 
 <!--<fb:login-button show-faces="true" width="200" max-rows="1"></fb:login-button>-->
 
-<%= render "layouts/topbar" %>
+<%= render "generic_partials/topbar" %>
 
 <%= yield %>
 

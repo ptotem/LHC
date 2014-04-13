@@ -3,42 +3,47 @@
 <% end %>
 
 
+<%= content_for(:dialogue_bar_header) do %>
+    Your Matches
+<% end %>
+<%= content_for(:page_header) do %>
+    Here are your matches!
+<% end %>
+
+
 <section id="dashboard_matches_section">
-  <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-     <div class="row">
-       <h4>Here are your new matches</h4>
-     </div>
 
-      <div class="row margin-15">
-        <ul class="list-inline portfolio text-center">
-          <% 9.times do |test_ans_option| %>
-              <li data-tag="graphics">
-                <div class=" test-thumbs">
-                  <img src="/assets/portfolio1.jpg" class="img-responsive" alt="Image Size 430x280">
-                  <a href="individual-work.html">
-                    <span class="title"><span>La Sara Kali</span></span>
-                  </a>
-                </div>
 
-                <div class="project-title margin-30">
-                  <div class="row" style="padding-left: 2%;">
-                    <div class="col-lg-1 col-lg-offset-4">
-                      <i class="fa fa-thumbs-up icon_font_size thumb_up_color"></i>
-                    </div>
-                    <div class="col-lg-1">
-                      <i class="fa fa-thumbs-down icon_font_size thumb_down_color"></i>
-                    </div>
+      <ul class="list-inline portfolio text-center">
+        <% 9.times do |test_ans_option| %>
+            <li data-tag="graphics">
+              <div class=" test-thumbs">
+                <img src="/assets/portfolio1.jpg" class="img-responsive" alt="Image Size 430x280">
+                <a href="individual-work.html">
+                  <span class="title"><span class="match_age">24,Female<br><br>Mumbai</span></span>
+                </a>
+              </div>
+
+              <div class="project-title margin-30">
+                <div class="row" style="padding-left: 2%;">
+                  <div class="col-lg-1 col-lg-offset-4">
+                    <i class="fa fa-thumbs-up icon_font_size thumb_up_color"></i>
+                  </div>
+                  <div class="col-lg-1">
+                    <i class="fa fa-thumbs-down icon_font_size thumb_down_color"></i>
                   </div>
                 </div>
-              </li>
-          <% end %>
+              </div>
+            </li>
+        <% end %>
 
 
-        </ul>
-      </div>
+      </ul>
 
 
-    </div>
-  </div>
+
+
+
+
+
 </section>
