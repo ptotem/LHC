@@ -1,0 +1,76 @@
+.whiteblock{
+    background-color: #FFFFFF;
+    height: 80px;
+    margin-top: 1%;
+    padding: -1%;
+
+}
+
+.recentactivitydate{
+    text-align: right;
+    font-size: 0.9em;
+    color: #3E4549;
+
+}
+
+
+
+.recentactivitytext{
+    vertical-align:bottom;
+    text-align: left;
+    font-size: 1.2em;
+    color: #3E4549;
+    margin-top: 8%;
+    /*margin-left: -8%;*/
+}
+
+
+.profile_pic_thumbnail
+{
+    height: 55px;
+    margin-top:15%;
+
+}
+
+.recent-activity-list
+ {
+    overflow-y: auto;
+    overflow-x:hidden ;
+    /*display: inline;*/
+    position: relative;
+    height: 370px;
+ }
+.recent-activity-list .left-part
+{
+    /*position: absolute;*/
+    width:9%;
+    display: inline-block;
+    vertical-align: top;
+    height:100%
+}
+
+.recent-activity-list .mid-part
+{
+    width:73%;
+    height: 100%;
+    vertical-align: bottom;
+    /*position: absolute;*/
+     display: inline-block;
+    /*left:0*/
+}
+
+.recent-activity-list .right-part
+{
+    /*position: absolute;*/
+    width:15%;
+    height:100%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.section-head1{
+    color:#3E4549;
+    text-align: right;
+    font-size: 1.3em;
+
+}

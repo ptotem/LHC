@@ -3,9 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>Lhc</title>
+  <title><%= get_content_for("siteTitle") %></title>
   <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
-  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+  <!--TODO: Why was this line here ?-->
+  <!--<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>-->
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
@@ -104,7 +105,7 @@
 
 <!--<fb:login-button show-faces="true" width="200" max-rows="1"></fb:login-button>-->
 
-<%= render "layouts/topbar" %>
+<%= render "generic_partials/topbar" %>
 
 <!--Header Section-->
 <section id="header">
@@ -154,38 +155,15 @@
   </div>
 </section>
 
-<!--<section id="sign_up_section">-->
-  <!--<div class="container">-->
-    <!--<div class="row">-->
-      <!--<div class="col-xs-12 col-sm-6 col-sm-offset-6 col-md-6 col-md-offset-6 col-lg-6 col-lg-offset-6 text-center" style="background-color: #000000; opacity: 0.65; color: #ffffff; padding: 1% 0% 2% 0%;">-->
-        <!--<div class="row">-->
-          <!--<div class="col-xs-6 col-sm-6 col-sm-offset-6 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4 text-center">-->
-            <!--<h5 class="white" style="position: relative">-->
-              <!--<span id="sign_up_with_text">Sign up with</span>-->
-              <!--<a class="facebook" href="/users/auth/facebook" target="_self"><i class="fa fa-facebook fa-3x blue"></i></a>-->
-            <!--</h5>-->
-            <!--<h5 class="white" id="sign_up_or_text">OR</h5>-->
-          <!--</div>-->
-        <!--</div>-->
+<!--Sifting partials to a different directory is a matter of choice. Nothing wrong in keeeping everything in layouts folder, but this is slightly more cleaner approach.-->
 
-        <!--<%#= yield %>-->
+<%= render "generic_partials/three_cols_desc_section" %>
 
-      <!--</div>-->
-      <!--&lt;!&ndash;End Col 6&ndash;&gt;-->
+<%= render "generic_partials/icons_section" %>
 
-    <!--</div>-->
-    <!--&lt;!&ndash;End Row&ndash;&gt;-->
+<%= render "generic_partials/message_section" %>
 
-  <!--</div>-->
-<!--</section>-->
-
-<%= render "layouts/three_cols_desc_section" %>
-
-<%= render "layouts/icons_section" %>
-
-<%= render "layouts/message_section" %>
-
-<%= render "layouts/bottom_section" %>
+<%= render "generic_partials/bottom_section" %>
 </body>
 
 <!--<script src="js/jquery.bxslider.min.js"></script>-->

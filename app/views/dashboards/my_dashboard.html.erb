@@ -3,6 +3,12 @@
     <%= render :partial=>"left_menu" %>
 <% end %>
 
+<%= content_for(:dialogue_bar_header) do %>
+    Welcome, <%= current_user.demographic.name %>
+<% end %>
+
+
+
 
 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-9 blue-background" style="padding-top:2%">
   <%#= yield %>
@@ -16,29 +22,44 @@
       Recent Activity
     </div>
   </div>
-  <% 4.times do |i| %>
+  <div class="recent-activity-list">
+  <% 7.times do |i| %>
       <div class="row">
         <div class="col-lg-12 whiteblock">
-          <div class="row">
-            <div class="col-lg-2">
-              <img class="img-responsive recentactivityimg" src="/assets/profile_pic.jpg">
-            </div>
-            <div class="col-lg-10">
-              <div class="row">
-                <div class="col-lg-12 recentactivitydate">
-                  8th April 2014
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-lg-12 recentactivitytext">
-                  Your Match <a>Sagarika</a> sent you a message
-                </div>
-              </div>
+          <div class="left-part"> <img class="img-circle profile_pic_thumbnail" src="/assets/profile_pic.jpg" ></div>
+          <div class="mid-part">
+          <div class="recentactivitytext">
+          Your Match <a>Sagarika</a> sent you a message
+          </div>
+          </div>
+          <div class="right-part">
+            <div class="recentactivitydate">
+              8th April 2014
             </div>
           </div>
+
+
+          <!--<div class="row">-->
+            <!--<div class="col-lg-2">-->
+              <!--<img class="img-circle profile_pic_thumbnail" src="/assets/profile_pic.jpg" >-->
+            <!--</div>-->
+            <!--<div class="col-lg-10">-->
+              <!--<div class="row">-->
+                <!--<div class="col-lg-12 recentactivitydate">-->
+                  <!--8th April 2014-->
+                <!--</div>-->
+              <!--</div>-->
+              <!--<div class="row">-->
+                <!--<div class="col-lg-12 recentactivitytext">-->
+                  <!--Your Match <a>Sagarika</a> sent you a message-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
         </div>
       </div>
   <% end %>
+  </div>
 
 </div>
 <div class="col-lg-3 text-center" style="padding-top:2%">

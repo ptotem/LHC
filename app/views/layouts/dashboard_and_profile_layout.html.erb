@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Lhc</title>
+  <title><%= get_content_for("siteTitle") %></title>
   <meta name="viewport" content="width=device-width">
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
   <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
@@ -60,38 +60,13 @@
         vertical-align: text-top;
       }
 
-      .section-head1{
-          color:#3E4549;
-          text-align: right;
-          font-size: 1.3em;
-          padding-right: 0;
-      }
 
-      .whiteblock{
-          background-color: #FFFFFF;
-          height: 80px;
-          margin-top: 1%;
-          padding: 0.5%;
-      }
 
-      .recentactivitydate{
-          text-align: right;
-          font-size: 0.9em;
-          color: #3E4549;
-      }
 
-      .recentactivityimg{
-          width: 72%;
-      }
 
-      .recentactivitytext{
-          vertical-align:bottom;
-          text-align: left;
-          font-size: 1.2em;
-          color: #3E4549;
-          margin-top: 5%;
-          margin-left: -8%;
-      }
+
+
+
 
       .countdown{
         width: 30%;
@@ -179,7 +154,7 @@
 
 <body>
 
-    <%= render "layouts/topbar" %>
+    <%= render "generic_partials/topbar" %>
 
     <!--Page Title-->
     <section id="page-title">
@@ -187,7 +162,8 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12 title-blue">
-            <h2>Welcome, <%= current_user.demographic.name %></h2>
+           <h2> <%= yield(:dialogue_bar_header) %></h2>
+            <!--<h2>Welcome, <%#= current_user.demographic.name %></h2>-->
           </div>
         </div>
       </div>
