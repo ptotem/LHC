@@ -43,6 +43,8 @@ module Lhc
       end
     end
 
+    config.action_mailer.default_url_options = {:host => "localhost:3000"}
+
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
