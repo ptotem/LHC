@@ -25,6 +25,7 @@ class HomeController < ApplicationController
   end
 
   def contact_us
+    @query = Query.new
 
   end
 

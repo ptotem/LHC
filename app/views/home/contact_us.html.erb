@@ -14,12 +14,14 @@
   <div class="custom-container">
     <div class="row" style="padding-top: 5%">
       <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-        <%= form_tag ('/contacts'), :class => "form-horizontal" do %>
+        <%= form_for @query, :class => "form-horizontal" do |f| %>
 
             <div class="control-group">
               <div class="controls">
                 <div class="row">
-                  <%= text_field_tag 'name', nil, placeholder: 'Name', class: 'input-xlarge col-xs-10 col-xs-offset-2 col-lg-10 col-lg-offset-2' %>
+                  <div class="col-lg-8 col-lg-offset-2">
+                  <%= f.text_field :name, placeholder: 'Name', class: 'form-control' %>
+                </div>
                 </div>
               </div>
             </div>
@@ -27,7 +29,9 @@
             <div class="control-group">
               <div class="controls">
                 <div class="row">
-                  <%= email_field_tag 'email', nil, placeholder: 'E-mail', class: 'input-xlarge col-xs-10 col-xs-offset-2 col-lg-10 col-lg-offset-2' %>
+                  <div class="col-lg-8 col-lg-offset-2">
+                  <%= f.email_field :email,  placeholder: 'E-mail', class: 'form-control' %>
+                </div>
                 </div>
               </div>
             </div>
@@ -35,7 +39,9 @@
             <div class="control-group">
               <div class="controls">
                 <div class="row">
-                  <%= select_tag "subject", "<option>I want to share my story</option><option>I want to know more about Let's Have Coffee</option><option>I have an interesting proposal for you</option><option>I want to add my college to Let's Have Coffee</option><option>I just generally want to talk to you guys!</option>".html_safe, prompt: "Subject", class: 'input-xlarge col-xs-10 col-xs-offset-2 col-lg-10 col-lg-offset-2' %>
+                  <div class="col-lg-8 col-lg-offset-2">
+                  <%= f.select :subject, ["I want to share my story","I want to know more about Let's Have Coffee","I have an interesting proposal for you","I want to add my college to Let's Have Coffee","I just generally want to talk to you guys!"], prompt: "Subject", class: 'form-control contact-select' %>
+                  </div>
                 </div>
               </div>
             </div>
@@ -43,16 +49,20 @@
             <div class="control-group">
               <div class="controls">
                 <div class="row">
-                  <%= text_area_tag 'message_body' , nil, placeholder: 'Message', class: 'input-xlarge col-xs-10 col-xs-offset-2 col-lg-10 col-lg-offset-2' %>
+                  <div class="col-lg-8 col-lg-offset-2">
+                  <%= f.text_area :body , placeholder: 'Message', class: 'form-control' %>
+                </div>
                 </div>
               </div>
             </div>
 
 
-            <div class="control-group">
+            <div class="control-group" style="margin-top: 3%">
               <div class="controls">
                 <div class="row">
-                  <%= submit_tag 'Send Message', :class=>"btn-main col-xs-offset-2 lhc-red-btn" %>
+                  <div class="col-lg-8 col-lg-offset-2">
+                  <%= f.submit 'Send Message', :class=>"btn-main lhc-red-btn" %>
+                </div>
                 </div>
               </div>
             </div>
@@ -61,7 +71,7 @@
       <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
 
         <p>
-          <%= raw(SiteContent.where(:key=>"contactusside").first.value) %>
+          <%= get_content_for("contactusside") %>
         </p>
       </div>
     </div>
@@ -74,10 +84,12 @@
     $(function(){
         //$('#criteria_fill_step_1').fadeIn();
 
+        $(".contact-select").chosen();
         //TODO: write contact in respective view
         var which_page;
         which_page = "contact"; // values => contact, relationship_test, dashboard etc...
 
+//        TODO: what is this ??
         if ( which_page == "algo" ) {
             $('#contact_page_title_section').hide();
             $('#contact_section').hide();
