@@ -73,12 +73,13 @@ Lhc::Application.routes.draw do
   get '/search_movies_ruby', to: 'demographics#search_movies_ruby'
   #post '/search_movies_themoviedb', to: 'demographics#search_movies_themoviedb'
   match '/search_movies_themoviedb', to: 'demographics#search_movies_themoviedb', via: [:get, :post]
+  match '/search_movies_by_rovicorp', to: 'demographics#search_movies_by_rovicorp', via: [:get, :post]
 
   match '/search_music_gmusic', to: 'demographics#search_music_gmusic', via: [:get, :post]
 
 
   match '/search_music_db', to: 'demographics#search_music_db', via: :post
-  match '/search_book_db', to: 'demographics#search_book_db', via: [:get]
+  match '/search_book_db', to: 'demographics#search_book_db', via: [:get, :post]
 
   get '/users/auth/:provider/callback' => 'authentications#create'
 

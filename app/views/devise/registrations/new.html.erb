@@ -49,14 +49,21 @@
             <div class="row">
               <div class="col-lg-8 col-lg-offset-2" style=" color: #ffffff;">
                 <div class="row" >
-                  <div class="col-lg-6"> <label class="control-label pull-left">I am a</label><i class="fa fa-male fa-2x lhc-pointer gender-icons"></i>
-                    <i class="fa fa-female fa-2x lhc-pointer gender-icons"></i></div>
+                  <div class="col-lg-6">
+                    <label class="control-label pull-left">I am a</label>
+                    <%= d.radio_button :male, 'true', :class=>"my_gender" %>
+                    <label for="user_demographic_attributes_male_true" class="custom-radio-btn my_gender" id="user_male_lable"></label>
+                    <%= d.radio_button :male, 'false', :class=>"my_gender" %>
+                    <label for="user_demographic_attributes_male_false" class="custom-radio-btn my_gender" id="user_female_lable"></label>
+                  </div>
                 <% end %>
                 <div class="col-lg-6">
-                <label class="control-label ">Looking for </label>
+                <label class="control-label pull-left">Looking for</label>
                         <%= f.fields_for :criterions do |c| %>
-                        <i class="fa fa-male fa-2x lhc-pointer expected-gender-icons pull-right"></i>
-                        <i class="fa fa-female fa-2x lhc-pointer expected-gender-icons pull-right"></i>
+                            <%= c.radio_button :male, 'true', :class=>"opposite_gender" %>
+                            <label for="user_criterions_attributes_0_male_true" class="custom-radio-btn opposite_user_gender pull-right" id="opposite_user_male_lable"></label>
+                            <%= c.radio_button :male, 'false', :class=>"opposite_gender" %>
+                            <label for="user_criterions_attributes_0_male_false" class="custom-radio-btn opposite_user_gender pull-right" id="opposite_user_female_lable"></label>
                     <% end %>
 
                   </div>
@@ -103,10 +110,51 @@
   {
       color:#38C8E0;
   }
+
+  input[type="radio"] {
+      display:none;
+  }
+  input[type="radio"] + .custom-radio-btn {
+      display:inline-block;
+      width:19px;
+      height:19px;
+      /*margin:-1px 4px 0 0;*/
+      vertical-align:middle;
+      cursor:pointer;
+  }
+
+  input[type="radio"] + .custom-radio-btn.my_gender{
+      margin:5px 4px 0 0;
+  }
+  input[type="radio"] + .custom-radio-btn.opposite_user_gender{
+      margin:5px 7px 0 0;
+  }
+
+  input[type="radio"] + #user_male_lable, #opposite_user_male_lable {
+      background :url('/assets/white_male.png');
+      background-size: 100% 100%;
+  }
+  input[type="radio"] + #user_female_lable, #opposite_user_female_lable {
+      background :url('/assets/white_female.png');
+      background-size: 100% 100%;
+  }
+
+  input[type="radio"]:checked + #user_male_lable, input[type="radio"]:checked + #opposite_user_male_lable {
+      background:url('/assets/blue_male.png');
+      background-size: 100% 100%;
+  }
+
+  input[type="radio"]:checked + #user_female_lable, input[type="radio"]:checked + #opposite_user_female_lable {
+      background:url('/assets/blue_female.png');
+      background-size: 100% 100%;
+  }
+
+
+
 </style>
 <script type="text/javascript">
     $(function(){
-        $(".lhc-dropdown").chosen()
+        $(".lhc-dropdown").chosen();
         $(".gender-icons").click(function(e){
             $(".gender-icons").removeClass("orange_button");
             $(this).addClass("orange_button")
@@ -117,5 +165,4 @@
             $(this).addClass("orange_button")
         });
     });
-
 </script>

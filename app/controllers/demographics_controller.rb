@@ -93,7 +93,7 @@ class DemographicsController < ApplicationController
     #@movie_search_text = params[:movie_search_text]
     #render :text => @movie_search_text
     #return
-    Tmdb::Api.key("a69e2d8b3e5942d8850c9d17e2dbc126")
+    Tmdb::Api.key("dc6068cf02d1dec8333334af43b20856")
     Tmdb::Api.language("en")
 
     @movies_arr = Array.new
@@ -124,11 +124,20 @@ class DemographicsController < ApplicationController
 
 
   def search_music_db
-
     require 'net/http'
-    @music_search_text = params[:music_search_text][0]
-    result = Net::HTTP.get(URI.parse('http://api.rovicorp.com/search/v2.1/music/autocomplete?entitytype=song&query='+ @music_search_text +'&country=US&language=en&size=20&format=json&apikey=7bwskaxgu2twtrzwwmjy9cra&sig=986400ec97abd579bdeeb3687b77d442'))
+    @music_search_text = URI::escape(params[:music_search_text][0])
+    result = Net::HTTP.get(URI.parse('http://api.rovicorp.com/search/v2.1/music/autocomplete?entitytype=song&query='+ @music_search_text +'&country=US&language=en&size=20&format=json&apikey=7bwskaxgu2twtrzwwmjy9cra&sig=a87700b9ce773e53ffcec170f2dbb9d0'))
+    @music_hash = Hash.new
+    render :json => result
+    return
+  end
 
+
+  def search_movies_by_rovicorp
+    #http://api.rovicorp.com/search/v2.1/video/autocomplete?entitytype=movie&query=Mur&country=US&language=en&size=20&format=json&apikey=7bwskaxgu2twtrzwwmjy9cra&sig=4766c991aa5ce8b1789b851397d16f98
+    require 'net/http'
+    @movie_search_text = URI::escape(params[:movie_search_text][0])
+    result = Net::HTTP.get(URI.parse('http://api.rovicorp.com/search/v2.1/video/autocomplete?entitytype=movie&query='+@movie_search_text+'&country=US&language=en&size=20&format=json&apikey=7bwskaxgu2twtrzwwmjy9cra&sig=8808394ab8c44b81fa40dbeaa8c9f044'))
     render :json => result
     return
   end
@@ -147,15 +156,17 @@ class DemographicsController < ApplicationController
 
 
   def search_book_db
+    #@book_search_text = "The Wings of Fire"
+    @book_search_text = params['book_search_text'][0]
     client = Goodreads::Client.new(:api_key => 'WsRZQw8XBqoIQpHQuG0wMQ', :api_secret => '49eUFUgkFHYyskIKTMTCsbn6XkA0ssr4U9Wp61pC0b8')
-    search = client.search_books('The Lord Of The Rings')
-    @movies_hash = Hash.new
+    search = client.search_books(@book_search_text)
+    @books_hash = Hash.new
+    #render :json => search.results
+    #return
     search.results.work.each_with_index do |book,index|
-      book.id        # => book id
-      book.title     # => book title
-      @movies_hash[index] = { "title"=>book.best_book.title,"id" => book.id}
+      @books_hash[index] = {"title"=>book.best_book.title, "id" => book.id, "author"=>book.best_book.author.name, "image"=>book.best_book.small_image_url}
     end
-    render :json =>@movies_hash
+    render :json =>@books_hash
     return
 
   end

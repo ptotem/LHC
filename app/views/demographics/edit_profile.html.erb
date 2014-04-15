@@ -211,6 +211,48 @@
             </div>
           </div>
 
+          <div class="form-group">
+            <div class="col-sm-8 col-lg-8">
+              <div class="ui-widget">
+                <label for="movie_suggest">Search Movie: </label>
+                <input id="movie_search_textfield" class="form-control">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-8 col-lg-8">
+              <div class="ui-widget">
+                <label for="music_suggest">Search Music: </label>
+                <input id="music_search_textfield" class="form-control">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-8 col-lg-8">
+              <div class="ui-widget">
+                <label for="books_suggest">Search Books: </label>
+                <input id="books_search_textfield" class="form-control">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-sm-8 col-lg-8" id="user_books_wrapper">
+            </div>
+          </div>
+
+
+          <!--<div class="form-group">-->
+            <!--<div class="col-sm-8 col-lg-8">-->
+              <!--<div class="ui-widget">-->
+                <!--<label for="books_suggest_tags">Search Books: </label>-->
+                <!--<input id="books_search_tagit_textfield" class="form-control">-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+
 
             <div class="actions">
               <%= f.submit :class=>"btn-main ans_btn" %>
@@ -229,12 +271,267 @@
 
 
 <script>
+    var moviesJSON = [];
+    var moviesNameTags = [];
+
+    var musicJSON = [];
+    var musicNameTags = [];
+
+    var booksJSON = [];
+    var booksNameTags = [];
+    var added_book_item_counter = 0;
+
   $(function(){
       $('.lhc_chosen').chosen();
       $('.chosen-container-single').css('width','158px');
 
       $(".multiple").multiselect().multiselectfilter();
-  })
+
+
+      $("#movie_search_textfield").autocomplete({
+          source: moviesNameTags
+      });
+
+      $("#music_search_textfield").autocomplete({
+          source: musicNameTags
+      });
+
+      $("#books_search_textfield").autocomplete({
+          source: booksNameTags,
+          select: AutoCompleteSelectHandler
+      });
+
+      //$('#books_search_tagit_textfield').tagit();
+
+      var booksavailableTags = ["c", "java"];
+      var mt = booksavailableTags;
+
+      $('#books_search_tagit_textfield').on('keyup', function (e) {
+
+          $('#books_search_tagit_textfield').tagit({
+
+              itemName: 'question',
+              fieldName: 'tags',
+              removeConfirmation: true,
+              //availableTags: ["c++", "java", "php", "javascript", "ruby", "python", "c"]
+              allowSpaces: true,
+              // tagSource: ['foo', 'bar']
+              tagSource: function () {
+                  var this_text = $('#books_search_tagit_textfield').val();
+                  $.ajax({
+                      url: "/search_book_db",
+                      dataType: "json",
+                      data: {
+                          //term: 'ruby'
+                          book_search_text: this_text
+                      },
+                      success: function (data) {
+                          console.log(data);
+                          return data;
+                      }
+
+                  });
+              },
+              autocomplete: {
+                  delay: 0,
+                  minLength: 2,
+                  source: this.tagSource
+                  //source: booksavailableTags
+
+              }
+          });
+      });
+
+
+      $('#movie_search_textfield').on('keyup', function (e) {
+          var movie_search_text = $(this).val();
+          var movie_search_text_len = movie_search_text.length;
+
+
+          // get key code of current keypress event
+          var code = (e.keyCode ? e.keyCode : e.which);
+
+          // do nothing if it's an arrow key
+          if (code == 37 || code == 38 || code == 39 || code == 40) {
+              return;
+          }
+          else {
+              if ((movie_search_text_len >= 3)) {
+
+                  var data = {movie_search_text: []};
+                  data["movie_search_text"].push(movie_search_text);
+                  //moviesTags = [];
+                  moviesNameTags.splice(0, moviesNameTags.length);
+                  moviesJSON.splice(0, moviesJSON.length);
+
+//                  $.ajax({
+//                      url: "/search_movies_themoviedb",
+//                      type: "post",
+//                      async: false,
+//                      data: JSON.stringify(data),
+//                      contentType: "application/json",
+//                      success: function (data) {
+//                          var movie_name, movie_poster, movie_release_date, movie_id;
+//                          $.each(data, function (i, obj) {
+//                              movie_name = obj.title;
+//                              moviesNameTags.push(movie_name);
+//                              moviesJSON.push({"title":movie_name,"id":movie_id});
+//                              //moviesTags = jQuery.unique(moviesTags);
+//                          });
+//                      }
+//                  });
+
+                  $.ajax({
+                      url: "/search_movies_by_rovicorp",
+                      type: "post",
+                      async: false,
+                      data: JSON.stringify(data),
+                      contentType: "application/json",
+                      success: function (data) {
+                          var movie_name, movie_poster, movie_release_date, movie_id;
+                          console.log(data);
+                          $.each(data["autocompleteResponse"]["results"], function (i, obj) {
+                              movie_name = obj;
+                              moviesNameTags.push(movie_name);
+                          })
+                      }
+                  });
+
+
+              }
+          }
+      });
+
+      $('#music_search_textfield').on('keyup', function (e) {
+          var music_search_text = $(this).val();
+          var music_search_text_len = music_search_text.length;
+
+          // get key code of current keypress event
+          var code = (e.keyCode ? e.keyCode : e.which);
+
+          // do nothing if it's an arrow key
+          if (code == 37 || code == 38 || code == 39 || code == 40) {
+              return;
+          }
+          else {
+              if ((music_search_text_len >= 5)) {
+
+                  var data = {music_search_text: []};
+                  data["music_search_text"].push(music_search_text);
+
+                  musicNameTags.splice(0, musicNameTags.length);
+                  //musicJSON.splice(0, musicJSON.length);
+
+                  $.ajax({
+                      url: "/search_music_db",
+                      type: "post",
+                      async: false,
+                      data: JSON.stringify(data),
+                      contentType: "application/json",
+                      success: function (data) {
+                          var music_name, music_poster, music_release_date, music_id;
+                          //console.log("data :- " + data["autocompleteResponse"]["results"]);
+                          $.each(data["autocompleteResponse"]["results"], function (i, obj) {
+                              music_name = obj;
+                              musicNameTags.push(music_name);
+                          })
+                      }
+                  });
+
+              }
+          }
+
+      });
+
+      $('#books_search_textfield').on('keyup', function (e) {
+          var book_search_text = $(this).val();
+          var book_search_text_len = book_search_text.length;
+
+
+          // get key code of current keypress event
+          var code = (e.keyCode ? e.keyCode : e.which);
+
+          // do nothing if it's an arrow key
+          if (code == 37 || code == 38 || code == 39 || code == 40) {
+              return;
+          }
+          else {
+              if ((book_search_text_len >= 3)) {
+
+                  var data = {book_search_text: []};
+                  data["book_search_text"].push(book_search_text);
+                  booksNameTags.splice(0, booksNameTags.length);
+                  booksJSON.splice(0, booksJSON.length);
+
+                  $.ajax({
+                      url: "/search_book_db",
+                      type: "post",
+                      async: false,
+                      data: JSON.stringify(data),
+                      contentType: "application/json",
+                      success: function (data) {
+                          var book_name, book_id, book_poster, movie_release_date;
+                          $.each(data, function (i, obj) {
+                              book_name = obj.title;
+                              booksNameTags.push(book_name);
+                              booksJSON.push({"title":book_name, "id":obj.id, "author":obj.author, "image":obj.image});
+                              //console.log(booksJSON[i]);
+                          })
+                      }
+                  });
+
+
+              }
+          }
+
+      });
+
+  });
+
+  function AutoCompleteSelectHandler(event, ui) {
+      var which_ele = $(this).attr('id');
+      if (which_ele == "books_search_textfield") {
+          var selected_book = ui.item.value;
+          //console.log(selected_book);
+          $.each(booksJSON, function(key, value) {
+              if ( value.title === selected_book) {
+                console.log("added_book_item_counter :- " + added_book_item_counter);
+                //console.log(added_book_item_counter%3 => 3);
+                if (added_book_item_counter <= 3){
+                    $('#user_books_wrapper').append("<div class='col-lg-4 text-center'>" +
+                                                        "<div class='row'>" +
+                                                            "<div class='col-lg-12'>" +
+                                                                "<img style='height: 150px;' src="+value.image+">" +
+                                                            "</div>" +
+                                                        "</div>" +
+                                                        "<div class='row'>" +
+                                                            "<div class='col-lg-12'>" +
+                                                                "<p style='overflow: hidden; text-overflow: ellipsis; -o-text-overflow: ellipsis; white-space: nowrap; width: 100%;'>" + selected_book + "</p>" +
+                                                                "<p style='overflow: hidden; text-overflow: ellipsis; -o-text-overflow: ellipsis; white-space: nowrap; width: 100%;'>" + value.author + "</p>" +
+                                                            "</div>" +
+                                                        "</div>" +
+                                                    "</div>");
+                }
+                else{
+                    $('#user_books_wrapper').append("<div class='row' id=book_row_"+added_book_item_counter+">" + "</div>");
+                    $("#book_row_"+added_book_item_counter).append("<div class=col-lg-3>" +
+                            "<h6>" + selected_book + "</h6>" +
+                            "<img src="+value.image+">" +
+                            "</div>")
+                }
+
+
+                //$('#user_books_wrapper').append();
+
+                added_book_item_counter = added_book_item_counter + 1;
+                console.log(added_book_item_counter);
+              }
+          });
+          this.value = "";
+          return false;
+      }
+  }
+
 </script>
 
 <!-- ========================= Edit Profile Page Ends ========================= -->
