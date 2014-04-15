@@ -188,8 +188,8 @@ iframe {
 }
 
 .criterion_field {
-    font-weight: bold;
-    font-size: 1.7em;
+                  padding-top: 5px;
+    font-size: 20px;
 }
 
 .between_text {
@@ -201,7 +201,9 @@ iframe {
 }
 
 .red-btn {
+
     background: #e30000
+
 }
 
 .my-carousel-indicator li {
@@ -516,7 +518,7 @@ li.sign-up:hover {
    ========================================================================== */
 #page-title {
     background: #3E4549;
-    padding-top: 120px;
+    padding-top: 0px;
 }
 
 .title-blue {
