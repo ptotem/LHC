@@ -143,6 +143,16 @@ class DashboardsController < ApplicationController
  end
 
 
+  def invitee_friends
+    @emails=params[:email]
+    @addresses=@emails.split(',')
+    @addresses.each do |invitee|
+      InviteeMailer.invitee_email(invitee).deliver
+    end
+    render :text => "Send Successfully"
+    return
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
