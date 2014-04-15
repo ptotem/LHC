@@ -10,4 +10,6 @@ class Question < ActiveRecord::Base
   has_many :revelations, dependent: :destroy
   has_many :mind_matches, dependent: :destroy
 
+  has_and_belongs_to_many :quizs
+
 end

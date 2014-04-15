@@ -1,4 +1,5 @@
 class Quiz < ActiveRecord::Base
   belongs_to :test
-  has_many :quests,:foreign_key => :quiz_id,:dependent=>:destroy
+
+  has_and_belongs_to_many :questions
 end

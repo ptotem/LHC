@@ -11,16 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-
-ActiveRecord::Schema.define(version: 20140415055151) do
-
-  create_table "answers", force: true do |t|
-    t.string   "name"
-    t.integer  "quest_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(version: 20140415110115) do
 
   create_table "attendances", force: true do |t|
     t.integer  "user_id"
@@ -169,7 +160,8 @@ ActiveRecord::Schema.define(version: 20140415055151) do
 
   create_table "options", force: true do |t|
     t.string   "name"
-    t.integer  "quest_id"
+    t.integer  "question_id"
+    t.boolean  "correct"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -206,16 +198,13 @@ ActiveRecord::Schema.define(version: 20140415055151) do
   end
 
   create_table "questions", force: true do |t|
-    t.integer  "rating_scale_id"
-    t.text     "revelation_style"
-    t.text     "expectation_style"
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "quests", force: true do |t|
-    t.string   "name"
-    t.integer  "ice_breaker_id"
+  create_table "questions_quizzes", force: true do |t|
+    t.integer  "question_id"
     t.integer  "quiz_id"
     t.datetime "created_at"
     t.datetime "updated_at"
