@@ -1,114 +1,29 @@
-<!-- ========================= Relationship Test Page Begins ========================= -->
+<h1>Listing tests</h1>
 
-<section id="relationship_test_section">
-    <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <h4>Here are the Tests</h4>
-      </div>
-    </div>
-    <div class="row" style="margin-top: 1%">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-          <ul class="list-inline portfolio text-center">
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Status</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
 
-            <!--Project Thumbnail-->
-            <li data-tag="graphics">
-              <div class="test-thumbs">
-                <img src="/assets/communicator.jpg" class="img-responsive" alt="Image Size 430x280">
-                <a href="/start_test/1">
-                    <span class="title">
-                        <span class="white upper-case">
-                          <h5>Take the</h5>
-                          <h1>Test!</h1>
-                        </span>
-                    </span>
-                </a>
-              </div>
-              <div class="project-title margin-30">
-                <h5>Communication Test</h5>
-              </div>
-            </li>
+  <tbody>
+    <% @tests.each do |test| %>
+      <tr>
+        <td><%= test.name %></td>
+        <td><%= test.status %></td>
+        <td><%= link_to 'Show', test %></td>
+        <td><%= link_to 'Edit', edit_test_path(test) %></td>
+        <td><%= link_to 'Destroy', test, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
-            <!--Project Thumbnail-->
-            <li data-tag="web">
-              <div class="test-thumbs">
-                <img src="/assets/assertiveness.jpg" class="img-responsive" alt="Image Size 430x280">
-                <a href="#">
-                        <span class="title">
-                            <span class="white upper-case">
-                              <h5>Take the</h5>
-                              <h1>Test!</h1>
-                            </span>
-                        </span>
-                </a>
-              </div>
-              <div class="project-title margin-30">
-                <h5>Assertiveness Test</h5>
-              </div>
-            </li>
+<br>
 
-            <!--Project Thumbnail-->
-            <li data-tag="videos">
-              <div class="test-thumbs">
-                <img src="/assets/conflict.jpg" class="img-responsive" alt="Image Size 430x280">
-                <a href="#">
-                        <span class="title">
-                            <span class="white upper-case">
-                              <h5>Take the</h5>
-                              <h1>Test!</h1>
-                            </span>
-                        </span>
-                </a>
-              </div>
-
-              <div class="project-title margin-30">
-                <h5>Conflict Resolution Test</h5>
-              </div>
-            </li>
-
-            <!--Project Thumbnail-->
-            <li data-tag="web">
-              <div class="test-thumbs">
-                <img src="/assets/stress.jpg" class="img-responsive" alt="Image Size 430x280">
-                <a href="#">
-                        <span class="title">
-                            <span class="white upper-case">
-                              <h5>Take the</h5>
-                              <h1>Test!</h1>
-                            </span>
-                        </span>
-                </a>
-              </div>
-
-              <div class="project-title margin-30">
-                <h5>Stress Test</h5>
-              </div>
-            </li>
-
-            <!--Project Thumbnail-->
-            <li data-tag="web">
-              <div class="test-thumbs">
-                <img src="/assets/romantic.jpg" class="img-responsive" alt="Image Size 430x280">
-                <a href="#">
-                        <span class="title">
-                            <span class="white upper-case">
-                              <h5>Take the</h5>
-                              <h1>Test!</h1>
-                            </span>
-                        </span>
-                </a>
-              </div>
-
-              <div class="project-title margin-30">
-                <h5>Romantic Test</h5>
-              </div>
-            </li>
-
-            <!--Project Thumbnail-->
-
-          </ul>
-        </div>
-      <!--End Work List-->
-    </div>
-    <!--End Row-->
-</section>
-<!-- ========================= Relationship Test Page Ends ========================= -->
+<%= link_to 'New Test', new_test_path %>

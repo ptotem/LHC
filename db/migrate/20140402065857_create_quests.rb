@@ -3,6 +3,7 @@ class CreateQuests < ActiveRecord::Migration
     create_table :quests do |t|
       t.string :name
       t.integer :ice_breaker_id
+      t.integer :quiz_id
       t.timestamps
     end
   end
