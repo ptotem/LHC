@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140414105947) do
+ActiveRecord::Schema.define(version: 20140415055151) do
 
   create_table "answers", force: true do |t|
     t.string   "name"
@@ -206,6 +206,14 @@ ActiveRecord::Schema.define(version: 20140414105947) do
   create_table "quests", force: true do |t|
     t.string   "name"
     t.integer  "ice_breaker_id"
+    t.integer  "quiz_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "quizzes", force: true do |t|
+    t.integer  "test_id"
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -280,6 +288,13 @@ ActiveRecord::Schema.define(version: 20140414105947) do
   create_table "songs_users", id: false, force: true do |t|
     t.integer "user_id", null: false
     t.integer "song_id", null: false
+  end
+
+  create_table "tests", force: true do |t|
+    t.string   "name"
+    t.boolean  "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "total_matches", force: true do |t|

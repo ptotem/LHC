@@ -1,4 +1,6 @@
 Lhc::Application.routes.draw do
+  resources :quizzes
+
   resources :queries
 
   resources :recipients

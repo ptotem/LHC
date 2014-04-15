@@ -1,27 +1,16 @@
 class TestsController < ApplicationController
   before_action :set_test, only: [:show, :edit, :update, :destroy]
-  layout 'dashboard_and_profile_layout'
 
   # GET /tests
   # GET /tests.json
   def index
-    #@tests = Test.all
+    @tests = Test.all
   end
 
   # GET /tests/1
   # GET /tests/1.json
   def show
-
   end
-
-  def take_test
-
-  end
-
-  def start_test
-
-  end
-  
 
   # GET /tests/new
   def new
@@ -80,6 +69,6 @@ class TestsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def test_params
-      params[:test]
+      params.require(:test).permit(:name, :status)
     end
 end
