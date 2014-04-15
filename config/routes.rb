@@ -1,4 +1,10 @@
 Lhc::Application.routes.draw do
+  resources :quiz_answers
+
+  resources :quiz_categories
+
+  resources :quizzes
+
   resources :queries
 
   resources :recipients
@@ -16,6 +22,7 @@ Lhc::Application.routes.draw do
   #devise_for :users
   devise_for :users, :controllers => {:omniauth_callbacks => "users/omniauth_callbacks"}
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
+  mount RailsAdminImport::Engine => '/rails_admin_import', :as => 'rails_admin_import'
 
   get "home/index"
   # The priority is based upon order of creation: first created -> highest priority.
@@ -64,8 +71,9 @@ Lhc::Application.routes.draw do
   get '/user_verification', to: 'dashboards#user_verification', as: :user_verification
   get '/start_ice_breaker/:id/(:prev_msg)', to: 'dashboards#start_ice_breaker', as: :start_ice_breaker
 
-  get '/take_test/(:test_id)', to: 'tests#take_test',as: :take_test
-  get '/start_test/(:test_id)', to: 'tests#start_test',as: :start_test
+  get '/take_test/:id/:question_id', to: 'quiz_categories#take_test',as: :take_test
+  get '/start_test/:id', to: 'quiz_categories#start_test',as: :start_test
+  get '/user_answer/:id', to: 'quiz_categories#user_answer',as: :user_answer
 
   get '/profile/:id', to: 'demographics#profile'
   get '/edit_profile/:id', to: 'demographics#edit_profile', as: :edit_profile
@@ -82,6 +90,9 @@ Lhc::Application.routes.draw do
   match '/search_book_db', to: 'demographics#search_book_db', via: [:get]
   match '/invitee_friends', to: 'dashboards#invitee_friends', via: :post
 
+  get '/user_like/:id', to: 'dashboards#user_like', as: :user_like
+  get '/accept_request/:id', to: 'dashboards#accept_request', as: :accept_request
+  get '/reject_request/:id', to: 'dashboards#reject_request', as: :reject_request
 
   get '/users/auth/:provider/callback' => 'authentications#create'
 

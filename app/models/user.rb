@@ -29,8 +29,8 @@ class User < ActiveRecord::Base
   has_many :recipients, foreign_key: 'sender_id', :dependent => :destroy
   has_many :messages, :through => :recipients, foreign_key: 'sender_id'
 
-  has_many :reverse_recipients, class_name: 'Recipient', foreign_key: 'receiver_id'
-  has_many :received_messages, through: :reverse_recipients, foreign_key: 'receiver_id', class_name: 'Message', source: :message
+  #has_many :reverse_recipients, class_name: 'Recipient', foreign_key: 'receiver_id'
+  #has_many :received_messages, through: :reverse_recipients, foreign_key: 'receiver_id', class_name: 'Message', source: :message
 
 
   accepts_nested_attributes_for :demographic
@@ -77,7 +77,14 @@ class User < ActiveRecord::Base
 
 
 
+  before_create :set_standard_password
+  before_validation :set_standard_password
 
+  def set_standard_password
+    self.password="password"
+    self.password_confirmation="password"
+    true
+  end
 
 
 end

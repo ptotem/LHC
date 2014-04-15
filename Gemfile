@@ -8,6 +8,7 @@ gem 'rails', '4.0.0'
 #gem 'sqlite3'
 gem 'pg'
 gem 'rails_admin'
+gem "rails_admin_import", :git => "git://github.com/stephskardal/rails_admin_import.git"
 gem "rails_12factor"
 
 # Use SCSS for stylesheets

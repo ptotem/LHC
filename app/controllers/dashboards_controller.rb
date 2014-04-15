@@ -149,7 +149,40 @@ class DashboardsController < ApplicationController
     @addresses.each do |invitee|
       InviteeMailer.invitee_email(invitee).deliver
     end
-    render :text => "Send Successfully"
+    redirect_to my_dashboard_path
+  end
+
+
+  def user_like
+    @receiver_id=params[:id]
+    @sender_id = current_user.id
+    if Like.find_by_receiver_id_and_sender_id(@receiver_id,@sender_id) or Like.find_by_receiver_id_and_sender_id(@sender_id,@receiver_id)
+      #render :text => "Request Already Sent"
+      #return
+      redirect_to my_dashboard_path
+      return
+    else
+      @like=Like.create(:receiver_id => @receiver_id,:sender_id => @sender_id,:status => false)
+      #render :text => "Request  Sent"
+      #return
+      redirect_to my_dashboard_path
+      return
+    end
+  end
+
+  def accept_request
+   @accept=Like.find(params[:id])
+   @accept.status=true
+   @accept.save
+   redirect_to my_dashboard_path
+   return
+  end
+
+  def reject_request
+    @reject=Like.find(params[:id])
+    @reject.status=false
+    @reject.save
+    redirect_to my_dashboard_path
     return
   end
 

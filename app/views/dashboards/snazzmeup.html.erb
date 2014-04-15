@@ -20,65 +20,25 @@
 
       <ul class="list-inline portfolio text-center">
 
-        <!--Project Thumbnail-->
-        <li data-tag="graphics">
-          <div class="test-thumbs">
-            <img src="/assets/communicator.jpg" class="img-responsive" alt="Image Size 430x280">
-            <a href="/take_test">
-                    <span class="title">
-                        <span class="white upper-case">
-                          <h5>Take the</h5>
-                          <h1>Test!</h1>
-                        </span>
-                    </span>
-            </a>
-          </div>
-          <div class="project-title margin-30">
-            <h5>Personality Test</h5>
-          </div>
-        </li>
 
-        <!--Project Thumbnail-->
-        <li data-tag="web">
-          <div class="test-thumbs">
-            <img src="/assets/assertiveness.jpg" class="img-responsive" alt="Image Size 430x280">
-            <a href="/start_test">
+        <%  QuizCategory.all.each do |e| %>
+            <li data-tag="web">
+              <div class="test-thumbs">
+                <img src="/assets/assertiveness.jpg" class="img-responsive" alt="Image Size 430x280">
+                <a href="<%= start_test_path(e.id) %>">
                         <span class="title">
                             <span class="white upper-case">
                               <h5>Take the</h5>
                               <h1>Test!</h1>
                             </span>
                         </span>
-            </a>
-          </div>
-          <div class="project-title margin-30">
-            <h5>5 Traits Test</h5>
-          </div>
-        </li>
-
-        <!--Project Thumbnail-->
-        <li data-tag="videos">
-          <div class="test-thumbs">
-            <img src="/assets/conflict.jpg" class="img-responsive" alt="Image Size 430x280">
-            <a href="#">
-                        <span class="title">
-                            <span class="white upper-case">
-                              <h5>Take the</h5>
-                              <h1>Test!</h1>
-                            </span>
-                        </span>
-            </a>
-          </div>
-
-          <div class="project-title margin-30">
-            <h5>Trivia</h5>
-          </div>
-        </li>
-
-        <!--Project Thumbnail-->
-
-
-        <!--Project Thumbnail-->
+                </a>
+              </div>
+              <div class="project-title margin-30">
+                <h5><%= e.name %></h5>
+              </div>
+            </li>
+        <% end %>
 
       </ul>
 

@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @quiz_category.name %>
+</p>
+
+<p>
+  <strong>Intro:</strong>
+  <%= @quiz_category.intro %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @quiz_category.status %>
+</p>
+
+<%= link_to 'Edit', edit_quiz_category_path(@quiz_category) %> |
+<%= link_to 'Back', quiz_categories_path %>
