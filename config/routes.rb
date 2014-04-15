@@ -16,6 +16,7 @@ Lhc::Application.routes.draw do
   #devise_for :users
   devise_for :users, :controllers => {:omniauth_callbacks => "users/omniauth_callbacks"}
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
+  mount RailsAdminImport::Engine => '/rails_admin_import', :as => 'rails_admin_import'
 
   get "home/index"
   # The priority is based upon order of creation: first created -> highest priority.
@@ -82,6 +83,9 @@ Lhc::Application.routes.draw do
   match '/search_book_db', to: 'demographics#search_book_db', via: [:get]
   match '/invitee_friends', to: 'dashboards#invitee_friends', via: :post
 
+  get '/user_like/:id', to: 'dashboards#user_like', as: :user_like
+  get '/accept_request/:id', to: 'dashboards#accept_request', as: :accept_request
+  get '/reject_request/:id', to: 'dashboards#reject_request', as: :reject_request
 
   get '/users/auth/:provider/callback' => 'authentications#create'
 
