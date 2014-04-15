@@ -143,6 +143,15 @@ class DashboardsController < ApplicationController
  end
 
 
+  def invitee_friends
+    @emails=params[:email]
+    @addresses=@emails.split(',')
+    @addresses.each do |invitee|
+      InviteeMailer.invitee_email(invitee).deliver
+    end
+    redirect_to my_dashboard_path
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

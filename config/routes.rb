@@ -62,6 +62,7 @@ Lhc::Application.routes.draw do
   get '/younme/:id', to: 'dashboards#younme', as: :younme
   get '/under_construction', to: 'dashboards#under_construction', as: :under_construction
 
+
   get '/user_verification', to: 'dashboards#user_verification', as: :user_verification
   get '/start_ice_breaker/:id/(:prev_msg)', to: 'dashboards#start_ice_breaker', as: :start_ice_breaker
 
@@ -81,8 +82,13 @@ Lhc::Application.routes.draw do
 
   match '/search_music_db', to: 'demographics#search_music_db', via: :post
   match '/search_book_db', to: 'demographics#search_book_db', via: [:get]
+  match '/invitee_friends', to: 'dashboards#invitee_friends', via: :post
+
 
   get '/users/auth/:provider/callback' => 'authentications#create'
+
+
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
