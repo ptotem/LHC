@@ -149,8 +149,7 @@ class DashboardsController < ApplicationController
     @addresses.each do |invitee|
       InviteeMailer.invitee_email(invitee).deliver
     end
-    render :text => "Send Successfully"
-    return
+    redirect_to my_dashboard_path
   end
 
 
