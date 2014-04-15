@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140415110115) do
+ActiveRecord::Schema.define(version: 20140415133320) do
 
   create_table "attendances", force: true do |t|
     t.integer  "user_id"
@@ -204,14 +204,28 @@ ActiveRecord::Schema.define(version: 20140415110115) do
   end
 
   create_table "questions_quizzes", force: true do |t|
+    t.integer "question_id"
+    t.integer "quiz_id"
+  end
+
+  create_table "quiz_answers", force: true do |t|
+    t.integer  "user_id"
     t.integer  "question_id"
-    t.integer  "quiz_id"
+    t.integer  "answer_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "quiz_categories", force: true do |t|
+    t.string   "name"
+    t.text     "intro"
+    t.boolean  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "quizzes", force: true do |t|
-    t.integer  "test_id"
+    t.integer  "quiz_category_id"
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -287,13 +301,6 @@ ActiveRecord::Schema.define(version: 20140415110115) do
   create_table "songs_users", id: false, force: true do |t|
     t.integer "user_id", null: false
     t.integer "song_id", null: false
-  end
-
-  create_table "tests", force: true do |t|
-    t.string   "name"
-    t.boolean  "status"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "total_matches", force: true do |t|
