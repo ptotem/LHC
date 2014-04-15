@@ -2,6 +2,7 @@
     .me_drinking_radio {
         /*display: none;*/
     }
+
     .hidden_elems {
         display: none;
     }
@@ -10,7 +11,7 @@
         display: none;
     }
 
-    .demographic-fill-step{
+    .demographic-fill-step {
         display: none;
     }
 
@@ -18,53 +19,75 @@
         display: none;
     }
 
-    .criteria-fill-step-btn{
+    .criteria-fill-step-btn {
         text-decoration: none;
     }
 
-    .criteria-fill-step-btn:hover, #criteria_submit_btn:hover{
+    .criteria-fill-step-btn:hover, #criteria_submit_btn:hover {
         background-color: #e30000;
         color: white;
     }
-    /*#demographic_fill_step_1 {*/
-        /*display: none;*/
-    /*}*/
 
-    /*#demographic_fill_step_2 {*/
+        /*#demographic_fill_step_1 {*/
         /*display: none;*/
-    /*}*/
+        /*}*/
 
-    /*#demographic_fill_step_3 {*/
+        /*#demographic_fill_step_2 {*/
         /*display: none;*/
-    /*}*/
+        /*}*/
+
+        /*#demographic_fill_step_3 {*/
+        /*display: none;*/
+        /*}*/
 
     .blue-background {
         background: #38c8e0;
         padding-bottom: 20px;
         padding-top: 20px;
     }
-        .img_caption_text
-        {
-            color:#000000;
-            font-size:2em;
-        }
 
-        .grey-btn:hover{
-              background-color: #E30000;
-            cursor: pointer;
-        }
-        .smoking_icons{
-           height:93%;
-           width:93%;
-        }
+    .img_caption_text {
+        color: #000000;
+        font-size: 2em;
+    }
 
-        .drinking_icons{
-          width:31%;
-          margin-left: 112px
-        }
-        .chosen-container-single{
-            width:100px;
-        }
+    .grey-btn:hover {
+        background-color: #E30000;
+        cursor: pointer;
+    }
+
+    .smoking_icons {
+
+        width: 69%;
+        margin-left: 20px;
+    }
+
+    .drinking_icons {
+        width: 24.5%;
+        margin-left: 102px
+    }
+
+    .chosen-container-single {
+        width: 100px;
+    }
+
+    .drink_smoke_font {
+        font-size: 20px;
+
+    }
+
+    #smoking_nav {
+        background: white;
+        line-height: 5.8px;
+        margin-top: 15px;
+    }
+
+    #drinking_nav {
+        background: white;
+        background: white;
+        line-height: 6px;
+        margin-top: 15px;
+    }
 
 </style>
 
@@ -83,345 +106,344 @@
 </section>
 
 <!--matching_criteria_section-->
-<section id="content">
+<section id="content" style="padding-bottom:0px;padding-top:0px;">
 <div class="container">
 
 <div class="row">
   <div class="col-lg-6 col-lg-offset-3">
 
-    <img src="/assets/cake_top_icon.png" class="img-responsive cake top_images" style="display: none">
-    <img src="/assets/drinking_top_icon.png" class="img-responsive drinking top_images" style="display: none">
-    <img src="/assets/smoking_top_icon.png" class="img-responsive smoking top_images" style="display: none">
+    <img src="/assets/cake_top_icon.png" class="img-responsive cake top_images" style="display: none;">
+    <img src="/assets/drinking_top_icon.png" class="img-responsive drinking top_images" style="display: none;">
+    <img src="/assets/smoking_top_icon.png" class="img-responsive smoking top_images" style="display: none;">
 
   </div>
 </div>
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
-            <div class="row">
-                <%#= form_for :user do |f| %>
-                <%= form_for :user, :url => url_for(:controller => 'criterions', :action => 'create_matching_criteria') do |f| %>
+<div class="row">
+<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-lg-offset-1 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 ">
+<div class="row">
+<%#= form_for :user do |f| %>
+<%= form_for :user, :url => url_for(:controller => 'criterions', :action => 'create_matching_criteria') do |f| %>
 
-                <!-- col for demographic - starts -->
-                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 blue-background text-center" style="position: relative">
-                    <%= f.fields_for :demographic do |d| %>
+    <!-- col for demographic - starts -->
+    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 blue-background text-center" style="position: relative">
+      <%= f.fields_for :demographic do |d| %>
 
-                      <!-- row for me image - starts -->
-                      <div class="row" style="margin-top: -12%">
-                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-lg-offset-4" style="position: relative">
-                          <div class="gender-pic" >
-                            <img class="thumbnail" src="/assets/male.png" style="margin-bottom: 10%">
-                            <span class="white img_caption_text">YOU</span>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- row for me image - ends -->
-
-                      <!-- row for me dob, drinking, smoking (three diff. cols for each) - starts -->
-                      <div class="row" >
-                        <!-- col for me dob - starts -->
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center demographic-fill-step" id="demographic_fill_step_1" style="position: relative">
-                          <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                              <img src="/assets/calendar_icon.png" style="width:40%;margin-top: 3%;">
-                            </div>
-                          </div>
-                          <div class="row" style="margin-top: 2%; padding-bottom: 15%;">
-                            <div class="col-lg-12">
-                              <div class="control-group">
-                                <div class="controls">
-                                  <div class="row">
-                                    <span class="white criterion_field">DOB</span>
-                                    <br>
-                                    <br>
-                                    <div class="row">
-                                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                        <%#= d.date_select :dob, :order => [:day, :month, :year], :start_year=>(Time.now.year-35), :end_year=>(Time.now.year), :class=>"chosen" %>
-                                        <%= d.date_select :dob, { :order => [:day, :month, :year],:start_year=>(Time.now.year-50),:end_year=>(Time.now.year), :prompt => { :day => 'Select day', :month => 'Select month', :year => 'Select year' } }, {:class => "lhc-chosen"} %>
-                                      </div>
-                                    </div>
-
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- col for me dob - ends -->
-
-                        <!-- col for me drinking - starts -->
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center demographic-fill-step" id="demographic_fill_step_2" style="position: relative; padding-top: 1%;">
-                          <div class="row" >
-                            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-lg-offset-2">
-                              <div class="control-group">
-                                <div class="controls">
-                                  <div class="row">
-                                    <h4 class="white">Drinking</h4>
-                                    <%= d.hidden_field :drinking, :id=>"me_drinking_textfield", :class=>"hidden_elems" %>
-                                    <div class="carousel slide" id="carousel-drinking" data-interval="false" data-ride="carousel">
-
-                                      <div class="carousel-inner">
-                                        <div class="item active">
-                                          <img alt="Never" src="/assets/empty_1_glass.png"  class="drinking_icons">
-                                          <%= radio_button_tag 'drinking', "Never", false, class: "me_drinking_radio hidden_elems" %>
-                                        </div>
-                                        <div class="item">
-                                          <img alt="Socially" src="/assets/empty_3_glass.png"   class="drinking_icons">
-                                          <%= radio_button_tag 'drinking', "Socially", false,class: "me_drinking_radio hidden_elems" %>
-                                        </div>
-                                        <div class="item">
-                                          <img alt="Often" src="/assets/empty_2_glass.png"  class="drinking_icons">
-                                          <%= radio_button_tag 'drinking', "Often", false,class: "me_drinking_radio hidden_elems" %>
-                                        </div>
-                                      </div>
-                                      <br>
-                                      <br>
-                                      <br>
-                                      <br>
-                                      <ol class="carousel-indicators my-carousel-indicator">
-                                        <li class="active" data-slide-to="0" data-target="#carousel-drinking"></li>
-                                        <li data-slide-to="1" data-target="#carousel-drinking" class=""></li>
-                                        <li data-slide-to="2" data-target="#carousel-drinking" class=""></li>
-                                      </ol>
-                                    </div>
-
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- col for me drinking - ends -->
-
-                        <!-- col for me smoking - starts -->
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center demographic-fill-step" id="demographic_fill_step_3" style="position: relative; padding-top: 1%;">
-                          <div class="row">
-                            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-lg-offset-2">
-                              <div class="control-group">
-                                <div class="controls">
-                                  <div class="row">
-                                    <h4 class="white">Smoking</h4>
-                                    <%#= d.text_field :smoking, :id=>"me_smoking_textfield", :class=>"hidden_elems" %>
-                                    <%= d.hidden_field :smoking, :id=>"me_smoking_textfield", :class=>"hidden_elems" %>
-                                    <div class="carousel slide" id="carousel-smoking" data-interval="false" data-ride="carousel">
-
-                                      <div class="carousel-inner">
-                                        <div class="item active">
-                                          <img alt="Never" data-src="holder.js/900x500/auto/#777:#555/text:First slide" src="/assets/no_smoking.png" class="smoking_icons"  class="img-responsive">
-                                          <%= radio_button_tag 'smoking', "Never", false, class: "me_smoking_radio hidden_elems" %>
-                                        </div>
-                                        <div class="item">
-                                          <img alt="Socially" data-src="holder.js/900x500/auto/#666:#444/text:Second slide" src="/assets/socially_smoking.png" class="smoking_icons"  >
-                                          <%= radio_button_tag 'smoking', "Socially", false, class: "me_smoking_radio hidden_elems" %>
-                                        </div>
-                                        <div class="item">
-                                          <img alt="Often" data-src="holder.js/900x500/auto/#555:#333/text:Third slide" src="/assets/regular_smoking.png"  class="smoking_icons" >
-                                          <%= radio_button_tag 'smoking', "Often", false, class: "me_smoking_radio hidden_elems" %>
-                                        </div>
-                                      </div>
-                                      <br>
-                                      <br>
-                                      <br>
-                                      <br>
-                                      <br>
-                                      <ol class="carousel-indicators my-carousel-indicator">
-                                        <li class="active" data-slide-to="0" data-target="#carousel-smoking"></li>
-                                        <li data-slide-to="1" data-target="#carousel-smoking" class=""></li>
-                                        <li data-slide-to="2" data-target="#carousel-smoking" class=""></li>
-                                      </ol>
-                                    </div>
-
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-
-                        </div>
-                        <!-- col for me smoking - ends -->
-                      </div>
-                      <!-- row for me dob, drinking, smoking (three diff. cols for each) - ends -->
-
-
-                    <% end %>
-                </div>
-                <!-- col for demographic - ends -->
-
-                <!-- col for criterion - starts -->
-                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2 blue-background text-center" style="position: relative">
-                  <%= f.fields_for :criterions do |c| %>
-
-                      <!-- row for opposite person image - starts -->
-                      <div class="row" style="margin-top: -12%">
-                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-lg-offset-4" style="position: relative">
-                          <div class="gender-pic">
-                            <img class="thumbnail" src="/assets/female.png" style="margin-bottom: 10%">
-                            <span class="white img_caption_text">HER</span>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- row for opposite person image - ends -->
-
-                      <!-- row for opposite person dob, drinking, smoking (three diff. cols for each) - starts -->
-                      <div class="row" >
-                        <!-- col for opposite person dob - starts -->
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center criterion-fill-step" id="criterion_fill_step_1" style="position: relative">
-                          <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                              <img src="/assets/calendar_icon.png" style="width:40%;margin-top: 3%">
-                            </div>
-                          </div>
-                          <div class="row" style="margin-top: 2%; padding-bottom: 15%;">
-                            <div class="col-lg-12">
-                              <div class="control-group">
-                                <div class="controls">
-                                  <div class="row">
-
-                                    <span class="white criterion_field">Age Range</span>
-                                    <br>
-                                    <br>
-                                    <% min_age = 18..28 %>
-                                    <% max_age = 22..36 %>
-                                    <%= c.select(:minage, min_age.collect {|d| [d.to_s,d.to_s]}, {:prompt=>"Age From"}, {:class=>"lhc-chosen"}) %>
-                                    <span class="white between_text">to</span>
-                                    <%= c.select(:maxage, max_age.collect {|d| [d.to_s,d.to_s]}, {:prompt=>"Age To"}, {:class=>"lhc-chosen"}) %>
-
-                                    </div>
-
-
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- col for opposite person dob - ends -->
-
-                        <!-- col for opposite person drinking - starts -->
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center criterion-fill-step" id="criterion_fill_step_2" style="position: relative; padding-top: 3%;">
-                          <div class="control-group">
-                            <div class="controls">
-                              <h4 class="white">Drinking</h4>
-                              <div class="row">
-                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-3 text-center" style="background: white">
-                                  <%= c.hidden_field :drinking, :id=>"opposite_person_drinking_textfield", :class=>"hidden_elems" %>
-                                  <div class="row" >
-                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top:8px;">
-                                      <div class="btn-main btn-small grey-btn" style="margin-top: 23px;" onclick="get_my_text($(this),'drinking')">Often</div>
-                                    </div>
-                                  </div>
-                                  <div class="row" style="margin-top: 2%;">
-                                    <div class="col-lg-12">
-                                      <div class="btn-main btn-small grey-btn" onclick="get_my_text($(this),'drinking')">Socially</div>
-                                    </div>
-                                  </div>
-                                  <div class="row" style="margin-top: 2%;">
-                                    <div class="col-lg-12">
-                                      <div class="btn-main btn-small grey-btn" onclick="get_my_text($(this),'drinking')">Never</div>
-                                    </div>
-                                  </div>
-                                  <div class="row" style="margin-top: 2%; margin-bottom: 9%;">
-                                    <div class="col-lg-12">
-                                      <div class="btn-main btn-small grey-btn" onclick="get_my_text($(this),'drinking')">Doesn't Matter</div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- col for opposite person drinking - ends -->
-
-                        <!-- col for opposite person smoking - starts -->
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center criterion-fill-step" id="criterion_fill_step_3" style="position: relative; padding-top: 3%;">
-                          <div class="row">
-                            <h4 class="white">Smoking</h4>
-                            <div class="row">
-                              <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-3 text-center" style="background: white">
-                                <!--<%= c.text_field :smoking, :id=>"opposite_person_smoking_textfield", :class=>"hidden_elems" %>-->
-                                <div class="row" style="margin-top: 8%;">
-                                  <div class="col-lg-12">
-                                    <div class="btn-main btn-small grey-btn" style="margin-top:10px; " onclick="get_my_text($(this),'smoking')">Often</div>
-                                  </div>
-                                </div>
-                                <div class="row" style="margin-top: 1%;">
-                                  <div class="col-lg-12">
-                                    <div class="btn-main btn-small grey-btn" onclick="get_my_text($(this),'smoking')">Socially</div>
-                                  </div>
-                                </div>
-                                <div class="row" style="margin-top: 1%;">
-                                  <div class="col-lg-12">
-                                    <div class="btn-main btn-small grey-btn" onclick="get_my_text($(this),'smoking')">Never</div>
-                                  </div>
-                                </div>
-                                <div class="row" style="margin-top: 1%; margin-bottom: 9%;">
-                                  <div class="col-lg-12">
-                                    <div class="btn-main btn-small grey-btn" onclick="get_my_text($(this),'smoking')">Doesn't Matter</div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-
-                        </div>
-                        <!-- col for opposite person smoking - ends -->
-                      </div>
-                      <!-- row for opposite person dob, drinking, smoking (three diff. cols for each) - ends -->
-
-
-                  <% end %>
-
+          <!-- row for me image - starts -->
+          <div class="row" style="margin-top: -12%">
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-lg-offset-4" style="position: relative">
+              <div class="gender-pic">
+                <img class="thumbnail" src="/assets/male.png" style="margin-bottom: 10%">
+                <span class="white img_caption_text">YOU</span>
               </div>
-                <!-- col for criterion - ends -->
+            </div>
+          </div>
+          <!-- row for me image - ends -->
 
-                <div class="row">
-                  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-12 text-center">
-                    <%#= f.submit "Submit", :id=>"criteria_submit_btn", :class=>"btn btn-main", :style=>"display:none;" %>
+          <!-- row for me dob, drinking, smoking (three diff. cols for each) - starts -->
+          <div class="row">
+            <!-- col for me dob - starts -->
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center demographic-fill-step" id="demographic_fill_step_1" style="position: relative">
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                  <h4 class="white criterion_field">DOB</h4>
+                </div>
+              </div>
+              <div class="row" style="margin-top: 2%; padding-bottom: 10%;">
+                <div class="col-lg-12">
+                  <div class="control-group">
+                    <div class="controls">
+                      <div class="row">
+
+                        <img src="/assets/calendar_icon.png" style="width:29%;margin-top: 0%;">
+                        <br>
+                        <br>
+
+                        <div class="row">
+                          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <%#= d.date_select :dob, :order => [:day, :month, :year], :start_year=>(Time.now.year-35), :end_year=>(Time.now.year), :class=>"chosen" %>
+                            <%= d.date_select :dob, {:order => [:day, :month, :year], :start_year => (Time.now.year-50), :end_year => (Time.now.year), :prompt => {:day => 'Select day', :month => 'Select month', :year => 'Select year'}}, {:class => "lhc-chosen"} %>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
                   </div>
                 </div>
-            <%# end %>
+              </div>
             </div>
-        </div>
+            <!-- col for me dob - ends -->
+
+            <!-- col for me drinking - starts -->
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center demographic-fill-step" id="demographic_fill_step_2" style="position: relative; padding-top: 1%;">
+              <div class="row">
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-lg-offset-2">
+                  <div class="control-group">
+                    <div class="controls">
+                      <div class="row">
+                        <h4 class="white drink_smoke_font">Drinking</h4>
+                        <%= d.hidden_field :drinking, :id => "me_drinking_textfield", :class => "hidden_elems" %>
+                        <div class="carousel slide" id="carousel-drinking" data-interval="false" data-ride="carousel">
+
+                          <div class="carousel-inner">
+                            <div class="item active">
+                              <img alt="Never" src="/assets/empty_1_glass.png" class="drinking_icons">
+                              <%= radio_button_tag 'drinking', "Never", false, class: "me_drinking_radio hidden_elems" %>
+                            </div>
+                            <div class="item">
+                              <img alt="Socially" src="/assets/empty_3_glass.png" class="drinking_icons">
+                              <%= radio_button_tag 'drinking', "Socially", false, class: "me_drinking_radio hidden_elems" %>
+                            </div>
+                            <div class="item">
+                              <img alt="Often" src="/assets/empty_2_glass.png" class="drinking_icons">
+                              <%= radio_button_tag 'drinking', "Often", false, class: "me_drinking_radio hidden_elems" %>
+                            </div>
+                          </div>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <ol class="carousel-indicators my-carousel-indicator">
+                            <li class="active" data-slide-to="0" data-target="#carousel-drinking"></li>
+                            <li data-slide-to="1" data-target="#carousel-drinking" class=""></li>
+                            <li data-slide-to="2" data-target="#carousel-drinking" class=""></li>
+                          </ol>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- col for me drinking - ends -->
+
+            <!-- col for me smoking - starts -->
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center demographic-fill-step" id="demographic_fill_step_3" style="position: relative; padding-top: 1.2%;">
+              <div class="row">
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-lg-offset-2">
+                  <div class="control-group">
+                    <div class="controls">
+                      <div class="row">
+                        <h4 class="white drink_smoke_font">Smoking</h4>
+                        <%#= d.text_field :smoking, :id=>"me_smoking_textfield", :class=>"hidden_elems" %>
+                        <%= d.hidden_field :smoking, :id => "me_smoking_textfield", :class => "hidden_elems" %>
+                        <div class="carousel slide" id="carousel-smoking" data-interval="false" data-ride="carousel">
+
+                          <div class="carousel-inner">
+                            <div class="item active">
+                              <img alt="Never" data-src="holder.js/900x500/auto/#777:#555/text:First slide" src="/assets/no_smoking.png" class="smoking_icons" class="img-responsive">
+                              <%= radio_button_tag 'smoking', "Never", false, class: "me_smoking_radio hidden_elems" %>
+                            </div>
+                            <div class="item">
+                              <img alt="Socially" data-src="holder.js/900x500/auto/#666:#444/text:Second slide" src="/assets/socially_smoking.png" class="smoking_icons">
+                              <%= radio_button_tag 'smoking', "Socially", false, class: "me_smoking_radio hidden_elems" %>
+                            </div>
+                            <div class="item">
+                              <img alt="Often" data-src="holder.js/900x500/auto/#555:#333/text:Third slide" src="/assets/regular_smoking.png" class="smoking_icons">
+                              <%= radio_button_tag 'smoking', "Often", false, class: "me_smoking_radio hidden_elems" %>
+                            </div>
+                          </div>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <ol class="carousel-indicators my-carousel-indicator">
+                            <li class="active" data-slide-to="0" data-target="#carousel-smoking"></li>
+                            <li data-slide-to="1" data-target="#carousel-smoking" class=""></li>
+                            <li data-slide-to="2" data-target="#carousel-smoking" class=""></li>
+                          </ol>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <!-- col for me smoking - ends -->
+          </div>
+          <!-- row for me dob, drinking, smoking (three diff. cols for each) - ends -->
 
 
-
-
-
-    <div class="row" style="margin-top: 3%;">
-      <!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">-->
-      <div class="pull-left">
-        <a href="javascript:void(0)" class="btn-main criteria-fill-step-btn red-btn" id="criteria_fill_step_prev_btn" style="padding-left: 100%; padding-right: 100%;">Back</a>
-      </div>
-      <div class="pull-right" >
-        <a href="javascript:void(0)" class="btn-main criteria-fill-step-btn red-btn" id="criteria_fill_step_next_btn">Continue</a>
-        <%= f.submit "Submit", :id=>"criteria_submit_btn", :class=>"btn btn-main red-btn", :style=>"display:none; margin-top:-14%; padding-left: 25%; padding-right:25%;" %>
-      </div>
-    <!--</div>-->
+      <% end %>
     </div>
-    <% end %>
-</div>
+    <!-- col for demographic - ends -->
 
+    <!-- col for criterion - starts -->
+    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2 blue-background text-center" style="position: relative">
+      <%= f.fields_for :criterions do |c| %>
+
+          <!-- row for opposite person image - starts -->
+          <div class="row" style="margin-top: -12%">
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-lg-offset-4" style="position: relative">
+              <div class="gender-pic">
+                <img class="thumbnail" src="/assets/female.png" style="margin-bottom: 10%">
+                <span class="white img_caption_text">HER</span>
+              </div>
+            </div>
+          </div>
+          <!-- row for opposite person image - ends -->
+
+          <!-- row for opposite person dob, drinking, smoking (three diff. cols for each) - starts -->
+          <div class="row">
+            <!-- col for opposite person dob - starts -->
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center criterion-fill-step" id="criterion_fill_step_1" style="position: relative">
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                  <h4 class="white criterion_field">Age Range</h4>
+                </div>
+              </div>
+              <div class="row" style="margin-top: 2%; padding-bottom: 10%;">
+                <div class="col-lg-12">
+                  <div class="control-group">
+                    <div class="controls">
+                      <div class="row">
+                        <img src="/assets/calendar_icon.png" style="width:29%;margin-top: 0%">
+                        <br>
+                        <br>
+                        <% min_age = 18..28 %>
+                        <% max_age = 22..36 %>
+                        <%= c.select(:minage, min_age.collect { |d| [d.to_s, d.to_s] }, {:prompt => "Age From"}, {:class => "lhc-chosen"}) %>
+                        <span class="white between_text">to</span>
+                        <%= c.select(:maxage, max_age.collect { |d| [d.to_s, d.to_s] }, {:prompt => "Age To"}, {:class => "lhc-chosen"}) %>
+
+                      </div>
+
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- col for opposite person dob - ends -->
+
+          <!-- col for opposite person drinking - starts -->
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center criterion-fill-step" id="criterion_fill_step_2" style="position: relative; ">
+            <div class="control-group">
+              <div class="controls">
+                <h4 class="white drink_smoke_font">Drinking</h4>
+
+                <div class="row">
+                  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-3 text-center" id="drinking_nav">
+                    <%= c.hidden_field :drinking, :id => "opposite_person_drinking_textfield", :class => "hidden_elems" %>
+                    <div class="row">
+                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top:10px;">
+                        <div class="btn-main btn-small grey-btn" style="margin-top: 12px;" onclick="get_my_text($(this),'drinking')">Often</div>
+                      </div>
+                    </div>
+                    <div class="row" style="margin-top: 2%;">
+                      <div class="col-lg-12">
+                        <div class="btn-main btn-small grey-btn" onclick="get_my_text($(this),'drinking')">Socially</div>
+                      </div>
+                    </div>
+                    <div class="row" style="margin-top: 2%;">
+                      <div class="col-lg-12">
+                        <div class="btn-main btn-small grey-btn" onclick="get_my_text($(this),'drinking')">Never</div>
+                      </div>
+                    </div>
+                    <div class="row" style="margin-top: 2%; margin-bottom: 9%;">
+                      <div class="col-lg-12">
+                        <div class="btn-main btn-small grey-btn" onclick="get_my_text($(this),'drinking')">Doesn't
+                          Matter
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- col for opposite person drinking - ends -->
+
+          <!-- col for opposite person smoking - starts -->
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center criterion-fill-step" id="criterion_fill_step_3" style="position: relative;">
+            <div class="control-group">
+              <div class="controls">
+                <h4 class="white drink_smoke_font">Smoking</h4>
+
+                <div class="row">
+                  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-3 text-center" id="smoking_nav">
+                    <!--<%= c.text_field :smoking, :id => "opposite_person_smoking_textfield", :class => "hidden_elems" %>-->
+                    <div class="row" style="margin-top: 1.5%;">
+                      <div class="col-lg-12">
+                        <div class="btn-main btn-small grey-btn" style="margin-top:10px; " onclick="get_my_text($(this),'smoking')">Often</div>
+                      </div>
+                    </div>
+                    <div class="row" style="margin-top: 2%;">
+                      <div class="col-lg-12">
+                        <div class="btn-main btn-small grey-btn" onclick="get_my_text($(this),'smoking')">Socially</div>
+                      </div>
+                    </div>
+                    <div class="row" style="margin-top: 2%;">
+                      <div class="col-lg-12">
+                        <div class="btn-main btn-small grey-btn" onclick="get_my_text($(this),'smoking')">Never</div>
+                      </div>
+                    </div>
+                    <div class="row" style="margin-top: 2%; margin-bottom: 9%;">
+                      <div class="col-lg-12">
+                        <div class="btn-main btn-small grey-btn" onclick="get_my_text($(this),'smoking')">Doesn't Matter
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- col for opposite person smoking - ends -->
+          </div>
+          <!-- row for opposite person dob, drinking, smoking (three diff. cols for each) - ends -->
+
+
+      <% end %>
+
+      </div>
+      <!-- col for criterion - ends -->
+
+      <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-12 text-center">
+          <%#= f.submit "Submit", :id=>"criteria_submit_btn", :class=>"btn btn-main", :style=>"display:none;" %>
+        </div>
+      </div>
+      <%# end %>
+      <div class="row" style="margin-top: 3%;">
+        <!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">-->
+        <div class="pull-left">
+          <a href="javascript:void(0)" class="btn-main criteria-fill-step-btn red-btn" id="criteria_fill_step_prev_btn" style="padding-left: 40px;padding-right: 40px;" ">Back</a>
+        </div>
+        <div class="pull-right">
+          <a href="javascript:void(0)" class="btn-main criteria-fill-step-btn red-btn" id="criteria_fill_step_next_btn">Continue</a>
+          <%= f.submit "Submit", :id => "criteria_submit_btn", :class => "btn btn-main red-btn", :style => "display:none; margin-top:-14%; padding-left: 25%; padding-right:25%;" %>
+        </div>
+        <!--</div>-->
+      </div>
+      </div>
+      </div>
+
+
+<% end %>
+</div>
 
 
 </section>
 <!-- ========================= Algo Page Ends ========================= -->
 
 <script>
-    function backButtonVisibility(current_step,totalSteps){
-        if(current_step === 0)
-        {
+    function backButtonVisibility(current_step, totalSteps) {
+        if (current_step === 0) {
             $("#criteria_fill_step_prev_btn").hide();
         }
-        else
-        {
+        else {
             $("#criteria_fill_step_prev_btn").show()
         }
 
-        if(current_step === totalSteps-1)
-        {
+        if (current_step === totalSteps - 1) {
             $("#criteria_fill_step_next_btn").hide();
         }
-        else
-        {
+        else {
             $("#criteria_fill_step_next_btn").show()
         }
 
@@ -429,7 +451,7 @@
     }
 
 
-    $(function(){
+    $(function () {
         var current_step = 0;
 
         var total_steps;
@@ -441,46 +463,42 @@
         total_criterion_steps = $('.criterion-fill-step').length;
 
         $('.lhc-chosen').chosen();
-        $('.chosen-container-single').css('width','120px');
+        $('.chosen-container-single').css('width', '120px');
 
         $('.demographic-fill-step').eq(current_step).show();
         $('.criterion-fill-step').eq(current_step).show();
         $('.top_images').eq(current_step).show();
-        if(current_step === 0)
-        {
+        if (current_step === 0) {
             $("#criteria_fill_step_prev_btn").hide();
         }
-        else
-        {
+        else {
             $("#criteria_fill_step_prev_btn").show()
         }
-
 
 
         $('.carousel').carousel();
 
         // Criteria Fill Form Steps -> Navigation control - starts
-        $('#criteria_fill_step_next_btn').on('click', function(){
+        $('#criteria_fill_step_next_btn').on('click', function () {
             //$('.criteria-fill-step').hide();
             $('.demographic-fill-step').hide();
             $('.criterion-fill-step').hide();
             $('.top_images').hide();
             current_step = current_step + 1;
-            backButtonVisibility(current_step,total_steps);
+            backButtonVisibility(current_step, total_steps);
 
 
-
-            if ( current_step >= (total_steps-1) ) {
+            if (current_step >= (total_steps - 1)) {
                 $('.demographic-fill-step').hide();
                 $('.criterion-fill-step').hide();
                 $('.top_images').hide();
-                current_step = total_steps-1;
+                current_step = total_steps - 1;
                 $('.demographic-fill-step').eq(current_step).show();
                 $('.criterion-fill-step').eq(current_step).show();
                 $('.top_images').eq(current_step).show();
                 $('#criteria_submit_btn').show();
             }
-            else{
+            else {
                 $('.demographic-fill-step').eq(current_step).show();
                 $('.criterion-fill-step').eq(current_step).show();
                 $('.top_images').eq(current_step).show();
@@ -488,20 +506,20 @@
             }
         });
 
-        $('#criteria_fill_step_prev_btn').on('click', function(){
+        $('#criteria_fill_step_prev_btn').on('click', function () {
             $('#criteria_submit_btn').hide();
             $('.demographic-fill-step').hide();
             $('.criterion-fill-step').hide();
             current_step = current_step - 1;
-            backButtonVisibility(current_step,total_steps);
-            if ( current_step <= 0 ) {
+            backButtonVisibility(current_step, total_steps);
+            if (current_step <= 0) {
                 $('.demographic-fill-step').hide();
                 $('.criterion-fill-step').hide();
                 current_step = 0;
                 $('.demographic-fill-step').eq(current_step).show();
                 $('.criterion-fill-step').eq(current_step).show();
             }
-            else{
+            else {
                 $('.demographic-fill-step').eq(current_step).show();
                 $('.criterion-fill-step').eq(current_step).show();
             }
@@ -518,7 +536,7 @@
 
         $(drinking_carousel).bind('slide.bs.carousel', function (e) {
             var me_drinking_val;
-            setTimeout(function(){
+            setTimeout(function () {
                 me_drinking_val = $('div.active').find('.me_drinking_radio').val();
                 $('#me_drinking_textfield').val(me_drinking_val);
             }, 1100);
@@ -535,7 +553,7 @@
 
         $(smoking_carousel).bind('slide.bs.carousel', function (e) {
             var me_smoking_val;
-            setTimeout(function(){
+            setTimeout(function () {
                 me_smoking_val = $('div.active').find('.me_smoking_radio').val();
                 $('#me_smoking_textfield').val(me_smoking_val);
             }, 1100);
@@ -544,11 +562,11 @@
     });
 
     //setting val for opposite person's drinking, smoking val - starts
-    function get_my_text(this_obj, which_step){
-        if ( which_step == "drinking" ) {
+    function get_my_text(this_obj, which_step) {
+        if (which_step == "drinking") {
             $('#opposite_person_drinking_textfield').val($(this_obj).text());
         }
-        else if ( which_step == "smoking" ) {
+        else if (which_step == "smoking") {
             $('#opposite_person_smoking_textfield').val($(this_obj).text());
         }
     }

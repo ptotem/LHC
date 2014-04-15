@@ -21,7 +21,35 @@
       Recent Activity
     </div>
   </div>
+
+
+
   <div class="recent-activity-list">
+    <% Like.where(:receiver_id => current_user.id).each do |e|  %>
+    <div class="row">
+      <div class="col-lg-12 whiteblock">
+        <div class="left-part"> <img class="img-circle profile_pic_thumbnail" src="/assets/profile_pic.jpg" ></div>
+        <div class="mid-part">
+          <div class="recentactivitytext">
+                Your  Match <a><%= User.find(e.sender_id).demographic.name %></a> sent you a Like request
+
+          </div>
+        </div>
+        <div class="right-part">
+          <div class="recentactivitydate">
+            15th April 2014
+            <div class="pull-right">
+              <a href="<%= accept_request_path(e.id) %>"><i class="fa fa-thumbs-up blue fa-3x"></i></a>
+              <a href="<%= reject_request_path(e.id) %>"><i class="fa fa-thumbs-down red fa-3x"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% end %>
+
+
+
   <% 7.times do |i| %>
       <div class="row">
         <div class="col-lg-12 whiteblock">
@@ -100,7 +128,7 @@
   </div>
   <div class="row">
     <div class="col-lg-12">
-      <a href="#"><i class="fa fa-envelope fa-3x white iconstyle"></i></a>
+      <a href="#"><i class="fa fa-envelope fa-3x white iconstyle" data-toggle="modal" data-target="#email_modal"></i></a>
     </div>
   </div>
   <div class="row">
@@ -110,7 +138,7 @@
   </div>
   <div class="row" id="try_img">
     <div class="col-lg-12">
-     <%= link_to image_tag("/assets/banner-quiz.jpg",:height=>"80"), start_test_path  %>
+     <%= link_to image_tag("/assets/banner-quiz.jpg",:height=>"80"), snazzmeup_path  %>
     </div>
   </div>
   <div class="row">
@@ -126,6 +154,45 @@
   </div>
 </div>
 
+
+
+<div class="modal fade" id="email_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel" style="color: #000000">Invitee Your Friends</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_tag ('/invitee_friends') do %>
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <%= label_tag "Enter Email" %>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-12">
+                    <%= text_field_tag :email, params[:email],:size => 50 %>
+                  </div>
+                </div>
+              </div>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <div class="row">
+          <div class="col-lg-12">
+            <%= submit_tag "Send" %>
+          </div>
+        </div>
+        <% end %>
+        <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+        <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <!-- ========================= Dashboard Page Ends ========================= -->

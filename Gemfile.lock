@@ -10,6 +10,12 @@ GIT
   specs:
     rails_log_stdout (0.0.1)
 
+GIT
+  remote: git://github.com/stephskardal/rails_admin_import.git
+  revision: 90f967a3700f803670cc59da916cd06999a9aebf
+  specs:
+    rails_admin_import (0.1.8)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -265,6 +271,7 @@ DEPENDENCIES
   rails3_serve_static_assets!
   rails_12factor
   rails_admin
+  rails_admin_import!
   rails_log_stdout!
   sass-rails (~> 4.0.0)
   sdoc
