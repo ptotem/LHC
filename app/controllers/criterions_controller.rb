@@ -26,6 +26,8 @@ class CriterionsController < ApplicationController
 
   def create_matching_criteria
     #TODO: update_attribues, don't create, and use permit params
+    #render :json => params
+    #return
     @user = current_user
 
     @user_demographic_date = params[:user][:demographic]["dob(3i)"]
@@ -40,13 +42,14 @@ class CriterionsController < ApplicationController
     @user_demographic = @user.build_demographic(:dob=>@user_demographic_dob, :drinking=>@user_demographic_drinking, :smoking=>@user_demographic_smoking)
 
 
-    @user_criterion_minage = params[:user][:criterions][:minage]
-    @user_criterion_maxage = params[:user][:criterions][:maxage]
-    @user_criterion_drinking = params[:user][:criterions][:drinking]
-    @user_criterion_smoking = params[:user][:criterions][:smoking]
+    @user_criterion_minage = params[:user][:criterion][:minage]
+    @user_criterion_maxage = params[:user][:criterion][:maxage]
+    @user_criterion_drinking = params[:user][:criterion][:drinking]
+    @user_criterion_smoking = params[:user][:criterion][:smoking]
 
     #@user_criteria = @user.criterions.create!(params[:user][:criterions])
-    @user_criteria = @user.criterions.create!(:minage => @user_criterion_minage, :maxage => @user_criterion_maxage, :drinking => @user_criterion_drinking, :smoking=> @user_criterion_smoking)
+    #@user_criteria = @user.criterions.create!(:minage => @user_criterion_minage, :maxage => @user_criterion_maxage, :drinking => @user_criterion_drinking, :smoking=> @user_criterion_smoking)
+    @user_criteriion = @user.build_criterion(:minage => @user_criterion_minage, :maxage => @user_criterion_maxage, :drinking => @user_criterion_drinking, :smoking=> @user_criterion_smoking)
     @user.save!
 
     redirect_to my_dashboard_path

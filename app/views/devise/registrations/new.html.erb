@@ -2,7 +2,7 @@
     <%= devise_error_messages! %>
 
     <% resource.build_demographic %>
-    <% resource.criterions.new() %>
+    <% resource.build_criterion %>
     <% resource.attendances.new() %>
 
     <div class="control-group">
@@ -59,7 +59,7 @@
                 <% end %>
                 <div class="col-lg-6">
                 <label class="control-label pull-left">Looking for</label>
-                        <%= f.fields_for :criterions do |c| %>
+                        <%= f.fields_for :criterion do |c| %>
                             <%= c.radio_button :male, 'true', :class=>"opposite_gender" %>
                             <label for="user_criterions_attributes_0_male_true" class="custom-radio-btn opposite_user_gender pull-right" id="opposite_user_male_lable"></label>
                             <%= c.radio_button :male, 'false', :class=>"opposite_gender" %>

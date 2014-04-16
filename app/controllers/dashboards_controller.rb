@@ -42,8 +42,29 @@ class DashboardsController < ApplicationController
   end
 
   def user_verification
+    @user = current_user
+    @user_document = UserDocument.new
     #render :text => params
     #return
+  end
+
+  def verify_user_institute_email
+    #@user = current_user
+    @user = User.find(params[:user][:user_id])
+    @user.verification_text = params[:user][:verification_text]
+    @user.save!
+    redirect_to "/profile/#{@user.id}"
+    #render :text => "Successfully updated"
+    #return
+  end
+
+  def verify_user_linkedin_url
+    #@user = current_user
+    @user = User.find(params[:user][:user_id])
+    @user.verification_text = params[:user][:verification_text]
+    @user.save!
+    render :text => "Successfully updated"
+    return
   end
 
   #include ApplicationHelper

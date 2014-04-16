@@ -1,0 +1,21 @@
+<%= form_for(@user_document) do |f| %>
+  <% if @user_document.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user_document.errors.count, "error") %> prohibited this user_document from being saved:</h2>
+
+      <ul>
+      <% @user_document.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :verification_text %><br>
+    <%= f.text_field :verification_text %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

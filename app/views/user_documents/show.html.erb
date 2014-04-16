@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Verification text:</strong>
+  <%= @user_document.verification_text %>
+</p>
+
+<%= link_to 'Edit', edit_user_document_path(@user_document) %> |
+<%= link_to 'Back', user_documents_path %>

@@ -48,7 +48,7 @@
       <% if checking_status_likes(params[:id]) %>
           <button class="buttonmenu" onclick="window.location='<%= younme_path(params[:id]) %>'">You + Me</button>
       <%else %>
-          <button class="buttonmenu" onclick="alert('Disable')">You + Me</button>
+          <button class="buttonmenu" data-toggle="modal" data-target="#disabledModal">You + Me</button>
       <%end %>
     </div>
 
@@ -56,7 +56,7 @@
       <% if checking_status_likes(params[:id]) %>
           <button class="buttonmenu" onclick="window.location='<%= start_ice_breaker_path(params[:id]) %>'">Send Icebreaker</button>
       <%else %>
-          <button class="buttonmenu" onclick="alert('Disable')">Send Icebreaker</button>
+          <button class="buttonmenu" data-toggle="modal" data-target="#disabledModal">Send Icebreaker</button>
       <%end %>
     </div>
 
@@ -64,11 +64,27 @@
     <% if checking_status_likes(params[:id]) %>
         <button class="buttonmenu" onclick="window.location='<%= start_ice_breaker_path(params[:id]) %>'">Send a Message</button>
     <%else %>
-        <button class="buttonmenu" onclick="alert('Disable')">Send a Message</button>
+        <button class="buttonmenu" data-toggle="modal" data-target="#disabledModal">Send a Message</button>
     <%end %>
   </div>
 
 
+  <div class="modal fade" id="disabledModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title blue" id="myModalLabel">Not Permitted</h4>
+        </div>
+        <div class="modal-body">
+          <p class="blue">This feature is temporary disabled.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </section>
 

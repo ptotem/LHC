@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140416054914) do
+ActiveRecord::Schema.define(version: 20140416084814) do
 
   create_table "about_lists", force: true do |t|
     t.string   "name"
@@ -93,6 +93,12 @@ ActiveRecord::Schema.define(version: 20140416054914) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "nickname"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.string   "country"
+    t.string   "city"
   end
 
   create_table "expectations", force: true do |t|
@@ -204,6 +210,7 @@ ActiveRecord::Schema.define(version: 20140416054914) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "professions_users", id: false, force: true do |t|
@@ -245,6 +252,10 @@ ActiveRecord::Schema.define(version: 20140416054914) do
     t.boolean  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   create_table "quizzes", force: true do |t|
@@ -334,6 +345,16 @@ ActiveRecord::Schema.define(version: 20140416054914) do
     t.datetime "updated_at"
   end
 
+  create_table "user_documents", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+  end
+
   create_table "users", force: true do |t|
     t.string   "email",                  default: "",    null: false
     t.string   "encrypted_password",     default: "",    null: false
@@ -352,6 +373,8 @@ ActiveRecord::Schema.define(version: 20140416054914) do
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
+    t.string   "verification_text"
+    t.boolean  "verified"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
