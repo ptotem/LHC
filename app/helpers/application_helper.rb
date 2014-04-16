@@ -25,6 +25,13 @@ module ApplicationHelper
     end
   end
 
+  def get_user_name(id)
+    User.find(id).demographic.name
+
+  end
+
+
+
 
 
 

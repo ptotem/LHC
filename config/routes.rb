@@ -55,11 +55,12 @@ Lhc::Application.routes.draw do
 
   get '/fill_matching_criteria', to: 'criterions#fill_matching_criteria', as: :fill_matching_criteria
   post '/create_matching_criteria', to: 'criterions#create_matching_criteria', as: :create_matching_criteria
+  post '/create_message', to: 'dashboards#create_message', as: :create_message
 
   get '/welcome_dashboard', to: 'dashboards#welcome_dashboard', as: :welcome_dashboard
   get '/my_dashboard', to: 'dashboards#my_dashboard', as: :my_dashboard
   get '/conversations', to: 'dashboards#conversations', as: :conversations
-  get '/conversations_with_users', to: 'dashboards#conversations_with_users', as: :conversations_with_users
+  get '/conversations_with_users/:id', to: 'dashboards#conversations_with_users', as: :conversations_with_users
   get '/quick_matches', to: 'dashboards#quick_matches', as: :quick_matches
   get '/mutual_likes', to: 'dashboards#mutual_likes', as: :mutual_likes
   get '/snazzmeup', to: 'dashboards#snazzmeup', as: :snazzmeup

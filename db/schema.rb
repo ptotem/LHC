@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140415133320) do
+ActiveRecord::Schema.define(version: 20140416054914) do
+
+  create_table "about_lists", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "about_lists_users", force: true do |t|
+    t.integer "about_list_id"
+    t.integer "user_id"
+  end
 
   create_table "attendances", force: true do |t|
     t.integer  "user_id"
@@ -92,6 +103,17 @@ ActiveRecord::Schema.define(version: 20140415133320) do
     t.datetime "updated_at"
   end
 
+  create_table "hobby_lists", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "hobby_lists_users", force: true do |t|
+    t.integer "hobby_list_id"
+    t.integer "user_id"
+  end
+
   create_table "ice_breakers", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -129,7 +151,8 @@ ActiveRecord::Schema.define(version: 20140415133320) do
 
   create_table "messages", force: true do |t|
     t.text     "body"
-    t.integer  "user_id"
+    t.integer  "sender_id"
+    t.integer  "receiver_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
