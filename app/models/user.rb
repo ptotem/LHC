@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :authentications, :dependent => :destroy
 
   has_one :demographic, dependent: :destroy
+  has_one :criterion, dependent: :destroy
 
   has_many :attendances, dependent: :destroy
   has_many :institutions, through: :attendances
@@ -19,7 +20,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :interests
   has_and_belongs_to_many :ice_breakers
 
-  has_many :criterions, dependent: :destroy
+  #has_many :criterions, dependent: :destroy
   has_many :revelations, dependent: :destroy
   has_many :expectations, dependent: :destroy
   has_many :base_matches, dependent: :destroy
@@ -27,15 +28,25 @@ class User < ActiveRecord::Base
   has_many :total_matches, dependent: :destroy
   has_many :user_documents, dependent: :destroy
 
-  has_many :recipients, foreign_key: 'sender_id', :dependent => :destroy
-  has_many :messages, :through => :recipients, foreign_key: 'sender_id'
+  #has_many :recipients, foreign_key: 'sender_id', :dependent => :destroy
+  #has_many :messages, :through => :recipients, foreign_key: 'sender_id'
 
   #has_many :reverse_recipients, class_name: 'Recipient', foreign_key: 'receiver_id'
   #has_many :received_messages, through: :reverse_recipients, foreign_key: 'receiver_id', class_name: 'Message', source: :message
 
 
+
+  has_many :sent_likes ,:class_name=>"Like",:foreign_key=>:sender_id
+  has_many :received_likes ,:class_name=>"Like",:foreign_key=>:receiver_id
+
+  has_many :sent_messages ,:class_name=>"Message",:foreign_key=>:sender_id
+  has_many :received_messages ,:class_name=>"Message",:foreign_key=>:receiver_id
+
+
+
+
   accepts_nested_attributes_for :demographic
-  accepts_nested_attributes_for :criterions
+  accepts_nested_attributes_for :criterion
   accepts_nested_attributes_for :attendances
 
   def demographic
@@ -49,19 +60,19 @@ class User < ActiveRecord::Base
   end
 
   def find_matches
-    if self.criterions.first.smoking == "Doesn't Matter" and self.criterions.first.drinking == "Doesn't Matter"
-      reduced_users =  Demographic.where(:male=>self.criterions.first.male).map(&:user).map{|i| return i if (self.criterions.first.minage..self.criterions.first.maxage).include?(i.age)}
+    if self.criterion.smoking == "Doesn't Matter" and self.criterion.drinking == "Doesn't Matter"
+      reduced_users =  Demographic.where(:male=>self.criterion.male).map(&:user).map{|i| return i if (self.criterion.minage..self.criterion.maxage).include?(i.age)}
       return
     else
-      if self.criterions.first.smoking == "Doesn't Matter"
-       reduced_users =  Demographic.where(:male=>self.criterions.first.male, :drinking => self.criterions.first.drinking).map(&:user).map{|i| return i if (self.criterions.first.minage..self.criterions.first.maxage).include?(i.age)}
-       return
-      end
-      if self.criterions.first.drinking == "Doesn't Matter"
-        reduced_users =  Demographic.where(:male=>self.criterions.first.male, :smoking=> self.criterions.first.smoking).map(&:user).map{|i| return i if (self.criterions.first.minage..self.criterions.first.maxage).include?(i.age)}
+      if self.criterion.smoking == "Doesn't Matter"
+        reduced_users =  Demographic.where(:male=>self.criterion.male, :drinking => self.criterion.drinking).map(&:user).map{|i| return i if (self.criterion.minage..self.criterion.maxage).include?(i.age)}
         return
       end
-      return reduced_users =  Demographic.where(:male=>self.criterions.first.male, :drinking => self.criterions.first.drinking, :smoking=> self.criterions.first.smoking).map(&:user).map{|i| return i if (self.criterions.first.minage..self.criterions.first.maxage).include?(i.age)}
+      if self.criterion.drinking == "Doesn't Matter"
+        reduced_users =  Demographic.where(:male=>self.criterion.male, :smoking=> self.criterion.smoking).map(&:user).map{|i| return i if (self.criterion.minage..self.criterion.maxage).include?(i.age)}
+        return
+      end
+      return reduced_users =  Demographic.where(:male=>self.criterion.male, :drinking => self.criterion.drinking, :smoking=> self.criterion.smoking).map(&:user).map{|i| return i if (self.criterion.minage..self.criterion.maxage).include?(i.age)}
     end
   end
 
@@ -78,8 +89,8 @@ class User < ActiveRecord::Base
 
 
 
-  before_create :set_standard_password
-  before_validation :set_standard_password
+  #before_create :set_standard_password
+  #before_validation :set_standard_password
 
   def set_standard_password
     self.password="password"

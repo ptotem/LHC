@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140416060757) do
+ActiveRecord::Schema.define(version: 20140416070132) do
+
+  create_table "about_lists", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "about_lists_users", force: true do |t|
+    t.integer "about_list_id"
+    t.integer "user_id"
+  end
 
   create_table "answers", force: true do |t|
     t.string   "name"
@@ -101,6 +112,17 @@ ActiveRecord::Schema.define(version: 20140416060757) do
     t.integer  "rating_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "hobby_lists", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "hobby_lists_users", force: true do |t|
+    t.integer "hobby_list_id"
+    t.integer "user_id"
   end
 
   create_table "ice_breakers", force: true do |t|
@@ -335,7 +357,6 @@ ActiveRecord::Schema.define(version: 20140416060757) do
   end
 
   create_table "user_documents", force: true do |t|
-    t.string   "verification_text"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
@@ -363,6 +384,7 @@ ActiveRecord::Schema.define(version: 20140416060757) do
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
+    t.string   "verification_text"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree

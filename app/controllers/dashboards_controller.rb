@@ -42,13 +42,39 @@ class DashboardsController < ApplicationController
   end
 
   def user_verification
+    @user = current_user
+    @user_document = UserDocument.new
     #render :text => params
     #return
   end
 
+  def verify_user_institute_email
+    #@user = current_user
+    @user = User.find(params[:user][:user_id])
+    @user.verification_text = params[:user][:verification_text]
+    @user.save!
+    redirect_to "/profile/#{@user.id}"
+    #render :text => "Successfully updated"
+    #return
+  end
+
+  def verify_user_linkedin_url
+    #@user = current_user
+    @user = User.find(params[:user][:user_id])
+    @user.verification_text = params[:user][:verification_text]
+    @user.save!
+    render :text => "Successfully updated"
+    return
+  end
+
+  #include ApplicationHelper
+
   def conversations
-    @conversions = current_user.recipients
-    @receivers = @conversions.map{|i| i.receiver_id}.uniq
+    user_list =  User.all.map(&:id)
+    @messages = current_user.sent_messages.where(:receiver_id=>user_list) + current_user.received_messages.where(sender_id:user_list)
+
+    #@conversions = current_user.recipients
+    #@receivers = @conversions.map{|i| i.receiver_id}.uniq
     #render :text => @conversions.map{|i| i.receiver_id}.uniq
     #return
   end
@@ -130,12 +156,21 @@ class DashboardsController < ApplicationController
 
  end
   def conversations_with_users
+    @target_user = User.find(params[:id])
+    @messages = current_user.sent_messages.map{|m|m if m.receiver_id == @target_user.id } + current_user.received_messages.map{|m| m if m.sender_id == @target_user.id }
+    #render :text=>@messages
+    #return
 
   end
 
 
   def younme
 
+  end
+
+  def create_message
+    Message.create!(:receiver_id=>params[:receiver_id],:body=>params[:body],:sender_id=>current_user.id)
+    redirect_to conversations_with_users_path(params[:receiver_id])
   end
 
  def under_construction

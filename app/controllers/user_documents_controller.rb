@@ -24,12 +24,15 @@ class UserDocumentsController < ApplicationController
   # POST /user_documents
   # POST /user_documents.json
   def create
+    #render :json => params
+    #return
+
     @user_document = UserDocument.new(user_document_params)
 
     respond_to do |format|
       if @user_document.save
-        format.html { redirect_to @user_document, notice: 'User document was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @user_document }
+        format.html { redirect_to my_dashboard_path, notice: 'User document was successfully created.' }
+        #format.json { render action: 'show', status: :created, location: @user_document }
       else
         format.html { render action: 'new' }
         format.json { render json: @user_document.errors, status: :unprocessable_entity }
@@ -69,6 +72,6 @@ class UserDocumentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_document_params
-      params.require(:user_document).permit(:verification_text)
+      params.require(:user_document).permit(:avatar, :user_id)
     end
 end

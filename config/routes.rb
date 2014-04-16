@@ -57,11 +57,12 @@ Lhc::Application.routes.draw do
 
   get '/fill_matching_criteria', to: 'criterions#fill_matching_criteria', as: :fill_matching_criteria
   post '/create_matching_criteria', to: 'criterions#create_matching_criteria', as: :create_matching_criteria
+  post '/create_message', to: 'dashboards#create_message', as: :create_message
 
   get '/welcome_dashboard', to: 'dashboards#welcome_dashboard', as: :welcome_dashboard
   get '/my_dashboard', to: 'dashboards#my_dashboard', as: :my_dashboard
   get '/conversations', to: 'dashboards#conversations', as: :conversations
-  get '/conversations_with_users', to: 'dashboards#conversations_with_users', as: :conversations_with_users
+  get '/conversations_with_users/:id', to: 'dashboards#conversations_with_users', as: :conversations_with_users
   get '/quick_matches', to: 'dashboards#quick_matches', as: :quick_matches
   get '/mutual_likes', to: 'dashboards#mutual_likes', as: :mutual_likes
   get '/snazzmeup', to: 'dashboards#snazzmeup', as: :snazzmeup
@@ -71,6 +72,8 @@ Lhc::Application.routes.draw do
 
 
   get '/user_verification', to: 'dashboards#user_verification', as: :user_verification
+  match '/verify_user_institute_email', to: 'dashboards#verify_user_institute_email', via: [:post]
+  match '/verify_user_linkedin_url', to: 'dashboards#verify_user_linkedin_url', via: [:post]
   get '/start_ice_breaker/:id/(:prev_msg)', to: 'dashboards#start_ice_breaker', as: :start_ice_breaker
 
   get '/take_test/:id/:question_id', to: 'quiz_categories#take_test',as: :take_test
