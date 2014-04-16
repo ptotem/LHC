@@ -19,7 +19,8 @@ namespace :data do
       user_dempgraphic = user.build_demographic(:name=>user_name, :male=>gender_array.sample, :dob=>random_date, :religion=>"Hindu", :smoking=>smoking_demographic_array.sample, :drinking=>drinking_demographic_array.sample)
       user_dempgraphic.save!
 
-      user_criterion = user.criterions.create(:male=>gender_array.sample, :minage=>rand(18..26), :maxage=>rand(18..26), :smoking=>smoking_criterions_array.sample, :drinking=>drinking_criterions_array.sample)
+      user_criterion = user.build_criterion(:male=>gender_array.sample, :minage=>rand(18..26), :maxage=>rand(18..26), :smoking=>smoking_criterions_array.sample, :drinking=>drinking_criterions_array.sample)
+
       user_criterion.save!
 
       user.save!
