@@ -1,0 +1,33 @@
+<h1>Listing icebreaker_answers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Ice breaker</th>
+      <th>Question</th>
+      <th>User</th>
+      <th>Answer</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @icebreaker_answers.each do |icebreaker_answer| %>
+      <tr>
+        <td><%= icebreaker_answer.ice_breaker_id %></td>
+        <td><%= icebreaker_answer.question_id %></td>
+        <td><%= icebreaker_answer.user_id %></td>
+        <td><%= icebreaker_answer.answer_id %></td>
+        <td><%= link_to 'Show', icebreaker_answer %></td>
+        <td><%= link_to 'Edit', edit_icebreaker_answer_path(icebreaker_answer) %></td>
+        <td><%= link_to 'Destroy', icebreaker_answer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Icebreaker answer', new_icebreaker_answer_path %>

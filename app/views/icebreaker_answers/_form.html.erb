@@ -1,0 +1,33 @@
+<%= form_for(@icebreaker_answer) do |f| %>
+  <% if @icebreaker_answer.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@icebreaker_answer.errors.count, "error") %> prohibited this icebreaker_answer from being saved:</h2>
+
+      <ul>
+      <% @icebreaker_answer.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :ice_breaker_id %><br>
+    <%= f.number_field :ice_breaker_id %>
+  </div>
+  <div class="field">
+    <%= f.label :question_id %><br>
+    <%= f.number_field :question_id %>
+  </div>
+  <div class="field">
+    <%= f.label :user_id %><br>
+    <%= f.number_field :user_id %>
+  </div>
+  <div class="field">
+    <%= f.label :answer_id %><br>
+    <%= f.number_field :answer_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

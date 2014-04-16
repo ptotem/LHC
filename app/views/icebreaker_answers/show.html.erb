@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Ice breaker:</strong>
+  <%= @icebreaker_answer.ice_breaker_id %>
+</p>
+
+<p>
+  <strong>Question:</strong>
+  <%= @icebreaker_answer.question_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @icebreaker_answer.user_id %>
+</p>
+
+<p>
+  <strong>Answer:</strong>
+  <%= @icebreaker_answer.answer_id %>
+</p>
+
+<%= link_to 'Edit', edit_icebreaker_answer_path(@icebreaker_answer) %> |
+<%= link_to 'Back', icebreaker_answers_path %>

@@ -33,14 +33,15 @@ class IceBreakersController < ApplicationController
       question_count = question_count+1
       @ice_breaker.questions << Question.find(q[0])
     end
-
-
     end
-  if question_count > 5 or question_count < 5
+
+    if question_count > 5 or question_count < 5
     @ice_breaker.destroy!
     redirect_to authenticated_root_path ,:notice=>"Number of Questions...."
     return
-  end
+    end
+    Notification.create!(:content=>"#{current_user.demographic.name} has sent you a ice-breaker", :user_id=>params[:ice_breaker][:receiver_id], :pointer_link=>answer_icebreaker_path(@ice_breaker.id,@ice_breaker.questions.first.id))
+
 
     respond_to do |format|
       if @ice_breaker.save

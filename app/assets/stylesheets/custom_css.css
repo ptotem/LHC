@@ -317,7 +317,7 @@ padding:10px;
 }
 
 input[type="radio"] {
-    display:none;
+    /*display:none;*/
 }
 input[type="radio"] + .custom-radio-btn {
     display:inline-block;

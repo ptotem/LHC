@@ -42,8 +42,29 @@ class DashboardsController < ApplicationController
   end
 
   def user_verification
+    @user = current_user
+    @user_document = UserDocument.new
     #render :text => params
     #return
+  end
+
+  def verify_user_institute_email
+    #@user = current_user
+    @user = User.find(params[:user][:user_id])
+    @user.verification_text = params[:user][:verification_text]
+    @user.save!
+    redirect_to "/profile/#{@user.id}"
+    #render :text => "Successfully updated"
+    #return
+  end
+
+  def verify_user_linkedin_url
+    #@user = current_user
+    @user = User.find(params[:user][:user_id])
+    @user.verification_text = params[:user][:verification_text]
+    @user.save!
+    render :text => "Successfully updated"
+    return
   end
 
   #include ApplicationHelper
@@ -137,6 +158,8 @@ class DashboardsController < ApplicationController
  def snazzmeup
 
  end
+
+
   def conversations_with_users
     @target_user = User.find(params[:id])
     @messages = current_user.sent_messages.map{|m|m if m.receiver_id == @target_user.id } + current_user.received_messages.map{|m| m if m.sender_id == @target_user.id }
@@ -150,8 +173,15 @@ class DashboardsController < ApplicationController
 
   end
 
+  def answer_icebreaker
+    @icebreaker_answer = IcebreakerAnswer.new
+    @ice_break=IceBreaker.find(params[:id])
+    @question_icebreaker=Question.find(params[:question_id])
+  end
+
   def create_message
     Message.create!(:receiver_id=>params[:receiver_id],:body=>params[:body],:sender_id=>current_user.id)
+    Notification.create!(:content=>"#{current_user.demographic.name} has sent you a message", :user_id=>params[:receiver_id], :pointer_link=>conversations_with_users_path(current_user.id))
     redirect_to conversations_with_users_path(params[:receiver_id])
   end
 

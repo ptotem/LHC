@@ -1,0 +1,65 @@
+<%= content_for(:left_menu) do %>
+    <%= render :partial=>"dashboards/left_menu" %>
+<% end %>
+<%= content_for(:dialogue_bar_header) do %>
+    Prove yourself !
+<% end %>
+
+<%= content_for(:page_header) do %>
+    Ice Breaker Question
+<% end %>
+
+
+<section id="take_test_blue-container">
+  <div class="custom-container">
+    <div class="row">
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 no-padding">
+        <div class="row" >
+          <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
+
+            <div id="step_<%= @question_icebreaker.id %>" class="test-steps">
+              <div class="row" style="margin-top: 20%;">
+                <h4 style="font-size: 1.8em;"><%= @question_icebreaker.name %></h4>
+              </div>
+              <div class="row">
+                <ul class="test_ul">
+
+                  <%= form_for(@icebreaker_answer) do |f| %>
+
+                      <%= f.hidden_field :user_id,:value => current_user.id %>
+                      <%= f.hidden_field :question_id,:value => @question_icebreaker.id %>
+                      <%= f.hidden_field :ice_breaker_id,:value => params[:id] %>
+
+
+                      <div class="field">
+                        <% @question_icebreaker.options.each do |e| %>
+                            <li>
+                              <%= f.radio_button :answer_id,e.id, :style=>"float: left;" %>
+                              <p class="radio_text"><%= e.name %></p>
+                            </li>
+                        <% end %>
+                      </div>
+
+                      <div class="actions" style="margin-top: 5%;">
+                        <%= f.submit "Answer", :class=>"btn-main ans_btn" %>
+                      </div>
+                  <% end %>
+                </ul>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+
+
+
