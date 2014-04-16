@@ -38,6 +38,8 @@ Lhc::Application.routes.draw do
   #root 'home#index'
 
   devise_scope :user do
+    post 'update_profile', to: 'users/registrations#update_profile', as: :update_profile
+
     authenticated :user do
       root 'home#index', as: :authenticated_root
     end
@@ -87,7 +89,7 @@ Lhc::Application.routes.draw do
 
   get '/profile/:id', to: 'demographics#profile',as: :user_profile
   get '/edit_profile/:id', to: 'demographics#edit_profile', as: :edit_profile
-  post '/update_profile', to: 'demographics#update_profile'
+  #post '/update_profile', to: 'demographics#update_profile'
 
   get '/search_movies_ruby', to: 'demographics#search_movies_ruby'
   #post '/search_movies_themoviedb', to: 'demographics#search_movies_themoviedb'

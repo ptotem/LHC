@@ -39,11 +39,11 @@ class DemographicsController < ApplicationController
     else
       @user = current_user
       #@user.build_demographic
-      @user.criterions.new
-      @user.attendances.new
+      #@user.build_criterion
+      #@user.attendances.new
       #@user.professions.new
-      @user.revelations.new
-      @user.expectations.new
+      #@user.revelations.new
+      #@user.expectations.new
 
       @user_name = current_user.demographic.name
       @user_demographics = @user.demographic
@@ -51,8 +51,19 @@ class DemographicsController < ApplicationController
   end
 
   def update_profile
-    render :json => params
-    return
+    #render :json => params[:user][:demographic_attributes]
+    #return
+    @user = current_user.demographic
+    respond_to do |format|
+      if @user.update(params[:user][:demographic_attributes])
+        format.html { redirect_to "/profile/#{@user.id}", notice: 'Demographic was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @demographic.errors, status: :unprocessable_entity }
+      end
+    end
+
   end
 
 
@@ -230,8 +241,8 @@ class DemographicsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     #def demographic_params
     def demographic_params
-      params[:demographic]
-      #params.permit(:name, :male, :religion)
+      #params[:demographic]
+      params.require(:demographic).permit(:name, :male, :religion,:nickname, :smoking, :drinking,:country, :city,:dob,:id)
     end
 
 end

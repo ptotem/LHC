@@ -21,5 +21,22 @@ class Users::RegistrationsController < Devise::RegistrationsController
     super
   end
 
+  def update_profile
+    #render :json => params#[:user][:demographic_attributes]
+    #return
+    @user = current_user
+    respond_to do |format|
+      if @user.update(params[:user])
+        format.html { redirect_to "/profile/#{@user.id}", notice: 'Demographic was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @demographic.errors, status: :unprocessable_entity }
+      end
+    end
+
+  end
+
+
 
 end
