@@ -281,7 +281,7 @@ padding:10px;
     color: #f7f7f7;
 }
 .invitefriend{
-    margin-left: 30px;
+    /*margin-left: 30px;*/
     color: #FFFFFF;
     font-family: 'Open Sans', sans-serif;
 
@@ -316,8 +316,8 @@ padding:10px;
     color:#38C8E0;
 }
 
-input[type="radio"] {
-    /*display:none;*/
+.lhc-radio-btn {
+    display:none;
 }
 input[type="radio"] + .custom-radio-btn {
     display:inline-block;
