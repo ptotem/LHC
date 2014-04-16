@@ -1,5 +1,28 @@
-<p>Welcome <%= @email %>!</p>
+<!--<p>Welcome <%#= @email %>!</p>-->
+<!---->
+<!--<p>You can confirm your account email through the link below:</p>-->
+<!---->
+<!--<p><%#= link_to 'Confirm my account', confirmation_url(@resource, :confirmation_token => @token) %></p>-->
 
-<p>You can confirm your account email through the link below:</p>
 
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, :confirmation_token => @token) %></p>
+<h4>Dear, <%= @email %> </h4>
+
+<h5>Welcome To LHC!</h5>
+<p>
+  As a next step, please click on <b><%= link_to 'Confirm my account', confirmation_url(@resource, :confirmation_token => @token) %></b> to verify your email address. You can also copy the link in the browser’s address bar.
+
+  Please note, that only verified users can send or receive coffee invites, or inbox messages.
+
+  Please let us know if you face any problem in verifying your account. We look forward to helping you in your quest for a suitable date.
+</p>
+
+
+
+
+<h6>
+  Let’s brew some awesomeness!
+</h6>
+<h6>
+  Team LHC
+</h6>
+

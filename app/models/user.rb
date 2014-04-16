@@ -11,7 +11,8 @@ class User < ActiveRecord::Base
   has_many :attendances, dependent: :destroy
   has_many :institutions, through: :attendances
 
-  has_and_belongs_to_many :professions
+  has_one :profession, dependent: :destroy
+
   has_and_belongs_to_many :personalities
   has_and_belongs_to_many :movies
   has_and_belongs_to_many :songs
@@ -34,11 +35,11 @@ class User < ActiveRecord::Base
 
 
 
-  has_many :sent_likes ,:class_name=>"Like",:foreign_key=>:sender_id
-  has_many :received_likes ,:class_name=>"Like",:foreign_key=>:receiver_id
-
-  has_many :sent_messages ,:class_name=>"Message",:foreign_key=>:sender_id
-  has_many :received_messages ,:class_name=>"Message",:foreign_key=>:receiver_id
+  #has_many :sent_likes ,:class_name=>"Like",:foreign_key=>:sender_id
+  #has_many :received_likes ,:class_name=>"Like",:foreign_key=>:receiver_id
+  #
+  #has_many :sent_messages ,:class_name=>"Message",:foreign_key=>:sender_id
+  #has_many :received_messages ,:class_name=>"Message",:foreign_key=>:receiver_id
 
 
 

@@ -38,10 +38,10 @@ class DemographicsController < ApplicationController
       return
     else
       @user = current_user
-      @user.build_demographic
+      #@user.build_demographic
       @user.criterions.new
       @user.attendances.new
-      @user.professions.new
+      #@user.professions.new
       @user.revelations.new
       @user.expectations.new
 
