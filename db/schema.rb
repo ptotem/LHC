@@ -11,12 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140416054230) do
+ActiveRecord::Schema.define(version: 20140416054914) do
 
   create_table "about_lists", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "about_lists_users", force: true do |t|
+    t.integer "about_list_id"
+    t.integer "user_id"
   end
 
   create_table "attendances", force: true do |t|
@@ -102,6 +107,11 @@ ActiveRecord::Schema.define(version: 20140416054230) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "hobby_lists_users", force: true do |t|
+    t.integer "hobby_list_id"
+    t.integer "user_id"
   end
 
   create_table "ice_breakers", force: true do |t|
