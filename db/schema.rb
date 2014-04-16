@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140416084814) do
+ActiveRecord::Schema.define(version: 20140416093706) do
 
   create_table "about_lists", force: true do |t|
     t.string   "name"
@@ -185,6 +185,14 @@ ActiveRecord::Schema.define(version: 20140416084814) do
   create_table "movies_users", id: false, force: true do |t|
     t.integer "user_id",  null: false
     t.integer "movie_id", null: false
+  end
+
+  create_table "notifications", force: true do |t|
+    t.string   "content"
+    t.integer  "user_id"
+    t.string   "pointer_link"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "options", force: true do |t|
