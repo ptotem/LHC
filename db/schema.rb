@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140416070132) do
+ActiveRecord::Schema.define(version: 20140416084814) do
 
   create_table "about_lists", force: true do |t|
     t.string   "name"
@@ -22,13 +22,6 @@ ActiveRecord::Schema.define(version: 20140416070132) do
   create_table "about_lists_users", force: true do |t|
     t.integer "about_list_id"
     t.integer "user_id"
-  end
-
-  create_table "answers", force: true do |t|
-    t.string   "name"
-    t.integer  "quest_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "attendances", force: true do |t|
@@ -104,6 +97,8 @@ ActiveRecord::Schema.define(version: 20140416070132) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.string   "country"
+    t.string   "city"
   end
 
   create_table "expectations", force: true do |t|
@@ -162,7 +157,8 @@ ActiveRecord::Schema.define(version: 20140416070132) do
 
   create_table "messages", force: true do |t|
     t.text     "body"
-    t.integer  "user_id"
+    t.integer  "sender_id"
+    t.integer  "receiver_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -193,7 +189,8 @@ ActiveRecord::Schema.define(version: 20140416070132) do
 
   create_table "options", force: true do |t|
     t.string   "name"
-    t.integer  "quest_id"
+    t.integer  "question_id"
+    t.boolean  "correct"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -213,6 +210,7 @@ ActiveRecord::Schema.define(version: 20140416070132) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "professions_users", id: false, force: true do |t|
@@ -230,9 +228,7 @@ ActiveRecord::Schema.define(version: 20140416070132) do
   end
 
   create_table "questions", force: true do |t|
-    t.integer  "rating_scale_id"
-    t.text     "revelation_style"
-    t.text     "expectation_style"
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -240,13 +236,6 @@ ActiveRecord::Schema.define(version: 20140416070132) do
   create_table "questions_quizzes", force: true do |t|
     t.integer "question_id"
     t.integer "quiz_id"
-  end
-
-  create_table "quests", force: true do |t|
-    t.string   "name"
-    t.integer  "ice_breaker_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "quiz_answers", force: true do |t|
@@ -385,6 +374,7 @@ ActiveRecord::Schema.define(version: 20140416070132) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "verification_text"
+    t.boolean  "verified"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree

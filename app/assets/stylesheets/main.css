@@ -518,7 +518,7 @@ li.sign-up:hover {
    ========================================================================== */
 #page-title {
     background: #3E4549;
-    padding-top: 0px;
+    padding-top: 10%;
 }
 
 .title-blue {
@@ -1478,7 +1478,7 @@ ul.social-icons li a:hover {
 
 .new_message_area
 {
-    width:102.5%;
+    width:100%;
 }
 .new_message_btn
 {

@@ -31,65 +31,62 @@
             <%= f.fields_for :demographic do |d| %>
                 <div class="form-group">
                   <div class="col-sm-8 col-lg-8">
-                    <%= d.text_field :name, :placeholder=>"Name", :class=>"form-control" %>
+
+                    <%= d.text_field :name,:value=>@user.demographic.name, :placeholder=>"Name", :class=>"form-control" %>
                   </div>
                 </div>
 
               <div class="form-group">
                 <div class="col-sm-8 col-lg-8">
-                  <%= d.text_field :nickname, :placeholder=>"Nickname", :class=>"form-control" %>
+                  <%= d.text_field :nickname, :value=>@user.demographic.nickname,:placeholder=>"Nickname", :class=>"form-control" %>
                 </div>
               </div>
 
               <div class="form-group">
                 <div class="col-sm-8 col-lg-8">
                   <h6 class="white">Date of Birth</h6>
-                  <%= d.date_select :dob, { :order => [:day, :month, :year], :prompt => { :day => 'Select day', :month => 'Select month', :year => 'Select year' } }, {:class => "lhc_chosen"} %>
+                  <%= d.date_select :dob, { :order => [:day, :month, :year],:selected=>@user.demographic.dob}, {:class => "lhc_chosen"} %>
                 </div>
               </div>
 
                 <div class="form-group">
-                  <div class="col-sm-3 col-lg-3">
-                    <label class="checkbox-inline">
-                      <%= d.radio_button :male, {:checked=>true} %> Male
-                      <%= d.radio_button :male,{:checked=>false} %> Female
-                    </label>
+                  <div class="col-sm-3 col-lg-2">
+                    <h6 class="white">Gender</h6>
+                    <%= d.radio_button :male,true, {:checked=>@user.demographic.male, :class=>"my_gender"} %>
+                    <label for="user_demographic_attributes_male_true" class="custom-radio-btn my_gender" id="user_male_lable"></label>
+                    <%= d.radio_button :male,false,{:checked=>!@user.demographic.male, :class=>"my_gender"} %>
+                    <label for="user_demographic_attributes_male_false" class="custom-radio-btn my_gender" id="user_female_lable"></label>
                 </div>
+                  <div class="col-sm-4 col-lg-3">
+                    <h6 class="white">Smoking</h6>
+                    <%= d.select :smoking, ['Never','Socially','Often'], {:selected => @user.demographic.smoking }, { :class => 'lhc_chosen' } %>
+                  </div>
+                  <div class="col-sm-4 col-lg-3">
+                    <h6 class="white">Drinking</h6>
+                    <%= d.select :drinking, ['Never','Socially','Often'], {:selected => @user.demographic.drinking }, { :class => 'lhc_chosen' } %>
+                  </div>
+
               </div>
 
 
-              <div class="form-group">
-                <div class="col-sm-4 col-lg-4">
-                  <%= d.select :smoking, ['Never','Socially','Often'], {:prompt=>"Smoking" }, { :class => 'lhc_chosen' } %>
-                </div>
-                <div class="col-sm-4 col-lg-3 col-lg-offset-1">
-                  <%= d.select :drinking, ['Never','Socially','Often'], {:prompt=>"Drinking" }, { :class => 'lhc_chosen' } %>
-                </div>
 
-              </div>
+
 
 
               <div class="form-group">
 
                 <div class="col-sm-4 col-lg-4">
-                  <select class="lhc_chosen">
-                    <option value="">Country</option>
-                    <option>India</option>
-                    <option>china</option>
-                    <option>srilanka</option>
-                    <option>austrailia</option>
-                    <option>england</option>
-                  </select>
+                  <%= d.text_field :country, :value=>@user.demographic.country,:placeholder=>"Country", :class=>"form-control" %>
                 </div>
                 <div class="col-sm-4 col-lg-4">
-                  <input type="form-control" class="form-control" id="city" placeholder="City">
+                  <%= d.text_field :city, :value=>@user.demographic.city,:placeholder=>"City", :class=>"form-control" %>
                 </div>
               </div>
 
 
               <div class="form-group">
                 <div class="col-sm-8 col-lg-8">
-                  <%= d.text_field :religion, :placeholder=>"Religion", :class=>"form-control" %>
+                  <%= d.text_field :religion, :placeholder=>"Religion",:value => @user.demographic.religion, :class=>"form-control" %>
                 </div>
               </div>
 
@@ -102,7 +99,7 @@
 
                 <div class="col-sm-4 col-lg-4">
                   <%= f.fields_for :professions do |p| %>
-                      <%= p.text_field :name , :placeholder=>"Professions", :class=>"form-control" %>
+                      <%= p.text_field :name , :placeholder=>"Professions",:class=>"form-control" %>
                   <% end %>
                 </div>
 
@@ -117,10 +114,11 @@
 
                 <div class="form-group">
                   <div class="col-sm-3 col-lg-3">
-                    <label class="checkbox-inline">
-                      <%= c.radio_button :male, {:checked=>true} %> Male
-                      <%= c.radio_button :male,{:checked=>false} %> Female
-                    </label>
+                    <h6 class="white">Gender</h6>
+                    <%= c.radio_button :male,true, {:checked=>@user.criterions.first.male, :class=>"my_gender"} %>
+                    <label for="user_demographic_attributes_male_true" class="custom-radio-btn my_gender" id="user_male_lable"></label>
+                    <%= c.radio_button :male,false,{:checked=>!@user.criterions.first.male, :class=>"my_gender"} %>
+                    <label for="user_demographic_attributes_male_false" class="custom-radio-btn my_gender" id="user_female_lable"></label>
                   </div>
                 </div>
 
@@ -128,11 +126,13 @@
                     <% min_age = 18..28 %>
                     <% max_age = 22..36 %>
                   <div class="col-sm-4 col-lg-4">
-                    <%= c.select(:minage, min_age.collect {|d| [d.to_s,d.to_s]}, {:prompt=>"Age From"}, {:class=>"lhc_chosen"}) %>
+                    <h6 class="white">Age From</h6>
+                    <%= c.select(:minage, min_age.collect {|d| [d.to_s,d.to_s]},{:selected => @user.criterions.first.minage}, {:class=>"lhc_chosen"}) %>
                   </div>
 
                   <div class="col-sm-4 col-lg-3 col-lg-offset-1">
-                    <%= c.select(:maxage, max_age.collect {|d| [d.to_s,d.to_s]}, {:prompt=>"Age To"}, {:class=>"lhc_chosen"}) %>
+                    <h6 class="white">Age To</h6>
+                    <%= c.select(:maxage, max_age.collect {|d| [d.to_s,d.to_s]},{:selected => @user.criterions.first.maxage}, {:class=>"lhc_chosen"}) %>
                   </div>
                 </div>
 
@@ -140,10 +140,12 @@
 
               <div class="form-group">
                 <div class="col-sm-4 col-lg-4">
-                  <%= c.select :smoking, ['Never','Socially','Often'], {:prompt=>"Smoking" }, { :class => 'lhc_chosen' } %>
+                  <h6 class="white">Smoking</h6>
+                  <%= c.select :smoking, ['Never','Socially','Often'], {:selected => @user.criterions.first.smoking }, { :class => 'lhc_chosen' } %>
                 </div>
                 <div class="col-sm-4 col-lg-3 col-lg-offset-1">
-                  <%= c.select :drinking, ['Never','Socially','Often'], {:prompt=>"Drinking" }, { :class => 'lhc_chosen' } %>
+                  <h6 class="white">Drinking</h6>
+                  <%= c.select :drinking, ['Never','Socially','Often'], {:selected => @user.criterions.first.drinking }, { :class => 'lhc_chosen' } %>
                 </div>
               </div>
 
@@ -214,7 +216,7 @@
           <div class="form-group">
             <div class="col-sm-8 col-lg-8">
               <div class="ui-widget">
-                <label for="movie_suggest">Search Movie: </label>
+                <h6 class="white">Search Movie</h6>
                 <input id="movie_search_textfield" class="form-control">
               </div>
             </div>
@@ -223,7 +225,7 @@
           <div class="form-group">
             <div class="col-sm-8 col-lg-8">
               <div class="ui-widget">
-                <label for="music_suggest">Search Music: </label>
+                <h6 class="white">Search Music</h6>
                 <input id="music_search_textfield" class="form-control">
               </div>
             </div>
@@ -232,7 +234,7 @@
           <div class="form-group">
             <div class="col-sm-8 col-lg-8">
               <div class="ui-widget">
-                <label for="books_suggest">Search Books: </label>
+                <h6 class="white">Search Book</h6>
                 <input id="books_search_textfield" class="form-control">
               </div>
             </div>

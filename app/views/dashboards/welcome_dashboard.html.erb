@@ -5,9 +5,11 @@
     Let's get started
 <% end %>
 
+<%= content_for(:dialogue_bar_header) do %>
+    Welcome, <%= current_user.demographic.name %>
+<% end %>
 
-<section id="dashboard_welcome_section">
-  <div class="row" style="margin-top:2%">
+
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-11">
 
 
@@ -58,5 +60,3 @@
       </div>
 
     </div>
-  </div>
-</section>
