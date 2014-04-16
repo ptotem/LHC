@@ -38,7 +38,7 @@ Lhc::Application.routes.draw do
   #root 'home#index'
 
   devise_scope :user do
-    post 'update_profile', to: 'users/registrations#update_profile', as: :update_profile
+    post 'update', to: 'users/registrations#update', as: :update_profile
 
     authenticated :user do
       root 'home#index', as: :authenticated_root

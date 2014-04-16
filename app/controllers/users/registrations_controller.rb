@@ -21,12 +21,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
     super
   end
 
-  def update_profile
+  def update
     #render :json => params#[:user][:demographic_attributes]
     #return
     @user = current_user
     respond_to do |format|
-      if @user.update(params[:user])
+      #if @user.update_attributes(params[:user].permit[:demographics_attributes])
+      if @user.update(params.require(:user).permit(:username,:email,:password,:password_confirmation,:phone, :validate_username,:avatar, :avatar_cache, :remove_avatar, :current_password,:demographic_attributes=>[:male, :name,:nickname,:dob,:smoking,:drinking,:country,:city,:religion], :criterion_attributes=>[:male,:minage,:maxage,:smoking,:drinking], :attendances_attributes=>[:user_id, :institution_id]))
         format.html { redirect_to "/profile/#{@user.id}", notice: 'Demographic was successfully updated.' }
         format.json { head :no_content }
       else
