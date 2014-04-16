@@ -1,0 +1,27 @@
+<h1>Listing user_documents</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Verification text</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @user_documents.each do |user_document| %>
+      <tr>
+        <td><%= user_document.verification_text %></td>
+        <td><%= link_to 'Show', user_document %></td>
+        <td><%= link_to 'Edit', edit_user_document_path(user_document) %></td>
+        <td><%= link_to 'Destroy', user_document, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New User document', new_user_document_path %>

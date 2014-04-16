@@ -1,4 +1,6 @@
 Lhc::Application.routes.draw do
+  resources :user_documents
+
   resources :quiz_answers
 
   resources :quiz_categories

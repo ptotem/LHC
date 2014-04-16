@@ -25,6 +25,7 @@ class User < ActiveRecord::Base
   has_many :base_matches, dependent: :destroy
   has_many :mind_matches, dependent: :destroy
   has_many :total_matches, dependent: :destroy
+  has_many :user_documents, dependent: :destroy
 
   has_many :recipients, foreign_key: 'sender_id', :dependent => :destroy
   has_many :messages, :through => :recipients, foreign_key: 'sender_id'

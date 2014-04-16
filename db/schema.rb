@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140415133320) do
+ActiveRecord::Schema.define(version: 20140416060757) do
+
+  create_table "answers", force: true do |t|
+    t.string   "name"
+    t.integer  "quest_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "attendances", force: true do |t|
     t.integer  "user_id"
@@ -82,6 +89,10 @@ ActiveRecord::Schema.define(version: 20140415133320) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "nickname"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   create_table "expectations", force: true do |t|
@@ -160,8 +171,7 @@ ActiveRecord::Schema.define(version: 20140415133320) do
 
   create_table "options", force: true do |t|
     t.string   "name"
-    t.integer  "question_id"
-    t.boolean  "correct"
+    t.integer  "quest_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -198,7 +208,9 @@ ActiveRecord::Schema.define(version: 20140415133320) do
   end
 
   create_table "questions", force: true do |t|
-    t.string   "name"
+    t.integer  "rating_scale_id"
+    t.text     "revelation_style"
+    t.text     "expectation_style"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -206,6 +218,13 @@ ActiveRecord::Schema.define(version: 20140415133320) do
   create_table "questions_quizzes", force: true do |t|
     t.integer "question_id"
     t.integer "quiz_id"
+  end
+
+  create_table "quests", force: true do |t|
+    t.string   "name"
+    t.integer  "ice_breaker_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "quiz_answers", force: true do |t|
@@ -222,6 +241,10 @@ ActiveRecord::Schema.define(version: 20140415133320) do
     t.boolean  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   create_table "quizzes", force: true do |t|
@@ -309,6 +332,17 @@ ActiveRecord::Schema.define(version: 20140415133320) do
     t.integer  "total_fit"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "user_documents", force: true do |t|
+    t.string   "verification_text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   create_table "users", force: true do |t|
