@@ -333,21 +333,32 @@ input[type="radio"] + .custom-radio-btn.opposite_user_gender{
     margin:5px 7px 0 0;
 }
 
-input[type="radio"] + #user_male_lable, #opposite_user_male_lable {
+.lhc-radio-btn + .male-radio-btn {
     background :url('/assets/white_male.png');
     background-size: 100% 100%;
 }
-input[type="radio"] + #user_female_lable, #opposite_user_female_lable {
+
+.lhc-radio-btn + .female-radio-btn {
     background :url('/assets/white_female.png');
     background-size: 100% 100%;
 }
 
-input[type="radio"]:checked + #user_male_lable, input[type="radio"]:checked + #opposite_user_male_lable {
-    background:url('/assets/blue_male.png');
+.lhc-radio-btn:checked + .male-radio-btn {
+    background :url('/assets/blue_male.png');
+    background-size: 100% 100%;
+}
+.lhc-radio-btn:checked + .female-radio-btn {
+    background :url('/assets/blue_female.png');
     background-size: 100% 100%;
 }
 
-input[type="radio"]:checked + #user_female_lable, input[type="radio"]:checked + #opposite_user_female_lable {
-    background:url('/assets/blue_female.png');
-    background-size: 100% 100%;
-}
+
+/*input[type="radio"]:checked + #user_male_lable, input[type="radio"]:checked + .opposite_user_gender_male {*/
+    /*background:url('/assets/blue_male.png');*/
+    /*background-size: 100% 100%;*/
+/*}*/
+
+/*input[type="radio"]:checked + #user_female_lable, input[type="radio"]:checked + .opposite_user_gender_female {*/
+    /*background:url('/assets/blue_female.png');*/
+    /*background-size: 100% 100%;*/
+/*}*/

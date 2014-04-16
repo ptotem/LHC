@@ -21,6 +21,9 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :interests
   has_and_belongs_to_many :ice_breakers
 
+  has_and_belongs_to_many :hobby_lists
+  has_and_belongs_to_many :about_lists
+
   #has_many :criterions, dependent: :destroy
   has_many :revelations, dependent: :destroy
   has_many :expectations, dependent: :destroy

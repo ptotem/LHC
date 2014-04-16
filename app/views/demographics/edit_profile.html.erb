@@ -24,7 +24,9 @@
 
 
 
-        <%= form_for @user, :url => { :controller => "demographics", :action => "update_profile" }, :html => { :method => :post,:class => "form-horizontal" } do |f| %>
+        <%#= form_for @user, :url => { :controller => "users/registrations", :action => "update_profile" }, :html => { :method => :post,:class => "form-horizontal" } do |f| %>
+        <%#= form_for(:user, :url => registration_path(@user), :html => { :method => :put,:class => "form-horizontal" }) do |f| %>
+        <%= form_for @user, :url => { :controller => "users/registrations", :action => "update_profile" }, :html => { :method => :post,:class => "form-horizontal" } do |f| %>
 
 
 
@@ -52,10 +54,10 @@
                 <div class="form-group">
                   <div class="col-sm-3 col-lg-2">
                     <h6 class="white">Gender</h6>
-                    <%= d.radio_button :male,true, {:checked=>@user.demographic.male, :class=>"my_gender"} %>
-                    <label for="user_demographic_attributes_male_true" class="custom-radio-btn my_gender" id="user_male_lable"></label>
-                    <%= d.radio_button :male,false,{:checked=>!@user.demographic.male, :class=>"my_gender"} %>
-                    <label for="user_demographic_attributes_male_false" class="custom-radio-btn my_gender" id="user_female_lable"></label>
+                    <%= d.radio_button :male,true, {:checked=>@user.demographic.male, :class=>"my_gender lhc-radio-btn"} %>
+                    <label for="user_demographic_attributes_male_true" class="custom-radio-btn male-radio-btn my_gender" id="user_male_lable"></label>
+                    <%= d.radio_button :male,false,{:checked=>!@user.demographic.male, :class=>"my_gender lhc-radio-btn"} %>
+                    <label for="user_demographic_attributes_male_false" class="custom-radio-btn female-radio-btn my_gender" id="user_female_lable"></label>
                 </div>
                   <div class="col-sm-4 col-lg-3">
                     <h6 class="white">Smoking</h6>
@@ -115,10 +117,11 @@
                 <div class="form-group">
                   <div class="col-sm-3 col-lg-3">
                     <h6 class="white">Gender</h6>
-                    <%= c.radio_button :male,true, {:checked=>@user.criterions.first.male, :class=>"my_gender"} %>
-                    <label for="user_demographic_attributes_male_true" class="custom-radio-btn my_gender" id="user_male_lable"></label>
-                    <%= c.radio_button :male,false,{:checked=>!@user.criterions.first.male, :class=>"my_gender"} %>
-                    <label for="user_demographic_attributes_male_false" class="custom-radio-btn my_gender" id="user_female_lable"></label>
+                    <%= c.radio_button :male,true, {:checked=>@user.demographic.male, :class=>"my_gender lhc-radio-btn"} %>
+                    <label for="user_criterion_attributes_male_true" class="custom-radio-btn male-radio-btn my_gender" id="user_male_lable"></label>
+                    <%= c.radio_button :male,false,{:checked=>!@user.demographic.male, :class=>"my_gender lhc-radio-btn"} %>
+                    <!--<%#= c.label :male,' ',:class=>"custom-radio-btn female-radio-btn my_gender" %>-->
+                    <label for="user_criterion_attributes_male_false" class="custom-radio-btn female-radio-btn my_gender" id="user_female_lable"></label>
                   </div>
                 </div>
 
@@ -127,12 +130,12 @@
                     <% max_age = 22..36 %>
                   <div class="col-sm-4 col-lg-4">
                     <h6 class="white">Age From</h6>
-                    <%= c.select(:minage, min_age.collect {|d| [d.to_s,d.to_s]},{:selected => @user.criterions.first.minage}, {:class=>"lhc_chosen"}) %>
+                    <%= c.select(:minage, min_age.collect {|d| [d.to_s,d.to_s]},{:selected => @user.criterion.minage}, {:class=>"lhc_chosen"}) %>
                   </div>
 
                   <div class="col-sm-4 col-lg-3 col-lg-offset-1">
                     <h6 class="white">Age To</h6>
-                    <%= c.select(:maxage, max_age.collect {|d| [d.to_s,d.to_s]},{:selected => @user.criterions.first.maxage}, {:class=>"lhc_chosen"}) %>
+                    <%= c.select(:maxage, max_age.collect {|d| [d.to_s,d.to_s]},{:selected => @user.criterion.maxage}, {:class=>"lhc_chosen"}) %>
                   </div>
                 </div>
 
@@ -141,11 +144,11 @@
               <div class="form-group">
                 <div class="col-sm-4 col-lg-4">
                   <h6 class="white">Smoking</h6>
-                  <%= c.select :smoking, ['Never','Socially','Often'], {:selected => @user.criterions.first.smoking }, { :class => 'lhc_chosen' } %>
+                  <%= c.select :smoking, ['Never','Socially','Often'], {:selected => @user.criterion.smoking }, { :class => 'lhc_chosen' } %>
                 </div>
                 <div class="col-sm-4 col-lg-3 col-lg-offset-1">
                   <h6 class="white">Drinking</h6>
-                  <%= c.select :drinking, ['Never','Socially','Often'], {:selected => @user.criterions.first.drinking }, { :class => 'lhc_chosen' } %>
+                  <%= c.select :drinking, ['Never','Socially','Often'], {:selected => @user.criterion.drinking }, { :class => 'lhc_chosen' } %>
                 </div>
               </div>
 
@@ -154,7 +157,10 @@
 
 
 
-            <h4>About Myself</h4><hr>
+          <h4>About Myself</h4><hr>
+
+
+
           <div class="form-group">
             <div class="col-sm-8 col-lg-8">
               <textarea class="form-control" rows="3" placeholder="About Myself"></textarea>
@@ -173,34 +179,41 @@
              <div class="col-sm-4 col-lg-4">
                  <p class="white">I like </p>
                <select class="multiple">
-                 <option value="1">Option 1</option>
-                 <option value="2">Option 2</option>
-                 <option value="3">Option 3</option>
-                 <option value="4">Option 4</option>
-                 <option value="5">Option 5</option>
-                 <option value="6">Option 6</option>
-                 <option value="7">Option 7</option>
-                 <option value="8">Option 8</option>
-                 <option value="9">Option 9</option>
-                 <option value="10">Option 10</option>
+                 <%= HobbyList.all.each do |h| %>
+                     <option value="<%= h.id %>"><%= h.name %></option>
+                 <% end %>
+                 <!--<option value="1">Option 1</option>-->
+                 <!--<option value="2">Option 2</option>-->
+                 <!--<option value="3">Option 3</option>-->
+                 <!--<option value="4">Option 4</option>-->
+                 <!--<option value="5">Option 5</option>-->
+                 <!--<option value="6">Option 6</option>-->
+                 <!--<option value="7">Option 7</option>-->
+                 <!--<option value="8">Option 8</option>-->
+                 <!--<option value="9">Option 9</option>-->
+                 <!--<option value="10">Option 10</option>-->
                </select>
              </div>
+
 
 
              <div class="col-sm-4 col-lg-4">
                  <p class="white">What Friends Say About Me </p>
                <div>
                  <select class="multiple">
-                   <option value="1">Option 1</option>
-                   <option value="2">Option 2</option>
-                   <option value="3">Option 3</option>
-                   <option value="4">Option 4</option>
-                   <option value="5">Option 5</option>
-                   <option value="6">Option 6</option>
-                   <option value="7">Option 7</option>
-                   <option value="8">Option 8</option>
-                   <option value="9">Option 9</option>
-                   <option value="10">Option 10</option>
+                   <%= AboutList.all.each do |h| %>
+                       <option value="<%= h.id %>"><%= h.name %></option>
+                   <% end %>
+                   <!--<option value="1">Option 1</option>-->
+                   <!--<option value="2">Option 2</option>-->
+                   <!--<option value="3">Option 3</option>-->
+                   <!--<option value="4">Option 4</option>-->
+                   <!--<option value="5">Option 5</option>-->
+                   <!--<option value="6">Option 6</option>-->
+                   <!--<option value="7">Option 7</option>-->
+                   <!--<option value="8">Option 8</option>-->
+                   <!--<option value="9">Option 9</option>-->
+                   <!--<option value="10">Option 10</option>-->
                  </select>
                </div>
              </div>
