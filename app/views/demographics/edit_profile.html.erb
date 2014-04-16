@@ -78,7 +78,8 @@
               <div class="form-group">
 
                 <div class="col-sm-4 col-lg-4">
-                  <%= d.text_field :country, :value=>@user.demographic.country,:placeholder=>"Country", :class=>"form-control" %>
+
+                  <%= d.text_field :country, :value=>@user.demographic.country,:placeholder=>"Country", :class=>"form-control location" %>
                 </div>
                 <div class="col-sm-4 col-lg-4">
                   <%= d.text_field :city, :value=>@user.demographic.city,:placeholder=>"City", :class=>"form-control" %>
@@ -297,6 +298,11 @@
     var added_book_item_counter = 0;
 
   $(function(){
+      var addressPicker = new AddressPicker();
+      $('.location').typeahead(null, {
+          displayKey: 'description',
+          source: addressPicker.ttAdapter()
+      });
       $('.lhc_chosen').chosen();
       $('.chosen-container-single').css('width','158px');
 
