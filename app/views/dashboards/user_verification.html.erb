@@ -8,12 +8,16 @@
         cursor: pointer;
         position: absolute;
         top: 0;
-        z-index: 2;
+        z-index: 1;
     }
 
     #upload .wrapper:hover
     {
         opacity: 1;
+    }
+
+    .upload_button:hover{
+        opacity: 0;
     }
 
 
@@ -83,7 +87,7 @@
               <%= file_field_tag "file", :class => "verify_buttn", :placeholder => "Enter your institute email" %>
 
                 </div>
-              <button id="verify_buttn"  class="file_upload">Upload!</button>
+              <button id="verify_buttn"  class="file_upload upload_button">Upload!</button>
             </div>
           </div>
           <!--<p class="white">(These document would be secure)</p>-->
