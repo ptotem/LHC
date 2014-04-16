@@ -56,6 +56,9 @@
         cursor: pointer;
     }
 
+    .active_gray_btn{
+        background-color: #E30000;
+    }
 
     .smoking_icons {
 
@@ -563,6 +566,11 @@
 
     //setting val for opposite person's drinking, smoking val - starts
     function get_my_text(this_obj, which_step) {
+        $('.grey-btn').each(function(index, value){
+            $(this).removeClass('active_gray_btn');
+        });
+        $(this_obj).addClass('active_gray_btn');
+
         if (which_step == "drinking") {
             $('#opposite_person_drinking_textfield').val($(this_obj).text());
         }
@@ -570,5 +578,17 @@
             $('#opposite_person_smoking_textfield').val($(this_obj).text());
         }
     }
+
+//        $(".grey-btn").click(function(){
+//                $(this).css("background","#e30000")
+//        })
+
+//    var color = $('.gray-btn');
+//    $(".gray-btn").click(function () {
+//
+//        $(".gray-btn").removeClass('active');
+//        $(this).addClass('active');
+//
+//    });
     //setting val for opposite person's drinking, smoking val - ends
 </script>
