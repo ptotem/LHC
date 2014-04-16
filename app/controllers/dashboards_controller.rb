@@ -60,8 +60,11 @@ class DashboardsController < ApplicationController
 
   def start_ice_breaker
     @opposite_user = User.find(params[:id])
-
     @message = Message.new
+    @ice_breaker = IceBreaker.new
+    #@ice=IceBreaker.create( :sender_id => current_user.id, :receiver_id => params[:id])
+    #@icequestion=@ice.questions
+    #
   end
 
 

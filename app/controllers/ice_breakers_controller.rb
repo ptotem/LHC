@@ -25,11 +25,26 @@ class IceBreakersController < ApplicationController
   # POST /ice_breakers
   # POST /ice_breakers.json
   def create
-    @ice_breaker = IceBreaker.new(ice_breaker_params)
+
+    question_count = 0
+    @ice_breaker = IceBreaker.create!(:receiver_id=>params[:ice_breaker][:receiver_id],:sender_id=>params[:ice_breaker][:sender_id])
+    params[:ice_breaker][:questions].each do |q|
+    if q[1].to_i == 1
+      question_count = question_count+1
+      @ice_breaker.questions << Question.find(q[0])
+    end
+
+
+    end
+  if question_count > 5 or question_count < 5
+    @ice_breaker.destroy!
+    redirect_to authenticated_root_path ,:notice=>"Number of Questions...."
+    return
+  end
 
     respond_to do |format|
       if @ice_breaker.save
-        format.html { redirect_to @ice_breaker, notice: 'Ice breaker was successfully created.' }
+        format.html { redirect_to user_profile_path(params[:ice_breaker][:receiver_id]), notice: 'Ice breaker was successfully created.' }
         format.json { render action: 'show', status: :created, location: @ice_breaker }
       else
         format.html { render action: 'new' }
@@ -70,6 +85,7 @@ class IceBreakersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ice_breaker_params
-      params[:ice_breaker]
+      params.require(:ice_breaker).permit(:sender_id, :receiver_id, :questions)
+      #params[:ice_breaker,:sender_id,:receiver_id,:questions]
     end
 end

@@ -76,7 +76,7 @@ Lhc::Application.routes.draw do
   get '/start_test/:id', to: 'quiz_categories#start_test',as: :start_test
   get '/user_answer/:id', to: 'quiz_categories#user_answer',as: :user_answer
 
-  get '/profile/:id', to: 'demographics#profile'
+  get '/profile/:id', to: 'demographics#profile',as: :user_profile
   get '/edit_profile/:id', to: 'demographics#edit_profile', as: :edit_profile
   post '/update_profile', to: 'demographics#update_profile'
 

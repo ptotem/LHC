@@ -44,6 +44,7 @@
       $('.font_awesome_ice_breaker').popover({
           html: true
 
+
       });
 
 //      $('.font_awesome_ice_breaker').on('click', function (e) {
@@ -66,47 +67,31 @@
     <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10" >
       <div class="row">
         <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 white-background_ice_breaker">
-          <div class="blue-background_ice_breaker">
-            <h4 class="text_styling_ice_breaker"><label>
-              &nbsp;<input type="checkbox">
-            </label>
-              This is where questions will appear
-              <i class="fa fa-info-circle  font_awesome_ice_breaker pop_over_style" data-content="<ul><li>Option A</li><li>Option B</li><li>Option C</li><li>Option D</li></ul>" title="" data-toggle="popover" data-original-title="A Title"></i>
-            </h4>
-          </div>
-          <div class="blue-background_ice_breaker">
-            <h4 class="text_styling_ice_breaker"><label>
-              &nbsp;<input type="checkbox">
-            </label>
-              This is where questions will appear
-              <i class="fa fa-info-circle  font_awesome_ice_breaker pop_over_style" data-content="<ul><li>Option A</li><li>Option B</li><li>Option C</li><li>Option D</li></ul>" title="" data-toggle="popover" data-original-title="A Title"></i>
-            </h4>
-            
-          </div>
-          <div class="blue-background_ice_breaker">
-            <h4 class="text_styling_ice_breaker"><label>
-              &nbsp;<input type="checkbox">
-            </label>
-              This is where questions will appear
-              <i class="fa fa-info-circle  font_awesome_ice_breaker pop_over_style" data-content="<ul><li>Option A</li><li>Option B</li><li>Option C</li><li>Option D</li></ul>" title="" data-toggle="popover" data-original-title="A Title"></i>
-            </h4>
-          </div>
-          <div class="blue-background_ice_breaker">
-            <h4 class="text_styling_ice_breaker"><label>
-              &nbsp;<input type="checkbox">
-            </label>
-              This is where questions will appear
-              <i class="fa fa-info-circle  font_awesome_ice_breaker pop_over_style" data-content="<ul><li>Option A</li><li>Option B</li><li>Option C</li><li>Option D</li></ul>" title="" data-toggle="popover" data-original-title="A Title"></i>
-            </h4>
-          </div>
-          <div class="blue-background_ice_breaker">
-            <h4 class="text_styling_ice_breaker"><label>
-              &nbsp;<input type="checkbox">
-            </label>
-              This is where questions will appear
-              <i class="fa fa-info-circle  font_awesome_ice_breaker pop_over_style" data-content="<ul><li>Option A</li><li>Option B</li><li>Option C</li><li>Option D</li></ul>" title="" data-toggle="popover" data-original-title="A Title"></i>
-            </h4>
-          </div>
+          <%= form_for(@ice_breaker) do |f| %>
+              <%= f.hidden_field :receiver_id,:value => params[:id] %>
+              <%= f.hidden_field :sender_id,:value => current_user.id %>
+              <% Question.all.each do |e| %>
+                  <%= f.fields_for :questions do |q| %>
+                      <div class="blue-background_ice_breaker">
+                        <h4 class="text_styling_ice_breaker"><label>
+                          &nbsp;
+                        </label>
+                          <%= q.check_box e.id %><%= e.name %>
+                          <% @option="" %>
+                          <% e.options.each do |o| %>
+                              <% @option = @option+"<li>"+o.name+"</li>" %>
+                          <% end %>
+                          <i class="fa fa-info-circle  font_awesome_ice_breaker pop_over_style" data-placement="left" data-content="<ul><%= @option %></ul>" title="" data-toggle="popover" data-original-title="Options"></i>
+                        </h4>
+                      </div>
+                      <% end %>
+
+              <% end %>
+
+
+
+
+
         </div>
       </div>
 
@@ -118,6 +103,9 @@
 
   <div class="row" style="margin-top:2%">
     <div class="col-lg-3" style="padding-left: 0">
-    <button class="btn btn-block ans_btn" onclick="window.location='<%= conversations_with_users_path %>'">Ask questions</button>
+    <!--<button class="btn btn-block ans_btn" onclick="window.location='<%= conversations_with_users_path %>'">Ask questions</button>-->
+      <%= f.submit %>
     </div>
   </div>
+
+          <% end %>

@@ -1,6 +1,7 @@
 class IceBreaker < ActiveRecord::Base
 
-  has_and_belongs_to_many :users
-  has_many :quests, dependent: :destroy
+  belongs_to :user
+  has_and_belongs_to_many :questions
+  #accepts_nested_attributes_for :questions
 
 end

@@ -132,6 +132,8 @@ padding:10px;
     background: #ffffff;
     padding-bottom: 7px;
     padding-top: 14px;
+    height: 347px;
+    overflow-x:hidden ;
 }
 
 .blue-background_ice_breaker {
