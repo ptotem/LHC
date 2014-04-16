@@ -1,6 +1,6 @@
 <!-- ========================= Dashboard Page Begins ========================= -->
 <%= content_for(:left_menu) do %>
-    <%= render :partial=>"left_menu" %>
+    <%= render :partial => "left_menu" %>
 <% end %>
 
 <%= content_for(:dialogue_bar_header) do %>
@@ -13,83 +13,63 @@
 
 
 
-<div class="col-xs-6 col-sm-6 col-md-6 col-lg-9 no-padding" >
+<div class="col-xs-6 col-sm-6 col-md-6 col-lg-9 no-padding">
   <%#= yield %>
 
-  <div class="row" >
+  <div class="row">
     <div class="col-lg-12 col-md-8 col-sm-8 col-xs-8 section-head1">
       Recent Activity
     </div>
   </div>
 
 
-
   <div class="recent-activity-list">
-    <% Like.where(:receiver_id => current_user.id).each do |e|  %>
-    <div class="row">
-      <div class="col-lg-12 whiteblock">
-        <div class="left-part"> <img class="img-circle profile_pic_thumbnail" src="/assets/profile_pic.jpg" ></div>
-        <div class="mid-part">
-          <div class="recentactivitytext">
-                Your  Match <a><%= User.find(e.sender_id).demographic.name %></a> sent you a Like request
+    <% Like.where(:receiver_id => current_user.id).each do |e| %>
+        <div class="row">
+          <div class="col-lg-12 whiteblock">
+            <div class="left-part"><img class="img-circle profile_pic_thumbnail" src="/assets/profile_pic.jpg"></div>
+            <div class="mid-part">
+              <div class="recentactivitytext">
+                Your Match <a><%= User.find(e.sender_id).demographic.name %></a> sent you a Like request
 
-          </div>
-        </div>
-        <div class="right-part">
-          <div class="recentactivitydate">
-            15th April 2014
-            <div class="pull-right">
-              <a href="<%= accept_request_path(e.id) %>"><i class="fa fa-thumbs-up blue fa-3x"></i></a>
-              <a href="<%= reject_request_path(e.id) %>"><i class="fa fa-thumbs-down red fa-3x"></i></a>
+              </div>
+            </div>
+            <div class="right-part">
+              <div class="recentactivitydate">
+                15th April 2014
+                <div class="pull-right">
+                  <a href="<%= accept_request_path(e.id) %>"><i class="fa fa-thumbs-up blue fa-3x"></i></a>
+                  <a href="<%= reject_request_path(e.id) %>"><i class="fa fa-thumbs-down red fa-3x"></i></a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
     <% end %>
 
 
-
-  <% 7.times do |i| %>
-      <div class="row">
-        <div class="col-lg-12 whiteblock">
-          <div class="left-part"> <img class="img-circle profile_pic_thumbnail" src="/assets/profile_pic.jpg" ></div>
-          <div class="mid-part">
-          <div class="recentactivitytext">
-          Your Match <a>Sagarika</a> sent you a message
-          </div>
-          </div>
-          <div class="right-part">
-            <div class="recentactivitydate">
-              8th April 2014
+    <% current_user.notifications.each do |notification| %>
+        <div class="row">
+          <div class="col-lg-12 whiteblock">
+            <div class="left-part"><img class="img-circle profile_pic_thumbnail" src="/assets/profile_pic.jpg"></div>
+            <div class="mid-part">
+              <div class="recentactivitytext">
+                <!--Your Match <a>Sagarika</a> sent you a message-->
+                <%= link_to notification.content, notification.pointer_link %>
+              </div>
+            </div>
+            <div class="right-part">
+              <div class="recentactivitydate">
+                <%= notification.created_at.strftime("%d %B %Y") %>
+              </div>
             </div>
           </div>
-
-
-          <!--<div class="row">-->
-            <!--<div class="col-lg-2">-->
-              <!--<img class="img-circle profile_pic_thumbnail" src="/assets/profile_pic.jpg" >-->
-            <!--</div>-->
-            <!--<div class="col-lg-10">-->
-              <!--<div class="row">-->
-                <!--<div class="col-lg-12 recentactivitydate">-->
-                  <!--8th April 2014-->
-                <!--</div>-->
-              <!--</div>-->
-              <!--<div class="row">-->
-                <!--<div class="col-lg-12 recentactivitytext">-->
-                  <!--Your Match <a>Sagarika</a> sent you a message-->
-                <!--</div>-->
-              <!--</div>-->
-            <!--</div>-->
-          <!--</div>-->
         </div>
-      </div>
-  <% end %>
+    <% end %>
   </div>
 
 </div>
-<div class="col-lg-3 text-center" >
+<div class="col-lg-3 text-center">
   <div class="row">
     <div class="col-lg-12">
       <div class="countdown">
@@ -138,7 +118,7 @@
   </div>
   <div class="row" id="try_img">
     <div class="col-lg-12">
-     <%= link_to image_tag("/assets/banner-quiz.jpg",:height=>"80"), snazzmeup_path  %>
+      <%= link_to image_tag("/assets/banner-quiz.jpg", :height => "80"), snazzmeup_path %>
     </div>
   </div>
   <div class="row">
@@ -174,23 +154,23 @@
                 </div>
                 <div class="row">
                   <div class="col-lg-12">
-                    <%= text_field_tag :email, params[:email],:size => 50 %>
+                    <%= text_field_tag :email, params[:email], :size => 50 %>
                   </div>
                 </div>
               </div>
             </div>
-      </div>
-      <div class="modal-footer">
-        <div class="row">
-          <div class="col-lg-12">
-            <%= submit_tag "Send" %>
-          </div>
-        </div>
+            </div>
+            <div class="modal-footer">
+              <div class="row">
+                <div class="col-lg-12">
+                  <%= submit_tag "Send" %>
+                </div>
+              </div>
         <% end %>
         <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
         <!--<button type="button" class="btn btn-primary">Save changes</button>-->
-      </div>
-    </div>
+        </div>
+        </div>
   </div>
 </div>
 
