@@ -29,7 +29,8 @@ class QueriesController < ApplicationController
 
     respond_to do |format|
       if @query.save
-        format.html { redirect_to root_path, notice: 'Query was successfully created.' }
+        InquiryMailer.inform_about_inquiry(@query.email,@query.body).deliver!
+        format.html { redirect_to authenticated_root_path, notice: 'Your query has been successfully forwarded to the manager!.' }
         format.json { render action: 'show', status: :created, location: @query }
       else
         format.html { render action: 'new' }

@@ -20,4 +20,5 @@
 //= require jquery.bxslider.min
 //= require tag-it
 //= require scaffold
+//= require gritter
 //= require_tree .

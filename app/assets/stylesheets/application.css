@@ -15,5 +15,6 @@
  *= require jquery.multiselect
  *= require jquery.multiselect.filter
  *= require jquery.bxslider
+ *= require gritter
  *= require_tree .
  */
