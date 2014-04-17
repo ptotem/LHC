@@ -70,8 +70,18 @@ class DashboardsController < ApplicationController
   #include ApplicationHelper
 
   def conversations
-    user_list =  User.all.map(&:id)
-    @messages = current_user.sent_messages.where(:receiver_id=>user_list) + current_user.received_messages.where(sender_id:user_list)
+    #TODO: not done optimally, change as soon as possible
+    @user_list =  User.all.map(&:id)
+    @conversations = Array.new
+    sent_messages = current_user.sent_messages.map(&:receiver_id)
+    received_messages = current_user.received_messages.map(&:sender_id)
+    @user_list.each do |i|
+      if sent_messages.include?(i) or received_messages.include?(i)
+
+        @conversations << {"user"=>i,"message"=> current_user.received_messages.where(:sender_id => i).last.body}
+      end
+    end
+    #@messages = current_user.sent_messages.where(:receiver_id=>user_list) + current_user.received_messages.where(sender_id:user_list)
 
     #@conversions = current_user.recipients
     #@receivers = @conversions.map{|i| i.receiver_id}.uniq
@@ -163,6 +173,7 @@ class DashboardsController < ApplicationController
   def conversations_with_users
     @target_user = User.find(params[:id])
     @messages = current_user.sent_messages.map{|m|m if m.receiver_id == @target_user.id } + current_user.received_messages.map{|m| m if m.sender_id == @target_user.id }
+    @messages = @messages.sort{|m1,m2| m1.created_at <=> m2.created_at}
     #render :text=>@messages
     #return
 
