@@ -3,7 +3,7 @@
 <% end %>
 
 <%= content_for(:page_header) do %>
-    Start a conversation with monika !
+    Start a conversation with <%= @opposite_user.demographic.name %> !
 <% end %>
 <%= content_for(:dialogue_bar_header) do %>
     Ice Breaker !

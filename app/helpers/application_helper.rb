@@ -30,6 +30,14 @@ module ApplicationHelper
 
   end
 
+  def get_user_image(id)
+    if User.find(id).demographic.avatar.nil?
+      "/assets/profile_pic.jpg"
+    else
+      User.find(id).demographic.avatar.url
+    end
+  end
+
 
 
 

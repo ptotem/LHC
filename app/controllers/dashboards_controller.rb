@@ -178,6 +178,7 @@ class DashboardsController < ApplicationController
     @target_user = User.find(params[:id])
     @messages = current_user.sent_messages.map{|m|m if m.receiver_id == @target_user.id } + current_user.received_messages.map{|m| m if m.sender_id == @target_user.id }
     @messages = @messages.sort{|m1,m2| m1.created_at <=> m2.created_at}
+    @messages.reverse!
     #render :text=>@messages
     #return
 
