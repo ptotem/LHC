@@ -34,7 +34,28 @@
     <section id="blue-container" style="padding-top: 0;overflow-x: hidden;">
 
       <div class="row">
-        <div class="page-left">  <%= yield(:left_menu) %>
+        <div class="page-left">
+          <%= yield(:left_menu) %>
+          <%= params[:action] %>
+          <% @which_action %>
+          <% case params[:action] %>
+          <% when "profile" %>
+              <% @which_action = "profile" %>
+          <% when "quick_matches" %>
+              <% @which_action = "quick_matches" %>
+          <% when "mutual_likes" %>
+              <% @which_action = "mutual_likes" %>
+          <% when "conversations" %>
+              <% @which_action = "conversations" %>
+          <% when "snazzmeup" %>
+              <% @which_action = "snazzmeup" %>
+          <% when "start_ice_breaker" %>
+              <% @which_action = "start_ice_breaker" %>
+          <% when "younme" %>
+              <% @which_action = "younme" %>
+          <% when "send_message" %>
+              <% @which_action = "send_message" %>
+        <% end %>
         </div>
         <div class="page-right">
           <div class="row" >
@@ -85,4 +106,44 @@
     </section>
 
 </body>
+
+<script>
+    //TODO: try another way for active button
+    $(function(){
+        //console.log("<%= @which_action %>");
+        var action = "<%= @which_action %>";
+        if ( action == "profile" ) {
+            $('.buttonmenu').removeClass('active-btn');
+            $('#profile_btn').addClass('active-btn');
+        }
+        else if ( action == "quick_matches" ) {
+            $('.buttonmenu').removeClass('active-btn');
+            $('#matches_btn').addClass('active-btn');
+        }
+        else if ( action == "mutual_likes" ) {
+            $('.buttonmenu').removeClass('active-btn');
+            $('#mutual_likes_btn').addClass('active-btn');
+        }
+        else if ( action == "conversations" ) {
+            $('.buttonmenu').removeClass('active-btn');
+            $('#conversation_btn').addClass('active-btn');
+        }
+        else if ( action == "snazzmeup" ) {
+            $('.buttonmenu').removeClass('active-btn');
+            $('#snazz_me_up_btn').addClass('active-btn');
+        }
+        else if ( action == "start_ice_breaker" ) {
+            $('.buttonmenu').removeClass('active-btn');
+            $('#send_icebreaker_btn').addClass('active-btn');
+        }
+        else if ( action == "younme" ) {
+            $('.buttonmenu').removeClass('active-btn');
+            $('#you_n_me_btn').addClass('active-btn');
+        }
+        else if ( action == "send_message" ) {
+            $('.buttonmenu').removeClass('active-btn');
+            $('#send_message_btn').addClass('active-btn');
+        }
+    })
+</script>
 </html>
