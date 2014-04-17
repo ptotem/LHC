@@ -355,6 +355,12 @@ input[type="radio"] + .custom-radio-btn.opposite_user_gender{
 }
 
 
+.gritter_style .gritter-css3 {
+    background:#38c8e0;
+    color:white;
+    font-weight: normal;
+}
+
 /*input[type="radio"]:checked + #user_male_lable, input[type="radio"]:checked + .opposite_user_gender_male {*/
     /*background:url('/assets/blue_male.png');*/
     /*background-size: 100% 100%;*/

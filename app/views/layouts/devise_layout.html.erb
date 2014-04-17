@@ -171,7 +171,7 @@
 <%= render "generic_partials/message_section" %>
 
 <%= render "generic_partials/bottom_section" %>
-<%= js add_gritter(flash[:notice], :image => :notice, :title => "Notification!", :sticky => false,:time => 4000  ,:position=>:bottom_left) %>
+<%= js add_gritter(flash[:notice], :image => :notice, :title => "Notification!", :sticky => false,:time => 4000  ,:position=>:bottom_left,:class_name => "gritter_style" ) %>
 </body>
 
 <!--<script src="js/jquery.bxslider.min.js"></script>-->
