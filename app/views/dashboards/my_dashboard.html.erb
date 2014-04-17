@@ -38,8 +38,11 @@
               <div class="recentactivitydate">
                 15th April 2014
                 <div class="pull-right">
-                  <a href="<%= accept_request_path(e.id) %>"><i class="fa fa-thumbs-up blue fa-3x"></i></a>
-                  <a href="<%= reject_request_path(e.id) %>"><i class="fa fa-thumbs-down red fa-3x"></i></a>
+
+                  <button onclick="window.location = '<%= accept_request_url(e.id) %>'" class="transparent-background-btn"><i class="fa fa-thumbs-up blue fa-3x"></i></button>
+                  <button onclick="window.location = '<%= reject_request_url(e.id) %>'" class="transparent-background-btn"><i class="fa fa-thumbs-down red fa-3x"></i></button>
+                  <!--<a href="<%#= accept_request_path(e.id) %>"><i class="fa fa-thumbs-up blue fa-3x"></i></a>-->
+                  <!--<a href="<%#= reject_request_path(e.id) %>"><i class="fa fa-thumbs-down red fa-3x"></i></a>-->
                 </div>
               </div>
             </div>
@@ -48,7 +51,7 @@
     <% end %>
 
 
-    <% current_user.notifications.each do |notification| %>
+    <% current_user.notifications.reverse!.each do |notification| %>
         <div class="row">
           <div class="col-lg-12 whiteblock">
             <div class="left-part"><img class="img-circle profile_pic_thumbnail" src="/assets/profile_pic.jpg"></div>

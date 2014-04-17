@@ -93,6 +93,7 @@ class DashboardsController < ApplicationController
     @opposite_user = User.find(params[:id])
     @message = Message.new
     @ice_breaker = IceBreaker.new
+    redirect_to conversations_with_users_path(params[:id])
     #@ice=IceBreaker.create( :sender_id => current_user.id, :receiver_id => params[:id])
     #@icequestion=@ice.questions
     #
@@ -207,7 +208,7 @@ class DashboardsController < ApplicationController
     @addresses.each do |invitee|
       InviteeMailer.invitee_email(invitee).deliver
     end
-    redirect_to my_dashboard_path
+    redirect_to user_profile_path(current_user.id), notice: 'Mail has been successfully sent to your friend.'
   end
 
 
@@ -223,24 +224,26 @@ class DashboardsController < ApplicationController
       @like=Like.create(:receiver_id => @receiver_id,:sender_id => @sender_id,:status => false)
       #render :text => "Request  Sent"
       #return
-      redirect_to my_dashboard_path
+      redirect_to user_profile_path(@receiver_id)
       return
     end
   end
 
   def accept_request
+
    @accept=Like.find(params[:id])
    @accept.status=true
-   @accept.save
-   redirect_to my_dashboard_path
-   return
+   @accept.save!
+
+   redirect_to user_profile_path(params[:id]), notice: 'You have accepted the request.'
+   #return
   end
 
   def reject_request
     @reject=Like.find(params[:id])
     @reject.status=false
-    @reject.save
-    redirect_to my_dashboard_path
+    @reject.save!
+    redirect_to user_profile_path(params[:id]), notice: 'You have rejected the request.'
     return
   end
 

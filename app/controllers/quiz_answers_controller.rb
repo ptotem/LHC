@@ -30,7 +30,7 @@ class QuizAnswersController < ApplicationController
     @next_question = (@quiz.questions - [@question])[0]
     respond_to do |format|
       if @quiz_answer.save
-        format.html { redirect_to take_test_path(@quiz.id,@next_question.id), notice: 'Quiz answer was successfully created.' }
+        format.html { redirect_to take_test_path(@quiz.id,@next_question.id)}
         format.json { render action: 'show', status: :created, location: @quiz_answer }
       else
         format.html { render action: 'new' }
