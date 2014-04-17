@@ -104,11 +104,14 @@
                 <i class="fa fa-info-circle  font_awesome_icon blue"></i>
               </div>
               <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 white">
-                <div class="hd_list">Reading</div>
-                <div class="hd_list">Writing</div>
-                <div class="hd_list">Sleeping</div>
-                <div class="hd_list">Drinking</div>
-                <div class="hd_list">Movies</div>
+                <%= current_user.hobby_lists.each do |h| %>
+                    <div class="hd_list"><%= h.name %></div>
+                    <% end %>
+                <!--<div class="hd_list">Reading</div>-->
+                <!--<div class="hd_list">Writing</div>-->
+                <!--<div class="hd_list">Sleeping</div>-->
+                <!--<div class="hd_list">Drinking</div>-->
+                <!--<div class="hd_list">Movies</div>-->
               </div>
             </div>
           </div>
@@ -121,15 +124,18 @@
                 <i class="fa fa-comments font_awesome_icon blue"></i>
               </div>
               <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 white">
-                <div class="hd_list">Artistic</div>
+                <%= current_user.about_lists.each do |h| %>
+                    <div class="hd_list"><%= h.name %></div>
+                <% end %>
+                <!--<div class="hd_list">Artistic</div>-->
 
-                <div class="hd_list">Athletic</div>
+                <!--<div class="hd_list">Athletic</div>-->
 
-                <div class="hd_list">Emotinal</div>
+                <!--<div class="hd_list">Emotinal</div>-->
 
-                <div class="hd_list">Sensitive</div>
+                <!--<div class="hd_list">Sensitive</div>-->
 
-                <div class="hd_list">Sexy</div>
+                <!--<div class="hd_list">Sexy</div>-->
               </div>
             </div>
           </div>
