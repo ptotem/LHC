@@ -32,14 +32,16 @@
 
 </style>
 
+<!--TODO: shift it to controller-->
+<% @user = User.find(params[:id]) %>
 <section id="left_menu">
   <div class="row" id="dashboard_user_profile_pic" >
 
     <div class="thumbs">
-      <% if current_user.demographic.avatar.nil? %>
+      <% if @user.demographic.avatar.nil? %>
           <img alt="Image Size 430x280" class="img-responsive profilepic" src="/assets/profile_pic.jpg">
       <% else %>
-          <img alt="Image Size 430x280" class="img-responsive profilepic" src="<%= current_user.demographic.avatar.url %>">
+          <img alt="Image Size 430x280" class="img-responsive profilepic" src="<%= @user.demographic.avatar.url %>">
       <% end %>
 
 
