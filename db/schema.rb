@@ -93,12 +93,12 @@ ActiveRecord::Schema.define(version: 20140416114047) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "nickname"
-    t.string   "country"
-    t.string   "city"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.string   "country"
+    t.string   "city"
   end
 
   create_table "expectations", force: true do |t|
@@ -121,8 +121,6 @@ ActiveRecord::Schema.define(version: 20140416114047) do
   end
 
   create_table "ice_breakers", force: true do |t|
-    t.integer  "sender_id"
-    t.integer  "receiver_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -130,6 +128,11 @@ ActiveRecord::Schema.define(version: 20140416114047) do
   create_table "ice_breakers_questions", force: true do |t|
     t.integer "ice_breaker_id"
     t.integer "question_id"
+  end
+
+  create_table "ice_breakers_users", id: false, force: true do |t|
+    t.integer "ice_breaker_id", null: false
+    t.integer "user_id",        null: false
   end
 
   create_table "icebreaker_answers", force: true do |t|
@@ -168,8 +171,7 @@ ActiveRecord::Schema.define(version: 20140416114047) do
 
   create_table "messages", force: true do |t|
     t.text     "body"
-    t.integer  "sender_id"
-    t.integer  "receiver_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -392,8 +394,8 @@ ActiveRecord::Schema.define(version: 20140416114047) do
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.boolean  "verified"
     t.string   "verification_text"
+    t.boolean  "verified"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
