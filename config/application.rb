@@ -43,8 +43,8 @@ module Lhc
       end
     end
 
-    config.action_mailer.default_url_options = {:host => "localhost:3000"}
-    #config.action_mailer.default_url_options = {:host => "lhcmocks.herokuapp.com"}
+    #config.action_mailer.default_url_options = {:host => "localhost:3000"}
+    config.action_mailer.default_url_options = {:host => "lhcmocks.herokuapp.com"}
 
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
