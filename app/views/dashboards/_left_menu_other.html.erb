@@ -68,7 +68,7 @@
 
     <div class="row" style="margin-top: 1%">
       <% if checking_status_likes(params[:id]) %>
-          <button class="buttonmenu" id="send_icebreaker_btn" onclick="window.location='<% start_ice_breaker_path(params[:id]) %>'">Send Icebreaker</button>
+          <button class="buttonmenu" id="send_icebreaker_btn" onclick="window.location='<%= start_ice_breaker_path(params[:id]) %>'">Send Icebreaker</button>
       <%else %>
           <button class="buttonmenu" id="send_icebreaker_btn" data-toggle="modal" data-target="#disabledModal">Send Icebreaker</button>
       <%end %>

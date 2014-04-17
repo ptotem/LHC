@@ -113,6 +113,20 @@
                 </div>
               </div>
 
+              <h4>About Myself</h4><hr>
+
+              <div class="form-group">
+                <div class="col-sm-8 col-lg-8">
+                  <%= d.text_area :description , :placeholder=>"Description",:class=>"form-control" %>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="col-sm-8 col-lg-8">
+                  <%= d.text_area :goal , :placeholder=>"In next 5 years, I would be",:class=>"form-control" %>
+                </div>
+              </div>
+
       <% end %>
 
 
@@ -159,24 +173,6 @@
               </div>
 
             <% end %>
-
-
-
-
-          <h4>About Myself</h4><hr>
-
-
-          <div class="form-group">
-            <div class="col-sm-8 col-lg-8">
-              <textarea class="form-control" rows="" placeholder="About Myself"></textarea>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <div class="col-sm-8 col-lg-8">
-              <textarea class="form-control" rows="3" placeholder="In next 5 years, I would be "></textarea>
-            </div>
-          </div>
 
 
            <div class="form-group">

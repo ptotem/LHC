@@ -27,6 +27,9 @@ class DemographicsController < ApplicationController
     @user_smoking = @user.demographic.smoking
     @user_drinking = @user.demographic.drinking
     @user_desc = @user.demographic.description
+    @user_goal = @user.demographic.goal
+    #render :text => @user_desc
+    #return
     @user_email = @user.email
   end
 
