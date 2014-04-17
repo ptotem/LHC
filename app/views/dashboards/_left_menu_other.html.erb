@@ -24,6 +24,10 @@
         width: 100%;
     }
 
+    .active-btn{
+        background-color:#ff0000;
+    }
+
 
 
 </style>
@@ -32,39 +36,43 @@
   <div class="row" id="dashboard_user_profile_pic" >
 
     <div class="thumbs">
-      <img alt="Image Size 430x280" class="img-responsive profilepic" src="/assets/profile_pic.jpg">
+      <% if current_user.demographic.avatar.nil? %>
+          <img alt="Image Size 430x280" class="img-responsive profilepic" src="/assets/profile_pic.jpg">
+      <% else %>
+          <img alt="Image Size 430x280" class="img-responsive profilepic" src="<%= current_user.demographic.avatar.url %>">
+      <% end %>
+
+
     </div>
 
   </div>
 
-
+    <%#= params %>
     <div class="row" style="margin-top: 1%">
-      <!--<button class="buttonmenu" onclick="window.location='/profile/'+<%#= current_user.id %>">Send Like Request</button>-->
-      <button class="buttonmenu" onclick="window.location='<%= user_like_path(params[:id]) %>'">Send Like Request</button>
-        <%#= link_to "Send Like Request", "#", class: "buttonmenu", :id=>"send_like_request_btn" %>
+      <button class="buttonmenu" id="send_like_request_btn" onclick="window.location='<%= user_like_path(params[:id]) %>'">Send Like Request</button>
     </div>
 
     <div class="row" style="margin-top: 1%">
       <% if checking_status_likes(params[:id]) %>
-          <button class="buttonmenu" onclick="window.location='<%= younme_path(params[:id]) %>'">You + Me</button>
+          <button class="buttonmenu" id="you_n_me_btn" onclick="window.location='<%= younme_path(params[:id]) %>'">You + Me</button>
       <%else %>
-          <button class="buttonmenu" data-toggle="modal" data-target="#disabledModal">You + Me</button>
+          <button class="buttonmenu" id="you_n_me_btn" data-toggle="modal" data-target="#disabledModal">You + Me</button>
       <%end %>
     </div>
 
     <div class="row" style="margin-top: 1%">
       <% if checking_status_likes(params[:id]) %>
-          <button class="buttonmenu" onclick="window.location='<%= start_ice_breaker_path(params[:id]) %>'">Send Icebreaker</button>
+          <button class="buttonmenu" id="send_icebreaker_btn" onclick="window.location='<%= start_ice_breaker_path(params[:id]) %>'">Send Icebreaker</button>
       <%else %>
-          <button class="buttonmenu" data-toggle="modal" data-target="#disabledModal">Send Icebreaker</button>
+          <button class="buttonmenu" id="send_icebreaker_btn" data-toggle="modal" data-target="#disabledModal">Send Icebreaker</button>
       <%end %>
     </div>
 
   <div class="row" style="margin-top: 1%">
     <% if checking_status_likes(params[:id]) %>
-        <button class="buttonmenu" onclick="window.location='<%= start_ice_breaker_path(params[:id]) %>'">Send a Message</button>
+        <button class="buttonmenu" id="send_message_btn" onclick="window.location='<%= start_ice_breaker_path(params[:id]) %>'">Send a Message</button>
     <%else %>
-        <button class="buttonmenu" data-toggle="modal" data-target="#disabledModal">Send a Message</button>
+        <button class="buttonmenu" id="send_message_btn" data-toggle="modal" data-target="#disabledModal">Send a Message</button>
     <%end %>
   </div>
 
