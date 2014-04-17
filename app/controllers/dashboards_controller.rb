@@ -96,7 +96,7 @@ class DashboardsController < ApplicationController
     @opposite_user = User.find(params[:id])
     @message = Message.new
     @ice_breaker = IceBreaker.new
-    redirect_to conversations_with_users_path(params[:id])
+    #redirect_to conversations_with_users_path(params[:id])
     #@ice=IceBreaker.create( :sender_id => current_user.id, :receiver_id => params[:id])
     #@icequestion=@ice.questions
     #
