@@ -52,7 +52,8 @@ class CriterionsController < ApplicationController
     @user_criteriion = @user.build_criterion(:minage => @user_criterion_minage, :maxage => @user_criterion_maxage, :drinking => @user_criterion_drinking, :smoking=> @user_criterion_smoking)
     @user.save!
 
-    redirect_to my_dashboard_path
+    #redirect_to my_dashboard_path
+    redirect_to welcome_dashboard_path
 
   end
 

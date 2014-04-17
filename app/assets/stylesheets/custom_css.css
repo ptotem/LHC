@@ -361,6 +361,12 @@ input[type="radio"] + .custom-radio-btn.opposite_user_gender{
     font-weight: normal;
 }
 
+.transparent-background-btn
+{
+    background: transparent;
+    border: none;
+}
+
 /*input[type="radio"]:checked + #user_male_lable, input[type="radio"]:checked + .opposite_user_gender_male {*/
     /*background:url('/assets/blue_male.png');*/
     /*background-size: 100% 100%;*/

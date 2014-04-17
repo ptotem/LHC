@@ -50,6 +50,10 @@
   </div>
 
     <%#= params %>
+  <div class="row" style="margin-top: 1%">
+    <button class="buttonmenu" id="profile_btn" onclick="window.location='/profile/'+<%= params[:id] %>">Profile</button>
+  </div>
+
     <div class="row" style="margin-top: 1%">
       <button class="buttonmenu" id="send_like_request_btn" onclick="window.location='<%= user_like_path(params[:id]) %>'">Send Like Request</button>
     </div>
@@ -64,7 +68,7 @@
 
     <div class="row" style="margin-top: 1%">
       <% if checking_status_likes(params[:id]) %>
-          <button class="buttonmenu" id="send_icebreaker_btn" onclick="window.location='<%= start_ice_breaker_path(params[:id]) %>'">Send Icebreaker</button>
+          <button class="buttonmenu" id="send_icebreaker_btn" onclick="window.location='<% start_ice_breaker_path(params[:id]) %>'">Send Icebreaker</button>
       <%else %>
           <button class="buttonmenu" id="send_icebreaker_btn" data-toggle="modal" data-target="#disabledModal">Send Icebreaker</button>
       <%end %>
@@ -72,7 +76,7 @@
 
   <div class="row" style="margin-top: 1%">
     <% if checking_status_likes(params[:id]) %>
-        <button class="buttonmenu" id="send_message_btn" onclick="window.location='<%= start_ice_breaker_path(params[:id]) %>'">Send a Message</button>
+        <button class="buttonmenu" id="send_message_btn" onclick="window.location='<%= conversations_with_users_path(params[:id]) %>'">Send a Message</button>
     <%else %>
         <button class="buttonmenu" id="send_message_btn" data-toggle="modal" data-target="#disabledModal">Send a Message</button>
     <%end %>

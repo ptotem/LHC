@@ -40,7 +40,10 @@
 
         <div class="thumbs">
           <% if current_user.demographic.avatar.nil? %>
-              <img alt="Image Size 430x280" class="img-responsive profilepic" src="/assets/profile_pic.jpg">
+              <a href="/assets/profile_pic.jpg" class="fancybox" title="Sample title">
+                <!--<img src="small_image.jpg" />-->
+                <img alt="Image Size 430x280" class="img-responsive profilepic" src="/assets/profile_pic.jpg">
+              </a>
           <% else %>
               <img alt="Image Size 430x280" class="img-responsive profilepic" src="<%= current_user.demographic.avatar.url %>">
           <% end %>
