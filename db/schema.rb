@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140416114047) do
+ActiveRecord::Schema.define(version: 20140417053422) do
 
   create_table "about_lists", force: true do |t|
     t.string   "name"
@@ -97,8 +97,7 @@ ActiveRecord::Schema.define(version: 20140416114047) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
-    t.string   "country"
-    t.string   "city"
+    t.string   "location"
   end
 
   create_table "expectations", force: true do |t|
@@ -171,7 +170,8 @@ ActiveRecord::Schema.define(version: 20140416114047) do
 
   create_table "messages", force: true do |t|
     t.text     "body"
-    t.integer  "user_id"
+    t.integer  "sender_id"
+    t.integer  "receiver_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

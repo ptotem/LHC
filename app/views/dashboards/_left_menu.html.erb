@@ -26,6 +26,10 @@
       width: 100%;
   }
 
+  .active-btn{
+      background-color:#ff0000;
+  }
+
 
 
 </style>
@@ -44,34 +48,25 @@
 
     </div>
 
+
     <div class="row" style="margin-top: 1%">
-        <button class="buttonmenu" onclick="window.location='/profile/'+<%= current_user.id %>">Profile</button>
-        <!--<button class="lhc-btn btn-large gray">Profile</button>-->
-        <%#= link_to "Profile", profile_path, class: "btn-main", :style=>"font-size: 1.1em; padding: 5% 77% 5% 5%; text-transform: none;" %>
+        <button class="buttonmenu" id="profile_btn" onclick="window.location='/profile/'+<%= current_user.id %>">Profile</button>
     </div>
 
     <div class="row" style="margin-top: 1%">
-        <button class="buttonmenu" onclick="window.location='/quick_matches'">Matches</button>
-        <!--<%#= link_to "Conversations", conversations_path, class: "buttonmenu", :style=>"font-size: 1.1em; text-transform: none;" %>-->
-        <!--<a href="#"><%#= Recipient.where(:user_id => current_user.id,:status => false).map {|r| r.message}.reverse.count %></a>-->
+        <button class="buttonmenu" id="matches_btn" onclick="window.location='/quick_matches'">Matches</button>
     </div>
 
     <div class="row" style="margin-top: 1%">
-        <button class="buttonmenu" onclick="window.location='/mutual_likes'">Mutual Likes</button>
-        <!--<button class="lhc-btn btn-large gray">Quick Match</button>-->
-        <!--<%#= link_to "Quick Matches", quick_matches_path, class: "btn-main btn-large", :style=>"font-size: 1.1em; text-transform: none; width:100%;" %>-->
+        <button class="buttonmenu" id="mutual_likes_btn" onclick="window.location='/mutual_likes'">Mutual Likes</button>
     </div>
 
     <div class="row" style="margin-top: 1%">
-        <button class="buttonmenu" onclick="window.location='/conversations'">Conversations</button>
-        <!--<button class="lhc-btn btn-large gray">Mutual Likes</button>-->
-        <!--<%#= link_to "Mutual Likes", "#", class: "btn-main btn-large", :style=>"font-size: 1.1em; text-transform: none;" %>-->
+        <button class="buttonmenu" id="conversation_btn" onclick="window.location='/conversations'">Conversations</button>
     </div>
 
     <div class="row" style="margin-top: 1%">
-        <button class="buttonmenu" onclick = "window.location='/snazzmeup'">Snaz Me Up!</button>
-        <!--<button class="lhc-btn btn-large gray">Questions</button>-->
-        <!--<%#= link_to "Questions", "#", class: "btn-main btn-large", :style=>"font-size: 1.1em; text-transform: none;" %>-->
+        <button class="buttonmenu" id="snazz_me_up_btn" onclick = "window.location='/snazzmeup'">Snaz Me Up!</button>
     </div>
 
 </section>
