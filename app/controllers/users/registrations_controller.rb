@@ -16,6 +16,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
 
   def create
+
     puts "devise/reg_controller/create - #{params}"
     #return
     super

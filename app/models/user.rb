@@ -63,6 +63,14 @@ class User < ActiveRecord::Base
     super || build_demographic
   end
 
+  def criterion
+    super || build_criterion
+  end
+
+  def attendances
+    super || self.attendance.new
+  end
+
   def age
     now = Time.now.utc.to_date
     birthday = self.demographic.dob
