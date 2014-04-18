@@ -377,11 +377,3 @@ input[type="radio"] + .custom-radio-btn.opposite_user_gender{
     /*background-size: 100% 100%;*/
 /*}*/
 
-#error_explanation {
-    background-color: #F0F0F0;
-    border: 2px solid #FF0000;
-    color: #000000;
-    margin: 0 auto 20px;
-    padding: 7px 7px 0;
-    width: 450px;
-}

@@ -112,7 +112,11 @@
   <div class="custom-container">
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <%= js add_gritter(devise_error_messages!, :image => :error, :title => "Errors!", :sticky => false,:time => 10000  ,:position=>:bottom_left,:class_name => "gritter_style"  ) %>
 
+
+        <% resource.build_demographic %>
+        <% resource.attendances.new() %>
         <!--BxSlider-->
         <ul class="bxslider">
           <li style="height: 560px; background-image: url('/assets/background.jpg'); background-size: 100% 100%; width: 100%;">
