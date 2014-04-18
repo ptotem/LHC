@@ -34,7 +34,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     respond_to do |format|
       #if @user.update_attributes(params[:user].permit[:demographics_attributes])
 
-      if @user.update(params.require(:user).permit(:username,:email,:password,:password_confirmation,:phone, :validate_username,:avatar, :avatar_cache, :remove_avatar, :current_password,:demographic_attributes=>[:id,:male, :name,:nickname,:dob,:smoking,:drinking,:location,:religion,:avatar, :description, :goal], :criterion_attributes=>[:male,:minage,:maxage,:smoking,:drinking], :attendances_attributes=>[:user_id, :institution_id], :hobby_list_ids=>[], :about_list_ids=>[]))
+      if @user.update(params.require(:user).permit(:username,:email,:password,:password_confirmation,:phone, :validate_username,:avatar, :avatar_cache, :remove_avatar, :current_password,:demographic_attributes=>[:id,:male, :name,:nickname,:dob,:smoking,:drinking,:location,:religion,:avatar, :description, :goal,:last_institute], :criterion_attributes=>[:male,:minage,:maxage,:smoking,:drinking], :attendances_attributes=>[:user_id, :institution_id], :hobby_list_ids=>[], :about_list_ids=>[]))
         format.html { redirect_to "/profile/#{@user.id}", notice: 'Your profile was successfully updated.' }
         format.json { head :no_content }
       else
