@@ -1,6 +1,6 @@
 class QuizCategoriesController < ApplicationController
   before_action :set_quiz_category, only: [:show, :edit, :update, :destroy]
-
+  layout "dashboard_and_profile_layout"
   # GET /quiz_categories
   # GET /quiz_categories.json
   def index

@@ -2,6 +2,12 @@
     <%= render :partial=>"dashboards/left_menu" %>
 <% end %>
 
+<%= content_for(:dialogue_bar_header) do %>
+    <%= @test.name %>
+<% end %>
+
+
+
 <section id="take_test_blue-container">
 
     <div class="custom-container">
