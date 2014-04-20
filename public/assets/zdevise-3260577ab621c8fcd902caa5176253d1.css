@@ -1,0 +1,22 @@
+/*This is the file to overwrite the default styling for devise.
+The devise styling comes from a file scaffolds.css and hence this file is named zdevise
+*/
+#error_explanation {
+    /*background-color: #F0F0F0;*/
+    /*border: 2px solid #FF0000;*/
+
+    color: #000000;
+    margin: 0 auto 20px;
+    /*padding: 7px 7px 0;*/
+    /*width: 450px;*/
+}
+
+#error_explanation h2
+{
+    background: transparent;
+    display: none;
+}
+#error_explanation ul
+{
+    padding-left:13px;
+}
