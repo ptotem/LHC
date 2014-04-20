@@ -377,3 +377,9 @@ input[type="radio"] + .custom-radio-btn.opposite_user_gender{
     /*background-size: 100% 100%;*/
 /*}*/
 
+
+
+.chosen-container-single .chosen-single
+{
+    height:30px;
+}

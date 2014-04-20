@@ -39,7 +39,7 @@ class DashboardsController < ApplicationController
       #return
     #end
 
-    if current_user.notifications.nil?
+    if current_user.notifications.blank?
       redirect_to user_profile_path(current_user.id)
     end
   end
@@ -83,6 +83,9 @@ class DashboardsController < ApplicationController
 
         @conversations << {"user"=>i,"message"=> current_user.received_messages.where(:sender_id => i).last.body}
       end
+    end
+    if @conversations.blank?
+      redirect_to user_profile_path(current_user.id), :notice=>"You do not have any conversations"
     end
     #@messages = current_user.sent_messages.where(:receiver_id=>user_list) + current_user.received_messages.where(sender_id:user_list)
 
