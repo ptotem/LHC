@@ -30,8 +30,8 @@ class DemographicsController < ApplicationController
     @user_location = @user.demographic.location rescue ""
     @user_goal = @user.demographic.goal rescue ""
     @user_profession = @user.profession.name rescue ""
-    @user_last_institute_id = @user.demographic.last_institute
-    @user_last_institute_name = Institution.find(@user_last_institute_id).name
+    @user_last_institute_id = @user.demographic.last_institute rescue nil?
+    @user_last_institute_name = Institution.find(@user_last_institute_id).name rescue ""
 
     #render :text => @user_last_institute_name
     #return
