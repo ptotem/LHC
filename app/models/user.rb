@@ -57,9 +57,18 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :criterion
   accepts_nested_attributes_for :attendances
   accepts_nested_attributes_for :notifications
+  accepts_nested_attributes_for :hobby_lists
 
   def demographic
     super || build_demographic
+  end
+
+  def criterion
+    super || build_criterion
+  end
+
+  def attendances
+    super || self.attendance.new
   end
 
   def age
@@ -99,6 +108,7 @@ class User < ActiveRecord::Base
 
 
   #before_create :set_standard_password
+  #before_save :set_standard_password
   #before_validation :set_standard_password
 
   def set_standard_password

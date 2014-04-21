@@ -34,7 +34,9 @@
             <!--</li>-->
 
             <li><a href="/about_us">About</a></li>
-            <li><a href="#">Blog</a></li>
+            <li>
+              <a href="#" data-toggle="modal" data-target="#content_not_available_Modal">Blog</a>
+            </li>
             <li><a href="/contact_us">Contact</a></li>
             <li class="sign-up">
               <a rel="nofollow" href="/users/sign_out" data-method="delete"><span class="white">Sign out</span></a>
@@ -50,7 +52,9 @@
               <!--<a href="#">About Us</a>-->
               <%= link_to "About Us", about_us_path %>
             </li>
-            <li><a href="#">Blog</a></li>
+            <li>
+              <a href="#" data-toggle="modal" data-target="#content_not_available_Modal">Blog</a>
+            </li>
             <li><a href="/contact_us">Contact</a></li>
             <li class="sign-up">
               <%#= @sign_in_method %>
@@ -65,6 +69,23 @@
     <% end %>
   </div>
 
+</div>
+
+<div class="modal fade" id="content_not_available_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title blue" id="myModalLabel">Awaiting for content</h4>
+      </div>
+      <div class="modal-body">
+        <p class="blue">Waiting for blog link</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 

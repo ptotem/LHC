@@ -39,6 +39,9 @@ class DashboardsController < ApplicationController
       #return
     #end
 
+    if current_user.notifications.blank?
+      redirect_to user_profile_path(current_user.id)
+    end
   end
 
   def user_verification
@@ -70,8 +73,21 @@ class DashboardsController < ApplicationController
   #include ApplicationHelper
 
   def conversations
-    user_list =  User.all.map(&:id)
-    @messages = current_user.sent_messages.where(:receiver_id=>user_list) + current_user.received_messages.where(sender_id:user_list)
+    #TODO: not done optimally, change as soon as possible
+    @user_list =  User.all.map(&:id)
+    @conversations = Array.new
+    sent_messages = current_user.sent_messages.map(&:receiver_id)
+    received_messages = current_user.received_messages.map(&:sender_id)
+    @user_list.each do |i|
+      if sent_messages.include?(i) or received_messages.include?(i)
+
+        @conversations << {"user"=>i,"message"=> current_user.received_messages.where(:sender_id => i).last.body}
+      end
+    end
+    if @conversations.blank?
+      redirect_to user_profile_path(current_user.id), :notice=>"You do not have any conversations"
+    end
+    #@messages = current_user.sent_messages.where(:receiver_id=>user_list) + current_user.received_messages.where(sender_id:user_list)
 
     #@conversions = current_user.recipients
     #@receivers = @conversions.map{|i| i.receiver_id}.uniq
@@ -83,6 +99,7 @@ class DashboardsController < ApplicationController
     @opposite_user = User.find(params[:id])
     @message = Message.new
     @ice_breaker = IceBreaker.new
+    #redirect_to conversations_with_users_path(params[:id])
     #@ice=IceBreaker.create( :sender_id => current_user.id, :receiver_id => params[:id])
     #@icequestion=@ice.questions
     #
@@ -163,6 +180,8 @@ class DashboardsController < ApplicationController
   def conversations_with_users
     @target_user = User.find(params[:id])
     @messages = current_user.sent_messages.map{|m|m if m.receiver_id == @target_user.id } + current_user.received_messages.map{|m| m if m.sender_id == @target_user.id }
+    @messages = @messages.sort{|m1,m2| m1.created_at <=> m2.created_at}
+    @messages.reverse!
     #render :text=>@messages
     #return
 
@@ -196,7 +215,7 @@ class DashboardsController < ApplicationController
     @addresses.each do |invitee|
       InviteeMailer.invitee_email(invitee).deliver
     end
-    redirect_to my_dashboard_path
+    redirect_to user_profile_path(current_user.id), notice: 'Mail has been successfully sent to your friend.'
   end
 
 
@@ -206,30 +225,32 @@ class DashboardsController < ApplicationController
     if Like.find_by_receiver_id_and_sender_id(@receiver_id,@sender_id) or Like.find_by_receiver_id_and_sender_id(@sender_id,@receiver_id)
       #render :text => "Request Already Sent"
       #return
-      redirect_to my_dashboard_path
+      redirect_to my_dashboard_path,:notice=>"Like request already sent !"
       return
     else
       @like=Like.create(:receiver_id => @receiver_id,:sender_id => @sender_id,:status => false)
       #render :text => "Request  Sent"
       #return
-      redirect_to my_dashboard_path
+      redirect_to user_profile_path(@receiver_id),:notice=>"Like request sent !"
       return
     end
   end
 
   def accept_request
+
    @accept=Like.find(params[:id])
    @accept.status=true
-   @accept.save
-   redirect_to my_dashboard_path
-   return
+   @accept.save!
+
+   redirect_to user_profile_path(params[:id]), notice: 'You have accepted the request.'
+   #return
   end
 
   def reject_request
     @reject=Like.find(params[:id])
     @reject.status=false
-    @reject.save
-    redirect_to my_dashboard_path
+    @reject.save!
+    redirect_to user_profile_path(params[:id]), notice: 'You have rejected the request.'
     return
   end
 

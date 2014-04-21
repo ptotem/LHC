@@ -55,11 +55,11 @@
               </tr>
               <tr>
                 <td class="user_detail"><i class="fa fa-lightbulb-o"></i></td>
-                <td class="user_detail">Creative Head</td>
+                <td class="user_detail"><%= @user.profession.name rescue "" %></td>
               </tr>
               <tr>
                 <td class="user_detail"><i class="fa fa-globe"></i></td>
-                <td class="user_detail"><%= @user.demographic.country %></td>
+                <td class="user_detail"><%= @user.demographic.location %></td>
               </tr>
             </table>
           </div>
@@ -95,6 +95,18 @@
             <p class="white"><%= @user_desc %></p>
           </div>
         </div>
+
+        <!--<div class="row">-->
+          <!--<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">-->
+            <!--<h5 class="white" style="background-color: #38C8E0; padding: 2%; font-size: 1.3em;">In next 5 years, I would be</h5>-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<div class="row">-->
+          <!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">-->
+            <!--<p class="white"><%#= @user_goal %></p>-->
+          <!--</div>-->
+        <!--</div>-->
+
         <div class="row">
           <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
             <h5 class="white" style="background-color: #38C8E0; padding: 2%; font-size: 1.3em">Hobbies</h5>
@@ -104,11 +116,14 @@
                 <i class="fa fa-info-circle  font_awesome_icon blue"></i>
               </div>
               <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 white">
-                <div class="hd_list">Reading</div>
-                <div class="hd_list">Writing</div>
-                <div class="hd_list">Sleeping</div>
-                <div class="hd_list">Drinking</div>
-                <div class="hd_list">Movies</div>
+                <% current_user.hobby_lists.each do |h| %>
+                    <div class="hd_list"><%= h.name %></div>
+                    <% end %>
+                <!--<div class="hd_list">Reading</div>-->
+                <!--<div class="hd_list">Writing</div>-->
+                <!--<div class="hd_list">Sleeping</div>-->
+                <!--<div class="hd_list">Drinking</div>-->
+                <!--<div class="hd_list">Movies</div>-->
               </div>
             </div>
           </div>
@@ -121,15 +136,18 @@
                 <i class="fa fa-comments font_awesome_icon blue"></i>
               </div>
               <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 white">
-                <div class="hd_list">Artistic</div>
+                <% current_user.about_lists.each do |h| %>
+                    <div class="hd_list"><%= h.name %></div>
+                <% end %>
+                <!--<div class="hd_list">Artistic</div>-->
 
-                <div class="hd_list">Athletic</div>
+                <!--<div class="hd_list">Athletic</div>-->
 
-                <div class="hd_list">Emotinal</div>
+                <!--<div class="hd_list">Emotinal</div>-->
 
-                <div class="hd_list">Sensitive</div>
+                <!--<div class="hd_list">Sensitive</div>-->
 
-                <div class="hd_list">Sexy</div>
+                <!--<div class="hd_list">Sexy</div>-->
               </div>
             </div>
           </div>
@@ -161,7 +179,7 @@
         </div>
         <div class="row">
           <div class="col-lg-12 text-center">
-            <i class="fa fa-envelope fa-3x white iconstyle" ></i>
+            <a href="#"><i class="fa fa-envelope fa-3x white iconstyle" data-toggle="modal" data-target="#email_modal"></i></a>
             <p class="white invitefriend">Invite A Friend</p>
           </div>
         </div>
@@ -181,6 +199,45 @@
     <% end %>
   </div>
 
+
+
+  <div class="modal fade" id="email_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="myModalLabel" style="color: #000000">Invitee Your Friends</h4>
+        </div>
+        <div class="modal-body">
+          <%= form_tag ('/invitee_friends') do %>
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <%= label_tag "Enter Email" %>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <%= text_field_tag :email, params[:email], :size => 50 %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </div>
+              <div class="modal-footer">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <%= submit_tag "Send" %>
+                  </div>
+                </div>
+          <% end %>
+          <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+          <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+          </div>
+          </div>
+    </div>
+  </div>
 
   <!--<div class="row">-->
     <!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">-->

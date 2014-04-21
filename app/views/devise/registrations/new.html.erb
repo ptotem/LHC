@@ -1,9 +1,9 @@
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => "form-horizontal"}) do |f| %>
-    <%= devise_error_messages! %>
+    <%#= devise_error_messages! %>
+    <%# resource.build_criterion %>
+    <% #resource.build_demographic %>
+    <% #resource.attendances.new() %>
 
-    <% resource.build_demographic %>
-    <% resource.build_criterion %>
-    <% resource.attendances.new() %>
 
     <div class="control-group">
       <div class="controls">
@@ -46,14 +46,23 @@
               <!--</div>-->
             </div>
             </div>
+
+                    <div class="row" >
+                      <div id="college_block" class="col-xs-8 col-sm-9 col-md-8 col-md-offset-2 col-lg-8" style="padding-bottom: 2%">
+                        <!--<label class="control-label">Last Attended</label>-->
+
+                            <%= d.collection_select(:last_institute, Institution.all, :id, :name,{}, {:class=>"lhc-dropdown"}) %>
+                      </div>
+
+                    </div>
             <div class="row">
               <div class="col-lg-8 col-lg-offset-2" style=" color: #ffffff;">
                 <div class="row" >
                   <div class="col-lg-6">
                     <label class="control-label pull-left">I am a</label>
-                    <%= d.radio_button :male,true, {:checked=>@user.demographic.male, :class=>"my_gender lhc-radio-btn"} %>
+                    <%= d.radio_button :male,true, {:class=>"my_gender lhc-radio-btn"} %>
                     <label for="user_demographic_attributes_male_true" class="custom-radio-btn male-radio-btn my_gender" id="user_male_lable"></label>
-                    <%= d.radio_button :male,false,{:checked=>!@user.demographic.male, :class=>"my_gender lhc-radio-btn"} %>
+                    <%= d.radio_button :male,false,{:class=>"my_gender lhc-radio-btn"} %>
                     <!--<%#= c.label :male,' ',:class=>"custom-radio-btn female-radio-btn my_gender" %>-->
                     <label for="user_demographic_attributes_male_false" class="custom-radio-btn female-radio-btn my_gender" id="user_female_lable"></label>
 
@@ -62,9 +71,9 @@
                 <div class="col-lg-6">
                 <label class="control-label pull-left">Looking for</label>
                         <%= f.fields_for :criterion do |c| %>
-                      <%= c.radio_button :male,true, {:checked=>@user.demographic.male, :class=>"my_gender lhc-radio-btn"} %>
+                      <%= c.radio_button :male,true, {:class=>"my_gender lhc-radio-btn"} %>
                       <label for="user_criterion_attributes_male_true" class="custom-radio-btn male-radio-btn my_gender" id="user_male_lable"></label>
-                      <%= c.radio_button :male,false,{:checked=>!@user.demographic.male, :class=>"my_gender lhc-radio-btn"} %>
+                      <%= c.radio_button :male,false,{:class=>"my_gender lhc-radio-btn"} %>
                       <!--<%#= c.label :male,' ',:class=>"custom-radio-btn female-radio-btn my_gender" %>-->
                       <label for="user_criterion_attributes_male_false" class="custom-radio-btn female-radio-btn my_gender" id="user_female_lable"></label>
 
@@ -82,15 +91,6 @@
         </div>
 
 
-            <div class="row" >
-              <div id="college_block" class="col-xs-8 col-sm-9 col-md-8 col-md-offset-2 col-lg-8" style="padding-bottom: 2%">
-                <label class="control-label">College</label>
-                <%= f.fields_for :attendances do |a| %>
-                    <%= a.collection_select(:institution_id, Institution.all, :id, :name,{}, {:class=>"lhc-dropdown"}) %>
-                <% end %>
-              </div>
-
-            </div>
 
 
     <div class="row" style="margin-top: 10px">
@@ -102,6 +102,10 @@
 
           <a class="small-message" href="/users/sign_in">
             <small>Already Registered?</small>
+          </a>
+          <br>
+          <a class="small-message" href="<%= new_user_password_path %>">
+            <small>Forgot passoword </small>
           </a>
         </div>
       </div>
@@ -120,7 +124,10 @@
 </style>
 <script type="text/javascript">
     $(function(){
-        $(".lhc-dropdown").chosen();
+        $(".lhc-dropdown").chosen({
+            placeholder_text_single:"Last attended college",
+            width:"100%"
+        });
         $(".gender-icons").click(function(e){
             $(".gender-icons").removeClass("orange_button");
             $(this).addClass("orange_button")
@@ -130,5 +137,8 @@
             $(".expected-gender-icons").removeClass("orange_button");
             $(this).addClass("orange_button")
         });
+
+        $(".chosen-single").find("span").text("Last attended/Current college");
+//        $(".chosen-container").css({"width":"100%"});
     });
 </script>

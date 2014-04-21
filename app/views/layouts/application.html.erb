@@ -100,7 +100,8 @@
 
 <!--<fb:login-button show-faces="true" width="200" max-rows="1"></fb:login-button>-->
 
-<%= render "generic_partials/topbar" %>
+<%= yield(:topbar) %>
+
 
 <%= yield %>
 
@@ -135,6 +136,9 @@
     <!--</div>-->
   <!--</div>-->
 <!--</section>-->
-<%= js add_gritter(flash[:notice], :image => :notice, :title => "Notification!", :sticky => false,:time => 4000  ,:position=>:bottom_left) %>
+<%= js add_gritter(flash[:notice], :image => '/assets/bulb_48_48.png', :title => "Notification!", :sticky => false,:time => 10000  ,:position=>:bottom_left,:class_name => "gritter_style"  ) %>
+
+
+
 </body>
 </html>

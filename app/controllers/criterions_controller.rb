@@ -39,7 +39,13 @@ class CriterionsController < ApplicationController
     @user_demographic_smoking = params[:user][:demographic][:smoking]
 
     #@user_demographic = @user.demographic.create!(params[:user][:demographic])
-    @user_demographic = @user.build_demographic(:dob=>@user_demographic_dob, :drinking=>@user_demographic_drinking, :smoking=>@user_demographic_smoking)
+    @user.demographic.dob  = @user_demographic_dob
+    @user.demographic.drinking= @user_demographic_drinking
+    @user.demographic.smoking= @user_demographic_smoking
+    @user.demographic.save!
+
+    #TODO: Nilesh/rakesh, why this line ? please explain ?
+    #@user_demographic = @user.build_demographic(:dob=>@user_demographic_dob, :drinking=>@user_demographic_drinking, :smoking=>@user_demographic_smoking)
 
 
     @user_criterion_minage = params[:user][:criterion][:minage]
@@ -49,10 +55,12 @@ class CriterionsController < ApplicationController
 
     #@user_criteria = @user.criterions.create!(params[:user][:criterions])
     #@user_criteria = @user.criterions.create!(:minage => @user_criterion_minage, :maxage => @user_criterion_maxage, :drinking => @user_criterion_drinking, :smoking=> @user_criterion_smoking)
+    #TODO: Nilesh/rakesh, why this line ? please explain ?
     @user_criteriion = @user.build_criterion(:minage => @user_criterion_minage, :maxage => @user_criterion_maxage, :drinking => @user_criterion_drinking, :smoking=> @user_criterion_smoking)
     @user.save!
 
-    redirect_to my_dashboard_path
+    #redirect_to my_dashboard_path
+    redirect_to welcome_dashboard_path
 
   end
 

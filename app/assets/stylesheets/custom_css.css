@@ -167,14 +167,6 @@ padding:10px;
     vertical-align: text-top;
 }
 
-
-
-
-
-
-
-
-
 .countdown{
     width: 30%;
     height: 80px;
@@ -192,8 +184,9 @@ padding:10px;
     /*margin-top: 45%;*/
     font-size: 5em;
     text-align: center;
-    padding-top: 32%;
+    /*padding-top: 32%;*/
     color: #38c8e0;
+    margin-top:-11%;
 }
 
 .countdowntexthr{
@@ -321,8 +314,8 @@ padding:10px;
 }
 input[type="radio"] + .custom-radio-btn {
     display:inline-block;
-    width:19px;
-    height:19px;
+    width:25px;
+    height:25px;
     /*margin:-1px 4px 0 0;*/
     vertical-align:middle;
     cursor:pointer;
@@ -346,14 +339,37 @@ input[type="radio"] + .custom-radio-btn.opposite_user_gender{
 }
 
 .lhc-radio-btn:checked + .male-radio-btn {
-    background :url('/assets/blue_male.png');
-    background-size: 100% 100%;
-}
+        background :url('/assets/blue_male.png');
+        background-size: 100% 100%;
+    }
 .lhc-radio-btn:checked + .female-radio-btn {
-    background :url('/assets/blue_female.png');
-    background-size: 100% 100%;
+        background :url('/assets/blue_female.png');
+        background-size: 100% 100%;
+    }
+
+/*#new_user .lhc-radio-btn:checked + .male-radio-btn {*/
+    /*background :url('/assets/blue_border_male.png');*/
+    /*background-size: 100% 100%;*/
+/*}*/
+
+/*#new_user .lhc-radio-btn:checked + .female-radio-btn {*/
+    /*background :url('/assets/blue_border_female.png');*/
+    /*background-size: 100% 100%;*/
+/*}*/
+
+.gritter_style .gritter-css3 {
+    background:#38c8e0;
+    color:white;
+    font-weight: normal;
 }
 
+
+
+.transparent-background-btn
+{
+    background: transparent;
+    border: none;
+}
 
 /*input[type="radio"]:checked + #user_male_lable, input[type="radio"]:checked + .opposite_user_gender_male {*/
     /*background:url('/assets/blue_male.png');*/
@@ -364,3 +380,10 @@ input[type="radio"] + .custom-radio-btn.opposite_user_gender{
     /*background:url('/assets/blue_female.png');*/
     /*background-size: 100% 100%;*/
 /*}*/
+
+
+
+.chosen-container-single .chosen-single
+{
+    height:30px;
+}

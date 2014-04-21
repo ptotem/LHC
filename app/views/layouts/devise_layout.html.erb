@@ -112,6 +112,8 @@
   <div class="custom-container">
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <%= js add_gritter(devise_error_messages!, :image => :error, :title => "Errors!", :sticky => false,:time => 10000  ,:position=>:bottom_left,:class_name => "gritter_style"  ) %>
+
 
         <!--BxSlider-->
         <ul class="bxslider">
@@ -122,7 +124,10 @@
                   <div class="col-xs-6 col-sm-6 col-sm-offset-6 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4 text-center">
                     <h5 class="white" style="position: relative">
                       <span id="sign_up_with_text">Sign up with</span>
-                      <a class="facebook" href="/users/auth/facebook" target="_self"><i class="fa fa-facebook fa-3x blue"></i></a>
+                      <!--<a class="facebook" href="/users/auth/facebook" target="_self">-->
+                      <a class="facebook" href="#" data-toggle="modal" data-target="#functionality_coming_soon_Modal">
+                        <i class="fa fa-facebook fa-3x blue"></i>
+                      </a>
                     </h5>
                     <h5 class="white" id="sign_up_or_text">OR</h5>
                   </div>
@@ -139,7 +144,10 @@
                   <div class="col-xs-6 col-sm-6 col-sm-offset-6 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4 text-center">
                     <h5 class="white" style="position: relative">
                       <span id="sign_up_with_text">Sign up with</span>
-                      <a class="facebook" href="/users/auth/facebook" target="_self"><i class="fa fa-facebook fa-3x blue"></i></a>
+                      <!--<a class="facebook" href="/users/auth/facebook" target="_self">-->
+                      <a class="facebook" href="#" data-toggle="modal" data-target="#functionality_coming_soon_Modal">
+                        <i class="fa fa-facebook fa-3x blue"></i>
+                      </a>
                     </h5>
                     <h5 class="white" id="sign_up_or_text">OR</h5>
                   </div>
@@ -153,7 +161,25 @@
       </div><!--End Span12-->
     </div>
   </div>
+
 </section>
+
+<div class="modal fade" id="functionality_coming_soon_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title blue" id="myModalLabel">Let's Have Coffee!!!</h4>
+      </div>
+      <div class="modal-body">
+        <p class="blue">Functionality coming soon...</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!--Sifting partials to a different directory is a matter of choice. Nothing wrong in keeeping everything in layouts folder, but this is slightly more cleaner approach.-->
 
@@ -164,7 +190,7 @@
 <%= render "generic_partials/message_section" %>
 
 <%= render "generic_partials/bottom_section" %>
-<%= js add_gritter(flash[:notice], :image => :notice, :title => "Notification!", :sticky => false,:time => 4000  ,:position=>:bottom_left) %>
+<%= js add_gritter(flash[:notice], :image => '/assets/bulb_48_48.png', :title => "Notification!", :sticky => false,:time => 10000  ,:position=>:bottom_left,:class_name => "gritter_style"  ) %>
 </body>
 
 <!--<script src="js/jquery.bxslider.min.js"></script>-->
