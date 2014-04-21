@@ -53,10 +53,16 @@ class CriterionsController < ApplicationController
     @user_criterion_drinking = params[:user][:criterion][:drinking]
     @user_criterion_smoking = params[:user][:criterion][:smoking]
 
+    @user.criterion.minage  = @user_criterion_minage
+    @user.criterion.maxage = @user_criterion_maxage
+    @user.criterion.drinking = @user_criterion_drinking
+    @user.criterion.smoking = @user_criterion_smoking
+    @user.criterion.save!
+
     #@user_criteria = @user.criterions.create!(params[:user][:criterions])
     #@user_criteria = @user.criterions.create!(:minage => @user_criterion_minage, :maxage => @user_criterion_maxage, :drinking => @user_criterion_drinking, :smoking=> @user_criterion_smoking)
     #TODO: Nilesh/rakesh, why this line ? please explain ?
-    @user_criteriion = @user.build_criterion(:minage => @user_criterion_minage, :maxage => @user_criterion_maxage, :drinking => @user_criterion_drinking, :smoking=> @user_criterion_smoking)
+    #@user_criteriion = @user.build_criterion(:minage => @user_criterion_minage, :maxage => @user_criterion_maxage, :drinking => @user_criterion_drinking, :smoking=> @user_criterion_smoking)
     @user.save!
 
     #redirect_to my_dashboard_path

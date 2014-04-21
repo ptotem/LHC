@@ -23,12 +23,17 @@ class DemographicsController < ApplicationController
       @user_gender = "Female"
     end
     @user_age = @user.age rescue nil
-    @user_religion = @user.demographic.religion
-    @user_smoking = @user.demographic.smoking
-    @user_drinking = @user.demographic.drinking
-    @user_desc = @user.demographic.description
-    @user_goal = @user.demographic.goal
-    #render :text => @user_desc
+    @user_religion = @user.demographic.religion rescue ""
+    @user_smoking = @user.demographic.smoking rescue ""
+    @user_drinking = @user.demographic.drinking rescue ""
+    @user_desc = @user.demographic.description rescue ""
+    @user_location = @user.demographic.location rescue ""
+    @user_goal = @user.demographic.goal rescue ""
+    @user_profession = @user.profession.name rescue ""
+    @user_last_institute_id = @user.demographic.last_institute
+    @user_last_institute_name = Institution.find(@user_last_institute_id).name
+
+    #render :text => @user_last_institute_name
     #return
     @user_email = @user.email
   end

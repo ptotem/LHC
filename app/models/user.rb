@@ -69,7 +69,11 @@ class User < ActiveRecord::Base
   end
 
   def attendances
-    super || self.attendance.new
+    super || build_attendances
+  end
+
+  def profession
+    super || build_profession
   end
 
   def age

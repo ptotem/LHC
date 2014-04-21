@@ -35,18 +35,23 @@
                   <div class="col-sm-8 col-lg-8">
 
                     <%= d.text_field :name,:value=>@user.demographic.name, :placeholder=>"Name", :class=>"form-control" %>
+                    <span class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span>
                   </div>
                 </div>
 
               <div class="form-group">
                 <div class="col-sm-8 col-lg-8">
                   <%= d.text_field :nickname, :value=>@user.demographic.nickname, :placeholder=>"Nickname", :class=>"form-control" %>
+                  <span class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span>
                 </div>
               </div>
 
               <div class="form-group">
                 <div class="col-sm-8 col-lg-8">
-                  <%= d.label :avatar %>
+                  <!--TODO: why html and not rails helper ?? Nilesh-->
+
+                  <%#= d.label :avatar %>
+                  <label>Picture</label>
 
                   <%= d.file_field :avatar,:class=>"form-control12" %>
                 </div>
@@ -117,35 +122,37 @@
                 </div>
               </div>
 
-              <div class="form-group">
-                <div class="col-sm-4 col-lg-4">
-                  <%= f.fields_for :attendances do |a| %>
-                          <%= a.collection_select(:institution_id, Institution.all, :id, :name,{}, {:class=>"lhc_chosen"}) %>
-                  <% end %>
-                </div>
-
-                <div class="col-sm-4 col-lg-4">
-                  <%= f.fields_for :profession do |p| %>
-                      <%= p.text_field :name , :placeholder=>"Professions",:class=>"form-control" %>
-                  <% end %>
-                </div>
-              </div>
 
               <h4>About Myself</h4><hr>
 
               <div class="form-group">
                 <div class="col-sm-8 col-lg-8">
-                  <%= d.text_area :description , :placeholder=>"Description",:class=>"form-control" %>
+                  <%= d.text_area :description , :placeholder=>"A few words about me...",:class=>"form-control" %>
                 </div>
               </div>
 
               <div class="form-group">
                 <div class="col-sm-8 col-lg-8">
-                  <%= d.text_area :goal , :placeholder=>"In next 5 years, I would be",:class=>"form-control" %>
+                  <%= d.text_area :goal , :placeholder=>"In next 5 years, I would be...",:class=>"form-control" %>
                 </div>
               </div>
 
       <% end %>
+
+          <div class="form-group">
+            <div class="col-sm-4 col-lg-4">
+              <%#= f.fields_for :attendances do |a| %>
+                  <%#= a.collection_select(:institution_id, Institution.all, :id, :name,{}, {:class=>"lhc_chosen"}) %>
+              <%# end %>
+              <%= f.collection_select(:institution_ids, Institution.order('name ASC').all, :id, :name, {:include_blank => false}, {:multiple => true, :class=>"multiple"}) %>
+            </div>
+
+            <div class="col-sm-4 col-lg-4">
+              <%= f.fields_for :profession do |p| %>
+                  <%= p.text_field :name , :placeholder=>"Profession",:class=>"form-control" %>
+              <% end %>
+            </div>
+          </div>
 
 
           <h4>Looking For</h4><hr>
@@ -195,7 +202,7 @@
 
            <div class="form-group">
              <div class="col-sm-8 col-lg-8">
-                 <p class="white">I like </p>
+                 <p class="white">I am looking for</p>
                  <%= f.collection_select(:hobby_list_ids, HobbyList.order('name ASC').all, :id, :name, {:include_blank => false}, {:multiple => true, :class=>"multiple"}) %>
              </div>
            </div>

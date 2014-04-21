@@ -136,7 +136,11 @@
           <div class="row" style="margin-top: -12%">
             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-lg-offset-4" style="position: relative">
               <div class="gender-pic">
-                <img class="thumbnail" src="/assets/male.png" style="margin-bottom: 10%">
+                <% if @user.demographic.male? %>
+                    <img class="thumbnail" src="/assets/male.png" style="margin-bottom: 10%">
+                <% else %>
+                    <img class="thumbnail" src="/assets/female.png" style="margin-bottom: 10%">
+                <% end %>
                 <span class="white img_caption_text">YOU</span>
               </div>
             </div>
@@ -283,8 +287,13 @@
           <div class="row" style="margin-top: -12%">
             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-lg-offset-4" style="position: relative">
               <div class="gender-pic">
-                <img class="thumbnail" src="/assets/female.png" style="margin-bottom: 10%">
-                <span class="white img_caption_text">HER</span>
+                <% if @user.criterion.male? %>
+                    <img class="thumbnail" src="/assets/male.png" style="margin-bottom: 10%">
+                    <span class="white img_caption_text">HIM</span>
+                <% else %>
+                    <img class="thumbnail" src="/assets/female.png" style="margin-bottom: 10%">
+                    <span class="white img_caption_text">HER</span>
+                <% end %>
               </div>
             </div>
           </div>
@@ -387,8 +396,7 @@
                     </div>
                     <div class="row" style="margin-top: 2%; margin-bottom: 9%;">
                       <div class="col-lg-12">
-                        <div class="btn-main btn-small grey-btn" onclick="get_my_text($(this),'smoking')">Don't Care
-                        </div>
+                        <div class="btn-main btn-small grey-btn" onclick="get_my_text($(this),'smoking')">Don't Care</div>
                       </div>
                     </div>
                   </div>
