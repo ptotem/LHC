@@ -9,7 +9,7 @@ class HomeController < ApplicationController
     if current_user.is_admin?
       redirect_to "/admin"
     else
-      if @current_user_sign_in_count == 2 && (!current_user.demographic.nil? || !current_user.criterions.nil?)
+      if @current_user_sign_in_count == 2 && (!current_user.demographic.nil? || !current_user.criterion.nil?)
         redirect_to welcome_dashboard_path
       elsif  @current_user_sign_in_count > 2
         redirect_to my_dashboard_path
