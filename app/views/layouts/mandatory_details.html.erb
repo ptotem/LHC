@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title><%= get_content_for("siteTitle") %></title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<style>
+
+    .hidden_elems {
+        display: none;
+    }
+
+
+
+    .criteria-fill-step-btn {
+        text-decoration: none;
+    }
+
+    .criteria-fill-step-btn:hover, #criteria_submit_btn:hover {
+        background-color: #e30000;
+        color: white;
+    }
+
+    /*#demographic_fill_step_1 {*/
+    /*display: none;*/
+    /*}*/
+
+    /*#demographic_fill_step_2 {*/
+    /*display: none;*/
+    /*}*/
+
+    /*#demographic_fill_step_3 {*/
+    /*display: none;*/
+    /*}*/
+
+    .blue-background {
+        background: #38c8e0;
+        padding-bottom: 20px;
+        padding-top: 20px;
+    }
+
+    .img_caption_text {
+        color: #000000;
+        font-size: 2em;
+    }
+
+    .grey-btn:hover {
+        background-color: #E30000;
+        cursor: pointer;
+    }
+
+    .active_gray_btn{
+        background-color: #E30000;
+    }
+
+    .smoking_icons {
+
+        width: 69%;
+        margin-left: 20px;
+    }
+
+    .drinking_icons {
+        width: 24.5%;
+        margin-left: 102px
+    }
+
+    .chosen-container-single {
+        width: 100px;
+    }
+
+    .drink_smoke_font {
+        font-size: 20px;
+
+    }
+
+    #smoking_nav {
+        background: white;
+        line-height: 5.8px;
+        margin-top: 15px;
+    }
+
+    #drinking_nav {
+        background: white;
+        background: white;
+        line-height: 6px;
+        margin-top: 15px;
+    }
+
+</style>
+
+
+
+<section id="page-title" style="padding-top: 0%;">
+  <!--<section id="match_criteria_page_title_section">  -->
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 title-white">
+        <h2>The Search Begins...</h2>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 demographic-fill-step" id="demographic_fill_step_1" style="position: relative;margin-top:2%;">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-offset-2 col-lg-8" style="padding-left:0; padding-right: 0">
+        <h3 class="black"><%= yield(:page_header) %></h3>
+        <p><%= yield(:page_description) %></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6 col-lg-offset-3">
+
+        <%= yield(:header_image) %>
+
+      </div>
+    </div>
+
+
+    <%= yield %>
+
+
+  </div>
+</div>
+
+
+
+
+
+<!--About Content-->
+<!--<section id="blue-container">-->
+<!--<div class="container">-->
+<!--<div class="row">-->
+
+<!--<div class="col-md-6 margin-30">-->
+<!--<h3>Here is why we are so amazing!</h3>-->
+<!--<p class="lead">Vestibulum non turpis sed diam volutpat scelerisque.</p>-->
+<!--<p class="white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pretium diam quis ante scelerisque interdum. Praesent non orci nunc. Nulla sit amet felis in nibh ultricies blandit vel vitae ipsum. Aenean at dolor arcu, a commodo metus. In purus purus, egestas a hendrerit non, euismod ut tortor. Maecenas placerat nunc at eros tincidunt sagittis. Quisque facilisis dapibus ullamcorper. Phasellus ac mauris libero, vel placerat felis. Vestibulum non turpis sed diam volutpat scelerisque.</p>-->
+<!--<p class="white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pretium diam quis ante scelerisque interdum. Praesent non orci nunc. Nulla sit amet felis in nibh ultricies blandit vel vitae ipsum.</p>-->
+<!--</div>-->
+
+<!--<div class="col-md-6 text-center">-->
+<!--<img src="img/about-img.png" class="img-responsive" alt="Title">-->
+<!--</div>-->
+
+<!--</div>-->
+<!--</div>-->
+<!--</section>-->
+
+
+<!--<section id="footer" style="background-color: #FFFFFF">-->
+<!--<div class="container">-->
+<!--<div class="row">-->
+<!--<div class="col-md-12 text-center">-->
+<!--<p></p>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</section>-->
+<%= js add_gritter(flash[:notice], :image => '/assets/bulb_48_48.png', :title => "Notification!", :sticky => false,:time => 10000  ,:position=>:bottom_left,:class_name => "gritter_style"  ) %>
+
+
+
+</body>
+</html>

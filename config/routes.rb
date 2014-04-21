@@ -64,9 +64,14 @@ Lhc::Application.routes.draw do
   get '/fill_matching_criteria', to: 'criterions#fill_matching_criteria', as: :fill_matching_criteria
   post '/create_matching_criteria', to: 'criterions#create_matching_criteria', as: :create_matching_criteria
 
-  get '/fill_about_me', to: 'demographics#fill_about_me', as: :fill_about_me
-  get '/fill_ilike', to: 'demographics#fill_ilike', as: :fill_ilike
-  get '/fill_profilepic', to: 'demographics#fill_profilepic', as: :profilepic
+  get '/fill_about_me', to: 'mandatory_details#fill_about_me', as: :fill_about_me
+  get '/fill_ilike', to: 'mandatory_details#fill_ilike', as: :fill_ilike
+  get '/fill_profilepic', to: 'mandatory_details#fill_profilepic', as: :fill_profilepic
+  get '/fill_future_plan', to: 'mandatory_details#future_plan', as: :fill_future_plan
+  get '/fill_friend_speak', to: 'mandatory_details#friend_speak', as: :fill_friend_speak
+  get '/fill_dates', to: 'mandatory_details#fill_dates', as: :fill_dates
+  get '/fill_smoking', to: 'mandatory_details#fill_smoking', as: :fill_smoking
+  get '/fill_drinking', to: 'mandatory_details#fill_drinking', as: :fill_drinking
 
   post '/create_message', to: 'dashboards#create_message', as: :create_message
 

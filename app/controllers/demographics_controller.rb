@@ -76,17 +76,6 @@ class DemographicsController < ApplicationController
 
   end
 
-  def fill_about_me
-    render :layout=> "application"
-  end
-
-  def fill_ilike
-    render :layout=> "application"
-  end
-
-  def fill_profilepic
-    render :layout=> "application"
-  end
 
   def update_filled_details
     @user = current_user

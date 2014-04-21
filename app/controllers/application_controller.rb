@@ -35,7 +35,6 @@ class ApplicationController < ActionController::Base
   # and current_password. More at https://github.com/plataformatec/devise#strong-parameters
 
   def configure_permitted_parameters
-    puts "I am gere"
     devise_parameter_sanitizer.for(:accept_invitation) do |u|
       u.permit(:username,:validate_username, :password,:password_confirmation, :invitation_token)
     end
@@ -44,10 +43,10 @@ class ApplicationController < ActionController::Base
     end
 
     devise_parameter_sanitizer.for(:sign_up) do |u|
-      u.permit(:email, :password, :password_confirmation, :demographic_attributes=>[:male, :name,:last_institute], :criterion_attributes=>[:male], :attendances_attributes=>[:user_id, :institution_id])
+      u.permit(:email, :password, :password_confirmation,:current_route, :demographic_attributes=>[:male, :name,:last_institute], :criterion_attributes=>[:male], :attendances_attributes=>[:user_id, :institution_id])
     end
     devise_parameter_sanitizer.for(:sign_in) do |u|
-      u.permit(:username,:email,:password,:password_confirmation , :phone, :validate_username, :avatar_cache, :remove_avatar, :current_password,:remember_me)
+      u.permit(:username,:email,:password,:password_confirmation ,:current_route, :phone, :validate_username, :avatar_cache, :remove_avatar, :current_password,:remember_me)
     end
 
     devise_parameter_sanitizer.for(:account_update) do |u|

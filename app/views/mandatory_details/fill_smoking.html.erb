@@ -1,0 +1,205 @@
+
+<%= content_for(:header_image) do %>
+    <img src="/assets/smoking_top_icon.png" class="img-responsive cake top_images">
+<% end %>
+
+
+
+<div class="row">
+  <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-lg-offset-1 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 ">
+    <div class="row">
+<%#= form_for :user do |f| %>
+      <%= form_for @user, :url => { :controller => "users/registrations", :action => "update" }, :html => { :method => :post,:class => "form-horizontal" } do |f| %>
+          <%= f.hidden_field :current_route,:value=>@next_page %>
+          <!-- col for demographic - starts -->
+          <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 blue-background text-center" style="position: relative">
+            <%= f.fields_for :demographic do |d| %>
+
+                <!-- row for me image - starts -->
+                <div class="row" style="margin-top: -12%">
+                  <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-lg-offset-4" style="position: relative">
+                    <div class="gender-pic">
+                      <% if @user.demographic.male? %>
+                          <img class="thumbnail" src="/assets/male.png" style="margin-bottom: 10%">
+                      <% else %>
+                          <img class="thumbnail" src="/assets/female.png" style="margin-bottom: 10%">
+                      <% end %>
+                      <span class="white img_caption_text">YOU</span>
+                    </div>
+                  </div>
+                </div>
+                <!-- row for me image - ends -->
+
+                <!-- row for me dob, drinking, smoking (three diff. cols for each) - starts -->
+                <div class="row">
+                  <!-- col for me dob - starts -->
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center demographic-fill-step" id="demographic_fill_step_3" style="position: relative; padding-top: 1.2%;">
+                    <div class="row">
+                      <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-lg-offset-2">
+                        <div class="control-group">
+                          <div class="controls">
+                            <div class="row">
+                              <h4 class="white drink_smoke_font">Smoking</h4>
+                              <%#= d.text_field :smoking, :id=>"me_smoking_textfield", :class=>"hidden_elems" %>
+                              <%= d.hidden_field :smoking, :id => "me_smoking_textfield", :class => "hidden_elems" %>
+                              <div class="carousel slide" id="carousel-smoking" data-interval="false" data-ride="carousel">
+
+                                <div class="carousel-inner">
+                                  <div class="item active">
+                                    <img alt="Never" data-src="holder.js/900x500/auto/#777:#555/text:First slide" src="/assets/no_smoking.png" class="smoking_icons" class="img-responsive">
+                                    <%= radio_button_tag 'smoking', "Never", false, class: "me_smoking_radio hidden_elems" %>
+                                  </div>
+                                  <div class="item">
+                                    <img alt="Socially" data-src="holder.js/900x500/auto/#666:#444/text:Second slide" src="/assets/socially_smoking.png" class="smoking_icons">
+                                    <%= radio_button_tag 'smoking', "Socially", false, class: "me_smoking_radio hidden_elems" %>
+                                  </div>
+                                  <div class="item">
+                                    <img alt="Often" data-src="holder.js/900x500/auto/#555:#333/text:Third slide" src="/assets/regular_smoking.png" class="smoking_icons">
+                                    <%= radio_button_tag 'smoking', "Often", false, class: "me_smoking_radio hidden_elems" %>
+                                  </div>
+                                </div>
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+                                <ol class="carousel-indicators my-carousel-indicator">
+                                  <li class="active" data-slide-to="0" data-target="#carousel-smoking"></li>
+                                  <li data-slide-to="1" data-target="#carousel-smoking" class=""></li>
+                                  <li data-slide-to="2" data-target="#carousel-smoking" class=""></li>
+                                </ol>
+                              </div>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div><!-- col for me dob - ends -->
+
+                </div>
+                <!-- row for me dob, drinking, smoking (three diff. cols for each) - ends -->
+
+
+            <% end %>
+          </div>
+          <!-- col for demographic - ends -->
+
+          <!-- col for criterion - starts -->
+          <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2 blue-background text-center" style="position: relative">
+            <%= f.fields_for :criterion do |c| %>
+
+                <!-- row for opposite person image - starts -->
+                <div class="row" style="margin-top: -12%">
+                  <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-lg-offset-4" style="position: relative">
+                    <div class="gender-pic">
+                      <% if @user.criterion.male? %>
+                          <img class="thumbnail" src="/assets/male.png" style="margin-bottom: 10%">
+                          <span class="white img_caption_text">HIM</span>
+                      <% else %>
+                          <img class="thumbnail" src="/assets/female.png" style="margin-bottom: 10%">
+                          <span class="white img_caption_text">HER</span>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+                <!-- row for opposite person image - ends -->
+
+                <!-- row for opposite person dob, drinking, smoking (three diff. cols for each) - starts -->
+                <div class="row">
+                  <!-- col for opposite person dob - starts -->
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center criterion-fill-step" id="criterion_fill_step_3" style="position: relative;">
+                    <div class="control-group">
+                      <div class="controls">
+                        <h4 class="white drink_smoke_font">Smoking</h4>
+
+                        <div class="row">
+                          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-3 text-center" id="smoking_nav">
+                            <%= c.hidden_field :smoking, :id => "opposite_person_smoking_textfield", :class => "hidden_elems" %>
+                            <%#= c.text_field :smoking, :id => "opposite_person_smoking_textfield", :class => "hidden_elems" %>
+                            <div class="row" style="margin-top: 1.5%;">
+                              <div class="col-lg-12">
+                                <div class="btn-main btn-small grey-btn" style="margin-top:10px; " onclick="get_my_text($(this),'smoking')">Often</div>
+                              </div>
+                            </div>
+                            <div class="row" style="margin-top: 2%;">
+                              <div class="col-lg-12">
+                                <div class="btn-main btn-small grey-btn" onclick="get_my_text($(this),'smoking')">Socially</div>
+                              </div>
+                            </div>
+                            <div class="row" style="margin-top: 2%;">
+                              <div class="col-lg-12">
+                                <div class="btn-main btn-small grey-btn" onclick="get_my_text($(this),'smoking')">Never</div>
+                              </div>
+                            </div>
+                            <div class="row" style="margin-top: 2%; margin-bottom: 9%;">
+                              <div class="col-lg-12">
+                                <div class="btn-main btn-small grey-btn" onclick="get_my_text($(this),'smoking')">Don't Care</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- col for opposite person dob - ends -->
+
+                </div>
+                <!-- row for opposite person dob, drinking, smoking (three diff. cols for each) - ends -->
+
+
+            <% end %>
+
+            </div>
+            <!-- col for criterion - ends -->
+
+            <%= render :partial => "buttons",:locals => {:form=>f} %>
+            <%# end %>
+            </div>
+            </div>
+
+
+      <% end %>
+
+      <script>
+
+
+
+          $(function () {
+
+
+              // setting default val for me smoking, val is set by carousel sliding - starts
+              var smoking_carousel = $('#carousel-smoking');
+              var smoking_carousel_first_ele = $(smoking_carousel).find('.item').first();
+              var smoking_carousel_first_ele_radio_val = $(smoking_carousel_first_ele).find('.me_smoking_radio').val();
+              var me_default_smoking_val = smoking_carousel_first_ele_radio_val;
+              $('#me_smoking_textfield').val(me_default_smoking_val);
+
+
+              $(smoking_carousel).bind('slide.bs.carousel', function (e) {
+                  var me_smoking_val;
+                  setTimeout(function () {
+                      me_smoking_val = $('div.active').find('.me_smoking_radio').val();
+                      $('#me_smoking_textfield').val(me_smoking_val);
+                  }, 1100);
+              });
+          })
+
+          function get_my_text(this_obj, which_step) {
+              $('.grey-btn').each(function(index, value){
+                  $(this).removeClass('active_gray_btn');
+              });
+              $(this_obj).addClass('active_gray_btn');
+
+              if (which_step == "drinking") {
+                  $('#opposite_person_drinking_textfield').val($(this_obj).text());
+              }
+              else if (which_step == "smoking") {
+                  $('#opposite_person_smoking_textfield').val($(this_obj).text());
+              }
+          }
+
+
+      </script>

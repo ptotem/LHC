@@ -4,6 +4,9 @@ class HomeController < ApplicationController
                 :only => [:index]
 
   def index
+    redirect_to current_user.current_route
+    return
+
     @current_user_sign_in_count = current_user.sign_in_count
 
     if current_user.is_admin?
