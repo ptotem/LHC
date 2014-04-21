@@ -17,7 +17,7 @@
 
           <% HobbyList.all.each do |a| %>
               <div class="col-lg-2" style="text-align: left">
-                <%= check_box_tag "user[hobby_list_ids][]",a.id %> <%= a.name %>
+                <%= check_box_tag "user[hobby_list_ids][]",a.id %> <%= a.name[0..10] %>
                 <!--<input type="checkbox" name="vehicle" value="Car"> Football-->
               </div>
 
