@@ -524,7 +524,8 @@ li.sign-up:hover {
 
 .title-blue {
     background: url("/assets/icons/arrow-blue.png") no-repeat scroll left 15px bottom #3E4549;
-    padding-bottom: 30px;
+    padding-bottom: 15px;
+    margin-top:-25px;
 }
 
 .title-white {
