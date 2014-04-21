@@ -63,6 +63,11 @@ Lhc::Application.routes.draw do
 
   get '/fill_matching_criteria', to: 'criterions#fill_matching_criteria', as: :fill_matching_criteria
   post '/create_matching_criteria', to: 'criterions#create_matching_criteria', as: :create_matching_criteria
+
+  get '/fill_about_me', to: 'demographics#fill_about_me', as: :fill_about_me
+  get '/fill_ilike', to: 'demographics#fill_ilike', as: :fill_ilike
+  get '/fill_profilepic', to: 'demographics#fill_profilepic', as: :profilepic
+
   post '/create_message', to: 'dashboards#create_message', as: :create_message
 
   get '/welcome_dashboard', to: 'dashboards#welcome_dashboard', as: :welcome_dashboard

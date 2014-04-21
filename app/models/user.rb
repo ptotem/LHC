@@ -36,11 +36,11 @@ class User < ActiveRecord::Base
   has_many :user_documents, dependent: :destroy
   has_many :notifications, dependent: :destroy
 
-  #has_many :recipients, foreign_key: 'sender_id', :dependent => :destroy
-  #has_many :messages, :through => :recipients, foreign_key: 'sender_id'
+  has_many :recipients, foreign_key: 'sender_id', :dependent => :destroy
+  has_many :messages, :through => :recipients, foreign_key: 'sender_id'
 
-  #has_many :reverse_recipients, class_name: 'Recipient', foreign_key: 'receiver_id'
-  #has_many :received_messages, through: :reverse_recipients, foreign_key: 'receiver_id', class_name: 'Message', source: :message
+  has_many :reverse_recipients, class_name: 'Recipient', foreign_key: 'receiver_id'
+  has_many :received_messages, through: :reverse_recipients, foreign_key: 'receiver_id', class_name: 'Message', source: :message
 
 
 

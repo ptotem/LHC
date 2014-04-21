@@ -2,6 +2,8 @@ class DemographicsController < ApplicationController
   before_action :set_demographic, only: [:show, :edit, :update, :destroy]
   layout 'dashboard_and_profile_layout'
 
+
+
   # GET /demographics
   # GET /demographics.json
   def index
@@ -30,7 +32,7 @@ class DemographicsController < ApplicationController
     @user_location = @user.demographic.location rescue ""
     @user_goal = @user.demographic.goal rescue ""
     @user_profession = @user.profession.name rescue ""
-    @user_last_institute_id = @user.demographic.last_institute
+    @user_last_institute_id = @user.demographic.last_institute rescue nil
     @user_last_institute_name = Institution.find(@user_last_institute_id).name
 
     #render :text => @user_last_institute_name
@@ -72,6 +74,24 @@ class DemographicsController < ApplicationController
       end
     end
 
+  end
+
+  def fill_about_me
+    render :layout=> "application"
+  end
+
+  def fill_ilike
+    render :layout=> "application"
+  end
+
+  def fill_profilepic
+    render :layout=> "application"
+  end
+
+  def update_filled_details
+    @user = current_user
+    render :json => params
+    return
   end
 
 
