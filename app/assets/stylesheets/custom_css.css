@@ -167,14 +167,6 @@ padding:10px;
     vertical-align: text-top;
 }
 
-
-
-
-
-
-
-
-
 .countdown{
     width: 30%;
     height: 80px;
@@ -192,8 +184,9 @@ padding:10px;
     /*margin-top: 45%;*/
     font-size: 5em;
     text-align: center;
-    padding-top: 32%;
+    /*padding-top: 32%;*/
     color: #38c8e0;
+    margin-top:-11%;
 }
 
 .countdowntexthr{
