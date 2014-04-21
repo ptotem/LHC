@@ -32,17 +32,24 @@ class Users::RegistrationsController < Devise::RegistrationsController
       return
     end
     respond_to do |format|
-      #if @user.update_attributes(params[:user].permit[:demographics_attributes])
-
-      #@user.update_with_password(user_params)
-      #if @user.update(params.require(:user).permit(:username,:email,:current_password, :password,:password_confirmation,:validate_username,:avatar, :avatar_cache, :remove_avatar, :current_password,:demographic_attributes=>[:id,:male, :name,:nickname,:dob,:smoking,:drinking,:location,:religion,:avatar, :description, :goal,:last_institute], :criterion_attributes=>[:male,:minage,:maxage,:smoking,:drinking], :attendances_attributes=>[:user_id, :institution_id], :hobby_list_ids=>[], :about_list_ids=>[], :profession_attributes=>[:name]))
-      if @user.update_with_password(params.require(:user).permit(:username,:email,:current_password, :password,:password_confirmation,:validate_username,:avatar, :avatar_cache, :remove_avatar, :current_password,:demographic_attributes=>[:id,:male, :name,:nickname,:dob,:smoking,:drinking,:location,:religion,:avatar, :description, :goal,:last_institute], :criterion_attributes=>[:male,:minage,:maxage,:smoking,:drinking], :attendances_attributes=>[:user_id, :institution_id], :hobby_list_ids=>[], :about_list_ids=>[], :profession_attributes=>[:name]))
-        sign_in @user, :bypass => true
-        format.html { redirect_to user_profile_path(@user.id), notice: 'Your profile was successfully updated.' }
-        format.json { head :no_content }
+      if params[:user][:current_password].blank?
+        if @user.update(params.require(:user).permit(:username,:email,:validate_username,:avatar, :avatar_cache, :remove_avatar, :demographic_attributes=>[:id,:male, :name,:nickname,:dob,:smoking,:drinking,:location,:religion,:avatar, :description, :goal,:last_institute], :criterion_attributes=>[:male,:minage,:maxage,:smoking,:drinking], :attendances_attributes=>[:user_id, :institution_id], :hobby_list_ids=>[], :about_list_ids=>[], :profession_attributes=>[:name]))
+          sign_in @user, :bypass => true
+          format.html { redirect_to user_profile_path(@user.id), notice: 'Your profile was successfully updated.' }
+          format.json { head :no_content }
+        else
+          format.html { redirect_to edit_profile_path(@user.id), notice: 'Password Incorrect.' }
+          format.json { render json: @demographic.errors, status: :unprocessable_entity }
+        end
       else
-        format.html { redirect_to edit_profile_path(@user.id), notice: 'Password Incorrect.' }
-        format.json { render json: @demographic.errors, status: :unprocessable_entity }
+        if @user.update_with_password(params.require(:user).permit(:username,:email,:current_password, :password,:password_confirmation,:validate_username,:avatar, :avatar_cache, :remove_avatar, :demographic_attributes=>[:id,:male, :name,:nickname,:dob,:smoking,:drinking,:location,:religion,:avatar, :description, :goal,:last_institute], :criterion_attributes=>[:male,:minage,:maxage,:smoking,:drinking], :attendances_attributes=>[:user_id, :institution_id], :hobby_list_ids=>[], :about_list_ids=>[], :profession_attributes=>[:name]))
+          sign_in @user, :bypass => true
+          format.html { redirect_to user_profile_path(@user.id), notice: 'Your profile was successfully updated.' }
+          format.json { head :no_content }
+        else
+          format.html { redirect_to edit_profile_path(@user.id), notice: 'Password Incorrect.' }
+          format.json { render json: @demographic.errors, status: :unprocessable_entity }
+        end
       end
     end
 
