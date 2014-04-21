@@ -19,8 +19,8 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :songs
   has_and_belongs_to_many :books
   has_and_belongs_to_many :interests
-  has_many :sent_icebreakers ,:class_name=>"IceBreaker",:foreign_key=>:sender_id
-  has_many :received_icebreakers ,:class_name=>"IceBreaker",:foreign_key=>:receiver_id
+  #has_many :sent_icebreakers ,:class_name=>"IceBreaker",:foreign_key=>:sender_id
+  #has_many :received_icebreakers ,:class_name=>"IceBreaker",:foreign_key=>:receiver_id
 
 
 
@@ -44,11 +44,11 @@ class User < ActiveRecord::Base
 
 
 
-  has_many :sent_likes ,:class_name=>"Like",:foreign_key=>:sender_id
-  has_many :received_likes ,:class_name=>"Like",:foreign_key=>:receiver_id
+  #has_many :sent_likes ,:class_name=>"Like",:foreign_key=>:sender_id
+  #has_many :received_likes ,:class_name=>"Like",:foreign_key=>:receiver_id
 
-  has_many :sent_messages ,:class_name=>"Message",:foreign_key=>:sender_id
-  has_many :received_messages ,:class_name=>"Message",:foreign_key=>:receiver_id
+  #has_many :sent_messages ,:class_name=>"Message",:foreign_key=>:sender_id
+  #has_many :received_messages ,:class_name=>"Message",:foreign_key=>:receiver_id
 
 
 
@@ -83,15 +83,16 @@ class User < ActiveRecord::Base
   end
 
   def find_matches
-    if self.criterion.smoking == "Doesn't Matter" and self.criterion.drinking == "Doesn't Matter"
+    #Don't Care, Doesn't Matter
+    if self.criterion.smoking == "Don't Care" and self.criterion.drinking == "Doesn't Matter"
       reduced_users =  Demographic.where(:male=>self.criterion.male).map(&:user).map{|i| return i if (self.criterion.minage..self.criterion.maxage).include?(i.age)}
       return
     else
-      if self.criterion.smoking == "Doesn't Matter"
+      if self.criterion.smoking == "Don't Care"
         reduced_users =  Demographic.where(:male=>self.criterion.male, :drinking => self.criterion.drinking).map(&:user).map{|i| return i if (self.criterion.minage..self.criterion.maxage).include?(i.age)}
         return
       end
-      if self.criterion.drinking == "Doesn't Matter"
+      if self.criterion.drinking == "Don't Care"
         reduced_users =  Demographic.where(:male=>self.criterion.male, :smoking=> self.criterion.smoking).map(&:user).map{|i| return i if (self.criterion.minage..self.criterion.maxage).include?(i.age)}
         return
       end
