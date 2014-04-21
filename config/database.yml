@@ -4,7 +4,7 @@ development:
   host: localhost
   pool: 5
   timeout: 5000
-  username: postgres
+  username: postgresql
   password: 19loki76
 
 test:
