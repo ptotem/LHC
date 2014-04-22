@@ -17,7 +17,7 @@ class MandatoryDetailsController < ApplicationController
 
   def fill_profilepic
     @user = current_user
-    @next_page = my_dashboard_path
+    @next_page = welcome_dashboard_path
     @prev_page = fill_friend_speak_path
 
   end

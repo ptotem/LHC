@@ -26,7 +26,11 @@ module ApplicationHelper
   end
 
   def get_user_name(id)
-    User.find(id).demographic.name
+    if User.find(id).demographic.nickname.nil?
+      "No name Found"
+    else
+      User.find(id).demographic.nickname
+    end
 
   end
 

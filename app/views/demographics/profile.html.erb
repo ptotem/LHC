@@ -37,7 +37,7 @@
         <div class="row">
           <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
             <div class="blue name_text">
-    <%= get_user_name(current_user.id) %>
+                <%= get_user_name(@user.id) %> <a href="<%= edit_profile_path(current_user.id) %>#demo_graphic"><i class="fa fa-edit "></i></a>
             </div>
             <table style="color: white;">
               <tr>
@@ -45,20 +45,20 @@
                 <td class="user_detail"><%= "#{@user_gender}, #{@user_age}" %></td>
               </tr>
               <tr>
-                <td class="user_detail"><i class="fa fa-globe"></i></td>
+                <td class="user_detail"><i class="fa fa-building-o"></i></td>
                 <td class="user_detail"><%= @user_last_institute_name %></td>
               </tr>
               <tr>
-                <td class="user_detail"><i class="fa fa-location-arrow"></i></td>
+                <td class="user_detail"><i class="fa fa-map-marker "></i></td>
                 <td class="user_detail"><%= @user_location %></td>
               </tr>
               <tr>
-                <td class="user_detail"><i class="fa fa-lightbulb-o"></i></td>
+                <td class="user_detail"><i class="fa fa-suitcase"></i></td>
                 <td class="user_detail"><%= @user_profession %></td>
               </tr>
 
               <tr>
-                <td class="user_detail"><i class="fa fa-flag"></i></td>
+                <td class="user_detail"><i class="fa fa-book"></i></td>
                 <td class="user_detail"><%= @user_religion %></td>
               </tr>
 
@@ -86,9 +86,14 @@
             </div>
           </div>
         </div>
+
+
+
         <div class="row">
           <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-            <h5 class="white" style="background-color: #38C8E0; padding: 2%; font-size: 1.3em;">About myself</h5>
+            <h5 class="white" style="background-color: #38C8E0; padding: 2%; font-size: 1.3em;">About myself
+              <a href="<%= edit_profile_path(current_user.id) %>#about_myself"><i class="fa fa-edit "></i></a>
+            </h5>
           </div>
         </div>
         <div class="row">
@@ -110,7 +115,10 @@
 
         <div class="row">
           <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-            <h5 class="white" style="background-color: #38C8E0; padding: 2%; font-size: 1.3em">Hobbies</h5>
+            <h5 class="white" style="background-color: #38C8E0; padding: 2%; font-size: 1.3em">
+              Hobbies
+              <a href="<%= edit_profile_path(current_user.id) %>#cri_terion"><i class="fa fa-edit "></i></a>
+            </h5>
 
             <div class="row">
               <div class="col-xs-4 col-sm-4 col-md-4 col-lg-5 white">
@@ -130,7 +138,9 @@
           </div>
           <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
             <h5 class="white" style="background-color: #38C8E0; padding: 2%; font-size: 1.3em">How my friends Describe
-              me</h5>
+              me
+              <a href="<%= edit_profile_path(current_user.id) %>#cri_terion"><i class="fa fa-edit "></i></a>
+            </h5>
 
             <div class="row">
               <div class="col-xs-4 col-sm-4 col-md-4 col-lg-5 white">
