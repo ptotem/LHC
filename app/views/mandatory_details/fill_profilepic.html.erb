@@ -17,7 +17,8 @@
           <% end %>
       </div>
 
-    <%= render :partial => "buttons",:locals => {:form=>f} %>
+
+    <%= render :partial => "buttons",:locals => {:form=>f,:prev_page_link=>@prev_page} %>
 
 <% end %>
 

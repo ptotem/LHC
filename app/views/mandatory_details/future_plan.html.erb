@@ -18,7 +18,8 @@
             <!--<textarea style="height: 198px; width: 100%; overflow: hidden"></textarea>-->
           </div>
         </div>
-        <%= render :partial => "buttons",:locals => {:form=>f} %>
+
+        <%= render :partial => "buttons",:locals => {:form=>f,:prev_page_link=>@prev_page} %>
 
     <% end %>
 
