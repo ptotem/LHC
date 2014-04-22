@@ -9,6 +9,8 @@ class DashboardsController < ApplicationController
   end
 
   def welcome_dashboard
+    current_user.current_route = my_dashboard_path
+    current_user.save!
 
   end
   
