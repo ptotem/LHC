@@ -44,15 +44,15 @@
                               <div class="carousel slide" id="carousel-drinking" data-interval="false" data-ride="carousel">
 
                                 <div class="carousel-inner">
-                                  <div class="item active">
+                                  <div class="item active" id="user_demographic_drinking_never_div">
                                     <img alt="Never" src="/assets/empty_1_glass.png" class="drinking_icons">
                                     <%= radio_button_tag 'drinking', "Never", false, class: "me_drinking_radio hidden_elems" %>
                                   </div>
-                                  <div class="item">
+                                  <div class="item" id="user_demographic_drinking_socially_div">
                                     <img alt="Socially" src="/assets/empty_3_glass.png" class="drinking_icons">
                                     <%= radio_button_tag 'drinking', "Socially", false, class: "me_drinking_radio hidden_elems" %>
                                   </div>
-                                  <div class="item">
+                                  <div class="item" id="user_demographic_drinking_often_div">
                                     <img alt="Often" src="/assets/empty_2_glass.png" class="drinking_icons">
                                     <%= radio_button_tag 'drinking', "Often", false, class: "me_drinking_radio hidden_elems" %>
                                   </div>
@@ -62,9 +62,9 @@
                                 <br>
                                 <br>
                                 <ol class="carousel-indicators my-carousel-indicator">
-                                  <li class="active" data-slide-to="0" data-target="#carousel-drinking"></li>
-                                  <li data-slide-to="1" data-target="#carousel-drinking" class=""></li>
-                                  <li data-slide-to="2" data-target="#carousel-drinking" class=""></li>
+                                  <li id="user_demographic_drinking_never_indicator" class="active" data-slide-to="0" data-target="#carousel-drinking"></li>
+                                  <li id="user_demographic_drinking_socially_indicator" data-slide-to="1" data-target="#carousel-drinking" class=""></li>
+                                  <li id="user_demographic_drinking_often_indicator" data-slide-to="2" data-target="#carousel-drinking" class=""></li>
                                 </ol>
                               </div>
 
@@ -115,22 +115,22 @@
                             <%= c.hidden_field :drinking, :id => "opposite_person_drinking_textfield", :class => "hidden_elems" %>
                             <div class="row">
                               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top:10px;">
-                                <div class="btn-main btn-small grey-btn" style="margin-top: 12px;" onclick="get_my_text($(this),'drinking')">Often</div>
+                                <div id="user_criterion_drinking_often_div" class="btn-main btn-small grey-btn" style="margin-top: 12px;" onclick="get_my_text($(this),'drinking')">Often</div>
                               </div>
                             </div>
                             <div class="row" style="margin-top: 2%;">
                               <div class="col-lg-12">
-                                <div class="btn-main btn-small grey-btn" onclick="get_my_text($(this),'drinking')">Socially</div>
+                                <div id="user_criterion_drinking_socially_div" class="btn-main btn-small grey-btn" onclick="get_my_text($(this),'drinking')">Socially</div>
                               </div>
                             </div>
                             <div class="row" style="margin-top: 2%;">
                               <div class="col-lg-12">
-                                <div class="btn-main btn-small grey-btn" onclick="get_my_text($(this),'drinking')">Never</div>
+                                <div id="user_criterion_drinking_never_div" class="btn-main btn-small grey-btn" onclick="get_my_text($(this),'drinking')">Never</div>
                               </div>
                             </div>
                             <div class="row" style="margin-top: 2%; margin-bottom: 9%;">
                               <div class="col-lg-12">
-                                <div class="btn-main btn-small grey-btn" onclick="get_my_text($(this),'drinking')">Don't Care</div>
+                                <div id="user_criterion_drinking_dont_care_div" class="btn-main btn-small grey-btn" onclick="get_my_text($(this),'drinking')">Don't Care</div>
                               </div>
                             </div>
                           </div>
@@ -144,6 +144,8 @@
                 </div>
                 <!-- row for opposite person dob, drinking, smoking (three diff. cols for each) - ends -->
 
+                <% @user_criterion_drinking = @current_user.criterion.drinking rescue "" %>
+                <% @user_demographic_drinking = @current_user.demographic.drinking rescue "" %>
 
             <% end %>
 
@@ -163,6 +165,59 @@
 
 
           $(function () {
+
+              //console.log("<%#= sanitize(@user_criterion_drinking) %>");
+              //console.log("<%#= sanitize(@user_demographic_drinking) %>");
+              var user_criterion_drinking = "<%= sanitize(@user_criterion_drinking) %>"
+              var user_demographic_drinking = "<%= sanitize(@user_demographic_drinking) %>"
+
+              //Never, Often, Socially, Don't Care
+              //user_criterion_drinking_never_div
+              //user_criterion_drinking_often_div
+              //user_criterion_drinking_socially_div
+              //user_criterion_drinking_dont_care_div
+              if ( user_criterion_drinking!="" ) {
+                  if ( user_criterion_drinking=="Never" ) {
+                      $('.grey-btn').removeClass('active_gray_btn');
+                      $('#user_criterion_drinking_never_div').addClass('active_gray_btn');
+                  }
+                  else if ( user_criterion_drinking=="Often" ) {
+                      $('.grey-btn').removeClass('active_gray_btn');
+                      $('#user_criterion_drinking_often_div').addClass('active_gray_btn');
+                  }
+                  else if ( user_criterion_drinking=="Socially" ) {
+                      $('.grey-btn').removeClass('active_gray_btn');
+                      $('#user_criterion_drinking_socially_div').addClass('active_gray_btn');
+                  }
+                  else if ( user_criterion_drinking=="Don't Care" ) {
+                      $('.grey-btn').removeClass('active_gray_btn');
+                      $('#user_criterion_drinking_dont_care_div').addClass('active_gray_btn');
+                  }
+              }
+
+              //user_demographic_drinking_never_indicator
+              ///user_demographic_drinking_socially_indicator
+              //user_demographic_drinking_often_indicator
+              if ( user_demographic_drinking!="" ) {
+                  $('#carousel-drinking').find('.carousel-inner').find('.item').each(function( index ) {
+                      $(this).removeClass('active')
+                  });
+                  $('#carousel-drinking').find('.carousel-indicators').find('li').each(function( index ) {
+                      $(this).removeClass('active')
+                  });
+                  if ( user_demographic_drinking=="Never" ) {
+                      $('#user_demographic_drinking_never_div').addClass('active');
+                      $('#user_demographic_drinking_never_indicator').addClass('active');
+                  }
+                  else if ( user_demographic_drinking=="Often" ) {
+                      $('#user_demographic_drinking_often_div').addClass('active');
+                      $('#user_demographic_drinking_often_indicator').addClass('active');
+                  }
+                  else if ( user_demographic_drinking=="Socially" ) {
+                      $('#user_demographic_drinking_socially_div').addClass('active');
+                      $('#user_demographic_drinking_socially_indicator').addClass('active');
+                  }
+              }
 
 
               // setting default val for me smoking, val is set by carousel sliding - starts

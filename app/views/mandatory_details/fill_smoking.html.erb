@@ -45,15 +45,15 @@
                               <div class="carousel slide" id="carousel-smoking" data-interval="false" data-ride="carousel">
 
                                 <div class="carousel-inner">
-                                  <div class="item active">
+                                  <div class="item active" id="user_demographic_smoking_never_div">
                                     <img alt="Never" data-src="holder.js/900x500/auto/#777:#555/text:First slide" src="/assets/no_smoking.png" class="smoking_icons" class="img-responsive">
                                     <%= radio_button_tag 'smoking', "Never", false, class: "me_smoking_radio hidden_elems" %>
                                   </div>
-                                  <div class="item">
+                                  <div class="item" id="user_demographic_smoking_socially_div">
                                     <img alt="Socially" data-src="holder.js/900x500/auto/#666:#444/text:Second slide" src="/assets/socially_smoking.png" class="smoking_icons">
                                     <%= radio_button_tag 'smoking', "Socially", false, class: "me_smoking_radio hidden_elems" %>
                                   </div>
-                                  <div class="item">
+                                  <div class="item" id="user_demographic_smoking_often_div">
                                     <img alt="Often" data-src="holder.js/900x500/auto/#555:#333/text:Third slide" src="/assets/regular_smoking.png" class="smoking_icons">
                                     <%= radio_button_tag 'smoking', "Often", false, class: "me_smoking_radio hidden_elems" %>
                                   </div>
@@ -64,9 +64,9 @@
                                 <br>
                                 <br>
                                 <ol class="carousel-indicators my-carousel-indicator">
-                                  <li class="active" data-slide-to="0" data-target="#carousel-smoking"></li>
-                                  <li data-slide-to="1" data-target="#carousel-smoking" class=""></li>
-                                  <li data-slide-to="2" data-target="#carousel-smoking" class=""></li>
+                                  <li id="user_demographic_smoking_never_indicator" class="active" data-slide-to="0" data-target="#carousel-smoking"></li>
+                                  <li id="user_demographic_smoking_socially_indicator" data-slide-to="1" data-target="#carousel-smoking" class=""></li>
+                                  <li id="user_demographic_smoking_often_indicator" data-slide-to="2" data-target="#carousel-smoking" class=""></li>
                                 </ol>
                               </div>
 
@@ -120,22 +120,22 @@
                             <%#= c.text_field :smoking, :id => "opposite_person_smoking_textfield", :class => "hidden_elems" %>
                             <div class="row" style="margin-top: 1.5%;">
                               <div class="col-lg-12">
-                                <div class="btn-main btn-small grey-btn" style="margin-top:10px; " onclick="get_my_text($(this),'smoking')">Often</div>
+                                <div id="user_criterion_smoking_often_div" class="btn-main btn-small grey-btn" style="margin-top:10px; " onclick="get_my_text($(this),'smoking')">Often</div>
                               </div>
                             </div>
                             <div class="row" style="margin-top: 2%;">
                               <div class="col-lg-12">
-                                <div class="btn-main btn-small grey-btn" onclick="get_my_text($(this),'smoking')">Socially</div>
+                                <div id="user_criterion_smoking_socially_div" class="btn-main btn-small grey-btn" onclick="get_my_text($(this),'smoking')">Socially</div>
                               </div>
                             </div>
                             <div class="row" style="margin-top: 2%;">
                               <div class="col-lg-12">
-                                <div class="btn-main btn-small grey-btn" onclick="get_my_text($(this),'smoking')">Never</div>
+                                <div id="user_criterion_smoking_never_div" class="btn-main btn-small grey-btn" onclick="get_my_text($(this),'smoking')">Never</div>
                               </div>
                             </div>
                             <div class="row" style="margin-top: 2%; margin-bottom: 9%;">
                               <div class="col-lg-12">
-                                <div class="btn-main btn-small grey-btn" onclick="get_my_text($(this),'smoking')">Don't Care</div>
+                                <div id="user_criterion_smoking_dont_care_div" class="btn-main btn-small grey-btn" onclick="get_my_text($(this),'smoking')">Don't Care</div>
                               </div>
                             </div>
                           </div>
@@ -161,6 +161,8 @@
             </div>
             </div>
 
+            <% @user_criterion_smoking = @current_user.criterion.smoking rescue "" %>
+            <% @user_demographic_smoking = @current_user.demographic.smoking rescue "" %>
 
       <% end %>
 
@@ -169,7 +171,58 @@
 
 
           $(function () {
+              //console.log("<%#= sanitize(@user_criterion_smoking) %>");
+              //console.log("<%#= sanitize(@user_demographic_smoking) %>");
+              var user_criterion_smoking = "<%= sanitize(@user_criterion_smoking) %>"
+              var user_demographic_smoking = "<%= sanitize(@user_demographic_smoking) %>"
 
+              //Never, Often, Socially, Don't Care
+              //user_criterion_smoking_never_div
+              //user_criterion_smoking_often_div
+              //user_criterion_smoking_socially_div
+              //user_criterion_smoking_dont_care_div
+              if ( user_criterion_smoking!="" ) {
+                  if ( user_criterion_smoking=="Never" ) {
+                      $('.grey-btn').removeClass('active_gray_btn');
+                      $('#user_criterion_smoking_never_div').addClass('active_gray_btn');
+                  }
+                  else if ( user_criterion_smoking=="Often" ) {
+                      $('.grey-btn').removeClass('active_gray_btn');
+                      $('#user_criterion_smoking_often_div').addClass('active_gray_btn');
+                  }
+                  else if ( user_criterion_smoking=="Socially" ) {
+                      $('.grey-btn').removeClass('active_gray_btn');
+                      $('#user_criterion_smoking_socially_div').addClass('active_gray_btn');
+                  }
+                  else if ( user_criterion_smoking=="Don't Care" ) {
+                      $('.grey-btn').removeClass('active_gray_btn');
+                      $('#user_criterion_smoking_dont_care_div').addClass('active_gray_btn');
+                  }
+              }
+
+              //user_demographic_smoking_never_indicator
+              ///user_demographic_smoking_socially_indicator
+              //user_demographic_smoking_often_indicator
+              if ( user_demographic_smoking!="" ) {
+                  $('#carousel-smoking').find('.carousel-inner').find('.item').each(function( index ) {
+                      $(this).removeClass('active')
+                  });
+                  $('#carousel-smoking').find('.carousel-indicators').find('li').each(function( index ) {
+                      $(this).removeClass('active')
+                  });
+                  if ( user_demographic_smoking=="Never" ) {
+                      $('#user_demographic_smoking_never_div').addClass('active');
+                      $('#user_demographic_smoking_never_indicator').addClass('active');
+                  }
+                  else if ( user_demographic_smoking=="Often" ) {
+                      $('#user_demographic_smoking_often_div').addClass('active');
+                      $('#user_demographic_smoking_often_indicator').addClass('active');
+                  }
+                  else if ( user_demographic_smoking=="Socially" ) {
+                      $('#user_demographic_smoking_socially_div').addClass('active');
+                      $('#user_demographic_smoking_socially_indicator').addClass('active');
+                  }
+              }
 
               // setting default val for me smoking, val is set by carousel sliding - starts
               var smoking_carousel = $('#carousel-smoking');
