@@ -40,7 +40,7 @@ class IceBreakersController < ApplicationController
     redirect_to authenticated_root_path ,:notice=>"Number of Questions...."
     return
     end
-    Notification.create!(:content=>"#{current_user.demographic.name} has sent you a ice-breaker", :user_id=>params[:ice_breaker][:receiver_id], :pointer_link=>answer_icebreaker_path(@ice_breaker.id,@ice_breaker.questions.first.id))
+    Notification.create!(:content=>"#{current_user.demographic.name} has sent you a ice-breaker", :user_id=>params[:ice_breaker][:receiver_id], :pointer_link=>answer_icebreaker_path(@ice_breaker.id,@ice_breaker.questions.first.id),:sender_id => params[:ice_breaker][:sender_id])
 
 
     respond_to do |format|

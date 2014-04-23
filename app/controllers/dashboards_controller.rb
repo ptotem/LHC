@@ -227,7 +227,7 @@ class DashboardsController < ApplicationController
 
   def create_message
     Message.create!(:receiver_id=>params[:receiver_id],:body=>params[:body],:sender_id=>current_user.id)
-    Notification.create!(:content=>"#{current_user.demographic.name} has sent you a message", :user_id=>params[:receiver_id], :pointer_link=>conversations_with_users_path(current_user.id))
+    Notification.create!(:content=>"#{current_user.demographic.name} has sent you a message", :user_id=>params[:receiver_id], :pointer_link=>conversations_with_users_path(current_user.id),:sender_id => current_user.id)
     redirect_to conversations_with_users_path(params[:receiver_id])
   end
 
@@ -240,7 +240,7 @@ class DashboardsController < ApplicationController
     @emails=params[:email]
     @addresses=@emails.split(',')
     @addresses.each do |invitee|
-      InviteeMailer.invitee_email(invitee).deliver
+      InviteeMailer.invitee_email(invitee,current_user.id).deliver
     end
     redirect_to user_profile_path(current_user.id), notice: 'Mail has been successfully sent to your friend.'
   end

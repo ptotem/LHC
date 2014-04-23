@@ -58,7 +58,7 @@
     <% current_user.notifications.reverse!.each do |notification| %>
         <div class="row">
           <div class="col-lg-12 whiteblock">
-            <div class="left-part"><img class="profile_pic_thumbnail" src="/assets/profile_pic.jpg"></div>
+            <div class="left-part"><img class="profile_pic_thumbnail" src="<%= get_user_image(notification.sender_id) %>"></div>
             <div class="mid-part">
               <div class="recentactivitytext">
                 <!--Your Match <a>Sagarika</a> sent you a message-->
@@ -136,11 +136,11 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="try_out_quiz_text">Your Match Sagarika sent you a message Your Match</div>
-    </div>
-  </div>
+  <!--<div class="row">-->
+    <!--<div class="col-lg-12">-->
+      <!--<div class="try_out_quiz_text">Your Match Sagarika sent you a message Your Match</div>-->
+    <!--</div>-->
+  <!--</div>-->
 </div>
 
 

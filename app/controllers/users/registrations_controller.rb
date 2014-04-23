@@ -26,11 +26,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
     #render :json => params#[:user][:demographic_attributes]
     #return
     @user = current_user
-    #params[:user][:hobby_list_ids].reject!{|a| a==""}
-    #if params[:user][:hobby_list_ids].length !=5
-    #  redirect_to "/edit_profile/#{@user.id}", notice: 'Your profile was not updated.You must exactly specify 5 likes!'
-    #  return
-    #end
+    params[:user][:hobby_list_ids].reject!{|a| a==""}
+    params[:user][:about_list_ids].reject!{|a| a==""}
+
+    if params[:user][:hobby_list_ids].length !=5  or  params[:user][:about_list_ids].length !=5
+      redirect_to "/edit_profile/#{@user.id}", notice: 'Your profile was not updated.You must exactly specify 5 likes!'
+      return
+    end
     respond_to do |format|
       if params[:user][:current_password].blank?
         if @user.update(params.require(:user).permit(:username,:email,:validate_username,:avatar,:current_route, :avatar_cache, :remove_avatar, :demographic_attributes=>[:id,:male, :name,:nickname,:dob,:smoking,:drinking,:location,:religion,:avatar, :description, :goal,:last_institute,:current_student], :criterion_attributes=>[:id,:male,:minage,:maxage,:smoking,:drinking], :attendances_attributes=>[:user_id, :institution_id], :hobby_list_ids=>[], :about_list_ids=>[], :profession_attributes=>[:name]))
