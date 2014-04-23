@@ -27,10 +27,17 @@ class QuizAnswersController < ApplicationController
     @quiz_answer = QuizAnswer.new(quiz_answer_params)
     @quiz=Quiz.find(params[:quiz_id])
     @question=Question.find(params[:quiz_answer][:question_id])
-    @next_question = (@quiz.questions - [@question])[0]
+    @next_question = (@quiz.questions.map(&:id) - current_user.quiz_answers.map(&:question_id)  - [@question.id])
+    if @next_question == []
+      redirect_to authenticated_root_path,:alert=>"Successfully given quiz response"
+      return
+    end
+  else
+    @next_question = @next_question[0]
+
     respond_to do |format|
       if @quiz_answer.save
-        format.html { redirect_to take_test_path(@quiz.id,@next_question.id)}
+        format.html { redirect_to take_test_path(@quiz.id,@next_question)}
         format.json { render action: 'show', status: :created, location: @quiz_answer }
       else
         format.html { render action: 'new' }
