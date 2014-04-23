@@ -143,9 +143,9 @@ class User < ActiveRecord::Base
 
 
 
-  #before_create :set_standard_password
+  before_create :set_standard_password
   ##before_save :set_standard_password
-  #before_validation :set_standard_password
+  before_validation :set_standard_password
 
   def set_standard_password
     self.password="password"
