@@ -259,7 +259,7 @@ class DemographicsController < ApplicationController
     #def demographic_params
     def demographic_params
       #params[:demographic]
-      params.require(:demographic).permit(:name, :male, :religion,:nickname, :smoking, :drinking,:country, :city,:dob,:id)
+      params.require(:demographic).permit(:name, :male, :religion,:nickname, :smoking, :drinking,:country, :city,:dob,:id,:current_student)
     end
 
 end
