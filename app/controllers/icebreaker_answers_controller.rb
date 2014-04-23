@@ -32,7 +32,7 @@ class IcebreakerAnswersController < ApplicationController
     @next_question = (@ice.questions.map(&:id) - @ice.icebreaker_answers.map(&:question_id)  - [@question.id])
     @ice.icebreaker_answers.each do |s|
       s.ice_ans_status=true
-      s.save
+      s.save!
     end
 
 
