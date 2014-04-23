@@ -218,6 +218,11 @@ class DashboardsController < ApplicationController
     @icebreaker_answer = IcebreakerAnswer.new
     @ice_break=IceBreaker.find(params[:id])
     @question_icebreaker=Question.find(params[:question_id])
+    @total_questions = @ice_break.questions.count
+    @current_question_index = @ice_break.questions.map(&:id).index(@question_icebreaker.id) + 1
+    #render :text => @current_question_index
+    #return
+
   end
 
   def create_message

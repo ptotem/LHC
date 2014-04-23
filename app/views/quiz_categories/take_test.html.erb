@@ -5,9 +5,9 @@
     Prove yourself !
 <% end %>
 
-<%= content_for(:page_header) do %>
-    Question n
-<% end %>
+<%#= content_for(:page_header) do %>
+    <!--Question n-->
+<%# end %>
 
 <section id="take_test_blue-container">
   <div class="custom-container">
@@ -22,6 +22,7 @@
                   </div>
                    <div class="row">
                      <ul class="test_ul">
+
                        <%= form_for(@quiz_answer) do |f| %>
 
                              <%= f.hidden_field :user_id,:value => current_user.id %>
@@ -31,7 +32,7 @@
                            <div class="field">
                              <% @question.options.each do |test_ans_option| %>
                                  <li>
-                                   <%= f.radio_button :answer_id,test_ans_option.id, :style=>"float: left;" %>
+                                   <%= f.radio_button :answer_id,test_ans_option.id, :checked=>true, :style=>"float: left;" %>
                                    <p class="radio_text"><%= test_ans_option.name %></p>
                                  </li>
                              <% end %>
@@ -39,6 +40,10 @@
 
                            <div class="actions" style="margin-top: 5%;">
                              <%= f.submit "Answer", :class=>"btn-main ans_btn" %>
+                             <div class="status" style="  float: right; margin-right: 30%; margin-top: 8px;">
+                               <%= @current_question_index.index(@question.id) + 1 %> /
+                               <%= @quiz.questions.count %>
+                             </div>
                            </div>
                        <% end %>
                      </ul>

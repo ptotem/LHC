@@ -28,6 +28,8 @@ class QuizAnswersController < ApplicationController
     @quiz=Quiz.find(params[:quiz_id])
     @question=Question.find(params[:quiz_answer][:question_id])
     @next_question = (@quiz.questions.map(&:id) - current_user.quiz_answers.map(&:question_id)  - [@question.id])
+    #render :json => [@question.id]
+    #return
     if @next_question == []
       redirect_to authenticated_root_path,:alert=>"Successfully given quiz response"
       return

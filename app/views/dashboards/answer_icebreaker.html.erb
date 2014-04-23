@@ -43,6 +43,13 @@
                       <div class="actions" style="margin-top: 5%;">
                         <%= f.submit "Answer", :class=>"btn-main ans_btn" %>
                       </div>
+
+                      <div class="status" style="  float: right; margin-right: 30%; margin-top: -28px;">
+                        <%= @current_question_index %> /
+                        <%= @total_questions %>
+                      </div>
+
+
                   <% end %>
                 </ul>
               </div>
