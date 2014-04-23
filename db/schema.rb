@@ -122,6 +122,8 @@ ActiveRecord::Schema.define(version: 20140428111918) do
   end
 
   create_table "ice_breakers", force: true do |t|
+    t.integer  "sender_id"
+    t.integer  "receiver_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -129,11 +131,6 @@ ActiveRecord::Schema.define(version: 20140428111918) do
   create_table "ice_breakers_questions", force: true do |t|
     t.integer "ice_breaker_id"
     t.integer "question_id"
-  end
-
-  create_table "ice_breakers_users", id: false, force: true do |t|
-    t.integer "ice_breaker_id", null: false
-    t.integer "user_id",        null: false
   end
 
   create_table "icebreaker_answers", force: true do |t|
@@ -379,12 +376,12 @@ ActiveRecord::Schema.define(version: 20140428111918) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "email",                  default: "",          null: false
-    t.string   "encrypted_password",     default: "",          null: false
+    t.string   "email",                  default: "",            null: false
+    t.string   "encrypted_password",     default: "",            null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,           null: false
+    t.integer  "sign_in_count",          default: 0,             null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -398,7 +395,7 @@ ActiveRecord::Schema.define(version: 20140428111918) do
     t.datetime "confirmation_sent_at"
     t.string   "verification_text"
     t.boolean  "verified"
-    t.string   "current_route",          default: "/fill_dob"
+    t.string   "current_route",          default: "/fill_dates"
     t.datetime "last_matched_time"
   end
 
