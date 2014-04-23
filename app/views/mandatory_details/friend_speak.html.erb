@@ -19,7 +19,14 @@
 
             <% AboutList.all.each do |a| %>
                   <div class="col-lg-2" style="text-align: left">
-                    <%= check_box_tag "user[about_list_ids][]",a.id %> <%= a.name %>
+                    <p class="field switch">
+
+                      <label class="cb-enable"><span><%= a.name %></span></label>
+                      <!--<label class="cb-disable selected"><span>NO</span></label>-->
+                      <%= check_box_tag "user[about_list_ids][]",a.id,false,:class=>"checkbox" %>
+                      <!--<input type="checkbox" id="checkbox" class="checkbox" name="field2" />-->
+                    </p>
+
                     <!--<input type="checkbox" name="vehicle" value="Car"> Football-->
                   </div>
 
@@ -34,4 +41,24 @@
 
 <% end %>
 
+<script type="text/javascript">
+    $(document).ready( function(){
+        $(".cb-enable").click(function(){
+            var parent = $(this).parents('.switch');
+            $('.cb-disable',parent).removeClass('selected');
+            $(this).toggleClass('selected');
+            var current_state = $('.checkbox',parent).attr("checked");
+            console.log(current_state);
+            $('.checkbox',parent).attr('checked',!current_state);
+
+        });
+        $(".cb-disable").click(function(){
+            var parent = $(this).parents('.switch');
+            $('.cb-enable',parent).removeClass('selected');
+            $(this).addClass('selected');
+
+            $('.checkbox',parent).attr('checked', false);
+        });
+    });
+</script>
 
