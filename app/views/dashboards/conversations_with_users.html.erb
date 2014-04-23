@@ -20,7 +20,7 @@
                 <li class="media message-item">
                   <a class="pull-left" href="#">
                     <!--<img class="img-circle img-responsive" src="/assets/male.png" height="80px" width="80px">-->
-                    <img class="img-circle img-responsive" src="<%= get_user_image(current_user.id) %>" height="80px" width="80px">
+                    <img class="img-responsive" src="<%= get_user_image(current_user.id) %>" height="80px" width="80px">
                   </a>
 
                   <div class="media-body">
@@ -31,7 +31,7 @@
             <% else %>
                 <li class="media message-item">
                   <a class="pull-right" href="#">
-                    <img class="img-circle" src="<%= get_user_image(m.sender_id) %>" height="80px" width="80px">
+                    <img class="img-responsive" src="<%= get_user_image(m.sender_id) %>" height="80px" width="80px">
                   </a>
 
                   <div class="media-body">

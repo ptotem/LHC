@@ -75,7 +75,7 @@
     </div>
 
   <div class="row" style="margin-top: 1%">
-    <% if checking_status_likes(params[:id]) %>
+    <% if check_icebreaker_status(params[:id]) %>
         <button class="buttonmenu" id="send_message_btn" onclick="window.location='<%= conversations_with_users_path(params[:id]) %>'">Send a Message</button>
     <%else %>
         <button class="buttonmenu" id="send_message_btn" data-toggle="modal" data-target="#disabledModal">Send a Message</button>

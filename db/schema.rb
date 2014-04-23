@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140428111919) do
+ActiveRecord::Schema.define(version: 20140428111920) do
 
   create_table "about_lists", force: true do |t|
     t.string   "name"
@@ -126,6 +126,7 @@ ActiveRecord::Schema.define(version: 20140428111919) do
     t.integer  "receiver_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "ice_status",  default: false
   end
 
   create_table "ice_breakers_questions", force: true do |t|
@@ -140,6 +141,7 @@ ActiveRecord::Schema.define(version: 20140428111919) do
     t.integer  "answer_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "ice_ans_status", default: false
   end
 
   create_table "institutions", force: true do |t|
@@ -377,12 +379,12 @@ ActiveRecord::Schema.define(version: 20140428111919) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "email",                  default: "",            null: false
-    t.string   "encrypted_password",     default: "",            null: false
+    t.string   "email",                  default: "",          null: false
+    t.string   "encrypted_password",     default: "",          null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,             null: false
+    t.integer  "sign_in_count",          default: 0,           null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -396,7 +398,7 @@ ActiveRecord::Schema.define(version: 20140428111919) do
     t.datetime "confirmation_sent_at"
     t.string   "verification_text"
     t.boolean  "verified"
-    t.string   "current_route",          default: "/fill_dates"
+    t.string   "current_route",          default: "/fill_dob"
     t.datetime "last_matched_time"
   end
 
