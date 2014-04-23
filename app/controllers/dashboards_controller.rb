@@ -42,6 +42,8 @@ class DashboardsController < ApplicationController
     #end
 
     @like_requests = Like.where(:receiver_id => current_user.id) rescue nil?
+    #render :json => @like_requests
+    #return
     #if current_user.notifications.blank? and @like_requests.blank?
     #  redirect_to user_profile_path(current_user.id)
     #end

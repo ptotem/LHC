@@ -24,6 +24,8 @@ class IcebreakerAnswersController < ApplicationController
   # POST /icebreaker_answers
   # POST /icebreaker_answers.json
   def create
+    #render :json => params
+    #return
     @icebreaker_answer = IcebreakerAnswer.new(icebreaker_answer_params)
     @ice=IceBreaker.find(params[:icebreaker_answer][:ice_breaker_id])
     @question=Question.find(params[:icebreaker_answer][:question_id])
@@ -33,16 +35,18 @@ class IcebreakerAnswersController < ApplicationController
       s.save
     end
 
-    if @next_question == []
-      redirect_to authenticated_root_path,:alert=>"Successfully given ice breaker response"
-      return
-    end
-  else
-    @next_question = @next_question[0]
 
 
     respond_to do |format|
       if @icebreaker_answer.save!
+        if @next_question == []
+          redirect_to authenticated_root_path,:alert=>"Successfully given ice breaker response"
+          return
+        else
+          @next_question = @next_question[0]
+        end
+
+
         format.html { redirect_to answer_icebreaker_path(@ice.id,@next_question), notice: 'Icebreaker answer was successfully created.' }
         format.json { render action: 'show', status: :created, location: @icebreaker_answer }
       else

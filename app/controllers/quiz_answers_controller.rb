@@ -30,15 +30,18 @@ class QuizAnswersController < ApplicationController
     @next_question = (@quiz.questions.map(&:id) - current_user.quiz_answers.map(&:question_id)  - [@question.id])
     #render :json => [@question.id]
     #return
-    if @next_question == []
-      redirect_to authenticated_root_path,:alert=>"Successfully given quiz response"
-      return
-    end
-  else
-    @next_question = @next_question[0]
+
 
     respond_to do |format|
-      if @quiz_answer.save
+      if @quiz_answer.save!
+
+        if @next_question == []
+          redirect_to authenticated_root_path,:alert=>"Successfully given quiz response"
+          return
+        else
+          @next_question = @next_question[0]
+        end
+
         format.html { redirect_to take_test_path(@quiz.id,@next_question)}
         format.json { render action: 'show', status: :created, location: @quiz_answer }
       else
