@@ -216,6 +216,7 @@ ActiveRecord::Schema.define(version: 20140428111921) do
     t.boolean  "correct"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "score"
   end
 
   create_table "personalities", force: true do |t|

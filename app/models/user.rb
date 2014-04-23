@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
   has_many :attendances, dependent: :destroy
   has_many :institutions, through: :attendances
 
+  has_many :quiz_answers, dependent: :destroy
+
   has_one :profession, dependent: :destroy
 
   has_and_belongs_to_many :personalities
