@@ -42,6 +42,8 @@ class DashboardsController < ApplicationController
     #end
 
     @like_requests = Like.where(:receiver_id => current_user.id) rescue nil?
+    #render :json => @like_requests
+    #return
     #if current_user.notifications.blank? and @like_requests.blank?
     #  redirect_to user_profile_path(current_user.id)
     #end
@@ -218,11 +220,16 @@ class DashboardsController < ApplicationController
     @icebreaker_answer = IcebreakerAnswer.new
     @ice_break=IceBreaker.find(params[:id])
     @question_icebreaker=Question.find(params[:question_id])
+    @total_questions = @ice_break.questions.count
+    @current_question_index = @ice_break.questions.map(&:id).index(@question_icebreaker.id) + 1
+    #render :text => @current_question_index
+    #return
+
   end
 
   def create_message
     Message.create!(:receiver_id=>params[:receiver_id],:body=>params[:body],:sender_id=>current_user.id)
-    Notification.create!(:content=>"#{current_user.demographic.name} has sent you a message", :user_id=>params[:receiver_id], :pointer_link=>conversations_with_users_path(current_user.id))
+    Notification.create!(:content=>"#{current_user.demographic.name} has sent you a message", :user_id=>params[:receiver_id], :pointer_link=>conversations_with_users_path(current_user.id),:sender_id => current_user.id)
     redirect_to conversations_with_users_path(params[:receiver_id])
   end
 
@@ -235,7 +242,7 @@ class DashboardsController < ApplicationController
     @emails=params[:email]
     @addresses=@emails.split(',')
     @addresses.each do |invitee|
-      InviteeMailer.invitee_email(invitee).deliver
+      InviteeMailer.invitee_email(invitee,current_user.id).deliver
     end
     redirect_to user_profile_path(current_user.id), notice: 'Mail has been successfully sent to your friend.'
   end

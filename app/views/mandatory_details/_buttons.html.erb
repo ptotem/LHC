@@ -1,20 +1,28 @@
 
 <div style="margin-top: 3%;" class="row">
   <% if !prev_page_link.blank? %>
-  <div class="col-xs-12 col-sm-12 col-md-12  col-lg-3" style="padding-left:18%; padding-right: 0;">
-    <!--<div class="pull-left">-->
-    <input type="submit" value="Back" class="btn-main btn criteria-fill-step-btn red-btn" onclick="window.location='<%= prev_page_link %>';return false;">
-    <!--<button class="btn-main btn criteria-fill-step-btn red-btn" onclick="window.location='<%#= prev_page_link %>';return false;">Back</button>-->
-    <!--<a style="padding-left: 40px; padding-right: 40px; display: inline;" class="btn-main criteria-fill-step-btn red-btn" href="<%#= prev_page_link %>">Back</a>-->
-    <!--</div>-->
-  </div>
-      <% end %>
+      <div class="col-xs-12 col-sm-12 col-md-12  col-lg-3" style="padding-left:18%; padding-right: 0;">
+        <!--<div class="pull-left">-->
+        <input type="submit" value="Back" class="btn-main btn criteria-fill-step-btn red-btn" onclick="window.location='<%= prev_page_link %>';return false;">
+        <!--<button class="btn-main btn criteria-fill-step-btn red-btn" onclick="window.location='<%#= prev_page_link %>';return false;">Back</button>-->
+        <!--<a style="padding-left: 40px; padding-right: 40px; display: inline;" class="btn-main criteria-fill-step-btn red-btn" href="<%#= prev_page_link %>">Back</a>-->
+        <!--</div>-->
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 " style="padding-left:50%; padding-right: 0">
+        <!--<div class="pull-right">-->
+        <%= form.submit "Submit", :id=>"criteria_submit_btn", :class=>"btn btn-main criteria-fill-step-btn red-btn"%>
 
-  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 " style="padding-left:50%; padding-right: 0">
-    <!--<div class="pull-right">-->
-    <%= form.submit "Submit", :id=>"criteria_submit_btn", :class=>"btn btn-main criteria-fill-step-btn red-btn"%>
+        <!--<a id="criteria_fill_step_next_btn" class="btn-main criteria-fill-step-btn red-btn" href="javascript:void(0)">Continue</a>-->
+        <!--</div>-->
+      </div>
+  <% else %>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 " style="padding-left:46%; padding-right: 0">
+        <!--<div class="pull-right">-->
+        <%= form.submit "Submit", :id=>"criteria_submit_btn", :class=>"btn btn-main criteria-fill-step-btn red-btn"%>
 
-    <!--<a id="criteria_fill_step_next_btn" class="btn-main criteria-fill-step-btn red-btn" href="javascript:void(0)">Continue</a>-->
-    <!--</div>-->
-  </div>
+        <!--<a id="criteria_fill_step_next_btn" class="btn-main criteria-fill-step-btn red-btn" href="javascript:void(0)">Continue</a>-->
+        <!--</div>-->
+      </div>
+  <% end %>
+
 </div>

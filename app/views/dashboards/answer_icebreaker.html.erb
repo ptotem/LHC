@@ -18,7 +18,7 @@
           <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
 
             <div id="step_<%= @question_icebreaker.id %>" class="test-steps">
-              <div class="row" style="margin-top: 20%;">
+              <div class="row" style="margin-top: 4%;">
                 <h4 style="font-size: 1.8em;"><%= @question_icebreaker.name %></h4>
               </div>
               <div class="row">
@@ -32,17 +32,32 @@
 
 
                       <div class="field">
-                        <% @question_icebreaker.options.each do |e| %>
-                            <li>
-                              <%= f.radio_button :answer_id,e.id, :style=>"float: left;" %>
-                              <p class="radio_text"><%= e.name %></p>
-                            </li>
+                        <% @question_icebreaker.options.each_with_index do |e, index| %>
+                            <% if (index+1)%4 == 0%>
+                                <li>
+                                  <%= f.radio_button :answer_id,e.id, :checked=>true, :style=>"float: left;" %>
+                                  <p class="radio_text"><%= e.name %></p>
+                                </li>
+                            <% else %>
+                                <li>
+                                  <%= f.radio_button :answer_id,e.id, :style=>"float: left;" %>
+                                  <p class="radio_text"><%= e.name %></p>
+                                </li>
+                            <% end  %>
+
                         <% end %>
                       </div>
 
                       <div class="actions" style="margin-top: 5%;">
                         <%= f.submit "Answer", :class=>"btn-main ans_btn" %>
                       </div>
+
+                      <div class="status" style="  float: right; margin-right: 30%; margin-top: -28px;">
+                        <%= @current_question_index %> /
+                        <%= @total_questions %>
+                      </div>
+
+
                   <% end %>
                 </ul>
               </div>
