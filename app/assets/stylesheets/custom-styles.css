@@ -3,7 +3,6 @@
    override existing main.css stylesheets.
    ========================================================================== */
 
-
 .typeahead,
 .tt-query,
 .tt-hint {
@@ -48,9 +47,9 @@
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
     border-radius: 8px;
-    -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
-    -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
-    box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+    -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
 }
 
 .tt-suggestion {
@@ -67,4 +66,14 @@
 
 .tt-suggestion p {
     margin: 0;
+}
+
+#bx-li-image1 {
+    background-image: url('/assets/background.jpg');
+    background-size: 100% 100%;
+}
+
+#bx-li-image2 {
+    background-image: url('/assets/landing_page_carasoul_bg.jpg');
+    background-size: 100% 100%;
 }
