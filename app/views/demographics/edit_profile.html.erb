@@ -119,8 +119,8 @@
 
             <div class="form-group">
               <div class="col-sm-8 col-lg-8 col-lg-offset-1">
-                <h6 class="white">Current Student</h6>
-                <%= d.check_box :current_student %>
+                <h6 class="white" style="float: left">Am I current student?</h6>
+                <span style="margin-left: 2%; position: relative; top: 5px;"><%= d.check_box :current_student %></span>
               </div>
             </div>
         </section>
@@ -181,7 +181,7 @@
 
             <div class="form-group">
               <div class="col-sm-8 col-lg-8 col-lg-offset-1">
-                <h6 class="white">I am looking for</h6>
+                <h6 class="white">Hobbies</h6>
                 <%= f.collection_select(:hobby_list_ids, HobbyList.order('name ASC').all, :id, :name, {:include_blank => false}, {:multiple => true, :class=>"multiple"}) %>
               </div>
             </div>
