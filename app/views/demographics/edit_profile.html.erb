@@ -234,9 +234,9 @@
             <div class="form-group">
               <div class="col-sm-2 col-lg-2 col-lg-offset-1">
                 <h6 class="white">Gender</h6>
-                <%= c.radio_button :male,true, {:checked=>@user.demographic.male, :class=>"my_gender lhc-radio-btn"} %>
+                <%= c.radio_button :male,true, {:checked=>@user.criterion.male, :class=>"my_gender lhc-radio-btn"} %>
                 <label for="user_criterion_attributes_male_true" class="custom-radio-btn male-radio-btn my_gender" id="user_male_lable"></label>
-                <%= c.radio_button :male,false,{:checked=>!@user.demographic.male, :class=>"my_gender lhc-radio-btn"} %>
+                <%= c.radio_button :male,false,{:checked=>!@user.criterion.male, :class=>"my_gender lhc-radio-btn"} %>
                 <!--<%#= c.label :male,' ',:class=>"custom-radio-btn female-radio-btn my_gender" %>-->
                 <label for="user_criterion_attributes_male_false" class="custom-radio-btn female-radio-btn my_gender" id="user_female_lable"></label>
               </div>
