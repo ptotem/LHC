@@ -40,7 +40,9 @@
                   <div class="col-sm-8 col-lg-8 col-lg-offset-1">
                     <h6 class="white">Name</h6>
                     <%= d.text_field :name,:value=>@user.demographic.name, :placeholder=>"Name", :class=>"form-control" %>
-                    <span class="help-block">A block of help text that breaks onto a new line.</span>
+                    <span class="help-block">
+                      <%= get_content_for("nameHelperText")%>
+                    </span>
                   </div>
                 </div>
 
@@ -49,7 +51,9 @@
                 <div class="col-sm-8 col-lg-8 col-lg-offset-1">
                   <h6 class="white">Nickname</h6>
                   <%= d.text_field :nickname, :value=>@user.demographic.nickname, :placeholder=>"Nickname", :class=>"form-control" %>
-                  <span class="help-block">A block of help text that breaks onto a new line.</span>
+                  <span class="help-block">
+                    <%= get_content_for("nicknameHelperText")%>
+                  </span>
                 </div>
               </div>
 
