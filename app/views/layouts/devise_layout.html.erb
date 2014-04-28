@@ -10,6 +10,7 @@
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
+<%= js add_gritter(devise_error_messages!, :image => :error, :title => "Errors!", :sticky => false,:time => 10000  ,:position=>:bottom_left,:class_name => "gritter_style"  ) %>
 <body>
 
 <div id="fb-root"></div>
@@ -112,7 +113,7 @@
   <div class="custom-container">
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <%= js add_gritter(devise_error_messages!, :image => :error, :title => "Errors!", :sticky => false,:time => 10000  ,:position=>:bottom_left,:class_name => "gritter_style"  ) %>
+        <%#= js add_gritter(devise_error_messages!, :image => :error, :title => "Errors!", :sticky => false,:time => 10000  ,:position=>:bottom_left,:class_name => "gritter_style"  ) %>
 
 
         <!--BxSlider-->
@@ -190,7 +191,7 @@
 <%= render "generic_partials/message_section" %>
 
 <%= render "generic_partials/bottom_section" %>
-<%= js add_gritter(flash[:notice], :image => '/assets/bulb_48_48.png', :title => "Notification!", :sticky => false,:time => 10000  ,:position=>:bottom_left,:class_name => "gritter_style"  ) %>
+<%#= js add_gritter(flash[:notice], :image => '/assets/bulb_48_48.png', :title => "Notification!", :sticky => false,:time => 10000  ,:position=>:bottom_left,:class_name => "gritter_style"  ) %>
 </body>
 
 <!--<script src="js/jquery.bxslider.min.js"></script>-->
