@@ -64,7 +64,7 @@ module ApplicationHelper
 
   def timer_countdown(id)
     u=User.find(id)
-    if u.last_matched_time.nil?
+    if u.last_matched_time.nil? || ((((u.last_matched_time+3.days).to_i - Time.now.to_i)/3600) <= 0)
       "X"
     else
       ((u.last_matched_time+3.days).to_i - Time.now.to_i)/3600
