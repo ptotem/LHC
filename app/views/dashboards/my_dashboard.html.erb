@@ -27,7 +27,7 @@
     <% @like_requests.each do |e| %>
         <div class="row">
           <div class="col-lg-12 whiteblock">
-            <div class="left-part"><img class="img-circle profile_pic_thumbnail" src="<%= get_user_image(e.sender_id) %>"></div>
+            <div class="left-part"><img class="profile_pic_thumbnail" src="<%= get_user_image(e.sender_id) %>"></div>
             <div class="mid-part">
               <div class="recentactivitytext">
                 <a><%= User.find(e.sender_id).demographic.name %></a> sent you a Like request
@@ -58,7 +58,7 @@
     <% current_user.notifications.reverse!.each do |notification| %>
         <div class="row">
           <div class="col-lg-12 whiteblock">
-            <div class="left-part"><img class="img-circle profile_pic_thumbnail" src="/assets/profile_pic.jpg"></div>
+            <div class="left-part"><img class="profile_pic_thumbnail" src="/assets/profile_pic.jpg"></div>
             <div class="mid-part">
               <div class="recentactivitytext">
                 <!--Your Match <a>Sagarika</a> sent you a message-->
@@ -77,14 +77,13 @@
 
 </div>
 <div class="col-lg-3 text-center">
-  <% if !current_user.last_matched_time.nil? %>
       <div class="row">
         <div class="col-lg-12">
           <div class="countdown">
             <div class="row">
               <div class="col-lg-12">
                 <div class="countdowntext">
-                  <%= timer_countdown(current_user.id) %>
+                    <%= timer_countdown(current_user.id) %>
                 </div>
               </div>
             </div>
@@ -114,7 +113,7 @@
           </div>
         </div>
       </div>
-  <% end %>
+
 
   <div class="row">
     <div class="col-lg-12">

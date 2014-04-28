@@ -27,7 +27,7 @@ class IceBreakersController < ApplicationController
   def create
 
     question_count = 0
-    @ice_breaker = IceBreaker.create!(:receiver_id=>params[:ice_breaker][:receiver_id],:sender_id=>params[:ice_breaker][:sender_id])
+    @ice_breaker = IceBreaker.create!(:receiver_id=>params[:ice_breaker][:receiver_id],:sender_id=>params[:ice_breaker][:sender_id],:ice_status => true)
     params[:ice_breaker][:questions].each do |q|
     if q[1].to_i == 1
       question_count = question_count+1
@@ -86,7 +86,7 @@ class IceBreakersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ice_breaker_params
-      params.require(:ice_breaker).permit(:sender_id, :receiver_id, :questions)
+      params.require(:ice_breaker).permit(:sender_id, :receiver_id, :questions,:ice_status)
       #params[:ice_breaker,:sender_id,:receiver_id,:questions]
     end
 end

@@ -28,6 +28,11 @@ class IcebreakerAnswersController < ApplicationController
     @ice=IceBreaker.find(params[:icebreaker_answer][:ice_breaker_id])
     @question=Question.find(params[:icebreaker_answer][:question_id])
     @next_question = (@ice.questions.map(&:id) - @ice.icebreaker_answers.map(&:question_id)  - [@question.id])
+    @ice.icebreaker_answers.each do |s|
+      s.ice_ans_status=true
+      s.save
+    end
+
     if @next_question == []
       redirect_to authenticated_root_path,:alert=>"Successfully given ice breaker response"
       return
@@ -79,6 +84,6 @@ class IcebreakerAnswersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def icebreaker_answer_params
-      params.require(:icebreaker_answer).permit(:ice_breaker_id, :question_id, :user_id, :answer_id)
+      params.require(:icebreaker_answer).permit(:ice_breaker_id, :question_id, :user_id, :answer_id,:ice_ans_status)
     end
 end
