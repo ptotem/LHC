@@ -40,7 +40,9 @@
                   <div class="col-sm-8 col-lg-8 col-lg-offset-1">
                     <h6 class="white">Name</h6>
                     <%= d.text_field :name,:value=>@user.demographic.name, :placeholder=>"Name", :class=>"form-control" %>
-                    <span class="help-block">A block of help text that breaks onto a new line.</span>
+                    <span class="help-block">
+                      <%= get_content_for("nameHelperText")%>
+                    </span>
                   </div>
                 </div>
 
@@ -49,7 +51,9 @@
                 <div class="col-sm-8 col-lg-8 col-lg-offset-1">
                   <h6 class="white">Nickname</h6>
                   <%= d.text_field :nickname, :value=>@user.demographic.nickname, :placeholder=>"Nickname", :class=>"form-control" %>
-                  <span class="help-block">A block of help text that breaks onto a new line.</span>
+                  <span class="help-block">
+                    <%= get_content_for("nicknameHelperText")%>
+                  </span>
                 </div>
               </div>
 
@@ -111,6 +115,14 @@
               <% end %>
             </div>
             </div>
+
+
+            <div class="form-group">
+              <div class="col-sm-8 col-lg-8 col-lg-offset-1">
+                <h6 class="white" style="float: left">Am I current student?</h6>
+                <span style="margin-left: 2%; position: relative; top: 5px;"><%= d.check_box :current_student %></span>
+              </div>
+            </div>
         </section>
 
       <section id="pswd">
@@ -169,7 +181,7 @@
 
             <div class="form-group">
               <div class="col-sm-8 col-lg-8 col-lg-offset-1">
-                <h6 class="white">I am looking for</h6>
+                <h6 class="white">Hobbies</h6>
                 <%= f.collection_select(:hobby_list_ids, HobbyList.order('name ASC').all, :id, :name, {:include_blank => false}, {:multiple => true, :class=>"multiple"}) %>
               </div>
             </div>
@@ -222,9 +234,9 @@
             <div class="form-group">
               <div class="col-sm-2 col-lg-2 col-lg-offset-1">
                 <h6 class="white">Gender</h6>
-                <%= c.radio_button :male,true, {:checked=>@user.demographic.male, :class=>"my_gender lhc-radio-btn"} %>
+                <%= c.radio_button :male,true, {:checked=>@user.criterion.male, :class=>"my_gender lhc-radio-btn"} %>
                 <label for="user_criterion_attributes_male_true" class="custom-radio-btn male-radio-btn my_gender" id="user_male_lable"></label>
-                <%= c.radio_button :male,false,{:checked=>!@user.demographic.male, :class=>"my_gender lhc-radio-btn"} %>
+                <%= c.radio_button :male,false,{:checked=>!@user.criterion.male, :class=>"my_gender lhc-radio-btn"} %>
                 <!--<%#= c.label :male,' ',:class=>"custom-radio-btn female-radio-btn my_gender" %>-->
                 <label for="user_criterion_attributes_male_false" class="custom-radio-btn female-radio-btn my_gender" id="user_female_lable"></label>
               </div>

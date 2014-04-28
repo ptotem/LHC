@@ -69,6 +69,8 @@ class QuizCategoriesController < ApplicationController
   def take_test
     @quiz_answer = QuizAnswer.new
     @quiz=Quiz.find(params[:id])
+    @total_questions = @quiz.questions.map(&:id).count
+    @current_question_index = @quiz.questions.map(&:id)
     @question=Question.find(params[:question_id])
     @next_question = (@quiz.questions - [@question])[0]
   end

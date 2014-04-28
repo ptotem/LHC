@@ -186,16 +186,30 @@ class DemographicsController < ApplicationController
   def search_book_db
     #@book_search_text = "The Wings of Fire"
     @book_search_text = params['book_search_text'][0]
-    client = Goodreads::Client.new(:api_key => 'WsRZQw8XBqoIQpHQuG0wMQ', :api_secret => '49eUFUgkFHYyskIKTMTCsbn6XkA0ssr4U9Wp61pC0b8')
+
+    #Nilesh - keys - starts
+    #client = Goodreads::Client.new(:api_key => 'WsRZQw8XBqoIQpHQuG0wMQ', :api_secret => '49eUFUgkFHYyskIKTMTCsbn6XkA0ssr4U9Wp61pC0b8')
+    #Nilesh - keys - ends
+
+    #LHC - keys - starts
+    client = Goodreads::Client.new(:api_key => '7KevzEgkysKmnWgBJEdBQ', :api_secret => 'aQ5WjXkeQdPVdZ7cMDOyA36A1z3C1GVuqWzmUnzOs')
+    #LHC - keys - ends
+
     search = client.search_books(@book_search_text)
     @books_hash = Hash.new
-    #render :json => search.results
+    #render :json => search.results.blank?
     #return
-    search.results.work.each_with_index do |book,index|
-      @books_hash[index] = {"title"=>book.best_book.title, "id" => book.id, "author"=>book.best_book.author.name, "image"=>book.best_book.small_image_url}
+
+    if !search.results.blank?
+      search.results.work.each_with_index do |book,index|
+        @books_hash[index] = {"title"=>book.best_book.title, "id" => book.id, "author"=>book.best_book.author.name, "image"=>book.best_book.small_image_url}
+      end
+      render :json => @books_hash
+      return
+    else
+      render :json => "No Book found."
+      return
     end
-    render :json =>@books_hash
-    return
 
   end
 
@@ -259,7 +273,7 @@ class DemographicsController < ApplicationController
     #def demographic_params
     def demographic_params
       #params[:demographic]
-      params.require(:demographic).permit(:name, :male, :religion,:nickname, :smoking, :drinking,:country, :city,:dob,:id)
+      params.require(:demographic).permit(:name, :male, :religion,:nickname, :smoking, :drinking,:country, :city,:dob,:id,:current_student)
     end
 
 end
