@@ -11,6 +11,8 @@
   <%= csrf_meta_tags %>
 </head>
 <%= js add_gritter(devise_error_messages!, :image => :error, :title => "Errors!", :sticky => false,:time => 10000  ,:position=>:bottom_left,:class_name => "gritter_style"  ) %>
+<%= js add_gritter( flash[:alert] , :image => :error, :title => "Errors!", :sticky => false,:time => 10000  ,:position=>:bottom_left,:class_name => "gritter_style"  ) %>
+
 <body>
 
 <div id="fb-root"></div>
