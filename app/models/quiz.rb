@@ -11,7 +11,6 @@ class Quiz < ActiveRecord::Base
       total_score = total_score + Option.find(a.answer_id).score
     end
     total_score
-
   end
 
 end
