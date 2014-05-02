@@ -182,7 +182,7 @@ padding:10px;
 
 .countdowntext{
     /*margin-top: 45%;*/
-    font-size: 5em;
+    font-size: 4em;
     text-align: center;
     /*padding-top: 32%;*/
     color: #38c8e0;
@@ -192,7 +192,7 @@ padding:10px;
 .countdowntexthr{
     color: #38c8e0;
     text-align: center;
-    margin-top: 18%;
+    margin-top: -18%;
 
 }
 

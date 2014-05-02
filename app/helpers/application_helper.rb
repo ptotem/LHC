@@ -59,7 +59,8 @@ module ApplicationHelper
   end
 
   def timer_countdown(id)
-    User.find(id).last_matched_time + 3.days
+    ((User.find(id).last_matched_time+3.days).to_i - Time.now.to_i)/3600
+
   end
 
 

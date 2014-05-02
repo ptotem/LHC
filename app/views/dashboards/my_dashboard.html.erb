@@ -7,7 +7,7 @@
     Welcome, <%= current_user.demographic.name %>
 <% end %>
 <%= content_for(:page_header) do %>
-    Have a great time !<%= timer_countdown(current_user.id).strftime("%H") %>
+    Have a great time !
 <% end %>
 
 
@@ -77,42 +77,45 @@
 
 </div>
 <div class="col-lg-3 text-center">
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="countdown">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="countdowntext" style="font-size: 0.8em">
+  <% if !current_user.last_matched_time.nil? %>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="countdown">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="countdowntext">
+                  <%= timer_countdown(current_user.id) %>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="countdowntexthr">
+                  Hours
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="countdown1">
+            <div class="countdowntext1">
+              Remaining
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="match_text">
+            Check your matches now!
+          </div>
+        </div>
+      </div>
+  <% end %>
 
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="countdowntexthr">
-              Hours
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="countdown1">
-        <div class="countdowntext1">
-          Remaining
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="match_text">
-        Check your matches now!
-      </div>
-    </div>
-  </div>
   <div class="row">
     <div class="col-lg-12">
       <a href="#"><i class="fa fa-envelope fa-3x white iconstyle" data-toggle="modal" data-target="#email_modal"></i></a>
