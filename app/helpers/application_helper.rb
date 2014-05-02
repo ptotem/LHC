@@ -42,6 +42,25 @@ module ApplicationHelper
     end
   end
 
+  def get_user_age(id)
+    User.find(id).age
+  end
+
+  def get_user_gender(id)
+    if User.find(id).demographic.male?
+      "Male"
+    else
+      "Female"
+    end
+  end
+
+  def get_user_location(id)
+    User.find(id).demographic.location
+  end
+
+  def timer_countdown(id)
+    User.find(id).last_matched_time + 3.days
+  end
 
 
 

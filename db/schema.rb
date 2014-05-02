@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140421113729) do
+ActiveRecord::Schema.define(version: 20140428111918) do
 
   create_table "about_lists", force: true do |t|
     t.string   "name"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 20140421113729) do
     t.boolean  "drinking_fit"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "match_status"
   end
 
   create_table "books", force: true do |t|
@@ -398,6 +399,7 @@ ActiveRecord::Schema.define(version: 20140421113729) do
     t.string   "verification_text"
     t.boolean  "verified"
     t.string   "current_route",          default: "/fill_dob"
+    t.datetime "last_matched_time"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree

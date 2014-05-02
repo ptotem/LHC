@@ -15,22 +15,22 @@
 
 
       <ul class="list-inline portfolio text-center">
-        <% 9.times do |test_ans_option| %>
+        <% @current_user_quick_matches.each do |m| %>
             <li data-tag="graphics">
-              <div class=" test-thumbs">
-                <img src="/assets/portfolio1.jpg" class="img-responsive" alt="Image Size 430x280">
-                <a href="#">
-                  <span class="title"><span class="match_age">24,Female<br><br>Mumbai</span></span>
+              <div class=" test-thumbs" >
+                <img src="<%= get_user_image(m.target_id) %>" class="img-responsive" alt="Image Size 430x280">
+                <a href="<%= user_profile_path(m.target_id) %>">
+                  <span class="title"><span class="match_age"><%= get_user_age(m.target_id) %>,<%= get_user_gender(m.target_id) %><br><br><%= get_user_location(m.target_id) %></span></span>
                 </a>
               </div>
 
               <div class="project-title margin-30">
                 <div class="row" style="padding-left: 2%;">
                   <div class="col-lg-1 col-lg-offset-4">
-                    <i class="fa fa-thumbs-up icon_font_size thumb_up_color"></i>
+                    <button onclick="window.location = '<%= user_like_path(m.target_id) %>'" class="transparent-background-btn"><i class="fa fa-thumbs-up icon_font_size thumb_up_color"></i></button>
                   </div>
                   <div class="col-lg-1">
-                    <i class="fa fa-thumbs-down icon_font_size thumb_down_color"></i>
+                    <button onclick="window.location = '<%= reject_request_url(m.target_id) %>'" class="transparent-background-btn"><i class="fa fa-thumbs-down icon_font_size thumb_down_color"></i></button>
                   </div>
                 </div>
               </div>

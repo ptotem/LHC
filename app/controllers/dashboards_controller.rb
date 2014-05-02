@@ -41,9 +41,10 @@ class DashboardsController < ApplicationController
       #return
     #end
 
-    if current_user.notifications.blank?
-      redirect_to user_profile_path(current_user.id)
-    end
+    @like_requests = Like.where(:receiver_id => current_user.id) rescue nil?
+    #if current_user.notifications.blank? and @like_requests.blank?
+    #  redirect_to user_profile_path(current_user.id)
+    #end
   end
 
   def user_verification
@@ -109,7 +110,21 @@ class DashboardsController < ApplicationController
 
 
   def quick_matches
-    @current_user_quick_matches = BaseMatch.where(:user_id=>current_user.id)
+  #if current_user.verified
+  #  current_user.update_match
+  #  render :text=>current_user.last_matched_time
+  #  return
+  #  render :text=>(Time.now - current_user.last_matched_time)/3600
+    if current_user.last_matched_time.nil? or (Time.now - current_user.last_matched_time)/3600 > 72
+      current_user.update_match_status
+      current_user.find_matches
+      current_user.update_match
+
+      puts "after 3 days"
+      #current_user.save!
+    end
+  #end
+    @current_user_quick_matches = BaseMatch.where(:user_id=>current_user.id,:match_status => true)
     #render :json => @current_user_quick_matches
     #return
   end
@@ -233,6 +248,7 @@ class DashboardsController < ApplicationController
       @like=Like.create(:receiver_id => @receiver_id,:sender_id => @sender_id,:status => false)
       #render :text => "Request  Sent"
       #return
+      #Notification.create!(:content=>"#{current_user.demographic.name} has sent you a like request.", :user_id=>@receiver_id, :pointer_link=>user_profile_path(current_user.id))
       redirect_to user_profile_path(@receiver_id),:notice=>"Like request sent !"
       return
     end

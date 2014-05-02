@@ -7,7 +7,7 @@
     Welcome, <%= current_user.demographic.name %>
 <% end %>
 <%= content_for(:page_header) do %>
-    Have a great time !
+    Have a great time !<%= timer_countdown(current_user.id).strftime("%H") %>
 <% end %>
 
 
@@ -24,25 +24,24 @@
 
 
   <div class="recent-activity-list">
-    <% Like.where(:receiver_id => current_user.id).each do |e| %>
+    <% @like_requests.each do |e| %>
         <div class="row">
           <div class="col-lg-12 whiteblock">
             <div class="left-part"><img class="img-circle profile_pic_thumbnail" src="<%= get_user_image(e.sender_id) %>"></div>
             <div class="mid-part">
               <div class="recentactivitytext">
-                Your Match <a><%= User.find(e.sender_id).demographic.name %></a> sent you a Like request
+                <a><%= User.find(e.sender_id).demographic.name %></a> sent you a Like request
 
               </div>
             </div>
             <div class="right-part">
               <div class="recentactivitydate">
-                15th April 2014
+                <%= e.created_at.strftime("%d %B %Y") %>
                 <div class="pull-right">
 
 
                   <% if e.status %>
                       <button onclick="window.location = '<%= reject_request_url(e.id) %>'" class="transparent-background-btn"><i class="fa fa-thumbs-down red fa-3x"></i></button>
-
                       <% else %>
                       <button onclick="window.location = '<%= accept_request_url(e.id) %>'" class="transparent-background-btn"><i class="fa fa-thumbs-up blue fa-3x"></i></button>
                       <% end %>
@@ -83,8 +82,8 @@
       <div class="countdown">
         <div class="row">
           <div class="col-lg-12">
-            <div class="countdowntext">
-              9
+            <div class="countdowntext" style="font-size: 0.8em">
+
             </div>
           </div>
         </div>
