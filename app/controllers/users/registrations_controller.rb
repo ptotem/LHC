@@ -35,8 +35,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
       if params[:user][:current_password].blank?
         if @user.update(params.require(:user).permit(:username,:email,:validate_username,:avatar,:current_route, :avatar_cache, :remove_avatar, :demographic_attributes=>[:id,:male, :name,:nickname,:dob,:smoking,:drinking,:location,:religion,:avatar, :description, :goal,:last_institute], :criterion_attributes=>[:id,:male,:minage,:maxage,:smoking,:drinking], :attendances_attributes=>[:user_id, :institution_id], :hobby_list_ids=>[], :about_list_ids=>[], :profession_attributes=>[:name]))
           sign_in @user, :bypass => true
-          format.html { redirect_to authenticated_root_path, notice: 'Your profile was successfully updated.' }
-          #format.html { redirect_to user_profile_path(@user.id), notice: 'Your profile was successfully updated.' }
+          #format.html { redirect_to authenticated_root_path, notice: 'Your profile was successfully updated.' }
+          format.html { redirect_to user_profile_path(@user.id), notice: 'Your profile was successfully updated.' }
           format.json { head :no_content }
         else
           format.html { redirect_to edit_profile_path(@user.id), notice: 'Password Incorrect.' }

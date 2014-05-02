@@ -10,7 +10,7 @@
 <% end %>
 
 <%= content_for(:page_header) do %>
-    Edit Profile
+
 <% end %>
 
 
@@ -26,134 +26,201 @@
         <%= form_for @user, :url => { :controller => "users/registrations", :action => "update" }, :html => { :method => :post,:class => "form-horizontal" } do |f| %>
 
 
-      <section id="demo_graphic">
-          <%= f.fields_for :demographic do |d| %>
-                <div class="form-group">
-                  <div class="col-sm-8 col-lg-8">
+      <section id="about_user">
+        <div class="form-group">
+            <div class="col-lg-11">
+              <h1  style="font-weight:normal;border-bottom:1px solid white; color:white;padding-top: 1%;padding-bottom: 1%;padding-left: 1%;">About</h1>
+            </div>
+        </div>
 
+
+          <%= f.fields_for :demographic do |d| %>
+
+                <div class="form-group">
+                  <div class="col-sm-8 col-lg-8 col-lg-offset-1">
+                    <h6 class="white">Name</h6>
                     <%= d.text_field :name,:value=>@user.demographic.name, :placeholder=>"Name", :class=>"form-control" %>
-                    <span class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span>
+                    <span class="help-block">A block of help text that breaks onto a new line.</span>
                   </div>
                 </div>
 
 
               <div class="form-group">
-                <div class="col-sm-8 col-lg-8">
+                <div class="col-sm-8 col-lg-8 col-lg-offset-1">
+                  <h6 class="white">Nickname</h6>
                   <%= d.text_field :nickname, :value=>@user.demographic.nickname, :placeholder=>"Nickname", :class=>"form-control" %>
-                  <span class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span>
+                  <span class="help-block">A block of help text that breaks onto a new line.</span>
                 </div>
               </div>
 
-
-              <div class="form-group">
-                <div class="col-sm-8 col-lg-8">
-                  <!--TODO: why html and not rails helper ?? Nilesh-->
-                  <%= d.label :Picture %>
-                  <!--<label>Picture</label>-->
+            <div class="form-group">
+              <div class="col-sm-8 col-lg-8 col-lg-offset-1">
+                  <h6 class="white">Picture</h6>
                   <%= d.file_field :avatar,:class=>"form-control12" %>
-                </div>
               </div>
+            </div>
+
+              <div class="form-group">
+                  <div class="col-sm-8 col-lg-8 col-lg-offset-1">
+                    <h6 class="white">Date of Birth</h6>
+                    <%= d.date_select :dob, { :order => [:day, :month, :year], :start_year => (Time.now.year-64), :end_year => (Time.now.year-18),:selected=>@user.demographic.dob}, {:class => "lhc_chosen"} %>
+                  </div>
+              </div>
+
+            <div class="form-group">
+              <div class="col-sm-3 col-lg-2 col-lg-offset-1">
+                <h6 class="white">Gender</h6>
+                <%= d.radio_button :male,true, {:checked=>@user.demographic.male, :class=>"my_gender lhc-radio-btn"} %>
+                <label for="user_demographic_attributes_male_true" class="custom-radio-btn male-radio-btn my_gender" id="user_male_lable"></label>
+                <%= d.radio_button :male,false,{:checked=>!@user.demographic.male, :class=>"my_gender lhc-radio-btn"} %>
+                <label for="user_demographic_attributes_male_false" class="custom-radio-btn female-radio-btn my_gender" id="user_female_lable"></label>
+              </div>
+
+              <div class="col-sm-4 col-lg-3">
+                <h6 class="white">Smoking</h6>
+                <%= d.select :smoking, ['Never','Socially','Often'], {:selected => @user.demographic.smoking }, { :class => 'lhc_chosen' } %>
+              </div>
+
+              <div class="col-sm-4 col-lg-3">
+                <h6 class="white">Drinking</h6>
+                <%= d.select :drinking, ['Never','Socially','Often'], {:selected => @user.demographic.drinking }, { :class => 'lhc_chosen' } %>
+              </div>
+            </div>
+
+
+            <div class="form-group">
+              <div class="col-sm-8 col-lg-8 col-lg-offset-1">
+                <h6 class="white">Location</h6>
+                <%= d.text_field :location, :value=>@user.demographic.location,:placeholder=>"Type in the location...", :class=>"form-control location" %>
+              </div>
+            </div>
+
+
+            <div class="form-group">
+              <div class="col-sm-8 col-lg-8 col-lg-offset-1">
+                <h6 class="white">Religion</h6>
+                <%= d.text_field :religion, :placeholder=>"Religion",:value => @user.demographic.religion, :class=>"form-control" %>
+              </div>
+            </div>
+
+            <div class="form-group">
+            <div class="col-sm-8 col-lg-8 col-lg-offset-1">
+              <h6 class="white">Profession</h6>
+              <%= f.fields_for :profession do |p| %>
+                  <%= p.text_field :name , :placeholder=>"Profession",:class=>"form-control" %>
+              <% end %>
+            </div>
+            </div>
+        </section>
+
+      <section id="pswd">
+            <div class="form-group">
+              <div class="col-lg-11">
+                <h1  style="font-weight:normal;border-bottom:1px solid white; color:white;padding-top: 1%;padding-bottom: 1%;padding-left: 1%;">Password</h1>
+              </div>
+            </div>
 
 
               <div class="form-group">
-                <div class="col-sm-8 col-lg-8">
+                <div class="col-sm-8 col-lg-8 col-lg-offset-1">
+                  <h6 class="white">Current Password</h6>
                   <%= f.password_field :current_password, :placeholder=>"Current Password", :class=>"form-control" %>
                 </div>
               </div>
 
 
               <div class="form-group">
-                <div class="col-sm-8 col-lg-8">
+                <div class="col-sm-8 col-lg-8 col-lg-offset-1">
+                  <h6 class="white">Password</h6>
                   <%= f.password_field :password, :autocomplete => "off", :placeholder=>"New Password", :class=>"form-control" %>
                 </div>
               </div>
 
               <div class="form-group">
-                <div class="col-sm-8 col-lg-8">
+                <div class="col-sm-8 col-lg-8 col-lg-offset-1">
+                  <h6 class="white">Password Confirmation</h6>
                   <%= f.password_field :password_confirmation, :placeholder=>"Confirm New Password", :class=>"form-control" %>
                 </div>
               </div>
-
-              <div class="form-group">
-                <div class="col-sm-8 col-lg-8">
-                  <h6 class="white">Date of Birth</h6>
-                  <%= d.date_select :dob, { :order => [:day, :month, :year], :start_year => (Time.now.year-64), :end_year => (Time.now.year-18),:selected=>@user.demographic.dob}, {:class => "lhc_chosen"} %>
-                </div>
-              </div>
-
-              <div class="form-group">
-                  <div class="col-sm-3 col-lg-2">
-                    <h6 class="white">Gender</h6>
-                    <%= d.radio_button :male,true, {:checked=>@user.demographic.male, :class=>"my_gender lhc-radio-btn"} %>
-                    <label for="user_demographic_attributes_male_true" class="custom-radio-btn male-radio-btn my_gender" id="user_male_lable"></label>
-                    <%= d.radio_button :male,false,{:checked=>!@user.demographic.male, :class=>"my_gender lhc-radio-btn"} %>
-                    <label for="user_demographic_attributes_male_false" class="custom-radio-btn female-radio-btn my_gender" id="user_female_lable"></label>
-                </div>
-                  <div class="col-sm-4 col-lg-3">
-                    <h6 class="white">Smoking</h6>
-                    <%= d.select :smoking, ['Never','Socially','Often'], {:selected => @user.demographic.smoking }, { :class => 'lhc_chosen' } %>
-                  </div>
-                  <div class="col-sm-4 col-lg-3">
-                    <h6 class="white">Drinking</h6>
-                    <%= d.select :drinking, ['Never','Socially','Often'], {:selected => @user.demographic.drinking }, { :class => 'lhc_chosen' } %>
-                  </div>
-              </div>
-
-
-              <div class="form-group">
-                <div class="col-sm-4 col-lg-8">
-                  <%= d.text_field :location, :value=>@user.demographic.location,:placeholder=>"Type in the location...", :class=>"form-control location" %>
-                </div>
-              </div>
-
-
-              <div class="form-group">
-                <div class="col-sm-8 col-lg-8">
-                  <%= d.text_field :religion, :placeholder=>"Religion",:value => @user.demographic.religion, :class=>"form-control" %>
-                </div>
-              </div>
-
       </section>
 
       <section id="about_myself">
-              <h4>About Myself</h4><hr>
+
+        <div class="form-group">
+          <div class="col-lg-11">
+            <h1  style="font-weight:normal;border-bottom:1px solid white; color:white;padding-top: 1%;padding-bottom: 1%;padding-left: 1%;">About Me</h1>
+          </div>
+        </div>
+
               <div class="form-group" id="myself">
-                <div class="col-sm-8 col-lg-8">
+                <div class="col-sm-8 col-lg-8 col-lg-offset-1">
+                  <h6 class="white">A few words about me...</h6>
                   <%= d.text_area :description , :placeholder=>"A few words about me...",:class=>"form-control" %>
                 </div>
               </div>
 
               <div class="form-group">
-                <div class="col-sm-8 col-lg-8">
+                <div class="col-sm-8 col-lg-8 col-lg-offset-1">
+                  <h6 class="white">In next 5 years, I would be...</h6>
                   <%= d.text_area :goal , :placeholder=>"In next 5 years, I would be...",:class=>"form-control" %>
                 </div>
               </div>
+
+
+            <div class="form-group">
+              <div class="col-sm-8 col-lg-8 col-lg-offset-1">
+                <h6 class="white">I am looking for</h6>
+                <%= f.collection_select(:hobby_list_ids, HobbyList.order('name ASC').all, :id, :name, {:include_blank => false}, {:multiple => true, :class=>"multiple"}) %>
+              </div>
+            </div>
+
+
+            <div class="form-group">
+              <div class="col-sm-8 col-lg-8 col-lg-offset-1">
+                <h6 class="white" >What Friends Say About Me</h6>
+                <%= f.collection_select(:about_list_ids, AboutList.order('name ASC').all, :id, :name, {:include_blank => false}, {:multiple => true, :class=>"multiple"}) %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-sm-4 col-lg-4 col-lg-offset-1">
+                <h6 class="white" >Others</h6>
+                <textarea class="form-control" rows="3" placeholder="Others"></textarea>
+              </div>
+            </div>
+
+
+            <div class="form-group">
+              <div class="col-sm-8 col-lg-8 col-lg-offset-1">
+                <h6 class="white">Institution</h6>
+                <%#= f.fields_for :attendances do |a| %>
+                <%#= a.collection_select(:institution_id, Institution.all, :id, :name,{}, {:class=>"lhc_chosen"}) %>
+                <%# end %>
+                <%= f.collection_select(:institution_ids, Institution.order('name ASC').all, :id, :name, {:include_blank => false}, {:multiple => true, :class=>"multiple"}) %>
+              </div>
+
+              <!--<div class="col-sm-4 col-lg-4">-->
+              <!--<%#= f.fields_for :profession do |p| %>-->
+              <!--<%#= p.text_field :name , :placeholder=>"Profession",:class=>"form-control" %>-->
+              <!--<%# end %>-->
+              <!--</div>-->
+            </div>
       </section>
       <% end %>
 
 
-          <div class="form-group">
-            <div class="col-sm-4 col-lg-4">
-              <%#= f.fields_for :attendances do |a| %>
-                  <%#= a.collection_select(:institution_id, Institution.all, :id, :name,{}, {:class=>"lhc_chosen"}) %>
-              <%# end %>
-              <%= f.collection_select(:institution_ids, Institution.order('name ASC').all, :id, :name, {:include_blank => false}, {:multiple => true, :class=>"multiple"}) %>
-            </div>
+      <section id="looking_for">
 
-            <div class="col-sm-4 col-lg-4">
-              <%= f.fields_for :profession do |p| %>
-                  <%= p.text_field :name , :placeholder=>"Profession",:class=>"form-control" %>
-              <% end %>
-            </div>
+        <div class="form-group">
+          <div class="col-lg-11">
+            <h1  style="font-weight:normal;border-bottom:1px solid white; color:white;padding-top: 1%;padding-bottom: 1%;padding-left: 1%;">Looking For</h1>
           </div>
+        </div>
 
-        <section id="cri_terion">
-
-          <h4>Looking For</h4><hr>
             <%= f.fields_for :criterion do |c| %>
 
             <div class="form-group">
-              <div class="col-sm-3 col-lg-3">
+              <div class="col-sm-2 col-lg-2 col-lg-offset-1">
                 <h6 class="white">Gender</h6>
                 <%= c.radio_button :male,true, {:checked=>@user.demographic.male, :class=>"my_gender lhc-radio-btn"} %>
                 <label for="user_criterion_attributes_male_true" class="custom-radio-btn male-radio-btn my_gender" id="user_male_lable"></label>
@@ -161,12 +228,21 @@
                 <!--<%#= c.label :male,' ',:class=>"custom-radio-btn female-radio-btn my_gender" %>-->
                 <label for="user_criterion_attributes_male_false" class="custom-radio-btn female-radio-btn my_gender" id="user_female_lable"></label>
               </div>
+
+                <div class="col-sm-3 col-lg-3">
+                  <h6 class="white">Smoking</h6>
+                  <%= c.select :smoking, ['Never','Socially','Often'], {:selected => @user.criterion.smoking }, { :class => 'lhc_chosen' } %>
+                </div>
+                <div class="col-sm-3 col-lg-3">
+                  <h6 class="white">Drinking</h6>
+                  <%= c.select :drinking, ['Never','Socially','Often'], {:selected => @user.criterion.drinking }, { :class => 'lhc_chosen' } %>
+                </div>
             </div>
 
                 <div class="form-group">
                     <% min_age = 18..28 %>
                     <% max_age = 22..36 %>
-                  <div class="col-sm-4 col-lg-4">
+                  <div class="col-sm-4 col-lg-4 col-lg-offset-1">
                     <h6 class="white">Age From</h6>
                     <%= c.select(:minage, min_age.collect {|d| [d.to_s,d.to_s]},{:selected => @user.criterion.minage}, {:class=>"lhc_chosen"}) %>
                   </div>
@@ -176,77 +252,56 @@
                     <%= c.select(:maxage, max_age.collect {|d| [d.to_s,d.to_s]},{:selected => @user.criterion.maxage}, {:class=>"lhc_chosen"}) %>
                   </div>
                 </div>
-
-
-
-              <div class="form-group">
-                <div class="col-sm-4 col-lg-4">
-                  <h6 class="white">Smoking</h6>
-                  <%= c.select :smoking, ['Never','Socially','Often'], {:selected => @user.criterion.smoking }, { :class => 'lhc_chosen' } %>
-                </div>
-                <div class="col-sm-4 col-lg-3 col-lg-offset-1">
-                  <h6 class="white">Drinking</h6>
-                  <%= c.select :drinking, ['Never','Socially','Often'], {:selected => @user.criterion.drinking }, { :class => 'lhc_chosen' } %>
-                </div>
-              </div>
-
             <% end %>
           </section>
 
 
-           <div class="form-group">
-             <div class="col-sm-8 col-lg-8">
-                 <p class="white">I am looking for</p>
-                 <%= f.collection_select(:hobby_list_ids, HobbyList.order('name ASC').all, :id, :name, {:include_blank => false}, {:multiple => true, :class=>"multiple"}) %>
-             </div>
-           </div>
 
 
-          <div class="form-group">
-             <div class="col-sm-8 col-lg-8">
-               <p class="white" >What Friends Say About Me </p>
-                 <%= f.collection_select(:about_list_ids, AboutList.order('name ASC').all, :id, :name, {:include_blank => false}, {:multiple => true, :class=>"multiple"}) %>
-             </div>
-           </div>
 
 
-          <div class="form-group">
-            <div class="col-sm-4 col-lg-4">
-              <textarea class="form-control" rows="3" placeholder="Others"></textarea>
+      <section id="more">
+        <div class="form-group">
+          <div class="col-lg-11">
+            <h1  style="font-weight:normal;border-bottom:1px solid white; color:white;padding-top: 1%;padding-bottom: 1%;padding-left: 1%;">More</h1>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-8 col-lg-8 col-lg-offset-1">
+            <div class="ui-widget">
+              <h6 class="white">Search Movie</h6>
+              <input id="movie_search_textfield" class="form-control">
             </div>
           </div>
+        </div>
 
-          <div class="form-group">
-            <div class="col-sm-8 col-lg-8">
-              <div class="ui-widget">
-                <h6 class="white">Search Movie</h6>
-                <input id="movie_search_textfield" class="form-control">
-              </div>
+        <div class="form-group">
+          <div class="col-sm-8 col-lg-8 col-lg-offset-1">
+            <div class="ui-widget">
+              <h6 class="white">Search Music</h6>
+              <input id="music_search_textfield" class="form-control">
             </div>
           </div>
+        </div>
 
-          <div class="form-group">
-            <div class="col-sm-8 col-lg-8">
-              <div class="ui-widget">
-                <h6 class="white">Search Music</h6>
-                <input id="music_search_textfield" class="form-control">
-              </div>
+        <div class="form-group">
+          <div class="col-sm-8 col-lg-8 col-lg-offset-1">
+            <div class="ui-widget">
+              <h6 class="white">Search Book</h6>
+              <input id="books_search_textfield" class="form-control">
             </div>
           </div>
+        </div>
 
-          <div class="form-group">
-            <div class="col-sm-8 col-lg-8">
-              <div class="ui-widget">
-                <h6 class="white">Search Book</h6>
-                <input id="books_search_textfield" class="form-control">
-              </div>
-            </div>
+        <div class="form-group row">
+          <div class="col-sm-8 col-lg-8 col-lg-offset-1" id="user_books_wrapper">
           </div>
+        </div>
+      </section>
 
-          <div class="form-group row">
-            <div class="col-sm-8 col-lg-8" id="user_books_wrapper">
-            </div>
-          </div>
+
+
 
 
           <!--<div class="form-group">-->
