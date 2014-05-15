@@ -1,3 +1,7 @@
+body{
+    font-family: 'Open Sans',sans-serif;
+}
+
 .whiteblock{
     background-color: #FFFFFF;
     height: 80px;
@@ -74,7 +78,7 @@
     color:#3E4549;
     text-align: right;
     font-size: 1.3em;
-
+    margin-top: -50px;
 }
 
 .page-left
@@ -82,7 +86,7 @@
     display: inline-block;
     width: 20%;
     padding:2.5%;
-    padding-left:4%
+    padding-left:4%;
  }
 
 .page-right
@@ -154,8 +158,19 @@ padding:10px;
     margin-right: 1%;
     margin-top: 1.5%;
 }
-
-
+.custom-title-blue {
+    background: url("/assets/icons/arrow-blue.png") no-repeat scroll left 15px bottom #3E4549;
+    padding-bottom: 15px;
+    margin-top:-37px;
+    font-family: 'Open Sans', sans-serif;
+}
+.custom-title-blue-text {
+    color: #FFFFFF;
+    font-size: 28px;
+    font-weight: 300;
+    letter-spacing: -2px;
+    line-height: 58px;
+}
 
 .blue-background {
     background: #38c8e0;

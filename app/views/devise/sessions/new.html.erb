@@ -2,9 +2,9 @@
 
 <!--<section id="sign_in_section">-->
         <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => "form-horizontal"}) do |f| %>
-            <%= devise_error_messages! %>
 
-            <div class="control-group">
+
+         <div class="control-group">
               <div class="controls">
                 <div class="row">
                   <%= f.email_field :email, :autofocus => true, :class => "input-xlarge col-xs-8 col-xs-offset-2", :placeholder => "Email" %>

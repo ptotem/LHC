@@ -71,7 +71,6 @@
       <% QuizCategory.all.each do |e|  %>
           <p class="p_text"><%= e.quizzes.first.calculate_total_score_for(params[:id])%></p>
       <% end %>
-
     </div>
 
 
