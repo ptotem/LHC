@@ -12,6 +12,8 @@
    Global Styles styles
    ========================================================================== */
 
+
+
 h1, h2, h3, h4, h5, h6, p {
     font-family: 'Open Sans', sans-serif;
 }
@@ -27,7 +29,7 @@ h1 {
 h2 {
     font-size: 32px;
     line-height: 34px;
-    letter-spacing: -2px;
+    /*letter-spacing: -2px;*/
     font-weight: 300;
     color: #ffffff;
 }
@@ -256,7 +258,7 @@ iframe {
 }
 
 .navbar-brand {
-    margin-top: 20px;
+    margin-top: 0px;
 }
 
 .navbar-inverse .btn-navbar {
@@ -522,15 +524,23 @@ li.sign-up:hover {
     padding-top: 10%;
 }
 
+/* ==========================================================================
+   title-blue & title-white style change on may-15
+   ========================================================================== */
 .title-blue {
     background: url("/assets/icons/arrow-blue.png") no-repeat scroll left 15px bottom #3E4549;
     padding-bottom: 15px;
-    margin-top:-25px;
+    margin-top:-43px;
+    font-family: 'Open Sans', sans-serif;
 }
+ .blue-white-titel-font-size{
+     font-size: 26px;
+ }
 
 .title-white {
     background: url("/assets/icons/arrow.png") no-repeat scroll left 15px bottom #3E4549;
-    padding-bottom: 30px;
+    margin-top: -26px;
+    padding-bottom: 13px
 }
 
 #blue-container {

@@ -11,140 +11,226 @@
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 
   <%= csrf_meta_tags %>
+
+
+
+  <style>
+      /*#black_row {*/
+          /*position: absolute;*/
+          /*left: 0px;*/
+          /*top: 100px;*/
+          /*background-color: black;*/
+          /*height: 100%;*/
+          /*width: 102%;*/
+          /*opacity: 0.7;*/
+          /*z-index: 100;*/
+
+          /*display:none;*/
+      /*}*/
+
+      /*#first_arrow {*/
+          /*position: absolute;*/
+          /*top: 110px;*/
+          /*left: 790px;*/
+          /*z-index: 999;*/
+      /*}*/
+
+      /*#second_arrow {*/
+          /*position: absolute;*/
+          /*top: 110px;*/
+          /*left: 1010px;*/
+          /*z-index: 999;*/
+      /*}*/
+
+      /*#third_arrow {*/
+          /*position: absolute;*/
+          /*top: 365px;*/
+          /*left: 250px;*/
+          /*z-index: 999;*/
+      /*}*/
+
+      /*#fourth_arrow {*/
+          /*position: absolute;*/
+          /*top: 440px;*/
+          /*left: 250px;*/
+          /*z-index: 999;*/
+      /*}*/
+
+
+  </style>
 </head>
-<%= js add_gritter(flash[:notice], :image => '/assets/bulb_48_48.png', :title => "Notification!", :sticky => false,:time => 10000  ,:position=>:bottom_left,:class_name => "gritter_style"  ) %>
+<%= js add_gritter(flash[:notice], :image => '/assets/bulb_48_48.png', :title => "Notification!", :sticky => false, :time => 10000, :position => :bottom_left, :class_name => "gritter_style") %>
 <body>
 
-    <%= render "generic_partials/topbar" %>
+<%= render "generic_partials/topbar" %>
 
-    <!--Page Title-->
-    <section id="page-title">
-    <!--<section id="user_name_section">-->
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 title-blue">
-           <h2> <%= yield(:dialogue_bar_header) %></h2>
-            <!--<h2>Welcome, <%#= current_user.demographic.name %></h2>-->
-          </div>
-        </div>
+<!--Page Title-->
+<section id="page-title" style="position:relative;">
+  <!--<section id="user_name_section">-->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 title-blue">
+        <h2 class="blue-white-titel-font-size"> <%= yield(:dialogue_bar_header) %></h2>
+        <!--<h2>Welcome, <%#= current_user.demographic.name %></h2>-->
       </div>
-    </section>
+    </div>
+  </div>
+</section>
 
-    <!--dashboard_section-->
-    <!--<section id="blue-container" style="padding-top: 0;overflow-x: hidden;">-->
-    <section id="blue-container" style="padding-top: 0;overflow-x: hidden;overflow-y: hidden">
+<!--dashboard_section-->
+<!--<section id="blue-container" style="padding-top: 0;overflow-x: hidden;">-->
+<section id="blue-container" style="padding-top: 0;overflow-x: hidden;overflow-y: hidden;position:relative;">
 
+  <div class="row">
+    <div class="page-left">
+      <%= yield(:left_menu) %>
+      <%#= params[:action] %>
+      <% @which_action %>
+      <% case params[:action] %>
+      <% when "profile" %>
+          <% @which_action = "profile" %>
+      <% when "quick_matches" %>
+          <% @which_action = "quick_matches" %>
+      <% when "mutual_likes" %>
+          <% @which_action = "mutual_likes" %>
+      <% when "conversations" %>
+          <% @which_action = "conversations" %>
+      <% when "snazzmeup" %>
+          <% @which_action = "snazzmeup" %>
+      <% when "start_ice_breaker" %>
+          <% @which_action = "start_ice_breaker" %>
+      <% when "younme" %>
+          <% @which_action = "younme" %>
+      <% when "send_message" %>
+          <% @which_action = "send_message" %>
+      <% end %>
+    </div>
+    <div class="page-right">
       <div class="row">
-        <div class="page-left">
-          <%= yield(:left_menu) %>
-          <%#= params[:action] %>
-          <% @which_action %>
-          <% case params[:action] %>
-          <% when "profile" %>
-              <% @which_action = "profile" %>
-          <% when "quick_matches" %>
-              <% @which_action = "quick_matches" %>
-          <% when "mutual_likes" %>
-              <% @which_action = "mutual_likes" %>
-          <% when "conversations" %>
-              <% @which_action = "conversations" %>
-          <% when "snazzmeup" %>
-              <% @which_action = "snazzmeup" %>
-          <% when "start_ice_breaker" %>
-              <% @which_action = "start_ice_breaker" %>
-          <% when "younme" %>
-              <% @which_action = "younme" %>
-          <% when "send_message" %>
-              <% @which_action = "send_message" %>
-        <% end %>
+        <div class="col-lg-12 col-md-8 col-sm-8 col-xs-8 page-header1">
+          <%= yield(:page_header) %>
         </div>
-        <div class="page-right">
-          <div class="row" >
-            <div class="col-lg-12 col-md-8 col-sm-8 col-xs-8 page-header1">
-              <%= yield(:page_header) %>
-            </div>
-          </div>
-          <div class="row" style="margin-top: 0%">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      </div>
+      <div class="row" style="margin-top: 0%">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
           <%= yield %>
-             </div>
-             </div>
-        </div>
-
-      </div>
-
-
-      <!--<div class="row">-->
-        <!--<div class="col-lg-3" style="padding: 6%;padding-top: 1%">-->
-          <!--<%#= yield(:left_menu) %>-->
-
-       <!--</div>-->
-        <!--<div class="col-lg-9" style="height:100%" >-->
-          <!--<%#= yield %>-->
-
-        <!--</div>-->
-      <!--</div>-->
-
-
-
-
-
-
-      <!--<div class="row">-->
-        <!--<div class="col-lg-12" id="footer_color">-->
-        <!--</div>-->
-      <!--</div>-->
-    </section>
-
-    <section id="footer" style="background-color: #FFFFFF">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 text-center">
-            <p></p>
-          </div>
         </div>
       </div>
-    </section>
+    </div>
+
+  </div>
+
+
+  <!--<div class="row">-->
+  <!--<div class="col-lg-3" style="padding: 6%;padding-top: 1%">-->
+  <!--<%#= yield(:left_menu) %>-->
+
+  <!--</div>-->
+  <!--<div class="col-lg-9" style="height:100%" >-->
+  <!--<%#= yield %>-->
+
+  <!--</div>-->
+  <!--</div>-->
+
+
+  <!--<div class="row">-->
+  <!--<div class="col-lg-12" id="footer_color">-->
+  <!--</div>-->
+  <!--</div>-->
+</section>
+
+<section id="footer" style="background-color: #FFFFFF">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <p></p>
+      </div>
+    </div>
+  </div>
+</section>
+<!--<div id="first_arrow">-->
+  <!--<img src="/assets/arrow_top.png" height="70px; width:70px;" style="opacity:1;margin-left: 50px;">-->
+
+  <!--<p class="white"> Click to go Dashbord Page</p>-->
+<!--</div>-->
+
+<!--<div id="second_arrow">-->
+  <!--<img src="/assets/arrow_top.png" height="70px; width:70px;" style="opacity:1;margin-left: 50px;">-->
+
+  <!--<p class="white"> Click to go Contact Page</p>-->
+<!--</div>-->
+
+<!--<div id="third_arrow">-->
+  <!--<img src="/assets/arroww.png" height="50px; width:50px;" style="opacity:1;">-->
+
+  <!--<p class="white" style="margin-left: 20px;"> Click to go Profile Page</p>-->
+<!--</div>-->
+
+<!--<div id="fourth_arrow">-->
+  <!--<img src="/assets/arroww.png" height="50px; width:50px;" style="opacity:1;">-->
+
+  <!--<p class="white" style="margin-left: 20px;"> Click to go matches Page</p>-->
+<!--</div>-->
+
+<!--<div style="position: absolute;top:310px;left:1060px;z-index: 999;">-->
+  <!--<img src="/assets/arrow.png" height="50px; width:50px;" style="opacity:1;margin-left: 40px;">-->
+
+  <!--<p class="white"> Click to go <br>matches Page</p>-->
+<!--</div>-->
+
+<!--<div style="position: absolute;top:580px;left:1060px;z-index: 999;">-->
+  <!--<img src="/assets/arrow.png" height="50px; width:50px;" style="opacity:1;margin-left: 40px;">-->
+
+  <!--<p class="white"> Click to go<br> quizs</p>-->
+<!--</div>-->
+
+<!--<div class="row" id="black_row">-->
+<!--</div>-->
+
 
 </body>
 
+
 <script>
     //TODO: try another way for active button
-    $(function(){
-        //console.log("<%= @which_action %>");
+    $(function () {
+        //console.log("
+        <%= @which_action %>");
         var action = "<%= @which_action %>";
-        if ( action == "profile" ) {
+        if (action == "profile") {
             $('.buttonmenu').removeClass('active-btn');
             $('#profile_btn').addClass('active-btn');
         }
-        else if ( action == "quick_matches" ) {
+        else if (action == "quick_matches") {
             $('.buttonmenu').removeClass('active-btn');
             $('#matches_btn').addClass('active-btn');
         }
-        else if ( action == "mutual_likes" ) {
+        else if (action == "mutual_likes") {
             $('.buttonmenu').removeClass('active-btn');
             $('#mutual_likes_btn').addClass('active-btn');
         }
-        else if ( action == "conversations" ) {
+        else if (action == "conversations") {
             $('.buttonmenu').removeClass('active-btn');
             $('#conversation_btn').addClass('active-btn');
         }
-        else if ( action == "snazzmeup" ) {
+        else if (action == "snazzmeup") {
             $('.buttonmenu').removeClass('active-btn');
             $('#snazz_me_up_btn').addClass('active-btn');
         }
-        else if ( action == "start_ice_breaker" ) {
+        else if (action == "start_ice_breaker") {
             $('.buttonmenu').removeClass('active-btn');
             $('#send_icebreaker_btn').addClass('active-btn');
         }
-        else if ( action == "younme" ) {
+        else if (action == "younme") {
             $('.buttonmenu').removeClass('active-btn');
             $('#you_n_me_btn').addClass('active-btn');
         }
-        else if ( action == "send_message" ) {
+        else if (action == "send_message") {
             $('.buttonmenu').removeClass('active-btn');
             $('#send_message_btn').addClass('active-btn');
         }
     })
+
+
 </script>
 </html>
