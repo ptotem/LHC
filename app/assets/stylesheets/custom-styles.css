@@ -77,3 +77,24 @@
     background-image: url('/assets/landing_page_carasoul_bg.jpg');
     background-size: 100% 100%;
 }
+
+#overlapping-div{
+    background-color: #000000;
+    height: 805px;
+    left: 15px;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    opacity: 0.4;
+    z-index: 9999;
+    display: none;
+}
+
+
+#inst_div {
+    position: absolute;
+    top: 386px;
+    left: 250px;
+    z-index: 9999;
+    color: white
+}

@@ -106,12 +106,22 @@
       </div>
     </section>
 
+    <div class="row" id="overlapping-div">
+      <div id="inst_div">
+        <%= image_tag "left_arrow.png", :id=>"instruction_arrow_image", :style => "width: 60%;" %>
+        <p id="goto_link">Click here to go to Profile</p>
+      </div>
+    </div>
+
 </body>
 
 <script>
     //TODO: try another way for active button
     $(function(){
         //console.log("<%= @which_action %>");
+
+        //display_interactive_howto();
+
         var action = "<%= @which_action %>";
         if ( action == "profile" ) {
             $('.buttonmenu').removeClass('active-btn');
@@ -145,6 +155,98 @@
             $('.buttonmenu').removeClass('active-btn');
             $('#send_message_btn').addClass('active-btn');
         }
+
+
+        var escape_keypress = false;
+
+        $("body").keydown(function (e) {
+
+            // escape key press
+            if ((e.keyCode || e.which) == 27) {
+                $("#inst_div").stop();
+                $('#overlapping-div').hide();
+                //console.log(e);
+//                if (escape_keypress==false){
+//
+//                    escape_keypress=true;
+//                }
+//                else if (escape_keypress==true){
+//
+//                    escape_keypress=false;
+//                }
+
+            }
+
+
+        });
+
+
+
+
     })
+
+    function display_interactive_howto(){
+        $('#overlapping-div').show();
+        setTimeout(function() {
+            $("#inst_div").animate({
+                top: "503"
+            }, 800);
+            $("#goto_link").text("Click here to go to Profile");
+            setTimeout(function() {
+                $("#inst_div").animate({
+                    top: "+=55"
+                }, 800);
+                $("#goto_link").text("Click here to go to Matches");
+            }, 3000);
+            setTimeout(function() {
+                $("#inst_div").animate({
+                    top: "+=55"
+                }, 800);
+                $("#goto_link").text("Click here to go to Mutual Likes");
+            }, 5000);
+            setTimeout(function() {
+                $("#inst_div").animate({
+                    top: "+=50"
+                }, 800);
+                $("#goto_link").text("Click here to go to Conversations");
+            }, 7000);
+            setTimeout(function() {
+                $("#inst_div").animate({
+                    top: "+=40"
+                }, 800);
+                $("#goto_link").text("Click here to go to Snaz Me Up!");
+            }, 9000);
+            setTimeout(function() {
+                $("#inst_div").animate({
+                    top: "75",
+                    left: "750"
+                }, 800);
+                //TODO: change img src
+                $('#instruction_arrow_image').attr('src','/assets/top_arrow.png');
+                $("#goto_link").text("Click here to go to Dashboard");
+            }, 11000);
+            setTimeout(function() {
+                $("#inst_div").animate({
+                    left: "+=120"
+                }, 800);
+                $("#goto_link").text("Click here to go to Contact Page");
+            }, 13000);
+            setTimeout(function() {
+                $("#inst_div").animate({
+                    top: "298",
+                    left: "918"
+                }, 800);
+                $('#instruction_arrow_image').attr('src','/assets/right_arrow.png');
+                $("#goto_link").text("Click here to see time remaining.");
+            }, 15000);
+            setTimeout(function() {
+                $("#inst_div").animate({
+                    top: "550",
+                    left: "918"
+                }, 800);
+                $("#goto_link").text("Click here to see quizzes.");
+            }, 17000);
+        }, 500);
+    }
 </script>
 </html>
