@@ -36,11 +36,13 @@ class IcebreakerAnswersController < ApplicationController
     end
 
 
-
+    #render :json =>  @next_question
+    #return
     respond_to do |format|
       if @icebreaker_answer.save!
         if @next_question == []
-          redirect_to authenticated_root_path,:alert=>"Successfully given ice breaker response"
+          redirect_to authenticated_root_path, :notice=>"Now its your turn to send an Ice-breaker."
+          #format.html { redirect_to authenticated_root_path, notice: 'Now its your turn to send an Ice-breaker.' }
           return
         else
           @next_question = @next_question[0]
