@@ -11,7 +11,7 @@
 
 <div class="row" id="younme_1strow">
   <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" id="you_col">
-    <img src="/assets/female.png"  id="you_img">
+    <img src="/assets/female.png" id="you_img">
 
     <p id="you_text">You</p>
   </div>
@@ -36,44 +36,34 @@
   <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 
     <img src="/assets/male.png" id="me_img">
-  <p id="me_text">Me</p>
+
+    <p id="me_text">Me</p>
 
   </div>
 
   <div class="row">
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 first_box">
-      <% QuizCategory.all.each do |e|  %>
+      <% QuizAnswer.where("user_id = ? OR user_id = ?",current_user.id,params[:id]).map { |i| Question.find(i.question_id).quizzes }.flatten.uniq.each do |e| %>
           <p class="p_text"><%= e.name %></p>
       <% end %>
     </div>
 
     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 scnd_box">
-      <br>
-      <i class="fa fa-foursquare fa-3x blue icon_position"></i>
-
-      <p class="secend_boxtext">Common Test</p>
-      <i class="fa fa-foursquare fa-3x icon_position"></i>
-
-      <p class="secend_boxtext">Common Test</p>
-      <i class="fa fa-foursquare fa-3x icon_position"></i>
-
-      <p class="secend_boxtext">Common Test</p>
-      <i class="fa fa-foursquare fa-3x icon_position"></i>
-
-      <p class="secend_boxtext">Common Test</p>
-
-
-    </div>
-
-
-    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 trd_box">
-
-      <% QuizCategory.all.each do |e|  %>
-          <p class="p_text"><%= e.quizzes.first.calculate_total_score_for(params[:id])%></p>
+      <% QuizAnswer.where("user_id = ? OR user_id = ?",current_user.id,params[:id]).map { |i| Question.find(i.question_id).quizzes }.flatten.uniq.each do |e| %>
+          <p class="secend_boxtext">
+            <%= QuizResult.where("quiz_id = ? and ? BETWEEN min_value AND max_value", e.id, e.calculate_total_score_for(current_user.id)).first.name rescue "NA"%> |
+            <%= QuizResult.where("quiz_id = ? and ? BETWEEN min_value AND max_value", e.id, e.calculate_total_score_for(params[:id])).first.name %>
+          </p>
+          <!--<i class="fa fa-foursquare fa-3x icon_position"></i>-->
       <% end %>
     </div>
 
 
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 trd_box">
+      <% QuizAnswer.where("user_id = ? OR user_id = ?",current_user.id,params[:id]).map { |i| Question.find(i.question_id).quizzes }.flatten.uniq.each do |e| %>
+            <p class="p_text"><%= e.calculate_total_score_for(current_user.id) rescue "NA" %> | <%= e.calculate_total_score_for(params[:id]) rescue "NA" %></p>
+      <% end %>
+    </div>
   </div>
 
 </div>
