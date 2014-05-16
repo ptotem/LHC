@@ -16,28 +16,37 @@ class DemographicsController < ApplicationController
   end
 
   def profile
-    @user = User.find(params[:id])
-    @user_name = @user.demographic.name
-    @user_nick_name = @user.demographic.nickname
-    if @user.demographic.male?
-      @user_gender = "Male"
-    else
-      @user_gender = "Female"
-    end
-    @user_age = @user.age rescue nil
-    @user_religion = @user.demographic.religion rescue ""
-    @user_smoking = @user.demographic.smoking rescue ""
-    @user_drinking = @user.demographic.drinking rescue ""
-    @user_desc = @user.demographic.description rescue ""
-    @user_location = @user.demographic.location rescue ""
-    @user_goal = @user.demographic.goal rescue ""
-    @user_profession = @user.profession.name rescue ""
-    @user_last_institute_id = @user.demographic.last_institute rescue nil?
-    @user_last_institute_name = Institution.find(@user_last_institute_id).name rescue ""
+    if !User.where(:id=>params[:id]).first.nil?
+      #@user = User.find(params[:id])
+        @user = User.where(:id=>params[:id]).first
+        @user_name = @user.demographic.name
+        @user_nick_name = @user.demographic.nickname
+        if @user.demographic.male?
+          @user_gender = "Male"
+        else
+          @user_gender = "Female"
+        end
+        @user_age = @user.age rescue nil
+        @user_religion = @user.demographic.religion rescue ""
+        @user_smoking = @user.demographic.smoking rescue ""
+        @user_drinking = @user.demographic.drinking rescue ""
+        @user_desc = @user.demographic.description rescue ""
+        @user_location = @user.demographic.location rescue ""
+        @user_goal = @user.demographic.goal rescue ""
+        @user_profession = @user.profession.name rescue ""
+        @user_last_institute_id = @user.demographic.last_institute rescue nil?
+        @user_last_institute_name = Institution.find(@user_last_institute_id).name rescue ""
 
-    #render :text => @user_last_institute_name
-    #return
-    @user_email = @user.email
+        #render :text => @user_last_institute_name
+        #return
+        @user_email = @user.email
+    else
+      #redirect_to user_profile_path(current_user.id)
+      respond_to do |format|
+          format.html { redirect_to user_profile_path(current_user.id), notice: 'User not found.' }
+      end
+    end
+
   end
 
   def edit_profile
