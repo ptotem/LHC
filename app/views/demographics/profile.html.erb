@@ -321,7 +321,13 @@
 
 
 </section>
-<input class="btn btn-main red-btn" type="submit" value="send a coffee request" name="commit" data-toggle="modal" data-target=".bs-example-modal-sm">
+
+<% if params[:id].to_s!=current_user.id.to_s %>
+    <br>
+    <input class="btn btn-main red-btn" type="submit" value="Send a coffee request" name="commit" data-toggle="modal" data-target=".bs-example-modal-sm">
+<% end %>
+
+
 
 <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm">
