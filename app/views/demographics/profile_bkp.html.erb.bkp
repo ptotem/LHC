@@ -16,9 +16,9 @@
     Your profile
 <% end %>
 
-<%#= content_for(:page_header) do %>
-    <!--Profile-->
-<%# end %>
+<%= content_for(:page_header) do %>
+    Profile
+<% end %>
 
 
 
@@ -46,10 +46,10 @@
 
 <div class="row">
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-    <ul class="nav nav-tabs" style="margin-bottom: 15px; border-bottom: none">
-      <li class="active"><a href="#basic-info" data-toggle="tab" style="outline: none; border-top-left-radius: 10px; border-top-right-radius: 10px;">Basic Info</a></li>
-      <li class=""><a href="#interests" data-toggle="tab" style="outline: none; border-top-left-radius: 10px; border-top-right-radius: 10px;">Interests</a></li>
-      <li class=""><a href="#quiz" data-toggle="tab" style="outline: none; border-top-left-radius: 10px; border-top-right-radius: 10px;">Quiz</a></li>
+    <ul class="nav nav-tabs" style="margin-bottom: 15px;">
+      <li class="active"><a href="#basic-info" data-toggle="tab">Basic Info</a></li>
+      <li class=""><a href="#interests" data-toggle="tab">Interests</a></li>
+      <li class=""><a href="#quiz" data-toggle="tab">Quiz</a></li>
     </ul>
 
     <div id="myTabContent" class="tab-content">
@@ -252,7 +252,6 @@
                 </div>
               </div>
           <% end %>
-
         </div>
 
 
@@ -351,90 +350,79 @@
         </section>
         </div>
         <div class="tab-pane fade tabs-content-background" id="interests">
+          <h3>Music i like</h3>
           <div class="row">
-            <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9" style="background-color: #FFFFFF; padding-bottom: 2%">
-              <div class="row">
-                <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11">
-                  <div class="black" style="font-size: 1.7em;padding: 2% 0 0 2%;">Music i like</div>
-                  <div id="music-caraousel-container">
-                    <ul id="music-caraousel">
-                      <li class="music-item">
-                        <%= image_tag("eminem-poster.jpg") %>
-                        <div class="music-item-name">Eminem</div>
-                        <div class="music-item-category">Pop Singer</div>
-                      </li>
-                      <li class="music-item">
-                        <%= image_tag("eminem-poster.jpg") %>
-                        <div class="music-item-name">Eminem</div>
-                        <div class="music-item-category">Pop Singer</div>
-                      </li>
-                      <li class="music-item">
-                        <%= image_tag("eminem-poster.jpg") %>
-                        <div class="music-item-name">Eminem</div>
-                        <div class="music-item-category">Pop Singer</div>
-                      </li>
-                      <li class="music-item">
-                        <%= image_tag("eminem-poster.jpg") %>
-                        <div class="music-item-name">Eminem</div>
-                        <div class="music-item-category">Pop Singer</div>
-                      </li>
-                      <li class="music-item">
-                        <%= image_tag("eminem-poster.jpg") %>
-                        <div class="music-item-name">Eminem</div>
-                        <div class="music-item-category">Pop Singer</div>
-                      </li>
-                      <li class="music-item">
-                        <%= image_tag("eminem-poster.jpg") %>
-                        <div class="music-item-name">Eminem</div>
-                        <div class="music-item-category">Pop Singer</div>
-                      </li>
-                      <li class="music-item">
-                        <%= image_tag("eminem-poster.jpg") %>
-                        <div class="music-item-name">Eminem</div>
-                        <div class="music-item-category">Pop Singer</div>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11">
-                  <div class="black" style="font-size: 1.7em;padding: 2% 0 0 2%;">Movies i like</div>
-                  <div id="movies-caraousel-container">
-                    <ul id="movies-caraousel">
-                      <li class="movie-item">
-                        <%= image_tag("lord_of_the_rings_poster.jpg") %>
-                        <div class="movie-item-name">Lord of The Rings</div>
-                        <div class="movie-item-category">English Movie</div>
-                      </li>
-                      <li class="movie-item">
-                        <%= image_tag("lord_of_the_rings_poster.jpg") %>
-                        <div class="movie-item-name">Lord of The Rings</div>
-                        <div class="movie-item-category">English Movie</div>
-                      </li>
-                      <li class="movie-item">
-                        <%= image_tag("lord_of_the_rings_poster.jpg") %>
-                        <div class="movie-item-name">Lord of The Rings</div>
-                        <div class="movie-item-category">English Movie</div>
-                      </li>
-                      <li class="movie-item">
-                        <%= image_tag("lord_of_the_rings_poster.jpg") %>
-                        <div class="movie-item-name">Lord of The Rings</div>
-                        <div class="movie-item-category">English Movie</div>
-                      </li>
-                      <li class="movie-item">
-                        <%= image_tag("lord_of_the_rings_poster.jpg") %>
-                        <div class="movie-item-name">Lord of The Rings</div>
-                        <div class="movie-item-category">English Movie</div>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
+            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+              <div id="music-caraousel-container">
+                <ul id="music-caraousel">
+                  <li class="music-item">
+                    <img src="/assets/conflict.jpg">
+                    <div class="music-item-name">Item 1 Item 1 Item 1</div>
+                  </li>
+                  <li class="music-item">
+                    <img src="/assets/conflict.jpg">
+                    <div class="music-item-name">Item 2</div>
+                  </li>
+                  <li class="music-item">
+                    <img src="/assets/conflict.jpg">
+                    <div class="music-item-name">Item 3</div>
+                  </li>
+                  <li class="music-item">
+                    <img src="/assets/conflict.jpg">
+                    <div class="music-item-name">Item 4</div>
+                  </li>
+                  <li class="music-item">
+                    <img src="/assets/conflict.jpg">
+                    <div class="music-item-name">Item 5</div>
+                  </li>
+                  <li class="music-item">Item 6</li>
+                  <li class="music-item">Item 7</li>
+                  <li class="music-item">Item 8</li>
+                  <li class="music-item">Item 9</li>
+                  <li class="music-item">Item 10</li>
+                  <li class="music-item">Item 11</li>
+                  <li class="music-item">Item 12</li>
+                  <li class="music-item">Item 13</li>
+                  <li class="music-item">Item 14</li>
+                  <li class="music-item">Item 15</li>
+                  <li class="music-item">Item 16</li>
+                  <li class="music-item">Item 17</li>
+                  <li class="music-item">Item 18</li>
+                  <li class="music-item">Item 19</li>
+                  <li class="music-item">Item 20</li>
+                  <li class="music-item">Item 21</li>
+                </ul>
               </div>
             </div>
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-              <h4></h4>
+          </div>
+
+          <h3>Movies i like</h3>
+          <div class="row">
+            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+              <div id="movies-caraousel-container">
+                <ul id="movies-caraousel">
+                  <li class="movie-item">
+                    <img src="/assets/conflict.jpg">
+                    <div class="movie-item-name">Item 1 Item 1 Item 1</div>
+                  </li>
+                  <li class="movie-item">
+                    <img src="/assets/conflict.jpg">
+                    <div class="movie-item-name">Item 1 Item 1 Item 1</div>
+                  </li>
+                  <li class="movie-item">
+                    <img src="/assets/conflict.jpg">
+                    <div class="movie-item-name">Item 1 Item 1 Item 1</div>
+                  </li>
+                  <li class="movie-item">
+                    <img src="/assets/conflict.jpg">
+                    <div class="movie-item-name">Item 1 Item 1 Item 1</div>
+                  </li>
+                  <li class="movie-item">
+                    <img src="/assets/conflict.jpg">
+                    <div class="movie-item-name">Item 1 Item 1 Item 1</div>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>

@@ -52,7 +52,7 @@
       <% QuizAnswer.where("user_id = ? OR user_id = ?",current_user.id,params[:id]).map { |i| Question.find(i.question_id).quizzes }.flatten.uniq.each do |e| %>
           <p class="secend_boxtext">
             <%= QuizResult.where("quiz_id = ? and ? BETWEEN min_value AND max_value", e.id, e.calculate_total_score_for(current_user.id)).first.name rescue "NA"%> |
-            <%= QuizResult.where("quiz_id = ? and ? BETWEEN min_value AND max_value", e.id, e.calculate_total_score_for(params[:id])).first.name %>
+            <%= QuizResult.where("quiz_id = ? and ? BETWEEN min_value AND max_value", e.id, e.calculate_total_score_for(params[:id])).first.name rescue "NA"%>
           </p>
           <!--<i class="fa fa-foursquare fa-3x icon_position"></i>-->
       <% end %>
