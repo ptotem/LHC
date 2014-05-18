@@ -408,13 +408,13 @@ input[type="radio"] + .custom-radio-btn.opposite_user_gender {
 /*}*/
 
 
-#music-caraousel-container, #movies-caraousel-container {
+#music-caraousel-container, #movies-caraousel-container, #books-caraousel-container {
     overflow: auto;
     position: relative;
     width: 100%;
 }
 
-#music-caraousel, #movies-caraousel {
+#music-caraousel, #movies-caraousel, #books-caraousel {
     list-style: none outside none;
     margin: 0;
     padding: 0;
@@ -422,20 +422,20 @@ input[type="radio"] + .custom-radio-btn.opposite_user_gender {
     width: 20000em;
 }
 
-.music-item, .movie-item {
+.music-item, .movie-item, .book-item {
     display: inline-block;
     float: left;
     /*height: 125px;*/
-    margin: 10px 10px 45px 15px;
+    margin: 10px 7px 45px 7px;
     width: 145px;
 }
 
-.music-item img, .movie-item img {
+.music-item img, .movie-item img, .book-item img {
     /*height: 100%;*/
     width: 100%;
 }
 
-.music-item-name, .movie-item-name {
+.music-item-name, .movie-item-name, .book-item-name {
     color: #38C8E0;
     font-size: 0.9em;
     overflow: hidden;
@@ -444,7 +444,7 @@ input[type="radio"] + .custom-radio-btn.opposite_user_gender {
     white-space: nowrap;
 }
 
-.music-item-category, .movie-item-category{
+.music-item-category, .movie-item-category, .book-item-category{
     color: #000000;
     font-size: 0.9em;
     overflow: hidden;
@@ -463,3 +463,46 @@ input[type="radio"] + .custom-radio-btn.opposite_user_gender {
     /*padding: 0;*/
 /*}*/
 
+#edit-profile-books-caraousel-container, #edit-profile-movies-caraousel-container, #edit-profile-musics-caraousel-container {
+    background-color: #FFFFFF;
+    /*height: 445px;*/
+    height: auto;
+    margin-left: 10.5%;
+    overflow-y: auto;
+    position: relative;
+    width: 100%;
+}
+
+.edit-profile-books-caraousel-item, .edit-profile-movies-caraousel-item, .edit-profile-musics-caraousel-item {
+    display: inline-block;
+    margin: 1% 4% 1% 4%;
+    width: 108px;
+}
+
+.edit-profile-book-item, .edit-profile-movie-item, .edit-profile-music-item {
+    /*border: 1px solid #FF8C00;*/
+    /*height: 60px;*/
+    overflow: hidden;
+    width: 108px;
+}
+
+.edit-profile-book-item img, .edit-profile-movie-item img, .edit-profile-music-item img{
+    height: 100%;
+    width: 100%;
+}
+
+.edit-profile-book-item-name, .edit-profile-movie-item-name, .edit-profile-music-item-name {
+    color: #38C8E0;
+    font-size: 1em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.edit-profile-book-item-category-name, .edit-profile-movie-item-category-name, .edit-profile-music-item-category-name {
+    color: #000000;
+    font-size: 1em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

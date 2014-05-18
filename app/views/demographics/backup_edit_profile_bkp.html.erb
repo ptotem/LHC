@@ -284,23 +284,8 @@
                     <div class="col-sm-8 col-lg-8 col-lg-offset-1">
                       <div class="ui-widget">
                         <h6 class="white">Search Movie</h6>
-                        <!--<input id="movie_search_textfield" class="form-control">-->
-                        <%= text_field_tag 'movie_search_textfield', nil, placeholder: 'Enter search term...', :class=>"form-control" %>
+                        <input id="movie_search_textfield" class="form-control">
                       </div>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-12" id="edit-profile-movies-caraousel-container">
-                      <% @user.movies.each do |user_movie| %>
-                          <div class="edit-profile-movies-caraousel-item">
-                            <div class="edit-profile-movie-item">
-                              <%= image_tag user_movie.movie_poster.url %>
-                            </div>
-                            <div class="edit-profile-movie-item-name"><%= user_movie.name %></div>
-                            <div class="edit-profile-movie-item-category-name"><%= user_movie.release_date %></div>
-                          </div>
-                      <% end %>
                     </div>
                   </div>
 
@@ -308,25 +293,8 @@
                     <div class="col-sm-8 col-lg-8 col-lg-offset-1">
                       <div class="ui-widget">
                         <h6 class="white">Search Music</h6>
-                        <!--<input id="music_search_textfield" class="form-control">-->
-                        <%= text_field_tag 'music_search_textfield', nil, placeholder: 'Enter search term...', :class=>"form-control" %>
+                        <input id="music_search_textfield" class="form-control">
                       </div>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-12" id="edit-profile-musics-caraousel-container">
-
-                      <% @user.songs.each do |user_song| %>
-                          <div class="edit-profile-musics-caraousel-item">
-                            <div class="edit-profile-music-item">
-                              <%= image_tag user_song.song_poster %>
-                            </div>
-                            <div class="edit-profile-music-item-name"><%= user_song.name %></div>
-                            <!--<div class="edit-profile-music-item-category-name"><%#= user_song.author %></div>-->
-                          </div>
-                      <% end %>
-
                     </div>
                   </div>
 
@@ -334,28 +302,104 @@
                     <div class="col-sm-8 col-lg-8 col-lg-offset-1">
                       <div class="ui-widget">
                         <h6 class="white">Search Book</h6>
-                        <!--<input id="books_search_textfield" class="form-control">-->
-                        <%= text_field_tag 'books_search_textfield', nil, placeholder: 'Enter search term...', :class=>"form-control" %>
+                        <input id="books_search_textfield" class="form-control">
                       </div>
                     </div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-12" id="edit-profile-books-caraousel-container">
-
-                      <% @user.books.each do |user_book| %>
-                          <div class="edit-profile-books-caraousel-item">
-                            <div class="edit-profile-book-item">
-                              <%= image_tag user_book.cover %>
-                            </div>
-                            <div class="edit-profile-book-item-name"><%= user_book.name %></div>
-                            <div class="edit-profile-book-item-category-name"><%= user_book.author %></div>
-                          </div>
-                      <% end %>
-
+                      <!--<div class="edit-profile-books-caraousel-item">-->
+                        <!--<div class="edit-profile-book-item">-->
+                          <!--<%#= image_tag "wings_of_fire_poster.jpeg" %>-->
+                        <!--</div>-->
+                        <!--<div class="edit-profile-book-item-name">Wings of Fire by Dr. APJ Kamal</div>-->
+                        <!--<div class="edit-profile-book-item-category-name">Biography/Inspirational</div>-->
+                      <!--</div>-->
+                      <!--<div class="edit-profile-books-caraousel-item">-->
+                        <!--<div class="edit-profile-book-item">-->
+                          <!--<%#= image_tag "wings_of_fire_poster.jpeg" %>-->
+                        <!--</div>-->
+                        <!--<div class="edit-profile-book-item-name">Wings of Fire by Dr. APJ Kamal</div>-->
+                        <!--<div class="edit-profile-book-item-category-name">Biography/Inspirational</div>-->
+                      <!--</div>-->
+                      <!--<div class="edit-profile-books-caraousel-item">-->
+                        <!--<div class="edit-profile-book-item">-->
+                          <!--<%#= image_tag "wings_of_fire_poster.jpeg" %>-->
+                        <!--</div>-->
+                        <!--<div class="edit-profile-book-item-name">Wings of Fire by Dr. APJ Kamal</div>-->
+                        <!--<div class="edit-profile-book-item-category-name">Biography/Inspirational</div>-->
+                      <!--</div>-->
+                      <!--<div class="edit-profile-books-caraousel-item">-->
+                        <!--<div class="edit-profile-book-item">-->
+                          <!--<%#= image_tag "wings_of_fire_poster.jpeg" %>-->
+                        <!--</div>-->
+                        <!--<div class="edit-profile-book-item-name">Wings of Fire by Dr. APJ Kamal</div>-->
+                        <!--<div class="edit-profile-book-item-category-name">Biography/Inspirational</div>-->
+                      <!--</div>-->
+                      <!--<div class="edit-profile-books-caraousel-item">-->
+                        <!--<div class="edit-profile-book-item">-->
+                          <!--<%#= image_tag "wings_of_fire_poster.jpeg" %>-->
+                        <!--</div>-->
+                        <!--<div class="edit-profile-book-item-name">Wings of Fire by Dr. APJ Kamal</div>-->
+                        <!--<div class="edit-profile-book-item-category-name">Biography/Inspirational</div>-->
+                      <!--</div>-->
+                      <!--<div class="edit-profile-books-caraousel-item">-->
+                        <!--<div class="edit-profile-book-item">-->
+                          <!--<%#= image_tag "wings_of_fire_poster.jpeg" %>-->
+                        <!--</div>-->
+                        <!--<div class="edit-profile-book-item-name">Wings of Fire by Dr. APJ Kamal</div>-->
+                        <!--<div class="edit-profile-book-item-category-name">Biography/Inspirational</div>-->
+                      <!--</div>-->
+                      <!--<div class="edit-profile-books-caraousel-item">-->
+                        <!--<div class="edit-profile-book-item">-->
+                          <!--<%#= image_tag "wings_of_fire_poster.jpeg" %>-->
+                        <!--</div>-->
+                        <!--<div class="edit-profile-book-item-name">Wings of Fire by Dr. APJ Kamal</div>-->
+                        <!--<div class="edit-profile-book-item-category-name">Biography/Inspirational</div>-->
+                      <!--</div>-->
+                      <!--<div class="edit-profile-books-caraousel-item">-->
+                        <!--<div class="edit-profile-book-item">-->
+                          <!--<%#= image_tag "wings_of_fire_poster.jpeg" %>-->
+                        <!--</div>-->
+                        <!--<div class="edit-profile-book-item-name">Wings of Fire by Dr. APJ Kamal</div>-->
+                        <!--<div class="edit-profile-book-item-category-name">Biography/Inspirational</div>-->
+                      <!--</div>-->
+                      <!--<div class="edit-profile-books-caraousel-item">-->
+                        <!--<div class="edit-profile-book-item">-->
+                          <!--<%#= image_tag "wings_of_fire_poster.jpeg" %>-->
+                        <!--</div>-->
+                        <!--<div class="edit-profile-book-item-name">Wings of Fire by Dr. APJ Kamal</div>-->
+                        <!--<div class="edit-profile-book-item-category-name">Biography/Inspirational</div>-->
+                      <!--</div>-->
+                      <!--<div class="edit-profile-books-caraousel-item">-->
+                        <!--<div class="edit-profile-book-item">-->
+                          <!--<%#= image_tag "wings_of_fire_poster.jpeg" %>-->
+                        <!--</div>-->
+                        <!--<div class="edit-profile-book-item-name">Wings of Fire by Dr. APJ Kamal</div>-->
+                        <!--<div class="edit-profile-book-item-category-name">Biography/Inspirational</div>-->
+                      <!--</div>-->
+                      <!--<div class="edit-profile-books-caraousel-item">-->
+                        <!--<div class="edit-profile-book-item">-->
+                          <!--<%#= image_tag "wings_of_fire_poster.jpeg" %>-->
+                        <!--</div>-->
+                        <!--<div class="edit-profile-book-item-name">Wings of Fire by Dr. APJ Kamal</div>-->
+                        <!--<div class="edit-profile-book-item-category-name">Biography/Inspirational</div>-->
+                      <!--</div>-->
+                      <!--<div class="edit-profile-books-caraousel-item">-->
+                        <!--<div class="edit-profile-book-item">-->
+                          <!--<%#= image_tag "wings_of_fire_poster.jpeg" %>-->
+                        <!--</div>-->
+                        <!--<div class="edit-profile-book-item-name">Wings of Fire by Dr. APJ Kamal</div>-->
+                        <!--<div class="edit-profile-book-item-category-name">Biography/Inspirational</div>-->
+                      <!--</div>-->
                     </div>
                   </div>
 
+                  <div class="form-group row">
+                    <div class="col-sm-8 col-lg-8 col-lg-offset-1" id="user_books_wrapper">
+                    </div>
+                  </div>
                 </section>
 
               </div>
@@ -439,13 +483,11 @@
 
 
       $("#movie_search_textfield").autocomplete({
-          source: moviesNameTags,
-          select: AutoCompleteSelectHandler
+          source: moviesNameTags
       });
 
       $("#music_search_textfield").autocomplete({
-          source: musicNameTags,
-          select: AutoCompleteSelectHandler
+          source: musicNameTags
       });
 
       $("#books_search_textfield").autocomplete({
@@ -516,6 +558,39 @@
                   moviesNameTags.splice(0, moviesNameTags.length);
                   moviesJSON.splice(0, moviesJSON.length);
 
+//                  $.ajax({
+//                      url: "/search_movies_themoviedb",
+//                      type: "post",
+//                      async: false,
+//                      data: JSON.stringify(data),
+//                      contentType: "application/json",
+//                      success: function (data) {
+//                          var movie_name, movie_poster, movie_release_date, movie_id;
+//                          $.each(data, function (i, obj) {
+//                              movie_name = obj.title;
+//                              moviesNameTags.push(movie_name);
+//                              moviesJSON.push({"title":movie_name,"id":movie_id});
+//                              //moviesTags = jQuery.unique(moviesTags);
+//                          });
+//                      }
+//                  });
+
+//                  $.ajax({
+//                      url: "/search_movies_by_rovicorp",
+//                      type: "post",
+//                      async: false,
+//                      data: JSON.stringify(data),
+//                      contentType: "application/json",
+//                      success: function (data) {
+//                          var movie_name, movie_poster, movie_release_date, movie_id;
+//                          console.log(data);
+//                          $.each(data["autocompleteResponse"]["results"], function (i, obj) {
+//                              movie_name = obj;
+//                              moviesNameTags.push(movie_name);
+//                          })
+//                      }
+//                  });
+
                     $.ajax({
                       url: "/search_movies_by_rotten_tomatoes",
                       type: "post",
@@ -523,20 +598,14 @@
                       data: JSON.stringify(data),
                       contentType: "application/json",
                       success: function (data) {
-                          var movie_name, movie_poster, movie_release_date, movie_id, movie_description;
-                          //console.log(data);
-                          $.each(data["movies"], function (i, obj) {
-                              movie_name = obj.title;
-                              movie_id = obj.id;
-                              movie_poster = obj.posters.profile;
-                              movie_release_date = obj.release_dates.theater;
-                              moviesNameTags.push(movie_name);
-                              moviesJSON.push({"name":movie_name, "id":movie_id, "poster":movie_poster, "release_date":movie_release_date});
-                          })
-
+                          var movie_name, movie_poster, movie_release_date, movie_id;
+                          console.log(data);
+//                          $.each(data["autocompleteResponse"]["results"], function (i, obj) {
+//                              movie_name = obj;
+//                              moviesNameTags.push(movie_name);
+//                          })
                       }
                   });
-
 
 
               }
@@ -559,31 +628,25 @@
 
                   var data = {music_search_text: []};
                   data["music_search_text"].push(music_search_text);
+
                   musicNameTags.splice(0, musicNameTags.length);
-                  musicJSON.splice(0, musicJSON.length);
+                  //musicJSON.splice(0, musicJSON.length);
 
                   $.ajax({
-                      url: "/search_music_by_lastfm",
+                      url: "/search_music_db",
                       type: "post",
                       async: false,
                       data: JSON.stringify(data),
                       contentType: "application/json",
                       success: function (data) {
                           var music_name, music_poster, music_release_date, music_id;
-
-                          $.each(data, function (i, obj) {
-                              $.each(obj.trackmatches.track, function (k, objj) {
-                                  music_name = objj.name;
-                                  music_poster = objj.image[2]["#text"];
-                                  music_id = objj.mbid;
-                                  //console.log(objj.mbid)
-                                  musicNameTags.push(music_name);
-                                  musicJSON.push({"name":music_name, "id":music_id, "image":music_poster});
-                              });
+                          //console.log("data :- " + data["autocompleteResponse"]["results"]);
+                          $.each(data["autocompleteResponse"]["results"], function (i, obj) {
+                              music_name = obj;
+                              musicNameTags.push(music_name);
                           })
                       }
                   });
-
 
               }
           }
@@ -637,7 +700,7 @@
 
   function AutoCompleteSelectHandler(event, ui) {
       var which_ele = $(this).attr('id');
-      //console.log("which_ele :- " + which_ele);
+
       if (which_ele == "books_search_textfield") {
           var selected_book = ui.item.value;
           //console.log(selected_book);
@@ -652,102 +715,6 @@
                           '</div>';
 
                   $("#edit-profile-books-caraousel-container").append(book_item_html);
-
-                  //booksJSON.push({"title":book_name, "id":obj.id, "author":obj.author, "image":obj.image});
-                  var data = {book_name: [], book_id:[], book_poster:[], book_author:[]};
-                  data["book_name"].push(selected_book);
-                  data["book_id"].push(value.id);
-                  data["book_poster"].push(value.image);
-                  data["book_author"].push(value.author);
-
-                  $.ajax({
-                      url: "/add_user_book",
-                      type: "post",
-                      async: false,
-                      data: JSON.stringify(data),
-                      contentType: "application/json",
-                      success: function (data) {
-                          console.log(data);
-                      }
-                  });
-
-              }
-          });
-          this.value = "";
-          return false;
-      }
-      else if (which_ele == "movie_search_textfield") {
-          var selected_movie = ui.item.value;
-          //console.log(selected_movie);
-          $.each(moviesJSON, function(key, value) {
-              if ( value.name === selected_movie) {
-                  var movie_item_html = '<div class="edit-profile-movies-caraousel-item">' +
-                          '<div class="edit-profile-movie-item">' +
-                          '<img src='+value.poster+'>' +
-                          '</div>' +
-                          '<div class="edit-profile-movie-item-name">'+selected_movie+'</div>' +
-                          '<div class="edit-profile-movie-item-category-name">'+value.release_date+'</div>' +
-                          '</div>';
-                  //moviesJSON.push({"name":movie_name, "id":movie_id, "poster":movie_poster, "release_date":movie_release_date});
-                  $("#edit-profile-movies-caraousel-container").append(movie_item_html);
-
-                  //moviesJSON.push({"name":movie_name, "id":movie_id, "poster":movie_poster, "release_date":movie_release_date});
-                  var data = {movie_name: [], movie_id:[], movie_poster:[], movie_release_date:[]};
-                  data["movie_name"].push(selected_movie);
-                  data["movie_id"].push(value.id);
-                  data["movie_poster"].push(value.poster);
-                  data["movie_release_date"].push(value.release_date);
-
-                  $.ajax({
-                      url: "/add_user_movie",
-                      type: "post",
-                      async: false,
-                      data: JSON.stringify(data),
-                      contentType: "application/json",
-                      success: function (data) {
-                        console.log(data);
-                      }
-                  });
-
-              }
-          });
-          this.value = "";
-          return false;
-      }
-      else if (which_ele == "music_search_textfield") {
-          var selected_music = ui.item.value;
-          //console.log(selected_music);
-          $.each(musicJSON, function(key, value) {
-              console.log(value.name)
-              if ( value.name === selected_music) {
-                  var music_item_html = '<div class="edit-profile-musics-caraousel-item">' +
-                          '<div class="edit-profile-music-item">' +
-                          '<img src='+value.image+'>' +
-                          '</div>' +
-                          '<div class="edit-profile-music-item-name">'+selected_music+'</div>' +
-                          //'<div class="edit-profile-music-item-category-name">'+value.release_date+'</div>' +
-                          '</div>';
-                  //moviesJSON.push({"name":movie_name, "id":movie_id, "poster":movie_poster, "release_date":movie_release_date});
-                  $("#edit-profile-musics-caraousel-container").append(music_item_html);
-
-                  //musicJSON.push({"name":music_name, "id":music_id, "image":music_poster});
-                  var data = {music_name: [], music_id:[], music_poster:[]};
-                  data["music_name"].push(selected_music);
-                  data["music_id"].push(value.id);
-                  data["music_poster"].push(value.image);
-                  //data["music_release_date"].push(value.release_date);
-
-                  $.ajax({
-                      url: "/add_user_music",
-                      type: "post",
-                      async: false,
-                      data: JSON.stringify(data),
-                      contentType: "application/json",
-                      success: function (data) {
-                          console.log(data);
-                      }
-                  });
-
               }
           });
           this.value = "";
