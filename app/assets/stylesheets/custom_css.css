@@ -261,9 +261,10 @@ body {
 }
 
 .profilometer_text {
-    text-align: center;
+    text-align: left;
+    padding-left: 14%;
     font-weight: bold;
-    font-size: 1.2em;
+    font-size: 1.4em;
     color: #38C8E0;
 }
 
@@ -436,12 +437,22 @@ input[type="radio"] + .custom-radio-btn.opposite_user_gender {
 }
 
 .music-item-name, .movie-item-name, .book-item-name {
-    color: #38C8E0;
+    color: #3E4549;
     font-size: 0.9em;
     overflow: hidden;
     /*text-align: center;*/
     text-overflow: ellipsis;
     white-space: nowrap;
+
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: -moz-use-text-color #E9EAED #E9EAED;
+    border-image: none;
+    border-style: none solid solid;
+    border-width: 0 1px 1px;
+    padding: 2px 0 2px 0;
 }
 
 .music-item-category, .movie-item-category, .book-item-category{
@@ -484,7 +495,33 @@ input[type="radio"] + .custom-radio-btn.opposite_user_gender {
     /*height: 60px;*/
     overflow: hidden;
     width: 108px;
+    position: relative;
 }
+
+.edit-profile-movie-item:hover > .edit-profile-delete-movie-item-block {
+    display: block;
+}
+
+.edit-profile-music-item:hover > .edit-profile-delete-music-item-block{
+    display: block;
+}
+
+.edit-profile-book-item:hover > .edit-profile-delete-book-item-block {
+    display: block;
+}
+
+.edit-profile-delete-movie-item-block, .edit-profile-delete-music-item-block, .edit-profile-delete-book-item-block{
+    background-color: #38C8E0;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 0 4px;
+    position: absolute;
+    right: 2px;
+    top: 2px;
+    display: none;
+}
+
 
 .edit-profile-book-item img, .edit-profile-movie-item img, .edit-profile-music-item img{
     height: 100%;

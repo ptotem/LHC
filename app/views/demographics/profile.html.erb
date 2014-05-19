@@ -45,8 +45,9 @@
 </style>
 
 <div class="row">
-  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-    <ul class="nav nav-tabs" style="margin-bottom: 15px; border-bottom: none">
+  <!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">-->
+  <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+    <ul class="nav nav-tabs" style="margin-bottom: 0px; border-bottom: none">
       <li class="active"><a href="#basic-info" data-toggle="tab" style="outline: none; border-top-left-radius: 10px; border-top-right-radius: 10px;">Basic Info</a></li>
       <li class=""><a href="#interests" data-toggle="tab" style="outline: none; border-top-left-radius: 10px; border-top-right-radius: 10px;">Interests</a></li>
       <li class=""><a href="#quiz" data-toggle="tab" style="outline: none; border-top-left-radius: 10px; border-top-right-radius: 10px;">Quiz</a></li>
@@ -54,10 +55,10 @@
 
     <div id="myTabContent" class="tab-content">
         <div class="tab-pane fade active in" id="basic-info">
-        <section id="view_profile_section" style="background-image: url('/assets/profile_back.jpg'); padding: 2% 5% 5% 2%;background-repeat:no-repeat;">
+        <section id="view_profile_section" style="padding: 2% 5% 5% 2%; background-color: #FFFFFF">
 
         <div class="row">
-          <div class="col-lg-9">
+          <div class="col-lg-12">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
               <div class="row">
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
@@ -69,7 +70,7 @@
                   </a>
 
                   </div>
-                  <table style="color: white;">
+                  <table style="color: #3E4549;">
                     <tr>
                       <td class="user_detail"><i class="fa fa-user"></i></td>
                       <td class="user_detail"><%= "#{@user_gender}, #{@user_age}" %></td>
@@ -101,7 +102,7 @@
                         <div class="prof-demo-container">
                           <img src="/assets/whiteglass.png" alt="" class="img-responsive"/>
 
-                          <p class="text-center"><%= @user_drinking %></p>
+                          <p class="text-center" style="color: #FFFFFF"><%= @user_drinking %></p>
                         </div>
                       </div>
 
@@ -109,7 +110,7 @@
                         <div class="prof-demo-container">
                           <img src="/assets/whitesmokes.png" alt="" class="img-responsive"/>
 
-                          <p class="text-center" style="margin-top: 1%;"><%= @user_smoking %></p>
+                          <p class="text-center" style="margin-top: 1%; color: #FFFFFF"><%= @user_smoking %></p>
                         </div>
                       </div>
                     </div>
@@ -131,7 +132,7 @@
               </div>
               <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                  <p class="white"><%= @user_desc %></p>
+                  <p style="color: #3E4549"><%= @user_desc %></p>
                 </div>
               </div>
 
@@ -159,11 +160,11 @@
 
                   <div class="row">
                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-5 white">
-                      <i class="fa fa-info-circle  font_awesome_icon blue"></i>
+                      <i class="fa fa-info-circle font_awesome_icon blue" style="font-size: 8em;"></i>
                     </div>
-                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 white">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                       <% current_user.hobby_lists.each do |h| %>
-                          <div class="hd_list"><%= h.name.truncate(10) %></div>
+                          <div class="hd_list" style="color: #3E4549"><%= h.name.truncate(10) %></div>
                       <% end %>
                       <!--<div class="hd_list">Reading</div>-->
                       <!--<div class="hd_list">Writing</div>-->
@@ -184,11 +185,11 @@
 
                   <div class="row">
                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-5 white">
-                      <i class="fa fa-comments font_awesome_icon blue"></i>
+                      <i class="fa fa-comments font_awesome_icon blue" style="font-size: 8em;"></i>
                     </div>
-                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 white">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                       <% current_user.about_lists.each do |h| %>
-                          <div class="hd_list"><%= h.name.truncate(10) %></div>
+                          <div class="hd_list" style="color: #3E4549"><%= h.name.truncate(10) %></div>
                       <% end %>
                       <!--<div class="hd_list">Artistic</div>-->
 
@@ -205,53 +206,6 @@
               </div>
             </div>
           </div>
-
-
-
-          <% if params[:id].to_s == (current_user.id).to_s %>
-              <div class="col-lg-3">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-
-                  <div class="row">
-                    <div class="profilometer_text">
-                      PROFILE'O' METER
-                    </div>
-                  </div>
-                  <br/>
-
-                  <div class="row">
-                    <div class="col-lg-12">
-                      <div class="knob_container">
-                        <!--<div id="myStat" data-dimension="200" data-text="35%" data-percent="46" data-info="" data-width="10" data-fontsize="38" data-percent="35" data-border="inline" data-fgcolor="#61a9dc" data-bgcolor="red" data-fill="#ddd" ></div>-->
-                        <div id="myStat" data-dimension="180" data-text="50%" data-info="" data-width="10" data-fontsize="48" data-percent="50" data-fgcolor="red" data-bgcolor="#eee" data-fill="#ddd" data-total="150" data-part="72" data-border="inline" data-icon="users" data-icon-size="28" data-icon-color="#ccc"></div>
-                      </div>
-
-                      <p class="white knob_text">Staring to look good!</p>
-                    </div>
-
-
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-12 text-center">
-                      <a href="#"><i class="fa fa-envelope fa-3x white iconstyle" data-toggle="modal" data-target="#email_modal"></i></a>
-
-                      <p class="white invitefriend">Invite A Friend</p>
-                    </div>
-                  </div>
-
-                  <p id="edit_profile_text">
-                    <%= link_to 'Edit My Profile', edit_profile_path(current_user.id), :class => "blue" %>
-                  </p>
-
-                </div>
-              </div>
-          <% else %>
-              <div class="col-lg-3">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                  <%= render :partial => "right_coffee_menu" %>
-                </div>
-              </div>
-          <% end %>
 
         </div>
 
@@ -350,12 +304,12 @@
 
         </section>
         </div>
-        <div class="tab-pane fade tabs-content-background" id="interests">
+        <div class="tab-pane fade tabs-content-background" id="interests" style="background-color: #FFFFFF; margin-top: 0">
           <div class="row">
-            <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9" style="background-color: #FFFFFF; padding-bottom: 2%">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-bottom: 2%">
               <div class="row">
-                <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11">
-                  <div class="black" style="font-size: 1.7em;padding: 2% 0 0 2%;">Music i like</div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                  <div class="black" style="font-size: 1.7em;padding: 2% 0 0 2%;">Music I like</div>
                   <div id="music-caraousel-container">
                     <ul id="music-caraousel">
                       <% @user.songs.each do |user_song| %>
@@ -371,15 +325,15 @@
               </div>
 
               <div class="row">
-                <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11">
-                  <div class="black" style="font-size: 1.7em;padding: 2% 0 0 2%;">Movies i like</div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                  <div class="black" style="font-size: 1.7em;padding: 2% 0 0 2%;">Movies I like</div>
                   <div id="movies-caraousel-container">
                     <ul id="movies-caraousel">
                       <% @user.movies.each do |user_movie| %>
                           <li class="movie-item">
                             <%= image_tag user_movie.movie_poster.url %>
                             <div class="movie-item-name"><%= user_movie.name %></div>
-                            <div class="movie-item-category"><%= user_movie.release_date %></div>
+                            <!--<div class="movie-item-category"><%#= user_movie.release_date %></div>-->
                           </li>
                       <% end %>
                     </ul>
@@ -388,8 +342,8 @@
               </div>
 
               <div class="row">
-                <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11">
-                  <div class="black" style="font-size: 1.7em;padding: 2% 0 0 2%;">Books i like</div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                  <div class="black" style="font-size: 1.7em;padding: 2% 0 0 2%;">Books I like</div>
                   <div id="books-caraousel-container">
                     <ul id="books-caraousel">
 
@@ -412,12 +366,59 @@
             </div>
           </div>
         </div>
-        <div class="tab-pane fade" id="quiz">
-          <h1>Here Comes Quiz</h1>
+        <div class="tab-pane fade" id="quiz" style="background-color: #FFFFFF; margin-top: 0">
+          <div style="font-size: 1.7em;padding: 2% 0 0 2%;" class="black">Here Comes Quiz</div>
         </div>
     </div>
 
   </div>
+
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+      <% if params[:id].to_s == (current_user.id).to_s %>
+          <!--<div class="col-lg-3">-->
+            <!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">-->
+
+              <div class="row">
+                <div class="profilometer_text" style="color: #FF0000">
+                  PROFILE'O' METER
+                </div>
+              </div>
+              <br/>
+
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="knob_container" style="padding-left: 5%;">
+                    <!--<div id="myStat" data-dimension="200" data-text="35%" data-percent="46" data-info="" data-width="10" data-fontsize="38" data-percent="35" data-border="inline" data-fgcolor="#61a9dc" data-bgcolor="red" data-fill="#ddd" ></div>-->
+                    <div id="myStat" data-dimension="180" data-text="50%" data-info="" data-width="10" data-fontsize="48" data-percent="50" data-fgcolor="red" data-bgcolor="#eee" data-fill="#ddd" data-total="150" data-part="72" data-border="inline" data-icon="users" data-icon-size="28" data-icon-color="#ccc"></div>
+                  </div>
+
+                  <p class="knob_text" style="color: #FFFFFF">Staring to look good!</p>
+                </div>
+
+
+              </div>
+              <div class="row">
+                <div class="col-lg-12 text-center" style="color: #FFFFFF; margin-left: -2%;">
+                  <a href="#"><i class="fa fa-envelope fa-3x iconstyle" data-toggle="modal" data-target="#email_modal"></i></a>
+
+                  <p class="invitefriend" style="color: #FFFFFF; font-weight: bold">Invite A Friend</p>
+                </div>
+              </div>
+
+              <p id="edit_profile_text">
+                <%= link_to 'Edit My Profile', edit_profile_path(current_user.id), :class => "blue" %>
+              </p>
+
+            <!--</div>-->
+          <!--</div>-->
+      <% else %>
+          <div class="col-lg-3">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              <%= render :partial => "right_coffee_menu" %>
+            </div>
+          </div>
+      <% end %>
+    </div>
 </div>
 
 

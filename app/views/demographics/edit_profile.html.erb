@@ -39,7 +39,7 @@
                   <li><a href="#dropdown2" data-toggle="tab"  style="border-top-left-radius: 10px; border-top-right-radius: 10px;outline: 0">Looking For</a></li>
                   <li><a href="#dropdown3" data-toggle="tab"  style="border-top-left-radius: 10px; border-top-right-radius: 10px;outline: 0">More</a></li>
             </ul>
-            <div id="myTabContent" class="tab-content">
+            <div id="myTabContent" class="tab-content" style="margin-left: -9%;">
               <div class="tab-pane fade active in" id="home">
 
 
@@ -295,6 +295,9 @@
                       <% @user.movies.each do |user_movie| %>
                           <div class="edit-profile-movies-caraousel-item">
                             <div class="edit-profile-movie-item">
+                              <div class="edit-profile-delete-movie-item-block">
+                                <div class="delete-movie-item-icon">&#215;</div>
+                              </div>
                               <%= image_tag user_movie.movie_poster.url %>
                             </div>
                             <div class="edit-profile-movie-item-name"><%= user_movie.name %></div>
@@ -320,6 +323,9 @@
                       <% @user.songs.each do |user_song| %>
                           <div class="edit-profile-musics-caraousel-item">
                             <div class="edit-profile-music-item">
+                              <div class="edit-profile-delete-music-item-block">
+                                <div class="delete-movie-music-icon">&#215;</div>
+                              </div>
                               <%= image_tag user_song.song_poster %>
                             </div>
                             <div class="edit-profile-music-item-name"><%= user_song.name %></div>
@@ -346,6 +352,9 @@
                       <% @user.books.each do |user_book| %>
                           <div class="edit-profile-books-caraousel-item">
                             <div class="edit-profile-book-item">
+                              <div class="edit-profile-delete-book-item-block">
+                                <div class="delete-movie-book-icon">&#215;</div>
+                              </div>
                               <%= image_tag user_book.cover %>
                             </div>
                             <div class="edit-profile-book-item-name"><%= user_book.name %></div>
