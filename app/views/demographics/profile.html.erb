@@ -358,41 +358,13 @@
                   <div class="black" style="font-size: 1.7em;padding: 2% 0 0 2%;">Music i like</div>
                   <div id="music-caraousel-container">
                     <ul id="music-caraousel">
-                      <li class="music-item">
-                        <%= image_tag("eminem-poster.jpg") %>
-                        <div class="music-item-name">Eminem</div>
-                        <div class="music-item-category">Pop Singer</div>
-                      </li>
-                      <li class="music-item">
-                        <%= image_tag("eminem-poster.jpg") %>
-                        <div class="music-item-name">Eminem</div>
-                        <div class="music-item-category">Pop Singer</div>
-                      </li>
-                      <li class="music-item">
-                        <%= image_tag("eminem-poster.jpg") %>
-                        <div class="music-item-name">Eminem</div>
-                        <div class="music-item-category">Pop Singer</div>
-                      </li>
-                      <li class="music-item">
-                        <%= image_tag("eminem-poster.jpg") %>
-                        <div class="music-item-name">Eminem</div>
-                        <div class="music-item-category">Pop Singer</div>
-                      </li>
-                      <li class="music-item">
-                        <%= image_tag("eminem-poster.jpg") %>
-                        <div class="music-item-name">Eminem</div>
-                        <div class="music-item-category">Pop Singer</div>
-                      </li>
-                      <li class="music-item">
-                        <%= image_tag("eminem-poster.jpg") %>
-                        <div class="music-item-name">Eminem</div>
-                        <div class="music-item-category">Pop Singer</div>
-                      </li>
-                      <li class="music-item">
-                        <%= image_tag("eminem-poster.jpg") %>
-                        <div class="music-item-name">Eminem</div>
-                        <div class="music-item-category">Pop Singer</div>
-                      </li>
+                      <% @user.songs.each do |user_song| %>
+                          <li class="music-item">
+                            <%= image_tag user_song.song_poster %>
+                            <div class="music-item-name"><%= user_song.name %></div>
+                            <!--<div class="music-item-category">Pop Singer</div>-->
+                          </li>
+                      <% end %>
                     </ul>
                   </div>
                 </div>
@@ -403,35 +375,37 @@
                   <div class="black" style="font-size: 1.7em;padding: 2% 0 0 2%;">Movies i like</div>
                   <div id="movies-caraousel-container">
                     <ul id="movies-caraousel">
-                      <li class="movie-item">
-                        <%= image_tag("lord_of_the_rings_poster.jpg") %>
-                        <div class="movie-item-name">Lord of The Rings</div>
-                        <div class="movie-item-category">English Movie</div>
-                      </li>
-                      <li class="movie-item">
-                        <%= image_tag("lord_of_the_rings_poster.jpg") %>
-                        <div class="movie-item-name">Lord of The Rings</div>
-                        <div class="movie-item-category">English Movie</div>
-                      </li>
-                      <li class="movie-item">
-                        <%= image_tag("lord_of_the_rings_poster.jpg") %>
-                        <div class="movie-item-name">Lord of The Rings</div>
-                        <div class="movie-item-category">English Movie</div>
-                      </li>
-                      <li class="movie-item">
-                        <%= image_tag("lord_of_the_rings_poster.jpg") %>
-                        <div class="movie-item-name">Lord of The Rings</div>
-                        <div class="movie-item-category">English Movie</div>
-                      </li>
-                      <li class="movie-item">
-                        <%= image_tag("lord_of_the_rings_poster.jpg") %>
-                        <div class="movie-item-name">Lord of The Rings</div>
-                        <div class="movie-item-category">English Movie</div>
-                      </li>
+                      <% @user.movies.each do |user_movie| %>
+                          <li class="movie-item">
+                            <%= image_tag user_movie.movie_poster.url %>
+                            <div class="movie-item-name"><%= user_movie.name %></div>
+                            <div class="movie-item-category"><%= user_movie.release_date %></div>
+                          </li>
+                      <% end %>
                     </ul>
                   </div>
                 </div>
               </div>
+
+              <div class="row">
+                <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11">
+                  <div class="black" style="font-size: 1.7em;padding: 2% 0 0 2%;">Books i like</div>
+                  <div id="books-caraousel-container">
+                    <ul id="books-caraousel">
+
+                      <% @user.books.each do |user_book| %>
+                          <li class="book-item">
+                            <%= image_tag user_book.cover %>
+                            <div class="book-item-name"><%= user_book.name %></div>
+                            <div class="book-item-category"><%= user_book.author %></div>
+                          </li>
+                      <% end %>
+
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
             </div>
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
               <h4></h4>

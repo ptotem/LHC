@@ -105,10 +105,14 @@ Lhc::Application.routes.draw do
   #post '/search_movies_themoviedb', to: 'demographics#search_movies_themoviedb'
   match '/search_movies_themoviedb', to: 'demographics#search_movies_themoviedb', via: [:get, :post]
   match '/search_movies_by_rovicorp', to: 'demographics#search_movies_by_rovicorp', via: [:get, :post]
+  match '/search_movies_by_rotten_tomatoes', to: 'demographics#search_movies_by_rotten_tomatoes', via: [:get, :post]
+
+  match '/add_user_movie', to: 'demographics#add_user_movie', via: [:get, :post]
+  match '/add_user_book', to: 'demographics#add_user_book', via: [:get, :post]
+  match '/add_user_music', to: 'demographics#add_user_music', via: [:get, :post]
 
   match '/search_music_gmusic', to: 'demographics#search_music_gmusic', via: [:get, :post]
-
-
+  match '/search_music_by_lastfm', to: 'demographics#search_music_by_lastfm', via: [:get, :post]
 
   match '/search_book_db', to: 'demographics#search_book_db', via: [:get, :post]
   match '/invitee_friends', to: 'dashboards#invitee_friends', via: :post

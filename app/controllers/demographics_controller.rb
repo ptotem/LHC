@@ -51,6 +51,7 @@ class DemographicsController < ApplicationController
 
   def edit_profile
     #render :text => "#{current_user.id}, #{current_user.email}, #{params[:id]}"
+    #render :json => current_user.movies
     #return
     if params[:id].to_s != (current_user.id).to_s
       render :text => "You can't edit others profile"
@@ -67,6 +68,59 @@ class DemographicsController < ApplicationController
       @user_name = current_user.demographic.name
       @user_demographics = @user.demographic
     end
+  end
+
+
+  def add_user_movie
+    @user = current_user
+
+    @movie_name = params[["movie_name"][0]][0]
+    @movie_api_id = params[["movie_id"][0]][0].to_i
+    @movie_poster = params[["movie_poster"][0]][0]
+    @movie_release_date = params[["movie_release_date"][0]][0]
+
+    #render :json => "#{@movie_name} #{@movie_id} #{@movie_poster} #{@movie_release_date}"
+
+    #if Movie.where(:movie_api_id =>@movie_api_id).first.nil?
+    #  @movie = Movie.create(:name=>@movie_name, :movie_api_id=>@movie_api_id, :poster=>@movie_poster, :release_date=>@movie_release_date)
+    #  @movie.save!
+    #else
+    #  @user.movies.create(:name=>@movie_name, :movie_api_id=>@movie_api_id, :poster=>@movie_poster, :release_date=>@movie_release_date)
+    #end
+
+    @user.movies.create(:name=>@movie_name, :movie_api_id=>@movie_api_id, :movie_poster=>@movie_poster, :release_date=>@movie_release_date)
+    @user.save!
+
+    render :text => "User Movie Created"
+    return
+  end
+
+  def add_user_book
+    @user = current_user
+    @book_name = params[["book_name"][0]][0]
+    @book_id = params[["book_id"][0]][0]
+    @book_poster = params[["book_poster"][0]][0]
+    @book_author = params[["book_author"][0]][0]
+
+    @user.books.create(:name=>@book_name, :book_api_id=>@book_id, :cover=>@book_poster, :author=>@book_author)
+    @user.save!
+
+    render :text => "#{@book_name} #{@book_id} #{@book_poster} #{@book_author}"
+    #render :text => "User Book Created"
+    return
+  end
+
+  def add_user_music
+    @user = current_user
+    @music_name = params[["music_name"][0]][0]
+    @music_id = params[["music_id"][0]][0]
+    @music_poster = params[["music_poster"][0]][0]
+
+    @user.songs.create(:name=>@music_name, :song_api_id=>@music_id, :song_poster=>@music_poster)
+
+    render :text => "#{@music_name} #{@music_id} #{@music_poster}"
+    #render :text => "User Music Created"
+    return
   end
 
   def update_profile
@@ -178,6 +232,21 @@ class DemographicsController < ApplicationController
     render :json => result
     return
   end
+
+  def search_movies_by_rotten_tomatoes
+    @movie_search_text = URI::escape(params[:movie_search_text][0])
+    result = Net::HTTP.get(URI.parse('http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=kdne34pjmqtcs6qukt8zmqmp&q='+@movie_search_text+''))
+    render :json => result
+    return
+  end
+
+  def search_music_by_lastfm
+    @music_search_text = URI::escape(params[:music_search_text][0])
+    result = Net::HTTP.get(URI.parse('http://ws.audioscrobbler.com/2.0/?method=track.search&track='+@music_search_text+'&api_key=6078900945f603ee0a48da7cb32ab1dc&format=json'))
+    render :json => result
+    return
+  end
+
 
 
 

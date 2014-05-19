@@ -2,7 +2,7 @@ namespace :data do
   desc "import data from files to database"
   task :import_users => :environment do
 
-    users_array = ["Nilesh", "Deepak", "Rakesh", "Swapnil", "Amol", "Rushabh", "Sachin", "Sunny", "Satya"]
+    users_array = ["Nilesh", "Deepak", "Rakesh", "Swapnil", "Amol", "Rushabh", "Sachin", "Satya"]
     gender_array = [true, false]
 
     smoking_demographic_array = ["Never", "Often", "Socially"]
