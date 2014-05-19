@@ -1,7 +1,7 @@
 <!-- ========================= Edit Profile Page Starts ========================= -->
 
 <%= content_for(:left_menu) do %>
-    <%= render :partial=>"dashboards/left_menu" %>
+    <%= render :partial => "dashboards/left_menu" %>
 <% end %>
 
 
@@ -15,452 +15,479 @@
 
 
 <section id="edit_profile_section">
-  <!--<div class="container">-->
-    <div class="row" style="padding-top: 3%;">
-      <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11">
+<!--<div class="container">-->
+<div class="row">
+<div class="col-xs-11 col-sm-11 col-md-11 col-lg-11">
 
 
-
-        <%#= form_for @user, :url => { :controller => "users/registrations", :action => "update_profile" }, :html => { :method => :post,:class => "form-horizontal" } do |f| %>
-        <%#= form_for(:user, :url => registration_path(@user), :html => { :method => :put,:class => "form-horizontal" }) do |f| %>
-        <%= form_for @user, :url => { :controller => "users/registrations", :action => "update" }, :html => { :method => :post,:class => "form-horizontal" } do |f| %>
-
-
-      <section id="about_user">
+<%#= form_for @user, :url => { :controller => "users/registrations", :action => "update_profile" }, :html => { :method => :post,:class => "form-horizontal" } do |f| %>
+<%#= form_for(:user, :url => registration_path(@user), :html => { :method => :put,:class => "form-horizontal" }) do |f| %>
+<%= form_for @user, :url => {:controller => "users/registrations", :action => "update"}, :html => {:method => :post, :class => "form-horizontal"} do |f| %>
 
 
-        <div class="row">
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-
-            <ul class="nav nav-tabs" style="margin-bottom: 15px;">
-              <li class="active"><a href="#home" data-toggle="tab" style="border-top-left-radius: 10px; border-top-right-radius: 10px;outline: 0">Personal Details</a></li>
-              <li><a href="#profile" data-toggle="tab"  style="border-top-left-radius: 10px; border-top-right-radius: 10px;outline: 0">Password</a></li>
-                  <li><a href="#dropdown1" data-toggle="tab"  style="border-top-left-radius: 10px; border-top-right-radius: 10px;outline: 0">About Me</a></li>
-                  <li><a href="#dropdown2" data-toggle="tab"  style="border-top-left-radius: 10px; border-top-right-radius: 10px;outline: 0">Looking For</a></li>
-                  <li><a href="#dropdown3" data-toggle="tab"  style="border-top-left-radius: 10px; border-top-right-radius: 10px;outline: 0">More</a></li>
-            </ul>
-            <div id="myTabContent" class="tab-content">
-              <div class="tab-pane fade active in" id="home">
+    <section id="about_user">
 
 
+    <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+    <ul class="nav nav-tabs" style="margin-bottom: 15px;">
+      <li class="active">
+        <a href="#home" data-toggle="tab" style="border-top-left-radius: 10px; border-top-right-radius: 10px;outline: 0">Personal
+          Details</a></li>
+      <li>
+        <a href="#profile" data-toggle="tab" style="border-top-left-radius: 10px; border-top-right-radius: 10px;outline: 0">Password</a>
+      </li>
+      <li>
+        <a href="#dropdown1" data-toggle="tab" style="border-top-left-radius: 10px; border-top-right-radius: 10px;outline: 0">About
+          Me</a></li>
+      <li>
+        <a href="#dropdown2" data-toggle="tab" style="border-top-left-radius: 10px; border-top-right-radius: 10px;outline: 0">Looking
+          For</a></li>
+      <li>
+        <a href="#dropdown3" data-toggle="tab" style="border-top-left-radius: 10px; border-top-right-radius: 10px;outline: 0">Movies</a>
+      </li>
+      <li>
+        <a href="#dropdown4" data-toggle="tab" style="border-top-left-radius: 10px; border-top-right-radius: 10px;outline: 0">Music</a>
+      </li>
+      <li>
+        <a href="#dropdown5" data-toggle="tab" style="border-top-left-radius: 10px; border-top-right-radius: 10px;outline: 0">Books</a>
+      </li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+    <div class="tab-pane fade active in" id="home">
 
 
+      <%= f.fields_for :demographic do |d| %>
 
-                <%= f.fields_for :demographic do |d| %>
-
-                    <div class="row">
-                      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                        <div class="form-group" style="margin-bottom: 0">
-                          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <h6 class="white">Name</h6>
-                            <%= d.text_field :name,:value=>@user.demographic.name, :placeholder=>"Name", :class=>"form-control" %>
-                            <span class="help-block">
-                                <%= get_content_for("nameHelperText")%>
+          <div class="row">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+              <div class="form-group" style="margin-bottom: 0">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                  <h6 class="white">Name</h6>
+                  <%= d.text_field :name, :value => @user.demographic.name, :placeholder => "Name", :class => "form-control" %>
+                  <span class="help-block">
+                                <%= get_content_for("nameHelperText") %>
                             </span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                        <div class="form-group" style="margin-bottom: 0">
-                          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <h6 class="white">Nickname</h6>
-                            <%= d.text_field :nickname, :value=>@user.demographic.nickname, :placeholder=>"Nickname", :class=>"form-control" %>
-                            <span class="help-block">
-                                <%= get_content_for("nicknameHelperText")%>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+              <div class="form-group" style="margin-bottom: 0">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                  <h6 class="white">Nickname</h6>
+                  <%= d.text_field :nickname, :value => @user.demographic.nickname, :placeholder => "Nickname", :class => "form-control" %>
+                  <span class="help-block">
+                                <%= get_content_for("nicknameHelperText") %>
                             </span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-lg-offset-1">
-                        <div class="form-group">
-                          <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                            <h6 class="white">Picture</h6>
-                            <%= d.file_field :avatar,:class=>"form-control12" %>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-
-                    <div class="row">
-                      <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-                        <div class="form-group">
-                          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <h6 class="white">Date of Birth</h6>
-                            <%= d.date_select :dob, { :order => [:day, :month, :year], :start_year => (Time.now.year-64), :end_year => (Time.now.year-18),:selected=>@user.demographic.dob}, {:class => "lhc_chosen"} %>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                        <div class="form-group">
-                          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <h6 class="white">Religion</h6>
-                            <%= d.text_field :religion, :placeholder=>"Religion",:value => @user.demographic.religion, :class=>"form-control" %>
-                          </div>
-                        </div>
-                      </div>
-
-                    </div>
-
-                  <div class="row">
-                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                      <div class="form-group">
-                          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <h6 class="white">Gender</h6>
-                            <%= d.radio_button :male,true, {:checked=>@user.demographic.male, :class=>"my_gender lhc-radio-btn"} %>
-                            <label for="user_demographic_attributes_male_true" class="custom-radio-btn male-radio-btn my_gender" id="user_male_lable"></label>
-                            <%= d.radio_button :male,false,{:checked=>!@user.demographic.male, :class=>"my_gender lhc-radio-btn"} %>
-                            <label for="user_demographic_attributes_male_false" class="custom-radio-btn female-radio-btn my_gender" id="user_female_lable"></label>
-                          </div>
-                      </div>
-                    </div>
-
-                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                      <div class="form-group">
-                        <div class="col-sm-4 col-lg-12">
-                          <h6 class="white">Smoking</h6>
-                          <%= d.select :smoking, ['Never','Socially','Often'], {:selected => @user.demographic.smoking }, { :class => 'lhc_chosen' } %>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                      <div class="form-group">
-                        <div class="col-sm-4 col-lg-12">
-                          <h6 class="white">Drinking</h6>
-                          <%= d.select :drinking, ['Never','Socially','Often'], {:selected => @user.demographic.drinking }, { :class => 'lhc_chosen' } %>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-7">
-                      <div class="form-group">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                          <h6 class="white">Location</h6>
-                          <%= d.text_field :location, :value=>@user.demographic.location,:placeholder=>"Type in the location...", :class=>"form-control location" %>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                      <div class="form-group">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                          <h6 class="white">Profession</h6>
-                          <%= f.fields_for :profession do |p| %>
-                              <%= p.text_field :name , :placeholder=>"Profession",:class=>"form-control" %>
-                          <% end %>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-
-
-
-
-
-                    <div class="form-group">
-                      <div class="col-sm-8 col-lg-8 col-lg-offset-1">
-                        <h6 class="white" style="float: left">Am I current student?</h6>
-                        <span style="margin-left: 2%; position: relative; top: 5px;"><%= d.check_box :current_student %></span>
-                      </div>
-                    </div>
-
+                </div>
               </div>
-              <div class="tab-pane fade" id="profile">
-
-                <section id="pswd">
-
-
-
-                  <div class="form-group">
-                    <div class="col-sm-8 col-lg-8 col-lg-offset-1">
-                      <h6 class="white">Current Password</h6>
-                      <%= f.password_field :current_password, :placeholder=>"Current Password", :class=>"form-control" %>
-                    </div>
-                  </div>
-
-
-                  <div class="form-group">
-                    <div class="col-sm-8 col-lg-8 col-lg-offset-1">
-                      <h6 class="white">Password</h6>
-                      <%= f.password_field :password, :autocomplete => "off", :placeholder=>"New Password", :class=>"form-control" %>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <div class="col-sm-8 col-lg-8 col-lg-offset-1">
-                      <h6 class="white">Password Confirmation</h6>
-                      <%= f.password_field :password_confirmation, :placeholder=>"Confirm New Password", :class=>"form-control" %>
-                    </div>
-                  </div>
-                </section>
-
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-lg-offset-1">
+              <div class="form-group">
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                  <h6 class="white">Picture</h6>
+                  <%= d.file_field :avatar, :class => "form-control12" %>
+                </div>
               </div>
-              <div class="tab-pane fade" id="dropdown1">
-
-                <section id="about_myself">
-
-                  <div class="row">
-                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                      <div class="form-group" id="myself">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                          <h6 class="white">A few words about me...</h6>
-                          <%= d.text_area :description , :placeholder=>"A few words about me...",:class=>"form-control", :size => "30x5" %>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                      <div class="form-group">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                          <h6 class="white">In next 5 years, I would be...</h6>
-                          <%= d.text_area :goal , :placeholder=>"In next 5 years, I would be...",:class=>"form-control", :size => "30x5" %>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                      <div class="form-group">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                          <h6 class="white">Hobbies</h6>
-                          <%= f.collection_select(:hobby_list_ids, HobbyList.order('name ASC').all, :id, :name, {:include_blank => false}, {:multiple => true, :class=>"multiple"}) %>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                      <div class="form-group">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                          <h6 class="white" >What Friends Say About Me</h6>
-                          <%= f.collection_select(:about_list_ids, AboutList.order('name ASC').all, :id, :name, {:include_blank => false}, {:multiple => true, :class=>"multiple"}) %>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                      <div class="form-group">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                          <h6 class="white" >Others</h6>
-                          <textarea class="form-control" rows="3" placeholder="Others"></textarea>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                      <div class="form-group">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                          <h6 class="white">Institution</h6>
-                          <%#= f.fields_for :attendances do |a| %>
-                          <%#= a.collection_select(:institution_id, Institution.all, :id, :name,{}, {:class=>"lhc_chosen"}) %>
-                          <%# end %>
-                          <%= f.collection_select(:institution_ids, Institution.order('name ASC').all, :id, :name, {:include_blank => false}, {:multiple => true, :class=>"multiple"}) %>
-                        </div>
-
-                        <!--<div class="col-sm-4 col-lg-4">-->
-                        <!--<%#= f.fields_for :profession do |p| %>-->
-                        <!--<%#= p.text_field :name , :placeholder=>"Profession",:class=>"form-control" %>-->
-                        <!--<%# end %>-->
-                        <!--</div>-->
-                      </div>
-                    </div>
-                  </div>
+            </div>
+          </div>
 
 
-                </section>
-                <% end %>
-
+          <div class="row">
+            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+              <div class="form-group">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                  <h6 class="white">Date of Birth</h6>
+                  <%= d.date_select :dob, {:order => [:day, :month, :year], :start_year => (Time.now.year-64), :end_year => (Time.now.year-18), :selected => @user.demographic.dob}, {:class => "lhc_chosen"} %>
+                </div>
               </div>
-              <div class="tab-pane fade" id="dropdown2">
+            </div>
 
-                <section id="looking_for">
-
-
-                  <%= f.fields_for :criterion do |c| %>
-
-                      <div class="form-group">
-                        <div class="col-sm-2 col-lg-2 col-lg-offset-1">
-                          <h6 class="white">Gender</h6>
-                          <%= c.radio_button :male,true, {:checked=>@user.criterion.male, :class=>"my_gender lhc-radio-btn"} %>
-                          <label for="user_criterion_attributes_male_true" class="custom-radio-btn male-radio-btn my_gender" id="user_male_lable"></label>
-                          <%= c.radio_button :male,false,{:checked=>!@user.criterion.male, :class=>"my_gender lhc-radio-btn"} %>
-                          <!--<%#= c.label :male,' ',:class=>"custom-radio-btn female-radio-btn my_gender" %>-->
-                          <label for="user_criterion_attributes_male_false" class="custom-radio-btn female-radio-btn my_gender" id="user_female_lable"></label>
-                        </div>
-
-                        <div class="col-sm-3 col-lg-3">
-                          <h6 class="white">Smoking</h6>
-                          <%= c.select :smoking, ['Never','Socially','Often'], {:selected => @user.criterion.smoking }, { :class => 'lhc_chosen' } %>
-                        </div>
-                        <div class="col-sm-3 col-lg-3">
-                          <h6 class="white">Drinking</h6>
-                          <%= c.select :drinking, ['Never','Socially','Often'], {:selected => @user.criterion.drinking }, { :class => 'lhc_chosen' } %>
-                        </div>
-                      </div>
-
-                      <div class="form-group">
-                        <% min_age = 18..28 %>
-                        <% max_age = 22..36 %>
-                        <div class="col-sm-4 col-lg-4 col-lg-offset-1">
-                          <h6 class="white">Age From</h6>
-                          <%= c.select(:minage, min_age.collect {|d| [d.to_s,d.to_s]},{:selected => @user.criterion.minage}, {:class=>"lhc_chosen"}) %>
-                        </div>
-
-                        <div class="col-sm-4 col-lg-3 col-lg-offset-1">
-                          <h6 class="white">Age To</h6>
-                          <%= c.select(:maxage, max_age.collect {|d| [d.to_s,d.to_s]},{:selected => @user.criterion.maxage}, {:class=>"lhc_chosen"}) %>
-                        </div>
-                      </div>
-                  <% end %>
-                </section>
-
-
-              </div>
-              <div class="tab-pane fade" id="dropdown3">
-
-                <section id="more">
-
-
-                  <div class="form-group">
-                    <div class="col-sm-8 col-lg-8">
-                      <div class="ui-widget">
-                        <h6 class="white">Search Movie</h6>
-                        <!--<input id="movie_search_textfield" class="form-control">-->
-                        <%= text_field_tag 'movie_search_textfield', nil, placeholder: 'Enter search term...', :class=>"form-control" %>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-12" id="edit-profile-movies-caraousel-container">
-                      <% @user.movies.each do |user_movie| %>
-                          <div class="edit-profile-movies-caraousel-item">
-                            <div class="edit-profile-movie-item">
-                              <div class="edit-profile-delete-movie-item-block">
-                                <div class="delete-movie-item-icon">&#215;</div>
-                              </div>
-                              <%= image_tag user_movie.movie_poster.url %>
-                            </div>
-                            <div class="edit-profile-movie-item-name"><%= user_movie.name %></div>
-                            <div class="edit-profile-movie-item-category-name"><%= user_movie.release_date %></div>
-                          </div>
-                      <% end %>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <div class="col-sm-8 col-lg-8">
-                      <div class="ui-widget">
-                        <h6 class="white">Search Music</h6>
-                        <!--<input id="music_search_textfield" class="form-control">-->
-                        <%= text_field_tag 'music_search_textfield', nil, placeholder: 'Enter search term...', :class=>"form-control" %>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-12" id="edit-profile-musics-caraousel-container">
-
-                      <% @user.songs.each do |user_song| %>
-                          <div class="edit-profile-musics-caraousel-item">
-                            <div class="edit-profile-music-item">
-                              <div class="edit-profile-delete-music-item-block">
-                                <div class="delete-movie-music-icon">&#215;</div>
-                              </div>
-                              <%= image_tag user_song.song_poster %>
-                            </div>
-                            <div class="edit-profile-music-item-name"><%= user_song.name %></div>
-                            <!--<div class="edit-profile-music-item-category-name"><%#= user_song.author %></div>-->
-                          </div>
-                      <% end %>
-
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <div class="col-sm-8 col-lg-8">
-                      <div class="ui-widget">
-                        <h6 class="white">Search Book</h6>
-                        <!--<input id="books_search_textfield" class="form-control">-->
-                        <%= text_field_tag 'books_search_textfield', nil, placeholder: 'Enter search term...', :class=>"form-control" %>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-12" id="edit-profile-books-caraousel-container">
-
-                      <% @user.books.each do |user_book| %>
-                          <div class="edit-profile-books-caraousel-item">
-                            <div class="edit-profile-book-item">
-                              <div class="edit-profile-delete-book-item-block">
-                                <div class="delete-movie-book-icon">&#215;</div>
-                              </div>
-                              <%= image_tag user_book.cover %>
-                            </div>
-                            <div class="edit-profile-book-item-name"><%= user_book.name %></div>
-                            <div class="edit-profile-book-item-category-name"><%= user_book.author %></div>
-                          </div>
-                      <% end %>
-
-                    </div>
-                  </div>
-
-                </section>
-
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+              <div class="form-group">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                  <h6 class="white">Religion</h6>
+                  <%= d.text_field :religion, :placeholder => "Religion", :value => @user.demographic.religion, :class => "form-control" %>
+                </div>
               </div>
             </div>
 
           </div>
-        </div>
+
+          <div class="row">
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+              <div class="form-group">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                  <h6 class="white">Gender</h6>
+                  <%= d.radio_button :male, true, {:checked => @user.demographic.male, :class => "my_gender lhc-radio-btn"} %>
+                  <label for="user_demographic_attributes_male_true" class="custom-radio-btn male-radio-btn my_gender" id="user_male_lable"></label>
+                  <%= d.radio_button :male, false, {:checked => !@user.demographic.male, :class => "my_gender lhc-radio-btn"} %>
+                  <label for="user_demographic_attributes_male_false" class="custom-radio-btn female-radio-btn my_gender" id="user_female_lable"></label>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+              <div class="form-group">
+                <div class="col-sm-4 col-lg-12">
+                  <h6 class="white">Smoking</h6>
+                  <%= d.select :smoking, ['Never', 'Socially', 'Often'], {:selected => @user.demographic.smoking}, {:class => 'lhc_chosen'} %>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+              <div class="form-group">
+                <div class="col-sm-4 col-lg-12">
+                  <h6 class="white">Drinking</h6>
+                  <%= d.select :drinking, ['Never', 'Socially', 'Often'], {:selected => @user.demographic.drinking}, {:class => 'lhc_chosen'} %>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+              <div class="form-group">
+                <div class="col-sm-8 col-lg-8 col-lg-offset-1">
+                  <h6 class="white" style="float: left">Am I current student?</h6>
+                  <span style="margin-left: 2%; position: relative; top: 5px;"><%= d.check_box :current_student %></span>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+
+          <div class="row">
+            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-7">
+              <div class="form-group">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                  <h6 class="white">Location</h6>
+                  <%= d.text_field :location, :value => @user.demographic.location, :placeholder => "Type in the location...", :class => "form-control location" %>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+              <div class="form-group">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                  <h6 class="white">Profession</h6>
+                  <%= f.fields_for :profession do |p| %>
+                      <%= p.text_field :name, :placeholder => "Profession", :class => "form-control" %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          </div>
+          <div class="tab-pane fade" id="profile">
+
+            <section id="pswd">
+
+
+              <div class="form-group">
+                <div class="col-sm-8 col-lg-8 ">
+                  <h6 class="white">Current Password</h6>
+                  <%= f.password_field :current_password, :placeholder => "Current Password", :class => "form-control" %>
+                </div>
+              </div>
+
+
+              <div class="form-group">
+                <div class="col-sm-8 col-lg-8">
+                  <h6 class="white">Password</h6>
+                  <%= f.password_field :password, :autocomplete => "off", :placeholder => "New Password", :class => "form-control" %>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="col-sm-8 col-lg-8">
+                  <h6 class="white">Password Confirmation</h6>
+                  <%= f.password_field :password_confirmation, :placeholder => "Confirm New Password", :class => "form-control" %>
+                </div>
+              </div>
+            </section>
+
+          </div>
+          <div class="tab-pane fade" id="dropdown1">
+
+            <section id="about_myself">
+
+              <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                  <div class="form-group" id="myself">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                      <h6 class="white">A few words about me...</h6>
+                      <%= d.text_area :description, :placeholder => "A few words about me...", :class => "form-control", :size => "30x3" %>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                  <div class="form-group">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                      <h6 class="white">In next 5 years, I would be...</h6>
+                      <%= d.text_area :goal, :placeholder => "In next 5 years, I would be...", :class => "form-control", :size => "30x3" %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                  <div class="form-group">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                      <h6 class="white">Hobbies</h6>
+                      <%= f.collection_select(:hobby_list_ids, HobbyList.order('name ASC').all, :id, :name, {:include_blank => false}, {:multiple => true, :class => "multiple"}) %>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                  <div class="form-group">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                      <h6 class="white">What Friends Say About Me</h6>
+                      <%= f.collection_select(:about_list_ids, AboutList.order('name ASC').all, :id, :name, {:include_blank => false}, {:multiple => true, :class => "multiple"}) %>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                  <div class="form-group">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                      <h6 class="white">Institution</h6>
+                      <%#= f.fields_for :attendances do |a| %>
+                      <%#= a.collection_select(:institution_id, Institution.all, :id, :name,{}, {:class=>"lhc_chosen"}) %>
+                      <%# end %>
+                      <%= f.collection_select(:institution_ids, Institution.order('name ASC').all, :id, :name, {:include_blank => false}, {:multiple => true, :class => "multiple"}) %>
+                    </div>
+
+                    <!--<div class="col-sm-4 col-lg-4">-->
+                    <!--<%#= f.fields_for :profession do |p| %>-->
+                    <!--<%#= p.text_field :name , :placeholder=>"Profession",:class=>"form-control" %>-->
+                    <!--<%# end %>-->
+                    <!--</div>-->
+                  </div>
+                </div>
+              </div>
+
+
+            </section>
+      <% end %>
+
+      </div>
+      <div class="tab-pane fade" id="dropdown2">
+
+        <section id="looking_for" >
+
+
+          <%= f.fields_for :criterion do |c| %>
+
+              <div class="form-group">
+                <div class="col-sm-2 col-lg-2 col-md-2">
+                  <h6 class="white">Gender</h6>
+                  <%= c.radio_button :male, true, {:checked => @user.criterion.male, :class => "my_gender lhc-radio-btn"} %>
+                  <label for="user_criterion_attributes_male_true" class="custom-radio-btn male-radio-btn my_gender" id="user_male_lable"></label>
+                  <%= c.radio_button :male, false, {:checked => !@user.criterion.male, :class => "my_gender lhc-radio-btn"} %>
+                  <!--<%#= c.label :male,' ',:class=>"custom-radio-btn female-radio-btn my_gender" %>-->
+                  <label for="user_criterion_attributes_male_false" class="custom-radio-btn female-radio-btn my_gender" id="user_female_lable"></label>
+                </div>
+
+                <div class="col-sm-2 col-lg-2 col-md-2">
+                  <h6 class="white">Smoking</h6>
+                  <%= c.select :smoking, ['Never', 'Socially', 'Often'], {:selected => @user.criterion.smoking}, {:class => 'lhc_chosen'} %>
+                </div>
+                <div class="col-sm-3 col-lg-3 col-md-3">
+                  <h6 class="white">Drinking</h6>
+                  <%= c.select :drinking, ['Never', 'Socially', 'Often'], {:selected => @user.criterion.drinking}, {:class => 'lhc_chosen'} %>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <% min_age = 18..28 %>
+                <% max_age = 22..36 %>
+                <div class="col-sm-2 col-lg-2 col-md-2">
+                  <h6 class="white">Age From</h6>
+                  <%= c.select(:minage, min_age.collect { |d| [d.to_s, d.to_s] }, {:selected => @user.criterion.minage}, {:class => "lhc_chosen"}) %>
+                </div>
+
+                <div class="col-sm-2 col-lg-2 col-md-2">
+                  <h6 class="white">Age To</h6>
+                  <%= c.select(:maxage, max_age.collect { |d| [d.to_s, d.to_s] }, {:selected => @user.criterion.maxage}, {:class => "lhc_chosen"}) %>
+                </div>
+              </div>
+          <% end %>
+        </section>
+
+
+      </div>
+      <div class="tab-pane fade" id="dropdown3">
+
+        <section id="more">
+
+
+          <div class="form-group">
+            <div class="col-sm-8 col-lg-8">
+              <div class="ui-widget">
+                <h6 class="white">Search Movie</h6>
+                <!--<input id="movie_search_textfield" class="form-control">-->
+                <%= text_field_tag 'movie_search_textfield', nil, placeholder: 'Enter search term...', :class => "form-control" %>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-12" id="edit-profile-movies-caraousel-container1">
+              <div id="carousel-for-movies" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                  <div class="item active">
+                  <% @user.movies.each_with_index do |user_movie, index| %>
+                      <div class="col-lg-3">
+                        <%= image_tag user_movie.movie_poster.url ,:class=>"my-img" %>
+                      </div>
+                      <% if (index+1)%4==0 %>
+                      </div> <div class="item ">
+                          <% end %>
+                  <% end %>
+                  </div>
+                  <!-- Controls -->
+
+                </div>
+                <a class="left carousel-control" href="#carousel-for-movies" data-slide="prev">
+                  <span class="fa  fa-chevron-left"></span>
+                </a>
+                <a class="right carousel-control" href="#carousel-for-movies" data-slide="next">
+                  <span class="fa fa-chevron-right"></span>
+                </a>
+
+              </div>
+            </div>
+            </div>
+
+
 
 
 
         </section>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-          <!--<div class="form-group">-->
-            <!--<div class="col-sm-8 col-lg-8">-->
-              <!--<div class="ui-widget">-->
-                <!--<label for="books_suggest_tags">Search Books: </label>-->
-                <!--<input id="books_search_tagit_textfield" class="form-control">-->
-              <!--</div>-->
-            <!--</div>-->
-          <!--</div>-->
-
-
-            <div class="actions">
-              <%= f.submit :class=>"btn-main ans_btn" %>
+      </div>
+      <div class="tab-pane fade" id="dropdown4">
+        <section id="more">
+          <div class="form-group">
+            <div class="col-sm-8 col-lg-8">
+              <div class="ui-widget">
+                <h6 class="white">Search Music</h6>
+                <!--<input id="music_search_textfield" class="form-control">-->
+                <%= text_field_tag 'music_search_textfield', nil, placeholder: 'Enter search term...', :class => "form-control" %>
+              </div>
             </div>
+          </div>
+
+        <div class="row">
+          <div class="col-lg-12" id="edit-profile-movies-caraousel-container2">
+            <div id="carousel-for-songs" class="carousel slide" data-ride="carousel">
+              <div class="carousel-inner">
+                <div class="item active">
+                  <% @user.songs.each_with_index do |user_song, index| %>
+                      <div class="col-lg-3">
+                        <%= image_tag user_song.song_poster ,:class=>"my-img" %>
+                      </div>
+                      <% if (index+1)%4==0 %>
+                          </div> <div class="item ">
+                      <% end %>
+                  <% end %>
+                  </div>
+                  <!-- Controls -->
+
+                  </div>
+              <a class="left carousel-control" href="#carousel-for-songs" data-slide="prev">
+                <span class="fa  fa-chevron-left"></span>
+              </a>
+              <a class="right carousel-control" href="#carousel-for-songs" data-slide="next">
+                <span class="fa fa-chevron-right"></span>
+              </a>
+
+            </div>
+          </div>
+        </div> </section>
+</div>
 
 
 
 
-    <% end  %>
+      <div class="tab-pane fade" id="dropdown5">
+
+          <div class="form-group">
+            <div class="col-sm-8 col-lg-8">
+              <div class="ui-widget">
+                <h6 class="white">Search Book</h6>
+                <!--<input id="books_search_textfield" class="form-control">-->
+                <%= text_field_tag 'books_search_textfield', nil, placeholder: 'Enter search term...', :class => "form-control" %>
+              </div>
+            </div>
+          </div>
+
+        <div class="row">
+          <div class="col-lg-12" id="edit-profile-movies-caraousel-container3">
+            <div id="carousel-for-books" class="carousel slide" data-ride="carousel">
+              <div class="carousel-inner">
+                <div class="item active">
+                  <% @user.books.each_with_index do |user_book, index| %>
+                      <div class="col-lg-3">
+                        <%= image_tag user_book.cover ,:class=>"my-img"%>
+                      </div>
+                      <% if (index+1)%4==0 %>
+                          </div> <div class="item ">
+                      <% end %>
+                  <% end %>
+                  </div>
+                  <!-- Controls -->
+
+                  </div>
+              <a class="left carousel-control" href="#carousel-for-books" data-slide="prev">
+                <span class="fa  fa-chevron-left"></span>
+              </a>
+              <a class="right carousel-control" href="#carousel-for-books" data-slide="next">
+                <span class="fa fa-chevron-right"></span>
+              </a>
+
+            </div>
+          </div>
+        </div>
+        </div>
+
 
 
 
       </div>
+
     </div>
+    </div>
+
+
+    </section>
+
+
+    <!--<div class="form-group">-->
+    <!--<div class="col-sm-8 col-lg-8">-->
+    <!--<div class="ui-widget">-->
+    <!--<label for="books_suggest_tags">Search Books: </label>-->
+    <!--<input id="books_search_tagit_textfield" class="form-control">-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+
+
+    <div class="actions" style="margin-top: 8%">
+      <%= f.submit :class => "btn-main ans_btn" %>
+    </div>
+
+
+<% end %>
+
+
+</div>
+</div>
 </section>
 
 
@@ -475,338 +502,348 @@
     var booksNameTags = [];
     var added_book_item_counter = 0;
 
-  $(function(){
-      var addressPicker = new AddressPicker();
-      $('.location').typeahead(null, {
-          displayKey: 'description',
-          source: addressPicker.ttAdapter()
-      });
+    $(function () {
+
+        $('.carousel').carousel({interval:false});
+
+        var addressPicker = new AddressPicker();
+        $('.location').typeahead(null, {
+            displayKey: 'description',
+            source: addressPicker.ttAdapter()
+        });
 //      this is bad js... written by rushabh
 //      TODO: rmeove this...
-      $(".twitter-typeahead").css({"width":"100%"});
+        $(".twitter-typeahead").css({"width": "100%"});
 
-      $('.lhc_chosen').chosen();
-      $('.chosen-container-single').css('width','158px');
+        $('.lhc_chosen').chosen();
+        $('.chosen-container-single').css('width', '158px');
 
-      $(".multiple").multiselect().multiselectfilter();
-
-
-      $("#movie_search_textfield").autocomplete({
-          source: moviesNameTags,
-          select: AutoCompleteSelectHandler
-      });
-
-      $("#music_search_textfield").autocomplete({
-          source: musicNameTags,
-          select: AutoCompleteSelectHandler
-      });
-
-      $("#books_search_textfield").autocomplete({
-          source: booksNameTags,
-          select: AutoCompleteSelectHandler
-      });
-
-      //$('#books_search_tagit_textfield').tagit();
-
-      var booksavailableTags = ["c", "java"];
-      var mt = booksavailableTags;
-
-      $('#books_search_tagit_textfield').on('keyup', function (e) {
-
-          $('#books_search_tagit_textfield').tagit({
-
-              itemName: 'question',
-              fieldName: 'tags',
-              removeConfirmation: true,
-              //availableTags: ["c++", "java", "php", "javascript", "ruby", "python", "c"]
-              allowSpaces: true,
-              // tagSource: ['foo', 'bar']
-              tagSource: function () {
-                  var this_text = $('#books_search_tagit_textfield').val();
-                  $.ajax({
-                      url: "/search_book_db",
-                      dataType: "json",
-                      data: {
-                          //term: 'ruby'
-                          book_search_text: this_text
-                      },
-                      success: function (data) {
-                          console.log(data);
-                          return data;
-                      }
-
-                  });
-              },
-              autocomplete: {
-                  delay: 0,
-                  minLength: 2,
-                  source: this.tagSource
-                  //source: booksavailableTags
-
-              }
-          });
-      });
+        $(".multiple").multiselect().multiselectfilter();
 
 
-      $('#movie_search_textfield').on('keyup', function (e) {
-          var movie_search_text = $(this).val();
-          var movie_search_text_len = movie_search_text.length;
+        $("#movie_search_textfield").autocomplete({
+            source: moviesNameTags,
+            select: AutoCompleteSelectHandler
+        });
+
+        $("#music_search_textfield").autocomplete({
+            source: musicNameTags,
+            select: AutoCompleteSelectHandler
+        });
+
+        $("#books_search_textfield").autocomplete({
+            source: booksNameTags,
+            select: AutoCompleteSelectHandler
+        });
+
+        //$('#books_search_tagit_textfield').tagit();
+
+        var booksavailableTags = ["c", "java"];
+        var mt = booksavailableTags;
+
+        $('#books_search_tagit_textfield').on('keyup', function (e) {
+
+            $('#books_search_tagit_textfield').tagit({
+
+                itemName: 'question',
+                fieldName: 'tags',
+                removeConfirmation: true,
+                //availableTags: ["c++", "java", "php", "javascript", "ruby", "python", "c"]
+                allowSpaces: true,
+                // tagSource: ['foo', 'bar']
+                tagSource: function () {
+                    var this_text = $('#books_search_tagit_textfield').val();
+                    $.ajax({
+                        url: "/search_book_db",
+                        dataType: "json",
+                        data: {
+                            //term: 'ruby'
+                            book_search_text: this_text
+                        },
+                        success: function (data) {
+                            console.log(data);
+                            return data;
+                        }
+
+                    });
+                },
+                autocomplete: {
+                    delay: 0,
+                    minLength: 2,
+                    source: this.tagSource
+                    //source: booksavailableTags
+
+                }
+            });
+        });
 
 
-          // get key code of current keypress event
-          var code = (e.keyCode ? e.keyCode : e.which);
+        $('#movie_search_textfield').on('keyup', function (e) {
+            var movie_search_text = $(this).val();
+            var movie_search_text_len = movie_search_text.length;
 
-          // do nothing if it's an arrow key
-          if (code == 37 || code == 38 || code == 39 || code == 40) {
-              return;
-          }
-          else {
-              if ((movie_search_text_len >= 3)) {
 
-                  var data = {movie_search_text: []};
-                  data["movie_search_text"].push(movie_search_text);
-                  //moviesTags = [];
-                  moviesNameTags.splice(0, moviesNameTags.length);
-                  moviesJSON.splice(0, moviesJSON.length);
+            // get key code of current keypress event
+            var code = (e.keyCode ? e.keyCode : e.which);
+
+            // do nothing if it's an arrow key
+            if (code == 37 || code == 38 || code == 39 || code == 40) {
+                return;
+            }
+            else {
+                if ((movie_search_text_len >= 3)) {
+
+                    var data = {movie_search_text: []};
+                    data["movie_search_text"].push(movie_search_text);
+                    //moviesTags = [];
+                    moviesNameTags.splice(0, moviesNameTags.length);
+                    moviesJSON.splice(0, moviesJSON.length);
 
                     $.ajax({
-                      url: "/search_movies_by_rotten_tomatoes",
-                      type: "post",
-                      async: false,
-                      data: JSON.stringify(data),
-                      contentType: "application/json",
-                      success: function (data) {
-                          var movie_name, movie_poster, movie_release_date, movie_id, movie_description;
-                          //console.log(data);
-                          $.each(data["movies"], function (i, obj) {
-                              movie_name = obj.title;
-                              movie_id = obj.id;
-                              movie_poster = obj.posters.profile;
-                              movie_release_date = obj.release_dates.theater;
-                              moviesNameTags.push(movie_name);
-                              moviesJSON.push({"name":movie_name, "id":movie_id, "poster":movie_poster, "release_date":movie_release_date});
-                          })
+                        url: "/search_movies_by_rotten_tomatoes",
+                        type: "post",
+                        async: false,
+                        data: JSON.stringify(data),
+                        contentType: "application/json",
+                        success: function (data) {
+                            var movie_name, movie_poster, movie_release_date, movie_id, movie_description;
+                            //console.log(data);
+                            $.each(data["movies"], function (i, obj) {
+                                movie_name = obj.title;
+                                movie_id = obj.id;
+                                movie_poster = obj.posters.profile;
+                                movie_release_date = obj.release_dates.theater;
+                                moviesNameTags.push(movie_name);
+                                moviesJSON.push({"name": movie_name, "id": movie_id, "poster": movie_poster, "release_date": movie_release_date});
+                            })
 
-                      }
-                  });
-
-
-
-              }
-          }
-      });
-
-      $('#music_search_textfield').on('keyup', function (e) {
-          var music_search_text = $(this).val();
-          var music_search_text_len = music_search_text.length;
-
-          // get key code of current keypress event
-          var code = (e.keyCode ? e.keyCode : e.which);
-
-          // do nothing if it's an arrow key
-          if (code == 37 || code == 38 || code == 39 || code == 40) {
-              return;
-          }
-          else {
-              if ((music_search_text_len >= 5)) {
-
-                  var data = {music_search_text: []};
-                  data["music_search_text"].push(music_search_text);
-                  musicNameTags.splice(0, musicNameTags.length);
-                  musicJSON.splice(0, musicJSON.length);
-
-                  $.ajax({
-                      url: "/search_music_by_lastfm",
-                      type: "post",
-                      async: false,
-                      data: JSON.stringify(data),
-                      contentType: "application/json",
-                      success: function (data) {
-                          var music_name, music_poster, music_release_date, music_id;
-
-                          $.each(data, function (i, obj) {
-                              $.each(obj.trackmatches.track, function (k, objj) {
-                                  music_name = objj.name;
-                                  music_poster = objj.image[2]["#text"];
-                                  music_id = objj.mbid;
-                                  //console.log(objj.mbid)
-                                  musicNameTags.push(music_name);
-                                  musicJSON.push({"name":music_name, "id":music_id, "image":music_poster});
-                              });
-                          })
-                      }
-                  });
+                        }
+                    });
 
 
-              }
-          }
+                }
+            }
+        });
 
-      });
+        $('#music_search_textfield').on('keyup', function (e) {
+            var music_search_text = $(this).val();
+            var music_search_text_len = music_search_text.length;
 
-      $('#books_search_textfield').on('keyup', function (e) {
-          var book_search_text = $(this).val();
-          var book_search_text_len = book_search_text.length;
+            // get key code of current keypress event
+            var code = (e.keyCode ? e.keyCode : e.which);
+
+            // do nothing if it's an arrow key
+            if (code == 37 || code == 38 || code == 39 || code == 40) {
+                return;
+            }
+            else {
+                if ((music_search_text_len >= 5)) {
+
+                    var data = {music_search_text: []};
+                    data["music_search_text"].push(music_search_text);
+                    musicNameTags.splice(0, musicNameTags.length);
+                    musicJSON.splice(0, musicJSON.length);
+
+                    $.ajax({
+                        url: "/search_music_by_lastfm",
+                        type: "post",
+                        async: false,
+                        data: JSON.stringify(data),
+                        contentType: "application/json",
+                        success: function (data) {
+                            var music_name, music_poster, music_release_date, music_id;
+
+                            $.each(data, function (i, obj) {
+                                $.each(obj.trackmatches.track, function (k, objj) {
+                                    music_name = objj.name;
+                                    music_poster = objj.image[2]["#text"];
+                                    music_id = objj.mbid;
+                                    //console.log(objj.mbid)
+                                    musicNameTags.push(music_name);
+                                    musicJSON.push({"name": music_name, "id": music_id, "image": music_poster});
+                                });
+                            })
+                        }
+                    });
 
 
-          // get key code of current keypress event
-          var code = (e.keyCode ? e.keyCode : e.which);
+                }
+            }
 
-          // do nothing if it's an arrow key
-          if (code == 37 || code == 38 || code == 39 || code == 40) {
-              return;
-          }
-          else {
-              if ((book_search_text_len >= 3)) {
+        });
 
-                  var data = {book_search_text: []};
-                  data["book_search_text"].push(book_search_text);
-                  booksNameTags.splice(0, booksNameTags.length);
-                  booksJSON.splice(0, booksJSON.length);
-
-                  $.ajax({
-                      url: "/search_book_db",
-                      type: "post",
-                      async: false,
-                      data: JSON.stringify(data),
-                      contentType: "application/json",
-                      success: function (data) {
-                          var book_name, book_id, book_poster, movie_release_date;
-                          $.each(data, function (i, obj) {
-                              book_name = obj.title;
-                              booksNameTags.push(book_name);
-                              booksJSON.push({"title":book_name, "id":obj.id, "author":obj.author, "image":obj.image});
-                              //console.log(booksJSON[i]);
-                          })
-                      }
-                  });
+        $('#books_search_textfield').on('keyup', function (e) {
+            var book_search_text = $(this).val();
+            var book_search_text_len = book_search_text.length;
 
 
-              }
-          }
+            // get key code of current keypress event
+            var code = (e.keyCode ? e.keyCode : e.which);
 
-      });
+            // do nothing if it's an arrow key
+            if (code == 37 || code == 38 || code == 39 || code == 40) {
+                return;
+            }
+            else {
+                if ((book_search_text_len >= 3)) {
 
-  });
+                    var data = {book_search_text: []};
+                    data["book_search_text"].push(book_search_text);
+                    booksNameTags.splice(0, booksNameTags.length);
+                    booksJSON.splice(0, booksJSON.length);
 
-  function AutoCompleteSelectHandler(event, ui) {
-      var which_ele = $(this).attr('id');
-      //console.log("which_ele :- " + which_ele);
-      if (which_ele == "books_search_textfield") {
-          var selected_book = ui.item.value;
-          //console.log(selected_book);
-          $.each(booksJSON, function(key, value) {
-              if ( value.title === selected_book) {
-                  var book_item_html = '<div class="edit-profile-books-caraousel-item">' +
-                  '<div class="edit-profile-book-item">' +
-                          '<img src='+value.image+'>' +
-                          '</div>' +
-                          '<div class="edit-profile-book-item-name">'+selected_book+'</div>' +
-                  '<div class="edit-profile-book-item-category-name">'+value.author+'</div>' +
-                          '</div>';
+                    $.ajax({
+                        url: "/search_book_db",
+                        type: "post",
+                        async: false,
+                        data: JSON.stringify(data),
+                        contentType: "application/json",
+                        success: function (data) {
+                            var book_name, book_id, book_poster, movie_release_date;
+                            $.each(data, function (i, obj) {
+                                book_name = obj.title;
+                                booksNameTags.push(book_name);
+                                booksJSON.push({"title": book_name, "id": obj.id, "author": obj.author, "image": obj.image});
+                                //console.log(booksJSON[i]);
+                            })
+                        }
+                    });
 
-                  $("#edit-profile-books-caraousel-container").append(book_item_html);
 
-                  //booksJSON.push({"title":book_name, "id":obj.id, "author":obj.author, "image":obj.image});
-                  var data = {book_name: [], book_id:[], book_poster:[], book_author:[]};
-                  data["book_name"].push(selected_book);
-                  data["book_id"].push(value.id);
-                  data["book_poster"].push(value.image);
-                  data["book_author"].push(value.author);
+                }
+            }
 
-                  $.ajax({
-                      url: "/add_user_book",
-                      type: "post",
-                      async: false,
-                      data: JSON.stringify(data),
-                      contentType: "application/json",
-                      success: function (data) {
-                          console.log(data);
-                      }
-                  });
+        });
 
-              }
-          });
-          this.value = "";
-          return false;
-      }
-      else if (which_ele == "movie_search_textfield") {
-          var selected_movie = ui.item.value;
-          //console.log(selected_movie);
-          $.each(moviesJSON, function(key, value) {
-              if ( value.name === selected_movie) {
-                  var movie_item_html = '<div class="edit-profile-movies-caraousel-item">' +
-                          '<div class="edit-profile-movie-item">' +
-                          '<img src='+value.poster+'>' +
-                          '</div>' +
-                          '<div class="edit-profile-movie-item-name">'+selected_movie+'</div>' +
-                          '<div class="edit-profile-movie-item-category-name">'+value.release_date+'</div>' +
-                          '</div>';
-                  //moviesJSON.push({"name":movie_name, "id":movie_id, "poster":movie_poster, "release_date":movie_release_date});
-                  $("#edit-profile-movies-caraousel-container").append(movie_item_html);
+    });
 
-                  //moviesJSON.push({"name":movie_name, "id":movie_id, "poster":movie_poster, "release_date":movie_release_date});
-                  var data = {movie_name: [], movie_id:[], movie_poster:[], movie_release_date:[]};
-                  data["movie_name"].push(selected_movie);
-                  data["movie_id"].push(value.id);
-                  data["movie_poster"].push(value.poster);
-                  data["movie_release_date"].push(value.release_date);
+    function AutoCompleteSelectHandler(event, ui) {
+        var which_ele = $(this).attr('id');
+        //console.log("which_ele :- " + which_ele);
+        if (which_ele == "books_search_textfield") {
+            var selected_book = ui.item.value;
+            //console.log(selected_book);
+            $.each(booksJSON, function (key, value) {
+                if (value.title === selected_book) {
+                    var book_item_html = '<div class="col-lg-3">' +
+                            '<img class="my-img" src=' + value.image + '>' +
+                            '</div>';
 
-                  $.ajax({
-                      url: "/add_user_movie",
-                      type: "post",
-                      async: false,
-                      data: JSON.stringify(data),
-                      contentType: "application/json",
-                      success: function (data) {
-                        console.log(data);
-                      }
-                  });
+//                    $("#edit-profile-books-caraousel-container").append(book_item_html);
+                    $('.carousel').carousel({interval:false});
 
-              }
-          });
-          this.value = "";
-          return false;
-      }
-      else if (which_ele == "music_search_textfield") {
-          var selected_music = ui.item.value;
-          //console.log(selected_music);
-          $.each(musicJSON, function(key, value) {
-              console.log(value.name)
-              if ( value.name === selected_music) {
-                  var music_item_html = '<div class="edit-profile-musics-caraousel-item">' +
-                          '<div class="edit-profile-music-item">' +
-                          '<img src='+value.image+'>' +
-                          '</div>' +
-                          '<div class="edit-profile-music-item-name">'+selected_music+'</div>' +
-                          //'<div class="edit-profile-music-item-category-name">'+value.release_date+'</div>' +
-                          '</div>';
-                  //moviesJSON.push({"name":movie_name, "id":movie_id, "poster":movie_poster, "release_date":movie_release_date});
-                  $("#edit-profile-musics-caraousel-container").append(music_item_html);
 
-                  //musicJSON.push({"name":music_name, "id":music_id, "image":music_poster});
-                  var data = {music_name: [], music_id:[], music_poster:[]};
-                  data["music_name"].push(selected_music);
-                  data["music_id"].push(value.id);
-                  data["music_poster"].push(value.image);
-                  //data["music_release_date"].push(value.release_date);
+                    $("#carousel-for-books").find(".item").last().append(book_item_html);
+                    var target = $("#carousel-for-books").find(".item").length-1;
+                    $('#carousel-for-books').carousel(target);
 
-                  $.ajax({
-                      url: "/add_user_music",
-                      type: "post",
-                      async: false,
-                      data: JSON.stringify(data),
-                      contentType: "application/json",
-                      success: function (data) {
-                          console.log(data);
-                      }
-                  });
+                    //booksJSON.push({"title":book_name, "id":obj.id, "author":obj.author, "image":obj.image});
+                    var data = {book_name: [], book_id: [], book_poster: [], book_author: []};
+                    data["book_name"].push(selected_book);
+                    data["book_id"].push(value.id);
+                    data["book_poster"].push(value.image);
+                    data["book_author"].push(value.author);
 
-              }
-          });
-          this.value = "";
-          return false;
-      }
-  }
+                    $.ajax({
+                        url: "/add_user_book",
+                        type: "post",
+                        async: false,
+                        data: JSON.stringify(data),
+                        contentType: "application/json",
+                        success: function (data) {
+                            console.log(data);
+                        }
+                    });
+
+                }
+            });
+            this.value = "";
+            return false;
+        }
+        else if (which_ele == "movie_search_textfield") {
+            var selected_movie = ui.item.value;
+            //console.log(selected_movie);
+            $.each(moviesJSON, function (key, value) {
+                if (value.name === selected_movie) {
+                    var movie_item_html = '<div class="col-lg-3">' +
+                            '<img class="my-img" src=' + value.poster + '>' +
+                            '</div>';
+                    //moviesJSON.push({"name":movie_name, "id":movie_id, "poster":movie_poster, "release_date":movie_release_date});
+                     $('.carousel').carousel({interval:false});
+
+
+                    $("#carousel-for-movies").find(".item").last().append(movie_item_html);
+                    var target = $("#carousel-for-movies").find(".item").length-1;
+                    $('#carousel-for-movies').carousel(target);
+
+
+                    //moviesJSON.push({"name":movie_name, "id":movie_id, "poster":movie_poster, "release_date":movie_release_date});
+                    var data = {movie_name: [], movie_id: [], movie_poster: [], movie_release_date: []};
+                    data["movie_name"].push(selected_movie);
+                    data["movie_id"].push(value.id);
+                    data["movie_poster"].push(value.poster);
+                    data["movie_release_date"].push(value.release_date);
+
+                    $.ajax({
+                        url: "/add_user_movie",
+                        type: "post",
+                        async: false,
+                        data: JSON.stringify(data),
+                        contentType: "application/json",
+                        success: function (data) {
+                            console.log(data);
+                        }
+                    });
+
+                }
+            });
+            this.value = "";
+            return false;
+        }
+        else if (which_ele == "music_search_textfield") {
+            var selected_music = ui.item.value;
+            //console.log(selected_music);
+            $.each(musicJSON, function (key, value) {
+                console.log(value.name)
+                if (value.name === selected_music) {
+                    var music_item_html = '<div class="col-lg-3">' +
+                            '<img class="my-img" src=' + value.image + '>' +
+                            '</div>';
+                    //moviesJSON.push({"name":movie_name, "id":movie_id, "poster":movie_poster, "release_date":movie_release_date});
+//                    $("#edit-profile-musics-caraousel-container").append(music_item_html);
+                    $('.carousel').carousel({interval:false});
+                    $("#carousel-for-songs").find(".item").last().append(music_item_html);
+
+
+//                    $("#carousel-for-songs").find(".item").last().append(movie_item_html);
+                    var target = $("#carousel-for-songs").find(".item").length-1;
+                    $('#carousel-for-songs').carousel(target);
+
+
+                    //musicJSON.push({"name":music_name, "id":music_id, "image":music_poster});
+                    var data = {music_name: [], music_id: [], music_poster: []};
+                    data["music_name"].push(selected_music);
+                    data["music_id"].push(value.id);
+                    data["music_poster"].push(value.image);
+                    //data["music_release_date"].push(value.release_date);
+
+                    $.ajax({
+                        url: "/add_user_music",
+                        type: "post",
+                        async: false,
+                        data: JSON.stringify(data),
+                        contentType: "application/json",
+                        success: function (data) {
+                            console.log(data);
+                        }
+                    });
+
+                }
+            });
+            this.value = "";
+            return false;
+        }
+    }
 
 </script>
 

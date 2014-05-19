@@ -1,5 +1,9 @@
+html,body{
+    height: 100%;
+}
 body {
     font-family: 'Open Sans', sans-serif;
+    /*overflow: hidden;*/
 }
 
 .whiteblock {
@@ -85,7 +89,8 @@ body {
     display: inline-block;
     width: 79%;
     vertical-align: top;
-    padding: 3%
+    padding: 3%;
+
 }
 
 .no-padding {
@@ -548,3 +553,11 @@ input[type="radio"] + .custom-radio-btn.opposite_user_gender {
     width: 110px;
 }
 
+
+
+.my-img
+{
+    height: 100px;
+    width: 100px;
+    margin-top:10%;
+}
