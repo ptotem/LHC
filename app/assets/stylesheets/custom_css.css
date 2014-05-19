@@ -274,7 +274,7 @@ body {
 
 .hd_list {
     font-family: "open sans";
-    font-size: 1.3em;
+    font-size: 1em;
     line-height: 1.5em;
     color: #f7f7f7;
 }
@@ -543,3 +543,8 @@ input[type="radio"] + .custom-radio-btn.opposite_user_gender {
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
+.button-style{
+    width: 110px;
+}
+
