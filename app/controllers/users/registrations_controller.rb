@@ -26,6 +26,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     # render :json => (params[:user][:hobby_list_ids]-[""]).blank?#[:user][:demographic_attributes]
     # return
     @user = current_user
+    if !params[:user][:hobby_list_ids].nil?
     if !(params[:user][:hobby_list_ids]-[""]).blank?
       params[:user][:hobby_list_ids].reject!{|a| a==""}
       if params[:user][:hobby_list_ids].length !=5
@@ -33,11 +34,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
         return
       end
       end
+    end
+
+    if !params[:user][:about_list_ids].nil?
     if !(params[:user][:about_list_ids]-[""]).blank?
       params[:user][:about_list_ids].reject!{|a| a==""}
       if params[:user][:about_list_ids].length !=5
         redirect_to authenticated_root_path, notice: 'Your profile was not updated.You must exactly specify 5 likes!'
         return
+      end
       end
 
     end
