@@ -557,7 +557,23 @@ input[type="radio"] + .custom-radio-btn.opposite_user_gender {
 
 .my-img
 {
-    height: 100px;
+    height: 150px;
     width: 100px;
-    margin-top:10%;
+    /*margin-top:10%;*/
 }
+
+.carousel-inner{
+    height: 100%;
+}
+
+.carousel-caption{
+    top:90%;
+    left:0;
+    color:#000000;
+}
+
+.carousel
+{
+    height: 215px;padding: 1%;
+}
+

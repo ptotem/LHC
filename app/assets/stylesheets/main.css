@@ -894,18 +894,24 @@ ul.portfolio li {
     padding-left: 5px;
 }
 
+
 .carousel-control {
     bottom: 0;
     color: #FFFFFF;
-    font-size: 20px;
+    font-size: 32px;
     left: 0;
-    opacity: 0.5;
-    padding-top: 15%;
+    opacity: 1.0;
+    padding-top: 7%;
     position: absolute;
     text-align: center;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
     top: 0;
     width: 10%;
+}
+
+.padding-control-indicator
+{
+    padding-top: 14%;
 }
 
 /* ==========================================================================

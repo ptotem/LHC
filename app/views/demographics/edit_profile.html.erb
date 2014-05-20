@@ -344,6 +344,10 @@
                   <% @user.movies.each_with_index do |user_movie, index| %>
                       <div class="col-lg-3">
                         <%= image_tag user_movie.movie_poster.url ,:class=>"my-img" %>
+                        <div class="carousel-caption">
+                          <p> <%= user_movie.name %></p>
+                        </div>
+
                       </div>
                       <% if (index+1)%4==0 %>
                       </div> <div class="item ">
@@ -391,6 +395,10 @@
                   <% @user.songs.each_with_index do |user_song, index| %>
                       <div class="col-lg-3">
                         <%= image_tag user_song.song_poster ,:class=>"my-img" %>
+                        <div class="carousel-caption">
+                          <p> <%= user_song.name %></p>
+                        </div>
+
                       </div>
                       <% if (index+1)%4==0 %>
                           </div> <div class="item ">
@@ -435,6 +443,10 @@
                   <% @user.books.each_with_index do |user_book, index| %>
                       <div class="col-lg-3">
                         <%= image_tag user_book.cover ,:class=>"my-img"%>
+                        <div class="carousel-caption">
+                          <p> <%= user_book.name %></p>
+                        </div>
+
                       </div>
                       <% if (index+1)%4==0 %>
                           </div> <div class="item ">

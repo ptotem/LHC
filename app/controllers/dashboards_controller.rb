@@ -44,9 +44,10 @@ class DashboardsController < ApplicationController
     @like_requests = Like.where(:receiver_id => current_user.id) rescue nil?
     #render :json => @like_requests
     #return
-    #if current_user.notifications.blank? and @like_requests.blank?
-    #  redirect_to user_profile_path(current_user.id)
-    #end
+    # TODO: Why was this code commented ? I wrote it for a reason- Rushabh
+    if current_user.notifications.blank? and @like_requests.blank?
+    redirect_to user_profile_path(current_user.id),:notice => "You have no notifications"
+    end
   end
 
   def user_verification
