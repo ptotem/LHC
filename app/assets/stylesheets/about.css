@@ -1,0 +1,60 @@
+.about-first-image {
+    background-image: url('/assets/D-icon.png');
+    background-size: 100% 100%;
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+}
+
+.about-first-image:hover {
+    background-image: url('/assets/D_pic.png');
+}
+
+.about-second-image {
+    background-image: url('/assets/S-icon.png');
+    background-size: 100% 100%;
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+}
+
+.about-second-image:hover {
+    background-image: url('/assets/S_pic.png');
+}
+
+.about-first-img-text {
+    margin-top: 2%;
+    margin-left: 6%;
+    color: white;
+    font-size: 1.3em;
+}
+
+.about-second-img-text {
+    margin-top: 2%;
+    padding-left: 5%;
+    color: white;
+    font-size: 1.3em;
+}
+
+.about-plus-text {
+    font-size: 4em;
+    text-align: center;
+    font-weight: bolder;
+    color: white;
+}
+
+
+.bottom-hedding {
+    font-size: 2em;
+    color: white;
+    text-align: center;
+}
+
+.content-top-space {
+    padding-top: 3%;;
+}
+.about-footer{
+    height: 15px;
+    background-color: white;
+
+}
