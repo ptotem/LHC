@@ -586,8 +586,8 @@ input[type="radio"] + .custom-radio-btn.opposite_user_gender {
 .carousel
 {
     /*height: 215px;*/
-    height: 190px;
-    padding: 1%;
+    /*height: 190px;*/
+    /*padding: 1%;*/
 }
 
 .custom-carousel-caption{
