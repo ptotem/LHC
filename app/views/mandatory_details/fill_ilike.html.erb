@@ -32,7 +32,7 @@
     </div>
 
     <%= render :partial => "buttons",:locals => {:form=>f,:prev_page_link=>@prev_page} %>
-
+    <% @user_hobbies = current_user.hobby_lists.map(&:id) rescue [] %>
 
 <% end %>
 
@@ -50,16 +50,15 @@
       <div class="modal-body">
        You Cannot Click More Than 5
       </div>
-
     </div>
   </div>
 </div>
 
 
 
-
 <script type="text/javascript">
     $(document).ready( function(){
+
         $(".cb-enable").click(function(){
             var parent = $(this).parents('.switch');
             $('.cb-disable',parent).removeClass('selected');
@@ -91,6 +90,27 @@
 //            })
 
         });
+
+        var user_hobbies = <%= @user_hobbies %>;
+        //console.log(user_hobbies);
+
+        $('input[type="checkbox"]').each(function(index) {
+            //$('#t').append(', '+$(this).val());
+            //console.log("cb");
+            //console.log($(this).val());
+            //console.log(user_hobbies[index]);
+            for (var j=0; j<user_hobbies.length; j++){
+                if ($(this).val() == user_hobbies[j]){
+                    //console.log($(this).val());
+                    //console.log($(this).prev().attr('class'));
+                    $(this).attr('checked','checked');
+                    $(this).prev().addClass('selected')
+                }
+            }
+        });
+
+
+
     });
 </script>
 

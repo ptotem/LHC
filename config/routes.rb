@@ -111,6 +111,10 @@ Lhc::Application.routes.draw do
   match '/add_user_book', to: 'demographics#add_user_book', via: [:get, :post]
   match '/add_user_music', to: 'demographics#add_user_music', via: [:get, :post]
 
+  match '/delete_user_movie', to: 'demographics#delete_user_movie', via: [:get, :post]
+  match '/delete_user_book', to: 'demographics#delete_user_book', via: [:get, :post]
+  match '/delete_user_song', to: 'demographics#delete_user_song', via: [:get, :post]
+
   match '/search_music_gmusic', to: 'demographics#search_music_gmusic', via: [:get, :post]
   match '/search_music_by_lastfm', to: 'demographics#search_music_by_lastfm', via: [:get, :post]
 

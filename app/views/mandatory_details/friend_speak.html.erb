@@ -37,7 +37,7 @@
         </div>
 
     <%= render :partial => "buttons",:locals => {:form=>f,:prev_page_link=>@prev_page} %>
-
+    <% @user_about_lists = current_user.about_lists.map(&:id) rescue [] %>
 
 <% end %>
 
@@ -91,6 +91,25 @@
 
             $('.checkbox',parent).attr('checked', false);
         });
+
+        var user_about_lists = <%= @user_about_lists %>;
+        console.log(user_about_lists);
+
+        $('input[type="checkbox"]').each(function(index) {
+            //$('#t').append(', '+$(this).val());
+            //console.log("cb");
+            //console.log($(this).val());
+            //console.log(user_hobbies[index]);
+            for (var j=0; j<user_about_lists.length; j++){
+                if ($(this).val() == user_about_lists[j]){
+                    //console.log($(this).val());
+                    //console.log($(this).prev().attr('class'));
+                    $(this).attr('checked','checked');
+                    $(this).prev().addClass('selected')
+                }
+            }
+        });
+
     });
 </script>
 

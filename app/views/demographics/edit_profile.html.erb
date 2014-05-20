@@ -32,25 +32,24 @@
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
     <ul class="nav nav-tabs" style="margin-bottom: 15px;">
-      <li class="active">
-        <a href="#home" data-toggle="tab" style="border-top-left-radius: 10px; border-top-right-radius: 10px;outline: 0">Personal
-          Details</a></li>
+      <li class="active" id="personal_details_tab">
+        <a href="#home" data-toggle="tab" style="border-top-left-radius: 10px; border-top-right-radius: 10px;outline: 0">Personal Details</a></li>
       <li>
         <a href="#profile" data-toggle="tab" style="border-top-left-radius: 10px; border-top-right-radius: 10px;outline: 0">Password</a>
       </li>
-      <li>
+      <li id="about_me_tab">
         <a href="#dropdown1" data-toggle="tab" style="border-top-left-radius: 10px; border-top-right-radius: 10px;outline: 0">About
           Me</a></li>
       <li>
         <a href="#dropdown2" data-toggle="tab" style="border-top-left-radius: 10px; border-top-right-radius: 10px;outline: 0">Looking
           For</a></li>
-      <li>
+      <li id="movies_tab">
         <a href="#dropdown3" data-toggle="tab" style="border-top-left-radius: 10px; border-top-right-radius: 10px;outline: 0">Movies</a>
       </li>
-      <li>
+      <li id="music_tab">
         <a href="#dropdown4" data-toggle="tab" style="border-top-left-radius: 10px; border-top-right-radius: 10px;outline: 0">Music</a>
       </li>
-      <li>
+      <li id="books_tab">
         <a href="#dropdown5" data-toggle="tab" style="border-top-left-radius: 10px; border-top-right-radius: 10px;outline: 0">Books</a>
       </li>
     </ul>
@@ -259,7 +258,7 @@
                       <%#= f.fields_for :attendances do |a| %>
                       <%#= a.collection_select(:institution_id, Institution.all, :id, :name,{}, {:class=>"lhc_chosen"}) %>
                       <%# end %>
-                      <%= f.collection_select(:institution_ids, Institution.order('name ASC').all, :id, :name, {:include_blank => false}, {:multiple => true, :class => "multiple"}) %>
+                      <%= f.collection_select(:institution_ids, Institution.order('name ASC').all, :id, :name, {:include_blank => false}, {:multiple => true, :class => "multiple", :style=>"width: 100%;"}) %>
                     </div>
 
                     <!--<div class="col-sm-4 col-lg-4">-->
@@ -338,14 +337,15 @@
 
           <div class="row">
             <div class="col-lg-12" id="edit-profile-movies-caraousel-container1">
-              <div id="carousel-for-movies" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
+              <div id="carousel-for-movies" class="carousel slide" data-ride="carousel" style="height: 200px;">
+                <div class="carousel-inner" style="margin-left: 3%">
                   <div class="item active">
                   <% @user.movies.each_with_index do |user_movie, index| %>
-                      <div class="col-lg-3">
-                        <%= image_tag user_movie.movie_poster.url ,:class=>"my-img" %>
-                        <div class="carousel-caption">
-                          <p> <%= user_movie.name %></p>
+                      <div class="col-lg-3 edit-profile-movie-citem" id="<%= user_movie.movie_api_id %>">
+                        <%= image_tag user_movie.poster ,:class=>"my-img" %>
+                        <div class="edit-profile-delete-movie-item-block">&#10006;</div>
+                        <div class="carousel-caption edit-profile-custom-carousel-caption">
+                          <p> <%= user_movie.name.truncate(15) %></p>
                         </div>
 
                       </div>
@@ -357,10 +357,10 @@
                   <!-- Controls -->
 
                 </div>
-                <a class="left carousel-control" href="#carousel-for-movies" data-slide="prev">
+                <a style="background-image: none; outline: none; left: -4%;" class="left carousel-control" href="#carousel-for-movies" data-slide="prev">
                   <span class="fa  fa-chevron-left"></span>
                 </a>
-                <a class="right carousel-control" href="#carousel-for-movies" data-slide="next">
+                <a style="background-image: none; outline: none; " class="right carousel-control" href="#carousel-for-movies" data-slide="next">
                   <span class="fa fa-chevron-right"></span>
                 </a>
 
@@ -389,14 +389,16 @@
 
         <div class="row">
           <div class="col-lg-12" id="edit-profile-movies-caraousel-container2">
-            <div id="carousel-for-songs" class="carousel slide" data-ride="carousel">
-              <div class="carousel-inner">
+
+            <div id="carousel-for-songs" class="carousel slide" data-ride="carousel" style="height: 200px;">
+              <div class="carousel-inner" style="margin-left: 3%">
                 <div class="item active">
                   <% @user.songs.each_with_index do |user_song, index| %>
-                      <div class="col-lg-3">
-                        <%= image_tag user_song.song_poster ,:class=>"my-img" %>
-                        <div class="carousel-caption">
-                          <p> <%= user_song.name %></p>
+                      <div class="col-lg-3 edit-profile-song-citem" id="<%= user_song.song_api_id %>">
+                        <%= image_tag user_song.song_poster, :class=>"my-img" %>
+                        <div class="edit-profile-delete-music-item-block">&#10006;</div>
+                        <div class="carousel-caption edit-profile-custom-carousel-caption">
+                          <p> <%= user_song.name.truncate(15) %></p>
                         </div>
 
                       </div>
@@ -408,14 +410,15 @@
                   <!-- Controls -->
 
                   </div>
-              <a class="left carousel-control" href="#carousel-for-songs" data-slide="prev">
+              <a style="background-image: none; outline: none; left: -4%;" class="left carousel-control" href="#carousel-for-songs" data-slide="prev">
                 <span class="fa  fa-chevron-left"></span>
               </a>
-              <a class="right carousel-control" href="#carousel-for-songs" data-slide="next">
+              <a style="background-image: none; outline: none; " class="right carousel-control" href="#carousel-for-songs" data-slide="next">
                 <span class="fa fa-chevron-right"></span>
               </a>
 
             </div>
+
           </div>
         </div> </section>
 </div>
@@ -437,14 +440,16 @@
 
         <div class="row">
           <div class="col-lg-12" id="edit-profile-movies-caraousel-container3">
-            <div id="carousel-for-books" class="carousel slide" data-ride="carousel">
-              <div class="carousel-inner">
+
+            <div id="carousel-for-books" class="carousel slide" data-ride="carousel" style="height: 200px;">
+              <div class="carousel-inner" style="margin-left: 3%">
                 <div class="item active">
                   <% @user.books.each_with_index do |user_book, index| %>
-                      <div class="col-lg-3">
+                      <div class="col-lg-3 edit-profile-book-citem" id="<%= user_book.book_api_id %>">
                         <%= image_tag user_book.cover ,:class=>"my-img"%>
-                        <div class="carousel-caption">
-                          <p> <%= user_book.name %></p>
+                        <div class="edit-profile-delete-book-item-block">&#10006;</div>
+                        <div class="carousel-caption edit-profile-custom-carousel-caption">
+                          <p> <%= user_book.name.truncate(15) %></p>
                         </div>
 
                       </div>
@@ -456,14 +461,15 @@
                   <!-- Controls -->
 
                   </div>
-              <a class="left carousel-control" href="#carousel-for-books" data-slide="prev">
+              <a style="background-image: none; outline: none; left: -4%;" class="left carousel-control" href="#carousel-for-books" data-slide="prev">
                 <span class="fa  fa-chevron-left"></span>
               </a>
-              <a class="right carousel-control" href="#carousel-for-books" data-slide="next">
+              <a style="background-image: none; outline: none; " class="right carousel-control" href="#carousel-for-books" data-slide="next">
                 <span class="fa fa-chevron-right"></span>
               </a>
 
             </div>
+
           </div>
         </div>
         </div>
@@ -515,6 +521,100 @@
     var added_book_item_counter = 0;
 
     $(function () {
+
+        var link = window.location.href.toString().split("#")[1];
+        //console.log(link.split("#")[1]);
+        //console.log($('.nav-tabs').find("li").length);
+        var tab_id, anchor_link;
+
+        $('#myTabContent').find('.tab-pane').each(function( index ) {
+            $(this).removeClass("active in")
+        });
+
+        $('.nav-tabs').find("li").each(function( index ) {
+            $(this).removeClass("active");
+            tab_id = $(this).attr('id');
+
+
+            if (link == tab_id ){
+                //console.log($(this));
+                //console.log($(this).attr('id'));
+                anchor_link = $(this).find('a').attr('href');
+                //console.log(anchor_link);
+                $(this).addClass("active");
+                $('#myTabContent').find(anchor_link).addClass("active in")
+            }
+
+        });
+
+
+        $('.edit-profile-delete-movie-item-block').on('click', function(){
+            var movie_item = $(this).parent();
+            var movie_api_id = $(this).parent().attr('id');
+
+            var data = {movie_api_id: []};
+            data["movie_api_id"].push(movie_api_id);
+
+            $.ajax({
+                url: "/delete_user_movie",
+                type: "post",
+                async: false,
+                data: JSON.stringify(data),
+                contentType: "application/json",
+                success: function (data) {
+                    console.log(data);
+                    $(movie_item).empty().remove();
+                }
+            });
+
+        });
+
+        $('.edit-profile-delete-book-item-block').on('click', function(){
+            var book_item = $(this).parent();
+            var book_api_id = $(this).parent().attr('id');
+
+            console.log(book_item);
+            console.log(book_api_id);
+
+            var data = {book_api_id: []};
+            data["book_api_id"].push(book_api_id);
+
+            $.ajax({
+                url: "/delete_user_book",
+                type: "post",
+                async: false,
+                data: JSON.stringify(data),
+                contentType: "application/json",
+                success: function (data) {
+                    console.log(data);
+                    $(book_item).empty().remove();
+                }
+            });
+
+        });
+
+        $('.edit-profile-delete-music-item-block').on('click', function(){
+            var song_item = $(this).parent();
+            var song_api_id = $(this).parent().attr('id');
+            console.log(song_api_id);
+
+            var data = {song_api_id: []};
+            data["song_api_id"].push(song_api_id);
+
+            $.ajax({
+                url: "/delete_user_song",
+                type: "post",
+                async: false,
+                data: JSON.stringify(data),
+                contentType: "application/json",
+                success: function (data) {
+                    console.log(data);
+                    $(song_item).empty().remove();
+                }
+            });
+
+        });
+
 
         $('.carousel').carousel({interval:false});
 
@@ -670,7 +770,7 @@
                                     music_name = objj.name;
                                     music_poster = objj.image[2]["#text"];
                                     music_id = objj.mbid;
-                                    //console.log(objj.mbid)
+                                    console.log(objj.mbid)
                                     musicNameTags.push(music_name);
                                     musicJSON.push({"name": music_name, "id": music_id, "image": music_poster});
                                 });
@@ -729,6 +829,7 @@
 
     });
 
+
     function AutoCompleteSelectHandler(event, ui) {
         var which_ele = $(this).attr('id');
         //console.log("which_ele :- " + which_ele);
@@ -737,17 +838,6 @@
             //console.log(selected_book);
             $.each(booksJSON, function (key, value) {
                 if (value.title === selected_book) {
-                    var book_item_html = '<div class="col-lg-3">' +
-                            '<img class="my-img" src=' + value.image + '>' +
-                            '</div>';
-
-//                    $("#edit-profile-books-caraousel-container").append(book_item_html);
-                    $('.carousel').carousel({interval:false});
-
-
-                    $("#carousel-for-books").find(".item").last().append(book_item_html);
-                    var target = $("#carousel-for-books").find(".item").length-1;
-                    $('#carousel-for-books').carousel(target);
 
                     //booksJSON.push({"title":book_name, "id":obj.id, "author":obj.author, "image":obj.image});
                     var data = {book_name: [], book_id: [], book_poster: [], book_author: []};
@@ -764,6 +854,23 @@
                         contentType: "application/json",
                         success: function (data) {
                             console.log(data);
+                            if (data=="OK"){
+                                var book_item_html = '<div class="col-lg-3">' +
+                                        '<img class="my-img" src=' + value.image + '>' +
+                                        '</div>';
+
+                                //$("#edit-profile-books-caraousel-container").append(book_item_html);
+                                $('.carousel').carousel({interval:false});
+
+
+                                $("#carousel-for-books").find(".item").last().append(book_item_html);
+                                var target = $("#carousel-for-books").find(".item").length-1;
+                                $('#carousel-for-books').carousel(target);
+                            }
+                            else{
+                                console.log("already there")
+                            }
+
                         }
                     });
 
@@ -777,17 +884,6 @@
             //console.log(selected_movie);
             $.each(moviesJSON, function (key, value) {
                 if (value.name === selected_movie) {
-                    var movie_item_html = '<div class="col-lg-3">' +
-                            '<img class="my-img" src=' + value.poster + '>' +
-                            '</div>';
-                    //moviesJSON.push({"name":movie_name, "id":movie_id, "poster":movie_poster, "release_date":movie_release_date});
-                     $('.carousel').carousel({interval:false});
-
-
-                    $("#carousel-for-movies").find(".item").last().append(movie_item_html);
-                    var target = $("#carousel-for-movies").find(".item").length-1;
-                    $('#carousel-for-movies').carousel(target);
-
 
                     //moviesJSON.push({"name":movie_name, "id":movie_id, "poster":movie_poster, "release_date":movie_release_date});
                     var data = {movie_name: [], movie_id: [], movie_poster: [], movie_release_date: []};
@@ -804,6 +900,24 @@
                         contentType: "application/json",
                         success: function (data) {
                             console.log(data);
+                            if (data=="OK"){
+                                var movie_item_html = '<div class="col-lg-3">' +
+                                        '<img class="my-img" src=' + value.poster + '>' +
+                                        '<div class="carousel-caption edit-profile-custom-carousel-caption">' +
+                                        '<p>'+value.name.substr(0,15)+'</p>' +
+                                        '</div>' +
+                                        '</div>';
+                                //moviesJSON.push({"name":movie_name, "id":movie_id, "poster":movie_poster, "release_date":movie_release_date});
+                                $('.carousel').carousel({interval:false});
+
+                                $("#carousel-for-movies").find(".item").last().append(movie_item_html);
+                                var target = $("#carousel-for-movies").find(".item").length-1;
+                                $('#carousel-for-movies').carousel(target);
+                            }
+                            else{
+                                console.log("already there")
+                            }
+
                         }
                     });
 
@@ -818,19 +932,6 @@
             $.each(musicJSON, function (key, value) {
                 console.log(value.name)
                 if (value.name === selected_music) {
-                    var music_item_html = '<div class="col-lg-3">' +
-                            '<img class="my-img" src=' + value.image + '>' +
-                            '</div>';
-                    //moviesJSON.push({"name":movie_name, "id":movie_id, "poster":movie_poster, "release_date":movie_release_date});
-//                    $("#edit-profile-musics-caraousel-container").append(music_item_html);
-                    $('.carousel').carousel({interval:false});
-                    $("#carousel-for-songs").find(".item").last().append(music_item_html);
-
-
-//                    $("#carousel-for-songs").find(".item").last().append(movie_item_html);
-                    var target = $("#carousel-for-songs").find(".item").length-1;
-                    $('#carousel-for-songs').carousel(target);
-
 
                     //musicJSON.push({"name":music_name, "id":music_id, "image":music_poster});
                     var data = {music_name: [], music_id: [], music_poster: []};
@@ -847,6 +948,24 @@
                         contentType: "application/json",
                         success: function (data) {
                             console.log(data);
+                            if (data=="OK"){
+                                var music_item_html = '<div class="col-lg-3">' +
+                                        '<img class="my-img" src=' + value.image + '>' +
+                                        '</div>';
+                                //moviesJSON.push({"name":movie_name, "id":movie_id, "poster":movie_poster, "release_date":movie_release_date});
+                                //$("#edit-profile-musics-caraousel-container").append(music_item_html);
+                                $('.carousel').carousel({interval:false});
+                                $("#carousel-for-songs").find(".item").last().append(music_item_html);
+
+
+                                //$("#carousel-for-songs").find(".item").last().append(movie_item_html);
+                                var target = $("#carousel-for-songs").find(".item").length-1;
+                                $('#carousel-for-songs').carousel(target);
+                            }
+                            else{
+                                console.log("already there")
+                            }
+
                         }
                     });
 

@@ -81,18 +81,35 @@ class DemographicsController < ApplicationController
 
     #render :json => "#{@movie_name} #{@movie_id} #{@movie_poster} #{@movie_release_date}"
 
-    #if Movie.where(:movie_api_id =>@movie_api_id).first.nil?
-    #  @movie = Movie.create(:name=>@movie_name, :movie_api_id=>@movie_api_id, :poster=>@movie_poster, :release_date=>@movie_release_date)
-    #  @movie.save!
-    #else
-    #  @user.movies.create(:name=>@movie_name, :movie_api_id=>@movie_api_id, :poster=>@movie_poster, :release_date=>@movie_release_date)
-    #end
+    if Movie.where(:movie_api_id => @movie_api_id).blank?
+      @movie = Movie.create(:name=>@movie_name, :movie_api_id=>@movie_api_id, :poster=>@movie_poster, :release_date=>@movie_release_date)
+      @movie.save!
+      @user.movies << @movie
+      render :text => "OK"
+      return
+    else
+      if @user.movies.where(:movie_api_id=>@movie_api_id).present?
+        render :text => "You have allready added this movie."
+        return
+      else
+        @movie_found = Movie.where(:movie_api_id => @movie_api_id).first
+        @user.movies << @movie_found
+        render :text => "OK"
+        return
+      end
+    end
 
-    @user.movies.create(:name=>@movie_name, :movie_api_id=>@movie_api_id, :movie_poster=>@movie_poster, :release_date=>@movie_release_date)
-    @user.save!
+  end
 
-    render :text => "User Movie Created"
+  def delete_user_movie
+    @user = current_user
+    @movie_api_id = params[["movie_api_id"][0]][0].to_i
+
+    @user_movie = @user.movies.where(:movie_api_id=>@movie_api_id).first
+    @user.movies.delete(@user_movie)
+    render :text => "Movie deleted"
     return
+    #@movie_api_id = params[["movie_name"][0]][0]
   end
 
   def add_user_book
@@ -102,12 +119,35 @@ class DemographicsController < ApplicationController
     @book_poster = params[["book_poster"][0]][0]
     @book_author = params[["book_author"][0]][0]
 
-    @user.books.create(:name=>@book_name, :book_api_id=>@book_id, :cover=>@book_poster, :author=>@book_author)
-    @user.save!
+    if Book.where(:book_api_id => @book_id).blank?
+      @book = Book.create(:name=>@book_name, :book_api_id=>@book_id, :cover=>@book_poster, :author=>@book_author)
+      @book.save!
+      @user.books << @book
+      render :text => "OK"
+      return
+    else
+      if @user.books.where(:book_api_id=>@book_id).present?
+        render :text => "You have allready added this book."
+        return
+      else
+        @book_found = Book.where(:book_api_id => @book_id).first
+        @user.books << @book_found
+        render :text => "OK"
+        return
+      end
+    end
 
-    render :text => "#{@book_name} #{@book_id} #{@book_poster} #{@book_author}"
-    #render :text => "User Book Created"
+  end
+
+  def delete_user_book
+    @user = current_user
+    @book_api_id = params[["book_api_id"][0]][0].to_i
+
+    @user_book = @user.books.where(:book_api_id=>@book_api_id).first
+    @user.books.delete(@user_book)
+    render :text => "Book deleted"
     return
+    #@movie_api_id = params[["movie_name"][0]][0]
   end
 
   def add_user_music
@@ -116,10 +156,39 @@ class DemographicsController < ApplicationController
     @music_id = params[["music_id"][0]][0]
     @music_poster = params[["music_poster"][0]][0]
 
-    @user.songs.create(:name=>@music_name, :song_api_id=>@music_id, :song_poster=>@music_poster)
+    #@user.songs.create(:name=>@music_name, :song_api_id=>@music_id, :song_poster=>@music_poster)
+    #
+    #render :text => "#{@music_name} #{@music_id} #{@music_poster}"
+    ##render :text => "User Music Created"
+    #return
 
-    render :text => "#{@music_name} #{@music_id} #{@music_poster}"
-    #render :text => "User Music Created"
+    if Song.where(:song_api_id => @music_id).blank?
+      @song = Song.create(:name=>@music_name, :song_api_id=>@music_id, :song_poster=>@music_poster)
+      @song.save!
+      @user.songs << @song
+      render :text => "OK"
+      return
+    else
+      if @user.songs.where(:song_api_id=>@music_id).present?
+        render :text => "You have allready added this song."
+        return
+      else
+        @song_found = Song.where(:song_api_id => @music_id).first
+        @user.songs << @song_found
+        render :text => "OK"
+        return
+      end
+    end
+
+  end
+
+  def delete_user_song
+    @user = current_user
+    @song_api_id = params[["song_api_id"][0]][0].to_i
+
+    @user_song = @user.songs.where(:song_api_id=>@song_api_id).first
+    @user.songs.delete(@user_song)
+    render :text => "Song deleted"
     return
   end
 
