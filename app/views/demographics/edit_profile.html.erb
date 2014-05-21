@@ -61,28 +61,37 @@
       <%= f.fields_for :demographic do |d| %>
 
           <div class="row">
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-              <div class="form-group" style="margin-bottom: 0">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                  <h6 class="white">Name</h6>
-                  <%= d.text_field :name, :value => @user.demographic.name, :placeholder => "Name", :class => "form-control" %>
-                  <span class="help-block">
+
+
+
+            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-7">
+              <div class="row">
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-5">
+                  <div class="form-group" style="margin-bottom: 0">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                      <h6 class="white">Name</h6>
+                      <%= d.text_field :name, :value => @user.demographic.name, :placeholder => "Name", :class => "form-control" %>
+                      <span class="help-block">
                                 <%= get_content_for("nameHelperText") %>
                             </span>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-              <div class="form-group" style="margin-bottom: 0">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                  <h6 class="white">Nickname</h6>
-                  <%= d.text_field :nickname, :value => @user.demographic.nickname, :placeholder => "Nickname", :class => "form-control" %>
-                  <span class="help-block">
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-offset-1 col-lg-5">
+                  <div class="form-group" style="margin-bottom: 0">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                      <h6 class="white">Nickname</h6>
+                      <%= d.text_field :nickname, :value => @user.demographic.nickname, :placeholder => "Nickname", :class => "form-control" %>
+                      <span class="help-block">
                                 <%= get_content_for("nicknameHelperText") %>
                             </span>
+                    </div>
+                  </div>
                 </div>
               </div>
+
             </div>
+
             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-lg-offset-1">
               <div class="form-group">
                 <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
@@ -150,12 +159,12 @@
               <div class="form-group" style="margin-left: 2%">
                 <div class="row">
                   <div class="col-sm-8 col-lg-8">
-                    <h6 class="white" style="float: left">current student?</h6>
+                    <h6 class="white" style="float: left">currently studying?</h6>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-sm-8 col-lg-8">
-                    <span style="margin-left: 15%; position: relative; top: 5px;"><%= d.check_box :current_student %></span>
+                    <span style="position: relative;"><%= d.check_box :current_student %></span>
                   </div>
                 </div>
               </div>
@@ -877,8 +886,11 @@
                             console.log(data);
                             if (data == "OK") {
                                 var book_item_html = '<div class="col-lg-3">' +
-                                        '<img class="my-img" src=' + value.image + '>' +
-                                        '</div>';
+                                                        '<img class="my-img" src=' + value.image + '>' +
+                                                        '<div class="carousel-caption edit-profile-custom-carousel-caption">' +
+                                                            '<p>'  + selected_book.substr(0, 15) + '</p>' +
+                                                        '</div>' +
+                                                     '</div>';
 
                                 //$("#edit-profile-books-caraousel-container").append(book_item_html);
                                 $('.carousel').carousel({interval: false});
@@ -972,6 +984,10 @@
                             if (data == "OK") {
                                 var music_item_html = '<div class="col-lg-3">' +
                                         '<img class="my-img" src=' + value.image + '>' +
+                                        '<div class="carousel-caption edit-profile-custom-carousel-caption">' +
+                                            '<p>' + selected_music.substr(0, 15) + '</p>' +
+                                        '</div>' +
+
                                         '</div>';
                                 //moviesJSON.push({"name":movie_name, "id":movie_id, "poster":movie_poster, "release_date":movie_release_date});
                                 //$("#edit-profile-musics-caraousel-container").append(music_item_html);
