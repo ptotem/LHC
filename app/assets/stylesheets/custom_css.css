@@ -292,9 +292,12 @@ body {
 }
 
 #edit_profile_text {
-    background-color: white;
+    background-color: #FFFFFF;
+    margin:0 auto;
     padding: 5px;
-    text-align: center
+    text-align: center;
+    width: 60%;
+    margin-top: 8%;
 }
 
 #edit_profile_text > a:hover {
@@ -611,3 +614,6 @@ input[type="radio"] + .custom-radio-btn.opposite_user_gender {
     margin-top: -1%;
     }
 
+.contact-subject-input{
+    width: 100%;
+}
