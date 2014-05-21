@@ -28,7 +28,7 @@
         <% @like_requests.each do |e| %>
             <div class="row">
               <div class="col-lg-12 whiteblock">
-                <div class="left-part"><img class="profile_pic_thumbnail" src="<%= get_user_image(e.sender_id) %>">
+                <div class="left-part"><img class="profile_pic_thumbnail" src="<%= get_user_image(e.sender_id) %>" style="border-radius: 50%">
                 </div>
                 <div class="mid-part">
                   <div class="recentactivitytext">
@@ -64,7 +64,7 @@
             <div class="row">
               <div class="col-lg-12 whiteblock">
                 <div class="left-part">
-                  <img class="profile_pic_thumbnail" src="<%= get_user_image(notification.sender_id) %>"></div>
+                  <img class="profile_pic_thumbnail img-circle123" src="<%= get_user_image(notification.sender_id) %>" style="border-radius: 50%;"> </div>
                 <div class="mid-part">
                   <div class="recentactivitytext">
                     <!--Your Match <a>Sagarika</a> sent you a message-->

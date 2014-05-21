@@ -23,13 +23,14 @@
                    <div class="row">
                      <ul class="test_ul">
 
+                       <%#= form_for(@quiz_answer, :html => { :style => 'height: 395px; overflow-y: auto' }) do |f| %>
                        <%= form_for(@quiz_answer) do |f| %>
 
                              <%= f.hidden_field :user_id,:value => current_user.id %>
                              <%= f.hidden_field :question_id,:value => @question.id %>
                              <%= hidden_field_tag :quiz_id, @quiz.id %>
 
-                           <div class="field">
+                           <div class="field" style="height: 395px; overflow-y: auto">
                              <% @question.options.each do |test_ans_option| %>
                                  <li>
                                    <%= f.radio_button :answer_id,test_ans_option.id, :checked=>true, :style=>"float: left;" %>

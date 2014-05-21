@@ -21,6 +21,7 @@ body {
 
 }
 
+/*For ver large screen handled via media queries in main.css */
 .recentactivitytext {
     vertical-align: bottom;
     text-align: left;
@@ -31,11 +32,12 @@ body {
 }
 
 .profile_pic_thumbnail {
-    height: 55px;
+    /*height: 55px;*/
+    height: 75%;
     margin-top: 15%;
     margin-left: 15%;
     max-width: 100%;
-
+    width: 100%;
 }
 
 .recent-activity-list {

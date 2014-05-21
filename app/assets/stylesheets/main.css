@@ -1144,8 +1144,16 @@ ul.social-icons li a:hover {
         text-align: left;
         font-size: 1.2em;
         color: #3E4549;
-        margin-top: 8%;
+        margin-top: 6%;
         margin-left: 4%;
+    }
+
+    .profile_pic_thumbnail {
+        height: 75%;
+        width: 77%;
+        margin-top: 15%;
+        margin-left: 15%;
+        max-width: 100%;
     }
 
 }
