@@ -23,8 +23,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :interests
 
 
-  has_many :sent_icebreakers ,:class_name=>"IceBreaker",:foreign_key=>:sender_id
-  has_many :received_icebreakers ,:class_name=>"IceBreaker",:foreign_key=>:receiver_id
+
 
 
 
@@ -45,12 +44,14 @@ class User < ActiveRecord::Base
   #has_many :reverse_recipients, class_name: 'Recipient', foreign_key: 'receiver_id'
   #has_many :received_messages, through: :reverse_recipients, foreign_key: 'receiver_id', class_name: 'Message', source: :message
 
-
-  has_many :sent_likes ,:class_name=>"Like",:foreign_key=>:sender_id
-  has_many :received_likes ,:class_name=>"Like",:foreign_key=>:receiver_id
-
-  has_many :sent_messages ,:class_name=>"Message",:foreign_key=>:sender_id
-  has_many :received_messages ,:class_name=>"Message",:foreign_key=>:receiver_id
+  #has_many :sent_icebreakers ,:class_name=>"IceBreaker",:foreign_key=>:sender_id
+  #has_many :received_icebreakers ,:class_name=>"IceBreaker",:foreign_key=>:receiver_id
+  #
+  #has_many :sent_likes ,:class_name=>"Like",:foreign_key=>:sender_id
+  #has_many :received_likes ,:class_name=>"Like",:foreign_key=>:receiver_id
+  #
+  #has_many :sent_messages ,:class_name=>"Message",:foreign_key=>:sender_id
+  #has_many :received_messages ,:class_name=>"Message",:foreign_key=>:receiver_id
 
 
 
