@@ -1148,12 +1148,21 @@ ul.social-icons li a:hover {
         margin-left: 4%;
     }
 
+
     .profile_pic_thumbnail {
         height: 75%;
         width: 77%;
         margin-top: 15%;
         margin-left: 15%;
         max-width: 100%;
+    }
+
+
+    .extra-margin{
+        margin-left: -9%;
+    }
+    .extra-margin-2{
+        margin-left: 17%;
     }
 
 }

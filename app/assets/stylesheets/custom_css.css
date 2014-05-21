@@ -620,4 +620,7 @@ input[type="radio"] + .custom-radio-btn.opposite_user_gender {
 .contact-subject-input{
     width: 100%;
 }
+.student-input-margin{
+    margin-top: 3%;
+}
 
