@@ -1144,15 +1144,27 @@ ul.social-icons li a:hover {
         text-align: left;
         font-size: 1.2em;
         color: #3E4549;
-        margin-top: 8%;
+        margin-top: 6%;
         margin-left: 4%;
     }
+
+
+    .profile_pic_thumbnail {
+        height: 75%;
+        width: 77%;
+        margin-top: 15%;
+        margin-left: 15%;
+        max-width: 100%;
+    }
+
+
     .extra-margin{
         margin-left: -9%;
     }
     .extra-margin-2{
         margin-left: 17%;
     }
+
     .edit-profile-delete-movie-item-block, .edit-profile-delete-music-item-block, .edit-profile-delete-book-item-block{
         background-color: #38C8E0;
         color: #FFFFFF;
@@ -1164,6 +1176,7 @@ ul.social-icons li a:hover {
         right: 65%;
         top: 1%;
     }
+
 }
 
 .sign-up-btn {

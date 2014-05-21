@@ -102,3 +102,14 @@
 .icon_font_size{
     cursor: pointer;
 }
+
+.full-bg-image{
+    height: 100%;
+    padding-right: 0;
+    background-image: url('/assets/cofee.jpg');
+    background-size: 100% 100%;
+}
+
+.full-bg-image-content{
+    height: 100%;
+}
