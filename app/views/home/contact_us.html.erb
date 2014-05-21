@@ -43,7 +43,8 @@
               <div class="controls">
                 <div class="row">
                   <div class="col-lg-8 col-lg-offset-2">
-                  <%= f.select :subject, ["I want to share my story","I want to know more about Let's Have Coffee","I have an interesting proposal for you","I want to add my college to Let's Have Coffee","I just generally want to talk to you guys!"], prompt: "Subject", class: 'form-control contact-select' %>
+                  <%#= f.select :subject, ["I want to share my story","I want to know more about Let's Have Coffee","I have an interesting proposal for you","I want to add my college to Let's Have Coffee","I just generally want to talk to you guys!"], {},prompt: "Subject", class: 'form-control contact-select', :style=>"width: 100%; border: none;" %>
+                  <%= f.select :subject, ["I want to share my story","I want to know more about Let's Have Coffee","I have an interesting proposal for you","I want to add my college to Let's Have Coffee","I just generally want to talk to you guys!"], {},prompt: "Subject", class: '', :style=>"width: 100%; border: none;" %>
                   </div>
                 </div>
               </div>

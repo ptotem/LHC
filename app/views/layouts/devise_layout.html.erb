@@ -117,44 +117,51 @@
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <%#= js add_gritter(devise_error_messages!, :image => :error, :title => "Errors!", :sticky => false,:time => 10000  ,:position=>:bottom_left,:class_name => "gritter_style"  ) %>
 
-
         <!--BxSlider-->
         <ul class="bxslider">
           <li id="bx-li-image1" style="height: 560px; width: 100%;">
             <div class="row text-center" style="padding-top: 4%;">
               <div class="col-xs-12 col-sm-6 col-sm-offset-6 col-md-5 col-md-offset-6 col-lg-5 col-lg-offset-6 text-center" style="background-color: #000000; opacity: 0.65; color: #ffffff; padding: 1% 0% 2% 0%;">
-                <div class="row">
-                  <div class="col-xs-6 col-sm-6 col-sm-offset-6 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4 text-center">
-                    <h5 class="white" style="position: relative">
-                      <span id="sign_up_with_text">Sign up with</span>
-                      <!--<a class="facebook" href="/users/auth/facebook" target="_self">-->
-                      <a class="facebook" href="#" data-toggle="modal" data-target="#functionality_coming_soon_Modal">
-                        <i class="fa fa-facebook fa-3x blue"></i>
-                      </a>
-                    </h5>
-                    <h5 class="white" id="sign_up_or_text">OR</h5>
-                  </div>
-                </div>
+                <% if params[:controller]!="devise/passwords" %>
+                    <div class="row">
+                      <div class="col-xs-6 col-sm-6 col-sm-offset-6 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4 text-center">
+                        <h5 class="white" style="position: relative">
+                          <span id="sign_up_with_text">Sign up with</span>
+                          <!--<a class="facebook" href="/users/auth/facebook" target="_self">-->
+                          <a class="facebook" href="#" data-toggle="modal" data-target="#functionality_coming_soon_Modal">
+                            <i class="fa fa-facebook fa-3x blue"></i>
+                          </a>
+                        </h5>
+                        <h5 class="white" id="sign_up_or_text">
+                          OR
+                        </h5>
+                      </div>
+                    </div>
+                <% end %>
                 <%= yield %>
               </div>
             </div>
           </li>
 
           <li id="bx-li-image2" style="height: 560px; width: 100%;">
-            <div class="row text-center" style="padding-top: 5%;" id="sign_up_sign_in_transparent_block">
+            <div class="row text-center" style="padding-top: 4%;" id="sign_up_sign_in_transparent_block">
               <div class="col-xs-12 col-sm-6 col-sm-offset-6 col-md-5 col-md-offset-6 col-lg-5 col-lg-offset-6 text-center" style="background-color: #000000; opacity: 0.65; color: #ffffff; padding: 1% 0% 2% 0%;">
-                <div class="row">
-                  <div class="col-xs-6 col-sm-6 col-sm-offset-6 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4 text-center">
-                    <h5 class="white" style="position: relative">
-                      <span id="sign_up_with_text">Sign up with</span>
-                      <!--<a class="facebook" href="/users/auth/facebook" target="_self">-->
-                      <a class="facebook" href="#" data-toggle="modal" data-target="#functionality_coming_soon_Modal">
-                        <i class="fa fa-facebook fa-3x blue"></i>
-                      </a>
-                    </h5>
-                    <h5 class="white" id="sign_up_or_text">OR</h5>
-                  </div>
-                </div>
+
+                <% if params[:controller]!="devise/passwords" %>
+                    <div class="row">
+                      <div class="col-xs-6 col-sm-6 col-sm-offset-6 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4 text-center">
+                        <h5 class="white" style="position: relative">
+                          <span id="sign_up_with_text">Sign up with</span>
+                          <!--<a class="facebook" href="/users/auth/facebook" target="_self">-->
+                          <a class="facebook" href="#" data-toggle="modal" data-target="#functionality_coming_soon_Modal">
+                            <i class="fa fa-facebook fa-3x blue"></i>
+                          </a>
+                        </h5>
+                        <h5 class="white" id="sign_up_or_text">OR</h5>
+                      </div>
+                    </div>
+                <% end %>
+
                 <%= yield %>
               </div>
             </div>
@@ -212,6 +219,8 @@
             controls: false
         });
 //        window.scrollTo(0, 0);
+//        TODO: check if anything goes because of this, remove
+        $('.chosen-container').find('.chosen-results').css("height","120px");
 
     });
 </script>

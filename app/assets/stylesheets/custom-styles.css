@@ -98,3 +98,7 @@
     z-index: 9999;
     color: white
 }
+
+.icon_font_size{
+    cursor: pointer;
+}

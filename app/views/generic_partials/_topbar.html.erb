@@ -73,7 +73,7 @@
               <%#= @sign_in_method %>
               <% if @sign_in_method == "sessions" %>
                   <a href="/users/sign_up"><span class="white">Sign up</span></a>
-              <% elsif @sign_in_method == "registrations" || @sign_in_method == "home" %>
+              <% elsif @sign_in_method == "registrations" || @sign_in_method == "home" || @sign_in_method == "passwords" %>
                   <a href="/users/sign_in"><span class="white">Log in</span></a>
               <% end %>
             </li>

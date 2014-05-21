@@ -1129,7 +1129,18 @@ ul.social-icons li a:hover {
 
 /* Large screens ----------- */
 @media (min-width: 1700px) and (max-width: 2200px) {
+    #page-title {
+        padding-top: 8%;
+    }
 
+    .recentactivitytext{
+        vertical-align: bottom;
+        text-align: left;
+        font-size: 1.2em;
+        color: #3E4549;
+        margin-top: 8%;
+        margin-left: 4%;
+    }
 }
 
 .sign-up-btn {

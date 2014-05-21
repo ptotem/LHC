@@ -314,7 +314,7 @@
           <section id="view_interests_section" style="padding: 4% 7% 4% 7%; background-color: #FFFFFF">
             <div class="row">
               <div class="col-xs-3 col-sm-3 col-md-1 col-lg-3">
-                <h5 style="background-color: #38C8E0; padding: 4% 2% 4% 3%; font-size: 1.4em" class="white">
+                <h5 style="font-size: 1.4em; padding: 4% 2% 4% 13%; color: #3E4549;">
                   Movies I like
                 </h5>
 
@@ -525,8 +525,9 @@
                 </div>
               </div>
 
-              <p id="edit_profile_text">
-                <%= link_to 'Edit My Profile', edit_profile_path(current_user.id), :class => "blue" %>
+              <p id="edit_profile_text" onclick="window.location = '<%= edit_profile_path(current_user.id) %>'" style="cursor: pointer">
+                <%#= link_to 'Edit My Profile', edit_profile_path(current_user.id), :class => "blue" %>
+                <%= link_to 'Edit My Profile', "#", :class => "blue" %>
               </p>
 
             <!--</div>-->
