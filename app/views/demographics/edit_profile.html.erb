@@ -33,7 +33,8 @@
 
     <ul class="nav nav-tabs" style="margin-bottom: 15px;">
       <li id="personal_details_tab" class="active">
-        <a href="#home" data-toggle="tab" style="border-top-left-radius: 10px; border-top-right-radius: 10px;outline: 0">Personal Details</a></li>
+        <a href="#home" data-toggle="tab" style="border-top-left-radius: 10px; border-top-right-radius: 10px;outline: 0">Personal
+          Details</a></li>
       <li id="password_tab">
         <a href="#profile" data-toggle="tab" style="border-top-left-radius: 10px; border-top-right-radius: 10px;outline: 0">Password</a>
       </li>
@@ -127,30 +128,35 @@
               </div>
             </div>
 
-            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 extra-margin">
               <div class="form-group">
-                <div class="col-sm-4 col-lg-12">
+                <div class="col-sm-4 col-lg-8">
                   <h6 class="white">Smoking</h6>
                   <%= d.select :smoking, ['Never', 'Socially', 'Often'], {:selected => @user.demographic.smoking}, {:class => 'lhc_chosen'} %>
                 </div>
               </div>
             </div>
 
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
               <div class="form-group">
-                <div class="col-sm-4 col-lg-12">
+                <div class="col-sm-4 col-lg-8">
                   <h6 class="white">Drinking</h6>
                   <%= d.select :drinking, ['Never', 'Socially', 'Often'], {:selected => @user.demographic.drinking}, {:class => 'lhc_chosen'} %>
                 </div>
               </div>
             </div>
 
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-              <div class="form-group">
-                <div class="col-sm-8 col-lg-8">
-
-                  <h6 class="white" style="float: left">current student?</h6>
-                  <span style="margin-left: 2%; position: relative; top: 5px;"><%= d.check_box :current_student %></span>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-lg-offset-1 extra-margin-2">
+              <div class="form-group" style="margin-left: 2%">
+                <div class="row">
+                  <div class="col-sm-8 col-lg-8">
+                    <h6 class="white" style="float: left">current student?</h6>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-8 col-lg-8">
+                    <span style="margin-left: 15%; position: relative; top: 5px;"><%= d.check_box :current_student %></span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -259,7 +265,7 @@
                       <%#= f.fields_for :attendances do |a| %>
                       <%#= a.collection_select(:institution_id, Institution.all, :id, :name,{}, {:class=>"lhc_chosen"}) %>
                       <%# end %>
-                      <%= f.collection_select(:institution_ids, Institution.order('name ASC').all, :id, :name, {:include_blank => false}, {:multiple => true, :class => "multiple", :style=>"width: 100%;"}) %>
+                      <%= f.collection_select(:institution_ids, Institution.order('name ASC').all, :id, :name, {:include_blank => false}, {:multiple => true, :class => "multiple", :style => "width: 100%;"}) %>
                     </div>
 
                     <!--<div class="col-sm-4 col-lg-4">-->
@@ -278,7 +284,7 @@
       </div>
       <div class="tab-pane fade" id="dropdown2">
 
-        <section id="looking_for" >
+        <section id="looking_for">
 
 
           <%= f.fields_for :criterion do |c| %>
@@ -341,23 +347,24 @@
               <div id="carousel-for-movies" class="carousel slide" data-ride="carousel" style="height: 200px;">
                 <div class="carousel-inner" style="margin-left: 3%">
                   <div class="item active">
-                  <% @user.movies.each_with_index do |user_movie, index| %>
-                      <div class="col-lg-3 edit-profile-movie-citem" id="<%= user_movie.movie_api_id %>">
-                        <%= image_tag user_movie.poster ,:class=>"my-img" %>
-                        <div class="edit-profile-delete-movie-item-block">&#10006;</div>
-                        <div class="carousel-caption edit-profile-custom-carousel-caption">
-                          <p> <%= user_movie.name.truncate(15) %></p>
+                    <% @user.movies.each_with_index do |user_movie, index| %>
+                        <div class="col-lg-3 edit-profile-movie-citem" id="<%= user_movie.movie_api_id %>">
+                          <%= image_tag user_movie.poster, :class => "my-img" %>
+                          <div class="edit-profile-delete-movie-item-block">&#10006;</div>
+                          <div class="carousel-caption edit-profile-custom-carousel-caption">
+                            <p> <%= user_movie.name.truncate(15) %></p>
+                          </div>
+
                         </div>
+                        <% if (index+1)%4==0 %>
+                            </div>
+                            <div class="item ">
+                        <% end %>
+                    <% end %>
+                    </div>
+                    <!-- Controls -->
 
-                      </div>
-                      <% if (index+1)%4==0 %>
-                      </div> <div class="item ">
-                          <% end %>
-                  <% end %>
-                  </div>
-                  <!-- Controls -->
-
-                </div>
+                    </div>
                 <a style="background-image: none; outline: none; left: -4%;" class="left carousel-control" href="#carousel-for-movies" data-slide="prev">
                   <span class="fa  fa-chevron-left"></span>
                 </a>
@@ -367,10 +374,7 @@
 
               </div>
             </div>
-            </div>
-
-
-
+          </div>
 
 
         </section>
@@ -388,56 +392,56 @@
             </div>
           </div>
 
-        <div class="row">
-          <div class="col-lg-12" id="edit-profile-movies-caraousel-container2">
+          <div class="row">
+            <div class="col-lg-12" id="edit-profile-movies-caraousel-container2">
 
-            <div id="carousel-for-songs" class="carousel slide" data-ride="carousel" style="height: 200px;">
-              <div class="carousel-inner" style="margin-left: 3%">
-                <div class="item active">
-                  <% @user.songs.each_with_index do |user_song, index| %>
-                      <div class="col-lg-3 edit-profile-song-citem" id="<%= user_song.song_api_id %>">
-                        <%= image_tag user_song.song_poster, :class=>"my-img" %>
-                        <div class="edit-profile-delete-music-item-block">&#10006;</div>
-                        <div class="carousel-caption edit-profile-custom-carousel-caption">
-                          <p> <%= user_song.name.truncate(15) %></p>
+              <div id="carousel-for-songs" class="carousel slide" data-ride="carousel" style="height: 200px;">
+                <div class="carousel-inner" style="margin-left: 3%">
+                  <div class="item active">
+                    <% @user.songs.each_with_index do |user_song, index| %>
+                        <div class="col-lg-3 edit-profile-song-citem" id="<%= user_song.song_api_id %>">
+                          <%= image_tag user_song.song_poster, :class => "my-img" %>
+                          <div class="edit-profile-delete-music-item-block">&#10006;</div>
+                          <div class="carousel-caption edit-profile-custom-carousel-caption">
+                            <p> <%= user_song.name.truncate(15) %></p>
+                          </div>
+
                         </div>
+                        <% if (index+1)%4==0 %>
+                            </div>
+                            <div class="item ">
+                        <% end %>
+                    <% end %>
+                    </div>
+                    <!-- Controls -->
 
-                      </div>
-                      <% if (index+1)%4==0 %>
-                          </div> <div class="item ">
-                      <% end %>
-                  <% end %>
-                  </div>
-                  <!-- Controls -->
+                    </div>
+                <a style="background-image: none; outline: none; left: -4%;" class="left carousel-control" href="#carousel-for-songs" data-slide="prev">
+                  <span class="fa  fa-chevron-left"></span>
+                </a>
+                <a style="background-image: none; outline: none; " class="right carousel-control" href="#carousel-for-songs" data-slide="next">
+                  <span class="fa fa-chevron-right"></span>
+                </a>
 
-                  </div>
-              <a style="background-image: none; outline: none; left: -4%;" class="left carousel-control" href="#carousel-for-songs" data-slide="prev">
-                <span class="fa  fa-chevron-left"></span>
-              </a>
-              <a style="background-image: none; outline: none; " class="right carousel-control" href="#carousel-for-songs" data-slide="next">
-                <span class="fa fa-chevron-right"></span>
-              </a>
+              </div>
 
             </div>
-
           </div>
-        </div> </section>
-</div>
-
-
+        </section>
+      </div>
 
 
       <div class="tab-pane fade" id="dropdown5">
 
-          <div class="form-group">
-            <div class="col-sm-8 col-lg-8">
-              <div class="ui-widget">
-                <h6 class="white">Search Book</h6>
-                <!--<input id="books_search_textfield" class="form-control">-->
-                <%= text_field_tag 'books_search_textfield', nil, placeholder: 'Enter search term...', :class => "form-control" %>
-              </div>
+        <div class="form-group">
+          <div class="col-sm-8 col-lg-8">
+            <div class="ui-widget">
+              <h6 class="white">Search Book</h6>
+              <!--<input id="books_search_textfield" class="form-control">-->
+              <%= text_field_tag 'books_search_textfield', nil, placeholder: 'Enter search term...', :class => "form-control" %>
             </div>
           </div>
+        </div>
 
         <div class="row">
           <div class="col-lg-12" id="edit-profile-movies-caraousel-container3">
@@ -447,7 +451,7 @@
                 <div class="item active">
                   <% @user.books.each_with_index do |user_book, index| %>
                       <div class="col-lg-3 edit-profile-book-citem" id="<%= user_book.book_api_id %>">
-                        <%= image_tag user_book.cover ,:class=>"my-img"%>
+                        <%= image_tag user_book.cover, :class => "my-img" %>
                         <div class="edit-profile-delete-book-item-block">&#10006;</div>
                         <div class="carousel-caption edit-profile-custom-carousel-caption">
                           <p> <%= user_book.name.truncate(15) %></p>
@@ -455,7 +459,8 @@
 
                       </div>
                       <% if (index+1)%4==0 %>
-                          </div> <div class="item ">
+                          </div>
+                          <div class="item ">
                       <% end %>
                   <% end %>
                   </div>
@@ -473,9 +478,7 @@
 
           </div>
         </div>
-        </div>
-
-
+      </div>
 
 
       </div>
@@ -536,22 +539,21 @@
         var tab_id, anchor_link;
 
 
-
         //console.log("link :- " + link);
         if (link === undefined || link === null) {
             //do something
         }
-        else{
-            $('#myTabContent').find('.tab-pane').each(function( index ) {
+        else {
+            $('#myTabContent').find('.tab-pane').each(function (index) {
                 $(this).removeClass("active in")
             });
 
-            $('.nav-tabs').find("li").each(function( index ) {
+            $('.nav-tabs').find("li").each(function (index) {
                 $(this).removeClass("active");
                 tab_id = $(this).attr('id');
 
 
-                if (link == tab_id ){
+                if (link == tab_id) {
                     //console.log($(this));
                     //console.log($(this).attr('id'));
                     anchor_link = $(this).find('a').attr('href');
@@ -564,7 +566,7 @@
         }
 
 
-        $('.edit-profile-delete-movie-item-block').on('click', function(){
+        $('.edit-profile-delete-movie-item-block').on('click', function () {
             var movie_item = $(this).parent();
             var movie_api_id = $(this).parent().attr('id');
 
@@ -586,7 +588,7 @@
 
         });
 
-        $('.edit-profile-delete-book-item-block').on('click', function(){
+        $('.edit-profile-delete-book-item-block').on('click', function () {
             var book_item = $(this).parent();
             var book_api_id = $(this).parent().attr('id');
 
@@ -610,7 +612,7 @@
 
         });
 
-        $('.edit-profile-delete-music-item-block').on('click', function(){
+        $('.edit-profile-delete-music-item-block').on('click', function () {
             var song_item = $(this).parent();
             var song_api_id = $(this).parent().attr('id');
             console.log(song_api_id);
@@ -633,7 +635,7 @@
         });
 
 
-        $('.carousel').carousel({interval:false});
+        $('.carousel').carousel({interval: false});
 
         var addressPicker = new AddressPicker();
         $('.location').typeahead(null, {
@@ -650,7 +652,7 @@
         $(".multiple").multiselect().multiselectfilter();
 
         //TODO: check if something goes wrong because of this
-        $('.ui-multiselect-filter').find('input').css('width',"100%");
+        $('.ui-multiselect-filter').find('input').css('width', "100%");
 
         $("#movie_search_textfield").autocomplete({
             source: moviesNameTags,
@@ -873,20 +875,20 @@
                         contentType: "application/json",
                         success: function (data) {
                             console.log(data);
-                            if (data=="OK"){
+                            if (data == "OK") {
                                 var book_item_html = '<div class="col-lg-3">' +
                                         '<img class="my-img" src=' + value.image + '>' +
                                         '</div>';
 
                                 //$("#edit-profile-books-caraousel-container").append(book_item_html);
-                                $('.carousel').carousel({interval:false});
+                                $('.carousel').carousel({interval: false});
 
 
                                 $("#carousel-for-books").find(".item").last().append(book_item_html);
-                                var target = $("#carousel-for-books").find(".item").length-1;
+                                var target = $("#carousel-for-books").find(".item").length - 1;
                                 $('#carousel-for-books').carousel(target);
                             }
-                            else{
+                            else {
                                 console.log("already there")
                             }
 
@@ -919,21 +921,21 @@
                         contentType: "application/json",
                         success: function (data) {
                             console.log(data);
-                            if (data=="OK"){
+                            if (data == "OK") {
                                 var movie_item_html = '<div class="col-lg-3">' +
                                         '<img class="my-img" src=' + value.poster + '>' +
                                         '<div class="carousel-caption edit-profile-custom-carousel-caption">' +
-                                        '<p>'+value.name.substr(0,15)+'</p>' +
+                                        '<p>' + value.name.substr(0, 15) + '</p>' +
                                         '</div>' +
                                         '</div>';
                                 //moviesJSON.push({"name":movie_name, "id":movie_id, "poster":movie_poster, "release_date":movie_release_date});
-                                $('.carousel').carousel({interval:false});
+                                $('.carousel').carousel({interval: false});
 
                                 $("#carousel-for-movies").find(".item").last().append(movie_item_html);
-                                var target = $("#carousel-for-movies").find(".item").length-1;
+                                var target = $("#carousel-for-movies").find(".item").length - 1;
                                 $('#carousel-for-movies').carousel(target);
                             }
-                            else{
+                            else {
                                 console.log("already there")
                             }
 
@@ -967,21 +969,21 @@
                         contentType: "application/json",
                         success: function (data) {
                             console.log(data);
-                            if (data=="OK"){
+                            if (data == "OK") {
                                 var music_item_html = '<div class="col-lg-3">' +
                                         '<img class="my-img" src=' + value.image + '>' +
                                         '</div>';
                                 //moviesJSON.push({"name":movie_name, "id":movie_id, "poster":movie_poster, "release_date":movie_release_date});
                                 //$("#edit-profile-musics-caraousel-container").append(music_item_html);
-                                $('.carousel').carousel({interval:false});
+                                $('.carousel').carousel({interval: false});
                                 $("#carousel-for-songs").find(".item").last().append(music_item_html);
 
 
                                 //$("#carousel-for-songs").find(".item").last().append(movie_item_html);
-                                var target = $("#carousel-for-songs").find(".item").length-1;
+                                var target = $("#carousel-for-songs").find(".item").length - 1;
                                 $('#carousel-for-songs').carousel(target);
                             }
-                            else{
+                            else {
                                 console.log("already there")
                             }
 

@@ -1147,7 +1147,12 @@ ul.social-icons li a:hover {
         margin-top: 8%;
         margin-left: 4%;
     }
-
+    .extra-margin{
+        margin-left: -9%;
+    }
+    .extra-margin-2{
+        margin-left: 17%;
+    }
 }
 
 .sign-up-btn {
