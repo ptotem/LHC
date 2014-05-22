@@ -8,6 +8,15 @@ module ApplicationHelper
     end
   end
 
+  def get_image_from_content(key)
+    if SiteContent.find_by_key(key).nil?
+      "/assets/background.jpg"
+    else
+      SiteContent.find_by_key(key).avatar.url
+    end
+
+  end
+
 
   def checking_status_likes(uid)
     if Like.find_by_sender_id_and_receiver_id(uid,current_user.id).nil? and Like.find_by_sender_id_and_receiver_id(current_user.id,uid).nil?
