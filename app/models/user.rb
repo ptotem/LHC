@@ -120,15 +120,23 @@ class User < ActiveRecord::Base
       if reduced_users == []
       reduced_users =  Demographic.where(:male=>self.criterion.male, :drinking => self.criterion.drinking, :smoking=> self.criterion.smoking).map(&:user).map{|i| i if (self.criterion.minage..self.criterion.maxage).include?(i.age)}
       end
+      #return reduced_users
       reduced_users = (reduced_users-User.where(:id => BaseMatch.where(:user_id => self.id,:match_status => true).map(&:target_id)))
-      reduced_users.shuffle[0..2].each do |b|
-        if !b.nil?
-            BaseMatch.create!(:user_id=>self.id, :target_id=>b.id, :match_status=> true)
-        end
-      end
 
       #return reduced_users
     end
+
+    count = 0
+    tmp = Array.new
+    reduced_users.shuffle.each_with_index do |b,index|
+      if !b.nil? and count < 3
+        BaseMatch.create!(:user_id=>self.id, :target_id=>b.id, :match_status=> true)
+        tmp << b.id
+        count = count+1
+      end
+    end
+    return tmp
+
   end
 
 
