@@ -119,7 +119,7 @@ class DashboardsController < ApplicationController
   #  return
   #  render :text=>(Time.now - current_user.last_matched_time)/3600
     if current_user.last_matched_time.nil? or (Time.now - current_user.last_matched_time)/3600 > 72
-
+      render :te
       current_user.update_match_status
       current_user.find_matches
       current_user.update_match
