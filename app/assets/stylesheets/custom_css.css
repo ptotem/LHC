@@ -140,7 +140,9 @@ body {
 
 .text_styling_ice_breaker {
     font-size: 1.5em;
+    line-height: 1.2em;
     margin-top: -3%;
+    padding: 0 1% 1% 0;
 }
 
 .font_awesome_ice_breaker {
