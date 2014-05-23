@@ -87,7 +87,7 @@ class DashboardsController < ApplicationController
     @user_list.each do |i|
       if sent_messages.include?(i) or received_messages.include?(i)
 
-        @conversations << {"user"=>i,"message"=> current_user.received_messages.where(:sender_id => i).last.body}
+        @conversations << {"user"=>i,"message"=> current_user.received_messages.where(:sender_id => i).last.body, "time"=>current_user.received_messages.where(:sender_id => i).last.created_at}
       end
     end
     if @conversations.blank?

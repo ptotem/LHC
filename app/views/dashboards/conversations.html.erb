@@ -48,7 +48,10 @@
                     <h5 class="media-heading hover-text"><%= get_user_name(m["user"]) %></h5>
                   </div>
                   <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                    <p class="pull-right date-time-text hover-text">6 PM, 24<sup>th</sup> March 2014</p>
+                    <p class="pull-right date-time-text hover-text">
+                      <!--6 PM, 24<sup>th</sup> March 2014-->
+                      <%= m["time"].strftime("%d %B %Y") %>
+                    </p>
                   </div>
                 </div>
             <span><%= link_to m["message"],conversations_with_users_path(m["user"])  %></span>
