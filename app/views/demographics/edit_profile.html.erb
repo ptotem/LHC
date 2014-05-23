@@ -542,6 +542,7 @@
 
         $("html, body").animate({ scrollTop: 0 }, "slow");
 
+
         var link = window.location.href.toString().split("#")[1];
         //console.log(link.split("#")[1]);
         //console.log($('.nav-tabs').find("li").length);
@@ -645,6 +646,13 @@
 
 
         $('.carousel').carousel({interval: false});
+        //var totalItems = $('.item').length;
+        var totalMovieItems = $('#carousel-for-movies').find('.item').length;
+        console.log("totalMovieItems :- " + totalMovieItems);
+
+        //var user_movies_len = <%#= @user.movies.count %>
+        //console.log(user_movies_len);
+        //(index+1)%4==0
 
         var addressPicker = new AddressPicker();
         $('.location').typeahead(null, {
@@ -885,20 +893,28 @@
                         success: function (data) {
                             console.log(data);
                             if (data == "OK") {
+
+                                var last_item = $("#carousel-for-books").find(".item").last();
+                                var last_item_children_len = $("#carousel-for-books").find(".item").last().children().length;
+
                                 var book_item_html = '<div class="col-lg-3">' +
-                                                        '<img class="my-img" src=' + value.image + '>' +
-                                                        '<div class="carousel-caption edit-profile-custom-carousel-caption">' +
-                                                            '<p>'  + selected_book.substr(0, 15) + '</p>' +
-                                                        '</div>' +
-                                                     '</div>';
+                                        '<img class="my-img" src=' + value.image + '>' +
+                                        '<div class="carousel-caption edit-profile-custom-carousel-caption">' +
+                                        '<p>'  + selected_book.substr(0, 15) + '</p>' +
+                                        '</div>' +
+                                        '</div>';
 
-                                //$("#edit-profile-books-caraousel-container").append(book_item_html);
-                                $('.carousel').carousel({interval: false});
-
-
-                                $("#carousel-for-books").find(".item").last().append(book_item_html);
-                                var target = $("#carousel-for-books").find(".item").length - 1;
-                                $('#carousel-for-books').carousel(target);
+                                if (last_item_children_len < 4) {
+                                    $('.carousel').carousel({interval: false});
+                                    $(last_item).append(book_item_html);
+                                    var target = $("#carousel-for-books").find(".item").length - 1;
+                                    $('#carousel-for-books').carousel(target);
+                                }
+                                else{
+                                    $("#carousel-for-books").find(".item").removeClass('active');
+                                    var item_active = '<div class="item active">'+book_item_html+'</div>';
+                                    $(item_active).insertAfter(last_item);
+                                }
                             }
                             else {
                                 console.log("already there")
@@ -934,18 +950,33 @@
                         success: function (data) {
                             console.log(data);
                             if (data == "OK") {
+                                var last_item = $("#carousel-for-movies").find(".item").last();
+                                var last_item_children_len = $("#carousel-for-movies").find(".item").last().children().length;
+
                                 var movie_item_html = '<div class="col-lg-3">' +
                                         '<img class="my-img" src=' + value.poster + '>' +
                                         '<div class="carousel-caption edit-profile-custom-carousel-caption">' +
                                         '<p>' + value.name.substr(0, 15) + '</p>' +
                                         '</div>' +
                                         '</div>';
-                                //moviesJSON.push({"name":movie_name, "id":movie_id, "poster":movie_poster, "release_date":movie_release_date});
-                                $('.carousel').carousel({interval: false});
 
-                                $("#carousel-for-movies").find(".item").last().append(movie_item_html);
-                                var target = $("#carousel-for-movies").find(".item").length - 1;
-                                $('#carousel-for-movies').carousel(target);
+                                if (last_item_children_len < 4) {
+                                    $('.carousel').carousel({interval: false});
+                                    $(last_item).append(movie_item_html);
+                                    var target = $("#carousel-for-movies").find(".item").length - 1;
+                                    $('#carousel-for-movies').carousel(target);
+                                }
+                                else{
+                                    $("#carousel-for-movies").find(".item").removeClass('active');
+                                    var item_active = '<div class="item active">'+movie_item_html+'</div>';
+                                    $(item_active).insertAfter(last_item);
+                                }
+
+//                                $('.carousel').carousel({interval: false});
+//
+//                                $("#carousel-for-movies").find(".item").last().append(movie_item_html);
+//                                var target = $("#carousel-for-movies").find(".item").length - 1;
+//                                $('#carousel-for-movies').carousel(target);
                             }
                             else {
                                 console.log("already there")
@@ -982,22 +1013,29 @@
                         success: function (data) {
                             console.log(data);
                             if (data == "OK") {
+
+                                var last_item = $("#carousel-for-songs").find(".item").last();
+                                var last_item_children_len = $("#carousel-for-songs").find(".item").last().children().length;
+
                                 var music_item_html = '<div class="col-lg-3">' +
                                         '<img class="my-img" src=' + value.image + '>' +
                                         '<div class="carousel-caption edit-profile-custom-carousel-caption">' +
-                                            '<p>' + selected_music.substr(0, 15) + '</p>' +
+                                        '<p>' + selected_music.substr(0, 15) + '</p>' +
                                         '</div>' +
 
                                         '</div>';
-                                //moviesJSON.push({"name":movie_name, "id":movie_id, "poster":movie_poster, "release_date":movie_release_date});
-                                //$("#edit-profile-musics-caraousel-container").append(music_item_html);
-                                $('.carousel').carousel({interval: false});
-                                $("#carousel-for-songs").find(".item").last().append(music_item_html);
 
-
-                                //$("#carousel-for-songs").find(".item").last().append(movie_item_html);
-                                var target = $("#carousel-for-songs").find(".item").length - 1;
-                                $('#carousel-for-songs').carousel(target);
+                                if (last_item_children_len < 4) {
+                                    $('.carousel').carousel({interval: false});
+                                    $(last_item).append(music_item_html);
+                                    var target = $("#carousel-for-songs").find(".item").length - 1;
+                                    $('#carousel-for-songs').carousel(target);
+                                }
+                                else{
+                                    $("#carousel-for-songs").find(".item").removeClass('active');
+                                    var item_active = '<div class="item active">'+music_item_html+'</div>';
+                                    $(item_active).insertAfter(last_item);
+                                }
                             }
                             else {
                                 console.log("already there")

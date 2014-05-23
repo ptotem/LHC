@@ -24,16 +24,16 @@ class IcebreakerAnswersController < ApplicationController
   # POST /icebreaker_answers
   # POST /icebreaker_answers.json
   def create
-    #render :json => params
-    #return
+
     @icebreaker_answer = IcebreakerAnswer.new(icebreaker_answer_params)
     @ice=IceBreaker.find(params[:icebreaker_answer][:ice_breaker_id])
     @question=Question.find(params[:icebreaker_answer][:question_id])
     @next_question = (@ice.questions.map(&:id) - @ice.icebreaker_answers.map(&:question_id)  - [@question.id])
-    @ice.icebreaker_answers.each do |s|
-      s.ice_ans_status=true
-      s.save!
-    end
+    @icebreaker_answer.ice_ans_status=true
+    #@ice.icebreaker_answers.each do |s|
+    #  s.ice_ans_status=true
+    #  s.save!
+    #end
 
 
     #render :json =>  @next_question

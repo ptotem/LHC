@@ -40,6 +40,17 @@ class DemographicsController < ApplicationController
         #render :text => @user_last_institute_name
         #return
         @user_email = @user.email
+
+        @user_quizzes = Array.new
+        @user_quiz_ans_questions = @user.quiz_answers.map(&:question_id)
+        @user_quiz_ans_questions.each do |q|
+          @user_quizzes << Question.find(q).quizzes.first.name
+          #@user_quizzes << q.quizzes.map(&:name)
+        end
+        @user_quizzes = @user_quizzes.uniq
+        #render :text => @user_quizzes
+        #return
+
     else
       #redirect_to user_profile_path(current_user.id)
       respond_to do |format|

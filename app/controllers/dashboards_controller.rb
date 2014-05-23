@@ -115,17 +115,20 @@ class DashboardsController < ApplicationController
   def quick_matches
   #if current_user.verified
   #  current_user.update_match
-  #  render :text=>current_user.last_matched_time
-  #  return
-  #  render :text=>(Time.now - current_user.last_matched_time)/3600
+
+    #render :text=>current_user.last_matched_time
+    #render :text=>(Time.now - current_user.last_matched_time)/3600
+    #return
+
     if current_user.last_matched_time.nil? or (Time.now - current_user.last_matched_time)/3600 > 72
-      render :te
       current_user.update_match_status
       current_user.find_matches
       current_user.update_match
 
       puts "after 3 days"
       #current_user.save!
+      #render :text => "after 3 days"
+      #return
     end
   #end
     @current_user_quick_matches = BaseMatch.where(:user_id=>current_user.id,:match_status => true)
@@ -189,6 +192,15 @@ class DashboardsController < ApplicationController
 
  def mutual_likes
 
+   @user_base_matches = BaseMatch.where(:user_id=>current_user.id).map{|i| i.target_id}
+
+   @mutual_likes =Array.new
+   @user_base_matches.each do |ubm|
+
+     if Like.where(:sender_id => current_user.id, :receiver_id => ubm).first and Like.where(:sender_id => current_user.id, :receiver_id => ubm).first.status and Like.where(:sender_id => ubm, :receiver_id => current_user.id).first and Like.where(:sender_id => current_user.id, :receiver_id => ubm).first.status and Like.where(:sender_id => ubm, :receiver_id => current_user.id).first.status
+       @mutual_likes << User.find(ubm)
+     end
+   end
 
  end
 

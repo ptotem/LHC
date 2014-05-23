@@ -607,6 +607,12 @@ input[type="radio"] + .custom-radio-btn.opposite_user_gender {
     padding-left: 7%;
 }
 
+.custom-carousel-caption-quiz{
+    text-shadow: none;
+    text-align: center;
+    padding-left: 14%;
+}
+
 .edit-profile-custom-carousel-caption{
     text-shadow: none;
     text-align: left;

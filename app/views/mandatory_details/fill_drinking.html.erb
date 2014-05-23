@@ -87,7 +87,7 @@
             <%= f.fields_for :criterion do |c| %>
 
                 <!-- row for opposite person image - starts -->
-                <div class="row" style="margin-top: -8%">
+                <div class="row" style="margin-top: -12%">
                   <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-lg-offset-4" style="position: relative">
                     <div class="gender-pic">
                       <% if @user.criterion.male? %>
@@ -111,7 +111,7 @@
                         <h4 class="white drink_smoke_font">Drinking</h4>
 
                         <div class="row">
-                          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-3 text-center" id="drinking_nav">
+                          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-3 text-center" id="drinking_nav" style="margin-bottom: 5%;">
                             <%= c.hidden_field :drinking, :id => "opposite_person_drinking_textfield", :class => "hidden_elems" %>
                             <div class="row">
                               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top:10px;">
