@@ -274,7 +274,7 @@ class DashboardsController < ApplicationController
    @accept.status=true
    @accept.save!
 
-   redirect_to user_profile_path(params[:id]), notice: 'You have accepted the request.'
+   redirect_to user_profile_path(@accept.sender_id), notice: 'You have accepted the request.'
    #return
   end
 
@@ -282,7 +282,7 @@ class DashboardsController < ApplicationController
     @reject=Like.find(params[:id])
     @reject.status=false
     @reject.save!
-    redirect_to user_profile_path(params[:id]), notice: 'You have rejected the request.'
+    redirect_to user_profile_path(@reject.sender_id), notice: 'You have rejected the request.'
     return
   end
 
