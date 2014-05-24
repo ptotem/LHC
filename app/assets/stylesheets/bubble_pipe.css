@@ -24,6 +24,14 @@ ol.progtrckr li.progtrckr-done {
     color: black;
     border-bottom: 4px solid yellowgreen;
 }
+
+
+ol.progtrckr li.progtrckr-current {
+    color: black;
+    border-bottom: 4px solid red;
+}
+
+
 ol.progtrckr li.progtrckr-todo {
     color: silver;
     border-bottom: 4px solid silver;
@@ -49,6 +57,21 @@ ol.progtrckr li.progtrckr-done:before {
     border: none;
     border-radius: 1.2em;
 }
+
+
+ol.progtrckr li.progtrckr-current:before {
+    content: "\2713";
+    color: white;
+    background-color: red;
+    height: 1.2em;
+    width: 1.2em;
+    line-height: 1.2em;
+    border: none;
+    border-radius: 1.2em;
+}
+
+
+
 ol.progtrckr li.progtrckr-todo:before {
     content: "\039F";
     color: silver;

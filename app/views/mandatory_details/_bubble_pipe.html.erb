@@ -1,9 +1,9 @@
 <ol class="progtrckr" data-progtrckr-steps="8">
   <li class="progtrckr-todo" id="fill_dates">Dates</li><!--
  --><li class="progtrckr-todo" id="fill_smoking">Smoking</li><!--
- --><li class="progtrckr-todo" id="fill_smoking">Drinking</li><!--
+ --><li class="progtrckr-todo" id="fill_drinking">Drinking</li><!--
  --><li class="progtrckr-todo" id="fill_about_me">About Me</li><!--
- --><li class="progtrckr-todo" id="fill_ilike">I like</li><!--
+ --><li class="progtrckr-todo" id="fill_ilike">I Like</li><!--
  --><li class="progtrckr-todo" id="fill_future_plan">Future Plan</li><!--
  --><li class="progtrckr-todo" id="fill_friend_speak">Friend Speak</li><!--
  --><li class="progtrckr-todo" id="fill_profilepic">Profile Pic</li>
@@ -12,9 +12,47 @@
 <script>
 
      $(function(){
+
+         var link = (document.URL).toString().split("/")[3];
+
          $("ol.progtrckr").each(function(){
              $(this).attr("data-progtrckr-steps",
                      $(this).children("li").length);
+
+
+
+             if (link.indexOf("fill_dates") >= 0){
+                 $(this).find("#fill_dates").removeClass('progtrckr-todo').addClass('progtrckr-current');
+             }
+             else if (link.indexOf("fill_smoking") >= 0){
+                 $(this).find("#fill_smoking").prevAll().removeClass('progtrckr-todo').addClass('progtrckr-done');
+                 $(this).find("#fill_smoking").removeClass('progtrckr-todo').addClass('progtrckr-current');
+             }
+             else if (link.indexOf("fill_drinking") >= 0){
+                 $(this).find("#fill_drinking").prevAll().removeClass('progtrckr-todo').addClass('progtrckr-done');
+                 $(this).find("#fill_drinking").removeClass('progtrckr-todo').addClass('progtrckr-current');
+             }
+             else if (link.indexOf("fill_about_me") >= 0){
+                 $(this).find("#fill_about_me").prevAll().removeClass('progtrckr-todo').addClass('progtrckr-done');
+                 $(this).find("#fill_about_me").removeClass('progtrckr-todo').addClass('progtrckr-current');
+             }
+             else if (link.indexOf("fill_ilike") >= 0){
+                 $(this).find("#fill_ilike").prevAll().removeClass('progtrckr-todo').addClass('progtrckr-done');
+                 $(this).find("#fill_ilike").removeClass('progtrckr-todo').addClass('progtrckr-current');
+             }
+             else if (link.indexOf("fill_future_plan") >= 0){
+                 $(this).find("#fill_future_plan").prevAll().removeClass('progtrckr-todo').addClass('progtrckr-done');
+                 $(this).find("#fill_future_plan").removeClass('progtrckr-todo').addClass('progtrckr-current');
+             }
+             else if (link.indexOf("fill_friend_speak") >= 0){
+                 $(this).find("#fill_friend_speak").prevAll().removeClass('progtrckr-todo').addClass('progtrckr-done');
+                 $(this).find("#fill_friend_speak").removeClass('progtrckr-todo').addClass('progtrckr-current');
+             }
+             else if (link.indexOf("fill_profilepic") >= 0){
+                 $(this).find("#fill_profilepic").prevAll().removeClass('progtrckr-todo').addClass('progtrckr-done');
+                 $(this).find("#fill_profilepic").removeClass('progtrckr-todo').addClass('progtrckr-current');
+             }
+
 
          });
 
