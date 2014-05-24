@@ -2,8 +2,11 @@
     In 5 years, I would be...
 <% end %>
 
-<%= content_for(:page_description) do %>
-    <%= get_content_for('futureDescription') %>
+<%#= content_for(:page_description) do %>
+    <%#= get_content_for('futureDescription') %>
+<%# end %>
+<%= content_for(:page_desc) do %>
+    <%= get_content_for("aboutmeDescription") %>
 <% end %>
 
 

@@ -2,8 +2,12 @@
    5 things I like...
 <% end %>
 
-<%= content_for(:page_description) do %>
-    <%= get_content_for('ilikeDescription') %>
+<%#= content_for(:page_description) do %>
+    <%#= get_content_for('ilikeDescription') %>
+<%# end %>
+
+<%= content_for(:page_desc) do %>
+    <%= get_content_for("aboutmeDescription") %>
 <% end %>
 
 

@@ -1,3 +1,11 @@
+<%= content_for(:page_header) do %>
+    <%#= get_content_for("fillMandotaryDetailWelcomeHeader") %>
+<% end %>
+
+<%= content_for(:page_desc) do %>
+    <%= get_content_for("fillMandotaryDetailWelcomeText") %>
+<% end %>
+
 <%= content_for(:header_image) do %>
     <img src="/assets/cake.png" class="img-responsive cake top_images">
 <% end %>

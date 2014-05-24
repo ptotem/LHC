@@ -2,8 +2,11 @@
     5 things my friends say about me...
 <% end %>
 
-<%= content_for(:page_description) do %>
-    <%= get_content_for('friendsayDescription') %>
+<%#= content_for(:page_description) do %>
+    <%#= get_content_for('friendsayDescription') %>
+<%# end %>
+<%= content_for(:page_desc) do %>
+    <%= get_content_for("aboutmeDescription") %>
 <% end %>
 
 
