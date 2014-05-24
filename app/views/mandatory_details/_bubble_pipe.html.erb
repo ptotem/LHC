@@ -1,0 +1,28 @@
+<ol class="progtrckr" data-progtrckr-steps="8">
+  <li class="progtrckr-todo" id="fill_dates">Dates</li><!--
+ --><li class="progtrckr-todo" id="fill_smoking">Smoking</li><!--
+ --><li class="progtrckr-todo" id="fill_smoking">Drinking</li><!--
+ --><li class="progtrckr-todo" id="fill_about_me">About Me</li><!--
+ --><li class="progtrckr-todo" id="fill_ilike">I like</li><!--
+ --><li class="progtrckr-todo" id="fill_future_plan">Future Plan</li><!--
+ --><li class="progtrckr-todo" id="fill_friend_speak">Friend Speak</li><!--
+ --><li class="progtrckr-todo" id="fill_profilepic">Profile Pic</li>
+</ol>
+
+<script>
+
+     $(function(){
+         $("ol.progtrckr").each(function(){
+             $(this).attr("data-progtrckr-steps",
+                     $(this).children("li").length);
+
+         });
+
+
+
+     })
+
+
+
+
+</script>
