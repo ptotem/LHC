@@ -23,9 +23,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def update
-    # render :json => (params[:user][:hobby_list_ids]-[""]).blank?#[:user][:demographic_attributes]
-    # return
     @user = current_user
+
+    #if params[:user][:demographic_attributes][:avatar].nil?
+    #  redirect_to fill_profilepic_path, notice: 'Your profile was not updated.You must exactly specify 5 likes!'
+    #end
+
     if !params[:user][:hobby_list_ids].nil?
     if !(params[:user][:hobby_list_ids]-[""]).blank?
       params[:user][:hobby_list_ids].reject!{|a| a==""}
@@ -74,7 +77,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
       end
     end
 
-  end
+    end
+  #end
 
 
 

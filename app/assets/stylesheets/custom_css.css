@@ -401,6 +401,14 @@ input[type="radio"] + .custom-radio-btn.opposite_user_gender {
     border: none;
 }
 
+.send-icebreaker_btn{
+    background: none repeat scroll 0 0 #FF0000;
+    border: medium none;
+    color: #FFFFFF;
+    padding: 4%;
+}
+
+
 /*input[type="radio"]:checked + #user_male_lable, input[type="radio"]:checked + .opposite_user_gender_male {*/
 /*background:url('/assets/blue_male.png');*/
 /*background-size: 100% 100%;*/

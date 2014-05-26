@@ -263,6 +263,8 @@ class DashboardsController < ApplicationController
 
 
   def user_like
+    #render :json=> params
+    #return
     @receiver_id=params[:id]
     @sender_id = current_user.id
     if Like.find_by_receiver_id_and_sender_id(@receiver_id,@sender_id) or Like.find_by_receiver_id_and_sender_id(@sender_id,@receiver_id)
@@ -291,10 +293,19 @@ class DashboardsController < ApplicationController
   end
 
   def reject_request
-    @reject=Like.find(params[:id])
-    @reject.status=false
-    @reject.save!
-    redirect_to user_profile_path(@reject.sender_id), notice: 'You have rejected the request.'
+    #render :json => Like.find_by_receiver_id_and_sender_id(params[:id], current_user.id)
+    #render :json => Like.find_by_receiver_id_and_sender_id(current_user.id, params[:id])
+    #return
+    #@reject=Like.find(params[:id])
+    @reject=Like.find_by_receiver_id_and_sender_id(params[:id], current_user.id)
+    if !@reject.nil?
+      @reject.status=false
+      @reject.save!
+      redirect_to user_profile_path(@reject.sender_id), notice: 'You have rejected the request.'
+    else
+      redirect_to quick_matches_path, notice: "You haven't sent request to this person."
+    end
+
     return
   end
 

@@ -2,15 +2,42 @@
 
 <style>
 
-  .navbar-nav > li > a{
-      padding-bottom: 8px;
-      padding-top: 8px;
+    .navbar-nav > li > a {
+        padding-bottom: 8px;
+        padding-top: 8px;
 
-  }
-        .coffee-logo-styling{
-            height: 77px;
-            margin-top: -8px;
+    }
+
+    .coffee-logo-styling {
+        height: 77px;
+        margin-top: -8px;
+    }
+
+    /* Notification bubble css - starts */
+    .animating{
+        animation: animate 1s cubic-bezier(0,1,1,0);
+    }
+
+    @keyframes animate{
+        from {
+            transform: scale(1);
         }
+        to {
+            transform: scale(1.7);
+        }
+    }
+
+    .menu .bubble {
+        background: none repeat scroll 0 0 #E02424;
+        border-radius: 3px 3px 3px 3px;
+        color: #FFFFFF;
+        font: bold 0.9em Tahoma,Arial,Helvetica;
+        padding: 2px 6px;
+        position: absolute;
+        right: 2px;
+        top: -6px;
+    }
+    /* Notification bubble css - ends */
 
 </style>
 <div class="navbar navbar-inverse navbar-fixed-top">
@@ -23,9 +50,15 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand " href="<%= my_dashboard_path %>">
-        <%= image_tag "logo.png", :class => "img-responsive coffee-logo-styling", :id=>"lhc-logo"%>
-      </a>
+      <% if user_signed_in? %>
+          <a class="navbar-brand " href="<%= my_dashboard_path %>">
+            <%= image_tag "logo.png", :class => "img-responsive coffee-logo-styling", :id=>"lhc-logo"%>
+          </a>
+      <% else %>
+          <a class="navbar-brand " href="/">
+            <%= image_tag "logo.png", :class => "img-responsive coffee-logo-styling", :id=>"lhc-logo"%>
+          </a>
+      <% end %>
     </div>
 
     <% @controller = params[:controller]%>
@@ -33,9 +66,13 @@
 
     <% if user_signed_in? %>
         <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
+          <ul class="nav navbar-nav navbar-right menu">
             <li>
-              <%= link_to "Dashboard", my_dashboard_path %>
+              <% @like_requests_count = Like.where(:receiver_id => current_user.id).count rescue 0 %>
+              <% @notifications = current_user.notifications.count rescue 0 %>
+              <% @total_notifications = @like_requests_count + @notifications %>
+              <%#= link_to "Dashboard", my_dashboard_path %>
+              <%= link_to(raw("Dashboard <span class=bubble>#{@total_notifications}</span>"), my_dashboard_path)  %>
             </li>
 
             <!--<li class="dropdown">-->
@@ -100,5 +137,26 @@
     </div>
   </div>
 </div>
+
+<script>
+    var counterValue = parseInt($('.bubble').html()); // Get the current bubble value
+    $(function() {
+        console.log("counterValue :- " + counterValue);
+    });
+
+    function removeAnimation(){
+        setTimeout(function() {
+            $('.bubble').removeClass('animating')
+        }, 1000);
+    }
+
+    function increase_counter(){
+        counterValue++; // increment
+        $('.bubble').html(counterValue).addClass('animating'); // animate it
+        removeAnimation(); // remove CSS animating class
+    }
+
+
+</script>
 
 
