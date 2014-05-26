@@ -33,8 +33,8 @@
           <div class="about-second-image">
           </div>
         </div>
-        <div class="col-md-7 col-lg-7 col-sm-7 col-xs-7 about-first-img-text">Dreamer, Procrastinator, Long Distance
-          Relationship Survivor "Did God really leave meeting someone to chance?"
+        <div class="col-md-7 col-lg-7 col-sm-7 col-xs-7 about-first-img-text">
+          <%= get_content_for("aboutUs1") %>
         </div>
       </div>
       <div class="row">
@@ -43,7 +43,7 @@
       <div class="row">
 
         <div class="col-md-7 col-lg-7 col-sm-7 col-xs-7 col-sm-offset-3 col-xs-offset-3 col-md-offset-3 col-lg-offset-3 about-second-img-text">
-          Vintage Generation Lover, Owned by a cat, Not so lucky guy "why does my cat always bite me when I pet her?"
+          <%= get_content_for("aboutUs2") %>
         </div>
         <div class="col-md-1 col-lg-1 col-sm-1 col-xs-1">
           <div class="about-first-image">
@@ -60,7 +60,9 @@
       </div>
       <div class="row">
         <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-          <p class="bottom-hedding">"Where people meet"</p>
+          <p class="bottom-hedding">
+            <%= get_content_for("aboutUs3") %>
+          </p>
         </div>
       </div>
     </div>

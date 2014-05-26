@@ -124,6 +124,7 @@ Lhc::Application.routes.draw do
   get '/user_like/:id', to: 'dashboards#user_like', as: :user_like
   get '/accept_request/:id', to: 'dashboards#accept_request', as: :accept_request
   get '/reject_request/:id', to: 'dashboards#reject_request', as: :reject_request
+  match '/reject_match/:id', to: 'dashboards#reject_match', as: :reject_match, via: [:get, :post]
 
   get '/users/auth/:provider/callback' => 'authentications#create'
 

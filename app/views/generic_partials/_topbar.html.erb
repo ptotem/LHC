@@ -71,8 +71,11 @@
               <% @like_requests_count = Like.where(:receiver_id => current_user.id).count rescue 0 %>
               <% @notifications = current_user.notifications.count rescue 0 %>
               <% @total_notifications = @like_requests_count + @notifications %>
-              <%#= link_to "Dashboard", my_dashboard_path %>
-              <%= link_to(raw("Dashboard <span class=bubble>#{@total_notifications}</span>"), my_dashboard_path)  %>
+              <% if @total_notifications > 0 %>
+                  <%= link_to(raw("Dashboard <span class=bubble>#{@total_notifications}</span>"), my_dashboard_path)  %>
+              <% else %>
+                  <%= link_to "Dashboard", my_dashboard_path %>
+              <% end %>
             </li>
 
             <!--<li class="dropdown">-->

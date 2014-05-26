@@ -309,6 +309,14 @@ class DashboardsController < ApplicationController
     return
   end
 
+  def reject_match
+    #render :json => params[:id]
+    #return
+    @base_match = BaseMatch.find(params[:id])
+    @base_match.destroy
+    redirect_to quick_matches_path, notice: 'You have rejected the request.'
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

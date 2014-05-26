@@ -7,7 +7,7 @@
 }
 
 .about-first-image:hover {
-    background-image: url('/assets/D_pic.png');
+    background-image: url('/assets/S_pic.png');
 }
 
 .about-second-image {
@@ -19,7 +19,7 @@
 }
 
 .about-second-image:hover {
-    background-image: url('/assets/S_pic.png');
+    background-image: url('/assets/D_pic.png');
 }
 
 .about-first-img-text {
