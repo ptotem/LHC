@@ -61,7 +61,7 @@
       .interactive-div {
           height: 136%;
           width: 100%;
-          background-color: rgba(0, 0, 0, 0.55);
+          background-color: rgba(0, 0, 0, 0.65);
           /*opacity: 0.7;*/
           z-index: 99999;
           color: white;
@@ -69,14 +69,24 @@
           top: 0;
           overflow: hidden;
           font-family: "DK Crayon";
-          font-size: 18px;
-          display: none;
+          font-size: 20px;
+          /*display: none;*/
       }
 
 
       .arrow-text {
           margin-left: 22%;
           margin-top: -5%;
+          font-family: "DK Crayon";
+      }
+      .arrow-text-matches {
+          margin-left: 22%;
+          margin-top: -31%;
+          font-family: "DK Crayon";
+      }
+      .arrow-text-p-pic {
+          margin-left: 22%;
+          margin-top: -34%;
           font-family: "DK Crayon";
       }
 
@@ -98,36 +108,43 @@
           src: url(/assets/DKCrayonCrumble.ttf);
       }
 
-
+         .arrow-1{
+             left: 18%;
+             /*position: absolute;*/
+             top: 20%;
+             /*margin-left: 18%;*/
+             /*margin-top: 27%;*/
+             position: absolute;
+         }
       .arrow-2 {
-          /*left: 19%;*/
+          left: 18%;
           /*position: absolute;*/
-          /*top: 55%;*/
-          margin-left: 18%;
-          margin-top: 27%;
+          top: 44%;
+          /*margin-left: 18%;*/
+          /*margin-top: 27%;*/
           position: absolute;
       }
 
       .arrow-3 {
-          /*left: 19%;*/
+          left: 18%;
           position: absolute;
-          /*top: 64%;*/
-          margin-left: 18%;
-          margin-top: 31%;
+          top: 56%;
+          /*margin-left: 18%;*/
+          /*margin-top: 31%;*/
       }
 
       .arrow-4 {
-          /*left: 19%;*/
+          left: 18%;
           position: absolute;
-          /*top: 72%;*/
-          margin-left: 18%;
-          margin-top: 36%;
+          top: 63%;
+          /*margin-left: 18%;*/
+          /*margin-top: 36%;*/
       }
 
       .arrow-5 {
           left: 18%;
           position: absolute;
-          bottom: 24%;
+          top: 69%;
           /*margin-left: 18%;*/
           /*margin-top: 40%;*/
       }
@@ -135,58 +152,58 @@
       .arrow-6 {
           left: 18%;
           position: absolute;
-          bottom: 18%;
+          top: 74%;
           /*margin-left: 18%;*/
           /*margin-top: 44%;*/
       }
 
       .arrow-7 {
-          /*left: 62%;*/
+          left: 61%;
           position: fixed;
-          /*top: 15%;*/
-          margin-top: 5%;
-          margin-left: 61%;
+          top: 10%;
+          /*margin-top: 5%;*/
+          /*margin-left: 61%;*/
       }
 
       .arrow-8 {
-          /*left: 71%;*/
+          left: 70%;
           position: fixed;
-          /*top: 15%;*/
-          margin-top: 5%;
-          margin-left: 70%;
+          top: 10%;
+          /*margin-top: 5%;*/
+          /*margin-left: 70%;*/
       }
 
 
       .arrow-10 {
-          /*left: 82%;*/
+          left: 80%;
           position: fixed;
-          /*top: 15%;*/
-          margin-left: 79%;
-          margin-top: 5%;
+          top: 10%;
+          /*margin-left: 79%;*/
+          /*margin-top: 5%;*/
       }
 
       .arrow-11 {
           position: absolute;
-          /*top: 50%;*/
-          /*left: 80%;*/
-          margin-left: 80%;
-          margin-top: 25%;
+          top: 38%;
+          left: 78%;
+          /*margin-left: 80%;*/
+          /*margin-to/p: 25%;*/
       }
 
       .arrow-12 {
           position: absolute;
-          /*top: 80%;*/
-          /*left: 80%;*/
-          margin-left: 80%;
-          margin-top: 40%;
+          top: 60%;
+          left: 78%;
+          /*margin-left: 80%;*/
+          /*margin-top: 40%;*/
       }
 
       .arrow-13 {
           position: absolute;
-          /*top: 90%;*/
-          /*left: 80%;*/
-          margin-left: 80%;
-          margin-top: 45%;
+          top: 69%;
+          left: 78%;
+          /*margin-left: 80%;*/
+          /*margin-top: 45%;*/
       }
 
   </style>
@@ -287,16 +304,21 @@
 
 <div class="interactive-div">
 
-  <div class="arrow-2">
-    <img src="/assets/left-arrow.png" width="80px" height="70px">
+  <div class="arrow-1">
 
-    <p class="arrow-text">click here to go to Profile page</p>
+    <img src="/assets/down-arrow.png" width="80px" height="70px">
+    <p class="arrow-text-p-pic">This is your profile picture</p>
+  </div>
+  <div class="arrow-2">
+
+    <img src="/assets/down-arrow.png" width="80px" height="70px">
+    <p class="arrow-text-matches">click here to go to profile page</p>
   </div>
 
   <div class="arrow-3">
     <img src="/assets/left-arrow.png" width="80px" height="70px">
-
     <p class="arrow-text">click here to go to matches page</p>
+
   </div>
   <div class="arrow-4">
     <img src="/assets/left-arrow.png" width="80px" height="70px">
@@ -311,7 +333,7 @@
   <div class="arrow-6">
     <img src="/assets/left-arrow.png" width="80px" height="70px">
 
-    <p class="arrow-text">click here to go to snazee me up page</p>
+    <p class="arrow-text">click here to go to snaz me up page</p>
   </div>
   <div class="arrow-7">
     <img src="/assets/top-arrow.png" width="80px" height="80px">
