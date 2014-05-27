@@ -57,6 +57,138 @@
       /*}*/
 
 
+
+      .interactive-div {
+          height: 136%;
+          width: 100%;
+          background-color: rgba(0, 0, 0, 0.55);
+          /*opacity: 0.7;*/
+          z-index: 99999;
+          color: white;
+          position: absolute;
+          top: 0;
+          overflow: hidden;
+          font-family: "DK Crayon";
+          font-size: 18px;
+          display: none;
+      }
+
+
+      .arrow-text {
+          margin-left: 22%;
+          margin-top: -5%;
+          font-family: "DK Crayon";
+      }
+
+      .top-arrow-text {
+          margin-left: -15%;
+          margin-top: 1%;
+          font-family: "DK Crayon";
+      }
+
+      .right-arrow-text {
+          margin-left: -95%;
+          margin-top: -6%;
+          /*font-family:;*/
+          font-family: "DK Crayon";
+      }
+
+      @font-face {
+          font-family:DK Crayon;
+          src: url(/assets/DKCrayonCrumble.ttf);
+      }
+
+
+      .arrow-2 {
+          /*left: 19%;*/
+          /*position: absolute;*/
+          /*top: 55%;*/
+          margin-left: 18%;
+          margin-top: 27%;
+          position: absolute;
+      }
+
+      .arrow-3 {
+          /*left: 19%;*/
+          position: absolute;
+          /*top: 64%;*/
+          margin-left: 18%;
+          margin-top: 31%;
+      }
+
+      .arrow-4 {
+          /*left: 19%;*/
+          position: absolute;
+          /*top: 72%;*/
+          margin-left: 18%;
+          margin-top: 36%;
+      }
+
+      .arrow-5 {
+          /*left: 19%;*/
+          position: absolute;
+          /*top: 80%;*/
+          margin-left: 18%;
+          margin-top: 40%;
+      }
+
+      .arrow-6 {
+          /*left: 19%;*/
+          position: absolute;
+          /*top: 86%;*/
+          margin-left: 18%;
+          margin-top: 44%;
+      }
+
+      .arrow-7 {
+          /*left: 62%;*/
+          position: fixed;
+          /*top: 15%;*/
+          margin-top: 5%;
+          margin-left: 61%;
+      }
+
+      .arrow-8 {
+          /*left: 71%;*/
+          position: fixed;
+          /*top: 15%;*/
+          margin-top: 5%;
+          margin-left: 70%;
+      }
+
+
+      .arrow-10 {
+          /*left: 82%;*/
+          position: fixed;
+          /*top: 15%;*/
+          margin-left: 79%;
+          margin-top: 5%;
+      }
+
+      .arrow-11 {
+          position: absolute;
+          /*top: 50%;*/
+          /*left: 80%;*/
+          margin-left: 80%;
+          margin-top: 25%;
+      }
+
+      .arrow-12 {
+          position: absolute;
+          /*top: 80%;*/
+          /*left: 80%;*/
+          margin-left: 80%;
+          margin-top: 40%;
+      }
+
+      .arrow-13 {
+          position: absolute;
+          /*top: 90%;*/
+          /*left: 80%;*/
+          margin-left: 80%;
+          margin-top: 45%;
+      }
+
   </style>
 </head>
 <%= js add_gritter(flash[:notice], :image => '/assets/bulb_48_48.png', :title => "Notification!", :sticky => false, :time => 10000, :position => :bottom_left, :class_name => "gritter_style") %>
@@ -148,6 +280,76 @@
     </div>
   </div>
 </section>
+
+
+
+ <!--interactive how to code starting  here-->
+
+<div class="interactive-div">
+
+  <div class="arrow-2">
+    <img src="/assets/left-arrow.png" width="80px" height="70px">
+
+    <p class="arrow-text">click here to go to Profile page</p>
+  </div>
+
+  <div class="arrow-3">
+    <img src="/assets/left-arrow.png" width="80px" height="70px">
+
+    <p class="arrow-text">click here to go to matches page</p>
+  </div>
+  <div class="arrow-4">
+    <img src="/assets/left-arrow.png" width="80px" height="70px">
+
+    <p class="arrow-text">click here to go to mutual likes page</p>
+  </div>
+  <div class="arrow-5">
+    <img src="/assets/left-arrow.png" width="80px" height="70px">
+
+    <p class="arrow-text">click here to go to conversations page</p>
+  </div>
+  <div class="arrow-6">
+    <img src="/assets/left-arrow.png" width="80px" height="70px">
+
+    <p class="arrow-text">click here to go to snazee me up page</p>
+  </div>
+  <div class="arrow-7">
+    <img src="/assets/top-arrow.png" width="80px" height="80px">
+
+    <p class="top-arrow-text">click here to<br> go to Dashboard</p>
+  </div>
+  <div class="arrow-8">
+    <img src="/assets/top-arrow.png" width="80px" height="80px">
+
+    <p class="top-arrow-text">click here to<br> go to about</p>
+  </div>
+
+  <div class="arrow-10">
+    <img src="/assets/top-arrow.png" width="80px" height="80px">
+
+    <p class="top-arrow-text">click here to<br> go to contact us page</p>
+  </div>
+  <div class="arrow-11">
+    <img src="/assets/right-arrow.png" width="80px" height="80px">
+
+    <p class="right-arrow-text">This is your profile meter</p>
+  </div>
+  <div class="arrow-12">
+    <img src="/assets/right-arrow.png" width="80px" height="80px">
+
+    <p class="right-arrow-text">click here to invite your friend</p>
+  </div>
+  <div class="arrow-13">
+    <img src="/assets/right-arrow.png" width="80px" height="80px">
+
+    <p class="right-arrow-text">click here to edit your profile</p>
+  </div>
+
+</div>
+
+<!--interactive how to code ending  here-->
+
+
 <!--<div id="first_arrow">-->
   <!--<img src="/assets/arrow_top.png" height="70px; width:70px;" style="opacity:1;margin-left: 50px;">-->
 
@@ -178,7 +380,7 @@
   <!--<p class="white"> Click to go <br>matches Page</p>-->
 <!--</div>-->
 
-<!--<div style="position: absolute;top:580px;left:1060px;z-index: 999;">-->
+<!--<div style="position: absolute;top:550px;left:1060px;z-index: 999;">-->
   <!--<img src="/assets/arrow.png" height="50px; width:50px;" style="opacity:1;margin-left: 40px;">-->
 
   <!--<p class="white"> Click to go<br> quizs</p>-->
@@ -247,7 +449,7 @@
             // escape key press
             if ((e.keyCode || e.which) == 27) {
                 $("#inst_div").stop();
-                $('#overlapping-div').hide();
+                $('.interactive-div').hide();
                 //console.log(e);
 //                if (escape_keypress==false){
 //
