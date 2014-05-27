@@ -9,6 +9,7 @@ class DashboardsController < ApplicationController
   end
 
   def welcome_dashboard
+    @current_user_route = current_user.current_route
     current_user.current_route = my_dashboard_path
     current_user.save!
 
@@ -44,9 +45,11 @@ class DashboardsController < ApplicationController
     @like_requests = Like.where(:receiver_id => current_user.id) rescue nil?
     #render :json => @like_requests
     #return
+    #render :text => current_user.current_route
+    #return
     # TODO: Why was this code commented ? I wrote it for a reason- Rushabh
     if current_user.notifications.blank? and @like_requests.blank?
-    redirect_to user_profile_path(current_user.id),:notice => "You have no notifications"
+      redirect_to user_profile_path(current_user.id),:notice => "You have no notifications"
     end
   end
 

@@ -70,7 +70,7 @@
           overflow: hidden;
           font-family: "DK Crayon";
           font-size: 18px;
-          display: none;
+          /*display: none;*/
       }
 
 
@@ -284,68 +284,70 @@
 
 
  <!--interactive how to code starting  here-->
+<%#= @current_user_route %>
+<%# if @current_user_route == "/welcome_dashboard" %>
+    <div class="interactive-div">
 
-<div class="interactive-div">
+      <div class="arrow-2">
+        <img src="/assets/left-arrow.png" width="80px" height="70px">
 
-  <div class="arrow-2">
-    <img src="/assets/left-arrow.png" width="80px" height="70px">
+        <p class="arrow-text">click here to go to Profile page</p>
+      </div>
 
-    <p class="arrow-text">click here to go to Profile page</p>
-  </div>
+      <div class="arrow-3">
+        <img src="/assets/left-arrow.png" width="80px" height="70px">
 
-  <div class="arrow-3">
-    <img src="/assets/left-arrow.png" width="80px" height="70px">
+        <p class="arrow-text">click here to go to matches page</p>
+      </div>
+      <div class="arrow-4">
+        <img src="/assets/left-arrow.png" width="80px" height="70px">
 
-    <p class="arrow-text">click here to go to matches page</p>
-  </div>
-  <div class="arrow-4">
-    <img src="/assets/left-arrow.png" width="80px" height="70px">
+        <p class="arrow-text">click here to go to mutual likes page</p>
+      </div>
+      <div class="arrow-5">
+        <img src="/assets/left-arrow.png" width="80px" height="70px">
 
-    <p class="arrow-text">click here to go to mutual likes page</p>
-  </div>
-  <div class="arrow-5">
-    <img src="/assets/left-arrow.png" width="80px" height="70px">
+        <p class="arrow-text">click here to go to conversations page</p>
+      </div>
+      <div class="arrow-6">
+        <img src="/assets/left-arrow.png" width="80px" height="70px">
 
-    <p class="arrow-text">click here to go to conversations page</p>
-  </div>
-  <div class="arrow-6">
-    <img src="/assets/left-arrow.png" width="80px" height="70px">
+        <p class="arrow-text">click here to go to snazee me up page</p>
+      </div>
+      <div class="arrow-7">
+        <img src="/assets/top-arrow.png" width="80px" height="80px">
 
-    <p class="arrow-text">click here to go to snazee me up page</p>
-  </div>
-  <div class="arrow-7">
-    <img src="/assets/top-arrow.png" width="80px" height="80px">
+        <p class="top-arrow-text">click here to<br> go to Dashboard</p>
+      </div>
+      <div class="arrow-8">
+        <img src="/assets/top-arrow.png" width="80px" height="80px">
 
-    <p class="top-arrow-text">click here to<br> go to Dashboard</p>
-  </div>
-  <div class="arrow-8">
-    <img src="/assets/top-arrow.png" width="80px" height="80px">
+        <p class="top-arrow-text">click here to<br> go to about</p>
+      </div>
 
-    <p class="top-arrow-text">click here to<br> go to about</p>
-  </div>
+      <div class="arrow-10">
+        <img src="/assets/top-arrow.png" width="80px" height="80px">
 
-  <div class="arrow-10">
-    <img src="/assets/top-arrow.png" width="80px" height="80px">
+        <p class="top-arrow-text">click here to<br> go to contact us page</p>
+      </div>
+      <div class="arrow-11">
+        <img src="/assets/right-arrow.png" width="80px" height="80px">
 
-    <p class="top-arrow-text">click here to<br> go to contact us page</p>
-  </div>
-  <div class="arrow-11">
-    <img src="/assets/right-arrow.png" width="80px" height="80px">
+        <p class="right-arrow-text">This is your profile meter</p>
+      </div>
+      <div class="arrow-12">
+        <img src="/assets/right-arrow.png" width="80px" height="80px">
 
-    <p class="right-arrow-text">This is your profile meter</p>
-  </div>
-  <div class="arrow-12">
-    <img src="/assets/right-arrow.png" width="80px" height="80px">
+        <p class="right-arrow-text">click here to invite your friend</p>
+      </div>
+      <div class="arrow-13">
+        <img src="/assets/right-arrow.png" width="80px" height="80px">
 
-    <p class="right-arrow-text">click here to invite your friend</p>
-  </div>
-  <div class="arrow-13">
-    <img src="/assets/right-arrow.png" width="80px" height="80px">
+        <p class="right-arrow-text">click here to edit your profile</p>
+      </div>
 
-    <p class="right-arrow-text">click here to edit your profile</p>
-  </div>
-
-</div>
+    </div>
+<%# end %>
 
 <!--interactive how to code ending  here-->
 
