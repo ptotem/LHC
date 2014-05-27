@@ -644,6 +644,19 @@ input[type="radio"] + .custom-radio-btn.opposite_user_gender {
     margin-right: 5%;
 }
 
+.you-me-modal-body{
+    max-height:420px;
+    overflow:auto;
+    font-size: 0.6em;
+    text-align: left;
+}
 
+.you-me-quest-name{
+    color: #38C8E0;
+    margin-bottom: 3px;
+}
 
-
+.you-me-text{
+    text-align: center;
+    text-transform: uppercase;
+}

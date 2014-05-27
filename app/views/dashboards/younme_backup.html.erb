@@ -73,66 +73,14 @@
     <% QuizAnswer.where("user_id = ? OR user_id = ?",current_user.id,params[:id]).map { |i| Question.find(i.question_id).quizzes }.flatten.uniq.each do |e| %>
         <p class="p_text">
           <%= e.calculate_total_score_for(current_user.id) rescue "NA" %> | <%= e.calculate_total_score_for(params[:id]) rescue "NA" %> |
-          <%= link_to "Show differences", "#", :id => "show_quiz_#{e.id}", "data-toggle" => "modal", 'data-target' => '#differentAnsModal_for_quiz_'+e.id.to_s %>
+          <% @user_quizzes.each do |uq| %>
+            <%= uq.id %>
+          <% end  %>
+          <%= link_to "Show differences", "#", :id => 'login', "data-toggle" => "modal", 'data-target' => '#differentAnsModal' %>
+          <!--<button class="btn" data-toggle="modal" data-target="#differentAnsModal">-->
+          <!--Show differences-->
+          <!--</button>-->
         </p>
-
-        <div class="modal fade" id="differentAnsModal_for_quiz_<%= e.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title black" id="myModalLabel">Differences</h4>
-              </div>
-              <div class="modal-body you-me-modal-body">
-                <div class="row" style="margin-bottom: 2%;">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <% @q = Quiz.find(e.id) %>
-                        <% @questions = @q.questions.map(&:id) %>
-
-                        <% cu_q_a = Array.new %>
-                        <% @questions.each_with_index do |cu_q, index| %>
-                                <% cu_q_a << cu_q %>
-                                <% if !QuizAnswer.find_all_by_user_id_and_question_id(current_user.id, cu_q_a[index]).map{|i| Question.find(i.question_id).name}.first.nil? and !QuizAnswer.find_all_by_user_id_and_question_id(params[:id], cu_q_a[index]).map{|i| Question.find(i.question_id).name}.first.nil? %>
-                                  <% if QuizAnswer.find_all_by_user_id_and_answer_id(params[:id], @opposite_user_diff_ans[index]).map{|i| Option.find(@opposite_user_diff_ans[index]).name}.first != QuizAnswer.find_all_by_user_id_and_answer_id(current_user.id, @current_user_diff_ans[index]).map{|i| Option.find(@current_user_diff_ans[index]).name}.first %>
-                                    <%= "Q. #{index+1}"%> <%= QuizAnswer.find_all_by_user_id_and_question_id(current_user.id, cu_q_a[index]).map{|i| Question.find(i.question_id).name}.first %>
-                                    <div class="row" style="margin-bottom: 2%;">
-                                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                        <div class="row" style="background: #38C8E0">
-                                          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                            <h5 class="white you-me-text" style="margin-bottom: 3px; margin-top: 3px;">You</h5>
-                                          </div>
-                                          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                            <h5 class="white you-me-text" style="margin-bottom: 3px; margin-top: 3px;">Me</h5>
-                                          </div>
-                                        </div>
-                                        <div class="row">
-                                          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="border-right: 5px solid #38C8E0;">
-                                            <p><%= QuizAnswer.find_all_by_user_id_and_answer_id(params[:id], @opposite_user_diff_ans[index]).map{|i| Option.find(@opposite_user_diff_ans[index]).name}.first %></p>
-                                          </div>
-                                          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                            <p><%= QuizAnswer.find_all_by_user_id_and_answer_id(current_user.id, @current_user_diff_ans[index]).map{|i| Option.find(@current_user_diff_ans[index]).name}.first %></p>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  <% end %>
-                                <% else %>
-                                    <% if index == 0  %>
-                                        <h5 class="black">Haven't taken test</h5>
-                                    <% end %>
-
-                                <% end %>
-                        <% end %>
-                    </div>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
     <% end %>
   </div>
 </div>

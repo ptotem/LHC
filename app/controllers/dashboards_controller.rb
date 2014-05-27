@@ -227,6 +227,72 @@ class DashboardsController < ApplicationController
 
 
   def younme
+    @opposite_user = User.find(params[:id])
+
+    #Sunny's code starts
+    @current_user_quiz = current_user.quiz_answers
+    @opposite_user_quiz = User.find(params[:id]).quiz_answers
+    @common_questions = @current_user_quiz - @opposite_user_quiz
+    @my_ans = @current_user_quiz.map{|i| i.answer_id}
+    @opp_ans = @opposite_user_quiz.map{|i| i.answer_id}
+    #@diff_answer =
+    #render :json => @common_questions
+    #render :json => QuizAnswer.where("user_id = ? OR user_id = ?",current_user.id, params[:id])
+    #return
+    #Sunny's code ends
+
+    #Nilesh' code starts
+    @current_user_quiz_quests = Array.new
+    current_user.quiz_answers.each do |cu_qa|
+      @current_user_quiz_quests << cu_qa.question_id
+    end
+
+    @current_user_quiz_ans = Array.new
+    current_user.quiz_answers.each do |cu_qa_ans|
+      @current_user_quiz_ans << cu_qa_ans.answer_id
+    end
+
+    @opposite_user_quiz_quests = Array.new
+    @opposite_user.quiz_answers.each do |ou_qa|
+      @opposite_user_quiz_quests << ou_qa.question_id
+    end
+
+    @opposite_user_quiz_ans = Array.new
+    @opposite_user.quiz_answers.each do |ou_qa_ans|
+      @opposite_user_quiz_ans << ou_qa_ans.answer_id
+    end
+
+    #@current_user_quiz_quests
+    #@opposite_user_quiz_quests
+
+    @both_users_quiz_quests_same = Array.new
+    @both_users_quiz_quests_same = @current_user_quiz_quests & @opposite_user_quiz_quests
+    #@both_users_quiz_quests_same
+
+    #@current_user_quiz_ans
+    #@opposite_user_quiz_ans
+
+    @both_users_quiz_ans_same = Array.new
+    @both_users_quiz_ans_same = @current_user_quiz_ans & @opposite_user_quiz_ans
+    #@both_users_quiz_ans_same
+    @current_user_diff_ans = @current_user_quiz_ans - @both_users_quiz_ans_same
+    @opposite_user_diff_ans = @opposite_user_quiz_ans - @both_users_quiz_ans_same
+    #Nilesh' code ends
+
+    @current_user_q_name = Array.new
+    @current_user_ans_name = Array.new
+    @current_user_diff_ans.each do |cuda|
+      @current_user_q_name << Option.find(cuda).question.name
+      @current_user_ans_name << Option.find(cuda).name
+    end
+
+    @opposite_user_q_name = Array.new
+    @opposite_user_ans_name = Array.new
+    @opposite_user_diff_ans.each do |ouda|
+      @opposite_user_q_name << Option.find(ouda).question.name
+      @opposite_user_ans_name << Option.find(ouda).name
+    end
+
 
   end
 

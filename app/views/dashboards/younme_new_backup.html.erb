@@ -93,34 +93,77 @@
                         <% @questions.each_with_index do |cu_q, index| %>
                                 <% cu_q_a << cu_q %>
                                 <% if !QuizAnswer.find_all_by_user_id_and_question_id(current_user.id, cu_q_a[index]).map{|i| Question.find(i.question_id).name}.first.nil? and !QuizAnswer.find_all_by_user_id_and_question_id(params[:id], cu_q_a[index]).map{|i| Question.find(i.question_id).name}.first.nil? %>
-                                  <% if QuizAnswer.find_all_by_user_id_and_answer_id(params[:id], @opposite_user_diff_ans[index]).map{|i| Option.find(@opposite_user_diff_ans[index]).name}.first != QuizAnswer.find_all_by_user_id_and_answer_id(current_user.id, @current_user_diff_ans[index]).map{|i| Option.find(@current_user_diff_ans[index]).name}.first %>
+                                <%= "Q. #{index+1}"%> <%= QuizAnswer.find_all_by_user_id_and_question_id(current_user.id, cu_q_a[index]).map{|i| Question.find(i.question_id).name}.first %>
+                                <div class="row" style="margin-bottom: 2%;">
+                                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <div class="row" style="background: #38C8E0">
+                                      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                        <h5 class="white you-me-text" style="margin-bottom: 3px; margin-top: 3px;">You</h5>
+                                      </div>
+                                      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                        <h5 class="white you-me-text" style="margin-bottom: 3px; margin-top: 3px;">Me</h5>
+                                      </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="border-right: 5px solid #38C8E0;">
+                                        <p><%= QuizAnswer.find_all_by_user_id_and_answer_id(params[:id], @opposite_user_diff_ans[index]).map{|i| Option.find(@opposite_user_diff_ans[index]).name}.first %></p>
+                                      </div>
+                                      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                        <p><%= QuizAnswer.find_all_by_user_id_and_answer_id(current_user.id, @current_user_diff_ans[index]).map{|i| Option.find(@current_user_diff_ans[index]).name}.first %></p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <% else %>
+                                  <h1 class="black">No Difference</h1>
+                                  <% if !QuizAnswer.find_all_by_user_id_and_question_id(current_user.id, cu_q_a[index]).map{|i| Question.find(i.question_id).name}.first.nil? %>
                                     <%= "Q. #{index+1}"%> <%= QuizAnswer.find_all_by_user_id_and_question_id(current_user.id, cu_q_a[index]).map{|i| Question.find(i.question_id).name}.first %>
-                                    <div class="row" style="margin-bottom: 2%;">
-                                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                        <div class="row" style="background: #38C8E0">
-                                          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                            <h5 class="white you-me-text" style="margin-bottom: 3px; margin-top: 3px;">You</h5>
+                                      <div class="row" style="margin-bottom: 2%;">
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                          <div class="row" style="background: #38C8E0">
+                                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                              <h5 class="white you-me-text" style="margin-bottom: 3px; margin-top: 3px;">You</h5>
+                                            </div>
+                                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                              <h5 class="white you-me-text" style="margin-bottom: 3px; margin-top: 3px;">Me</h5>
+                                            </div>
                                           </div>
-                                          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                            <h5 class="white you-me-text" style="margin-bottom: 3px; margin-top: 3px;">Me</h5>
-                                          </div>
-                                        </div>
-                                        <div class="row">
-                                          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="border-right: 5px solid #38C8E0;">
-                                            <p><%= QuizAnswer.find_all_by_user_id_and_answer_id(params[:id], @opposite_user_diff_ans[index]).map{|i| Option.find(@opposite_user_diff_ans[index]).name}.first %></p>
-                                          </div>
-                                          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                            <p><%= QuizAnswer.find_all_by_user_id_and_answer_id(current_user.id, @current_user_diff_ans[index]).map{|i| Option.find(@current_user_diff_ans[index]).name}.first %></p>
+                                          <div class="row">
+                                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="border-right: 5px solid #38C8E0;">
+                                              <p><%= QuizAnswer.find_all_by_user_id_and_question_id(params[:id], cu_q_a[index]).map{|i| Option.find_by_question_id(i.question_id).name}.first %></p>
+                                            </div>
+                                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                              <p><%= QuizAnswer.find_all_by_user_id_and_question_id(current_user.id, cu_q_a[index]).map{|i| Option.find_by_question_id(i.question_id).name}.first %></p>
+                                            </div>
                                           </div>
                                         </div>
                                       </div>
-                                    </div>
                                   <% end %>
-                                <% else %>
-                                    <% if index == 0  %>
-                                        <h5 class="black">Haven't taken test</h5>
-                                    <% end %>
+                                  <br>
+                                  <% if !QuizAnswer.find_all_by_user_id_and_question_id(params[:id], cu_q_a[index]).map{|i| Question.find(i.question_id).name}.first.nil? %>
+                                    <%= "Q. #{index+1}"%> <%= QuizAnswer.find_all_by_user_id_and_question_id(params[:id], cu_q_a[index]).map{|i| Question.find(i.question_id).name}.first %> <br>
 
+                                      <div class="row" style="margin-bottom: 2%;">
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                          <div class="row" style="background: #38C8E0">
+                                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                              <h5 class="white you-me-text" style="margin-bottom: 3px; margin-top: 3px;">You</h5>
+                                            </div>
+                                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                              <h5 class="white you-me-text" style="margin-bottom: 3px; margin-top: 3px;">Me</h5>
+                                            </div>
+                                          </div>
+                                          <div class="row">
+                                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="border-right: 5px solid #38C8E0;">
+                                              <p><%= QuizAnswer.find_all_by_user_id_and_question_id(params[:id], cu_q_a[index]).map{|i| Option.find_by_question_id(i.question_id).name}.first %></p>
+                                            </div>
+                                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                              <p><%= QuizAnswer.find_all_by_user_id_and_question_id(current_user.id, cu_q_a[index]).map{|i| Option.find_by_question_id(i.question_id).name}.first %></p>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                  <% end %>
                                 <% end %>
                         <% end %>
                     </div>
