@@ -43,10 +43,10 @@ class ApplicationController < ActionController::Base
     end
 
     devise_parameter_sanitizer.for(:sign_up) do |u|
-      u.permit(:email, :password, :password_confirmation,:current_route, :demographic_attributes=>[:male, :nickname,:last_institute], :criterion_attributes=>[:male], :attendances_attributes=>[:user_id, :institution_id])
+      u.permit(:email, :password, :password_confirmation,:current_route,:first_visit, :demographic_attributes=>[:male, :nickname,:last_institute], :criterion_attributes=>[:male], :attendances_attributes=>[:user_id, :institution_id])
     end
     devise_parameter_sanitizer.for(:sign_in) do |u|
-      u.permit(:username,:email,:password,:password_confirmation ,:current_route, :phone, :validate_username, :avatar_cache, :remove_avatar, :current_password,:remember_me)
+      u.permit(:username,:email,:password,:password_confirmation ,:current_route,:first_visit, :phone, :validate_username, :avatar_cache, :remove_avatar, :current_password,:remember_me)
     end
 
     devise_parameter_sanitizer.for(:account_update) do |u|

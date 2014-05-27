@@ -16,6 +16,10 @@ class DemographicsController < ApplicationController
   end
 
   def profile
+    @user_first_visit = current_user.first_visit
+    current_user.first_visit = true
+    current_user.save!
+
     if !User.where(:id=>params[:id]).first.nil?
       #@user = User.find(params[:id])
         @user = User.where(:id=>params[:id]).first
