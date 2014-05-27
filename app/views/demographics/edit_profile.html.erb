@@ -358,7 +358,7 @@
                   <div class="item active">
                     <% @user.movies.each_with_index do |user_movie, index| %>
                         <div class="col-lg-3 edit-profile-movie-citem" id="<%= user_movie.movie_api_id %>">
-                          <%= image_tag user_movie.poster, :class => "my-img" %>
+                          <%= image_tag user_movie.poster, :class => "my-img", :title => user_movie.name %>
                           <div class="edit-profile-delete-movie-item-block">&#10006;</div>
                           <div class="carousel-caption edit-profile-custom-carousel-caption">
                             <p> <%= user_movie.name.truncate(15) %></p>
@@ -409,7 +409,7 @@
                   <div class="item active">
                     <% @user.songs.each_with_index do |user_song, index| %>
                         <div class="col-lg-3 edit-profile-song-citem" id="<%= user_song.song_api_id %>">
-                          <%= image_tag user_song.song_poster, :class => "my-img" %>
+                          <%= image_tag user_song.song_poster, :class => "my-img", :title=> user_song.name %>
                           <div class="edit-profile-delete-music-item-block">&#10006;</div>
                           <div class="carousel-caption edit-profile-custom-carousel-caption">
                             <p> <%= user_song.name.truncate(15) %></p>
@@ -460,7 +460,7 @@
                 <div class="item active">
                   <% @user.books.each_with_index do |user_book, index| %>
                       <div class="col-lg-3 edit-profile-book-citem" id="<%= user_book.book_api_id %>">
-                        <%= image_tag user_book.cover, :class => "my-img" %>
+                        <%= image_tag user_book.cover, :class => "my-img", :title => user_book.name %>
                         <div class="edit-profile-delete-book-item-block">&#10006;</div>
                         <div class="carousel-caption edit-profile-custom-carousel-caption">
                           <p> <%= user_book.name.truncate(15) %></p>

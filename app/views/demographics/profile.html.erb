@@ -13,7 +13,11 @@
 
 
 <%= content_for(:dialogue_bar_header) do %>
-    Your profile
+    <% if params[:id].to_s != (current_user.id).to_s %>
+        Profile
+    <% else %>
+        Your profile
+    <% end %>
 <% end %>
 
 <%#= content_for(:page_header) do %>
@@ -104,16 +108,22 @@
                     <div class="row">
                       <div class="col-xs-3 col-sm-3 col-md-3 col-lg-5 col-lg-offset-1" style="background-color: #38C8E0;">
                         <div class="prof-demo-container">
-                          <img src="/assets/whiteglass.png" alt="" class="img-responsive"/>
-
+                          <% if @user_drinking == "Never" %>
+                              <img src="/assets/no-drinking.png" alt="" class="img-responsive"/>
+                          <% else %>
+                              <img src="/assets/whiteglass.png" alt="" class="img-responsive"/>
+                          <% end %>
                           <p class="text-center" style="color: #FFFFFF"><%= @user_drinking %></p>
                         </div>
                       </div>
 
                       <div class="col-xs-3 col-sm-3 col-md-3 col-lg-5 col-lg-offset-1" style="background-color: #38C8E0;">
                         <div class="prof-demo-container">
-                          <img src="/assets/whitesmokes.png" alt="" class="img-responsive"/>
-
+                          <% if @user_smoking == "Never" %>
+                              <img src="/assets/no-smoking.png" alt="" class="img-responsive"/>
+                          <% else %>
+                              <img src="/assets/whitesmokes.png" alt="" class="img-responsive"/>
+                          <% end %>
                           <p class="text-center" style="margin-top: 1%; color: #FFFFFF"><%= @user_smoking %></p>
                         </div>
                       </div>
@@ -338,7 +348,7 @@
                     <div class="carousel-inner">
                       <div class="item active">
                         <% @user.movies.each_with_index do |user_movie, index| %>
-                            <div class="col-lg-3">
+                            <div class="col-lg-3" title="<%= user_movie.name %>">
                               <%= image_tag user_movie.poster ,:class=>"my-img" %>
                               <div class="carousel-caption custom-carousel-caption">
                                 <p><%= user_movie.name.truncate(15) %></p>
@@ -395,7 +405,7 @@
                   <div class="carousel-inner">
                     <div class="item active">
                       <% @user.songs.each_with_index do |user_song, index| %>
-                          <div class="col-lg-3">
+                          <div class="col-lg-3" title="<%= user_song.name %>">
                             <%= image_tag user_song.song_poster ,:class=>"my-img" %>
                             <div class="carousel-caption custom-carousel-caption">
                               <%= user_song.name.truncate(15) %>
@@ -452,7 +462,7 @@
                   <div class="carousel-inner">
                     <div class="item active">
                       <% @user.books.each_with_index do |user_book, index| %>
-                          <div class="col-lg-4">
+                          <div class="col-lg-4" title="<%= user_book.name %>">
                             <%= image_tag user_book.cover ,:class=>"my-img"%>
                             <div class="carousel-caption custom-carousel-caption-book">
                              <p> <%= user_book.name.truncate(15) %></p>

@@ -24,7 +24,8 @@
         <%  QuizCategory.all.each do |e| %>
             <li data-tag="web">
               <div class="test-thumbs">
-                <img src="/assets/assertiveness.jpg" class="img-responsive" alt="Image Size 430x280" style="width: 100%;">
+                <!--<img src="/assets/assertiveness.jpg" class="img-responsive" alt="Image Size 430x280" style="width: 100%;">-->
+                <%= image_tag e.avatar.url, :class=>"img-responsive", :style => "width: 100%;" %>
                 <a href="<%= start_test_path(e.id) %>">
                         <span class="title">
                             <span class="white upper-case">

@@ -34,13 +34,14 @@
               </div>
 
               <div class="project-title margin-30">
-                <div class="row" style="padding-left: 2%;">
-                  <div class="col-lg-1 col-lg-offset-4">
-                    <button onclick="window.location = '<%= user_like_path(m.id) %>'" class="transparent-background-btn"><i class="fa fa-thumbs-up icon_font_size thumb_up_color"></i></button>
+                <div class="row">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <!--<button onclick="window.location = '<%#= user_like_path(m.id) %>'" class="transparent-background-btn"><i class="fa fa-thumbs-up icon_font_size thumb_up_color"></i></button>-->
+                    <button class="send-icebreaker_btn" id="send_icebreaker_btn" onclick="window.location='<%= start_ice_breaker_path(m.id) %>'">Send Icebreaker</button>
                   </div>
-                  <div class="col-lg-1">
-                    <button onclick="window.location = '<%= reject_request_url(m.id) %>'" class="transparent-background-btn"><i class="fa fa-thumbs-down icon_font_size thumb_down_color"></i></button>
-                  </div>
+                  <!--<div class="col-lg-1">-->
+                    <!--<button onclick="window.location = '<%#= reject_request_url(m.id) %>'" class="transparent-background-btn"><i class="fa fa-thumbs-down icon_font_size thumb_down_color"></i></button>-->
+                  <!--</div>-->
                 </div>
               </div>
             </li>
