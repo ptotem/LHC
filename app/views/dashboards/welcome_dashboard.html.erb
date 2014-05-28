@@ -17,21 +17,29 @@
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
           <div class="row">
             <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-              <i class="fa fa-pencil fa-5x white"></i>
+              <%= link_to '<i class="fa fa-pencil fa-5x white"></i>'.html_safe, edit_profile_path(current_user.id) %>
             </div>
             <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-              <div class="lhc-text">Fill your profile</div>
-              <p class="white">we would love to know you better</p>
+              <div class="lhc-text">
+                <%= get_content_for("welcomeDashboardProfileHeader") %>
+              </div>
+              <p class="white">
+                <%= get_content_for("welcomeDashboardProfileText") %>
+              </p>
             </div>
           </div>
         </div>
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
           <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-            <i class="fa fa-user fa-5x white"></i>
+            <%= link_to '<i class="fa fa-user fa-5x white"></i>'.html_safe, quick_matches_path %>
           </div>
           <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-            <div class="lhc-text">Check your machines Regularly</div>
-            <p class="white">(there's a time limit)</p>
+            <div class="lhc-text">
+              <%= get_content_for("welcomeDashboardMatchesHeader") %>
+            </div>
+            <p class="white">
+              <%= get_content_for("welcomeDashboardMatchesText") %>
+            </p>
           </div>
         </div>
       </div>
@@ -43,18 +51,26 @@
               <i class="fa fa-thumbs-up fa-5x white"></i>
             </div>
             <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-              <div class="lhc-text">If you get a mutual like , send a message</div>
-              <p class="white">(Ofcourse. you will)</p>
+              <div class="lhc-text">
+                <%= get_content_for("welcomeDashboardMutualLikesHeader") %>
+              </div>
+              <p class="white">
+                <%= get_content_for("welcomeDashboardMutualLikesText") %>
+              </p>
             </div>
           </div>
         </div>
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
           <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-            <i class="fa fa-trophy fa-5x white"></i>
+            <%= link_to '<i class="fa fa-trophy fa-5x white"></i>'.html_safe, snazzmeup_path %>
           </div>
           <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-            <div class="lhc-text">Have fun with our fun-filled quizzes!</div>
-            <p class="white">(play-now)</p>
+            <div class="lhc-text">
+              <%= get_content_for("welcomeDashboardQuizzesHeader") %>
+            </div>
+            <p class="white">
+              <%= get_content_for("welcomeDashboardQuizzesText") %>
+            </p>
           </div>
         </div>
       </div>

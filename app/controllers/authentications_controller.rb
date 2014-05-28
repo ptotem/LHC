@@ -12,34 +12,36 @@ class AuthenticationsController < ApplicationController
 
   def create
     auth=request.env["omniauth.auth"]
-    render :json => auth
-    return
+    #render :json => "#{auth.extra.raw_info.email}, #{auth.extra.raw_info.email.nil?}"
+    #return
 
-    #if auth.provider=='facebook' # Checking if request comes from facebook or twitter
-    #                             #if User.find_by_email(auth.info.email).nil?
-    #  if User.find_by_uid(auth['uid']).nil?
-    #    users_email = auth.extra.raw_info.email
-    #    if users_email.nil?
-    #      @user = User.create(:provider => auth["provider"], :uid => auth["uid"])
-    #    else
-    #      @user = User.create(:provider => auth["provider"], :email => users_email, :password => Devise.friendly_token[0, 20], :uid => auth["uid"])
-    #    end
-    #
-    #  else
-    #    #@user=User.find_by_email(auth.info.email)
-    #    @user=User.find_by_uid(auth['uid'])
-    #  end
-    #else
-    #  if User.find_by_uid(auth['uid']).nil?
-    #    @user=User.create!(:provider => auth['provider'], :uid => auth['uid'])
-    #  else
-    #    @user=User.find_by_uid(auth['uid'])
-    #  end
-    #end
-    #
-    #sign_in(:user, @user)
-    #@user.save
-    #redirect_to console_path
+    if auth.provider=='facebook' # Checking if request comes from facebook or twitter
+                                 #if User.find_by_email(auth.info.email).nil?
+      users_email = auth.extra.raw_info.email
+
+      if users_email.nil?
+        #redirect_to "/", :notice=>"Your e-mail is secured, can't be fetched."
+        render :text => "Your e-mail is secured, can't be fetched."
+        return
+      else
+        if User.where(:email=>users_email).first.nil?
+          @user = User.create(:provider => auth["provider"], :email => users_email, :password => Devise.friendly_token[0, 20], :uid => auth["uid"])
+          @user.confirmed_at = Time.now
+          @user.save!
+          sign_in(:user, @user)
+          redirect_to welcome_dashboard_path
+          #render :text => "User Created, #{@user}"
+          #return
+        else
+          @user=User.where(:email=>users_email).first
+          sign_in(:user, @user)
+          redirect_to welcome_dashboard_path
+          #render :text => "User Found, #{@user}"
+          #return
+        end
+      end
+
+    end
 
   end
 

@@ -1,5 +1,5 @@
 <%= content_for(:page_header) do %>
-   5 things I like...
+    <%= get_content_for("fillMandatoryiLikeHeader") %>
 <% end %>
 
 <%#= content_for(:page_description) do %>
@@ -7,17 +7,17 @@
 <%# end %>
 
 <%= content_for(:page_desc) do %>
-    <%= get_content_for("aboutmeDescription") %>
+    <%= get_content_for("fillMandatoryiLikeText") %>
 <% end %>
 
 
 
 <%= form_for @user, :url => { :controller => "users/registrations", :action => "update" }, :html => { :method => :post,:class => "form-horizontal" } do |f| %>
     <%= f.hidden_field :current_route,:value=>@next_page %>
-    <div class="row">
+    <div class="row" id="fill_i_like_row">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-offset-2 col-lg-8 blue-background text-center" style="padding: 3%">
         <%#= f.collection_select(:about_list_ids, AboutList.order('name ASC').all, :id, :name, {:include_blank => false}, {:multiple => true, :class=>"multiple"}) %>
-        <div class="row" style="padding-top: 1%; padding-bottom:1%; padding-left:0; background-color: white">
+        <div class="row fill_i_like_row" style="padding-top: 1%; padding-bottom:1%; padding-left:0; background-color: white">
 
           <% HobbyList.all.each do |a| %>
               <div class="col-lg-2" style="text-align: left">
@@ -68,37 +68,33 @@
 <script type="text/javascript">
     $(document).ready( function(){
 
+        //console.log($("#fill_i_like_row :checkbox:checked").length);
+
         $(".cb-enable").click(function(){
-            var parent = $(this).parents('.switch');
-            $('.cb-disable',parent).removeClass('selected');
-            $(this).toggleClass('selected');
-            var current_state = $('.checkbox',parent).attr("checked");
-            console.log(current_state);
-            $('.checkbox',parent).attr('checked',!current_state);
-            if (($("input:checkbox:checked").length) >= 5) {
-                $('#error_modal').trigger('click');
-                $("input:checkbox:not(:checked)").each(function(){
-                    $(this).prev().css('pointer-events','none');
-                })
-            }
-            else{
-                $("input:checkbox:not(:checked)").each(function(){
-                    $(this).prev().css('pointer-events','auto');
-                })
+            if(($(".cb-enable.selected").length < 5)||($(this).hasClass('selected'))) {
+                var parent = $(this).parents('.switch');
+                //console.log(parent);
+                $('.cb-disable',parent).removeClass('selected');
+                $(this).toggleClass('selected');
+                var current_state = $('.checkbox',parent).attr("checked");
+                //console.log(current_state);
+                $('.checkbox',parent).attr('checked',!current_state);
+
             }
 
-
         });
-        $(".cb-disable").click(function(){
-            var parent = $(this).parents('.switch');
-            $('.cb-enable',parent).removeClass('selected');
-            $(this).addClass('selected');
-            $('.checkbox',parent).attr('checked', false);
-//            $("input:checkbox:not(:checked)").each(function(){
-//                $(this).prev().css('pointer-events','none');
-//            })
 
-        });
+
+//        $(".cb-disable").click(function(){
+//            var parent = $(this).parents('.switch');
+//            $('.cb-enable',parent).removeClass('selected');
+//            $(this).addClass('selected');
+//            $('.checkbox',parent).attr('checked', false);
+////            $("input:checkbox:not(:checked)").each(function(){
+////                $(this).prev().css('pointer-events','none');
+////            })
+//
+//        });
 
         var user_hobbies = <%= @user_hobbies %>;
         //console.log(user_hobbies);

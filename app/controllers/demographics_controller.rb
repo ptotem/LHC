@@ -32,6 +32,7 @@ class DemographicsController < ApplicationController
         end
         @user_age = @user.age rescue nil
         @user_religion = @user.demographic.religion rescue ""
+        @user_current_student = @user.demographic.current_student
         @user_smoking = @user.demographic.smoking rescue ""
         @user_drinking = @user.demographic.drinking rescue ""
         @user_desc = @user.demographic.description rescue ""

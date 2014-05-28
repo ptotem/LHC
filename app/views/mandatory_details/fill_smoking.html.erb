@@ -1,5 +1,5 @@
 <%= content_for(:page_desc) do %>
-    <%= get_content_for("fillMandotaryDetailKindOfPersonYouLike") %>
+    <%= get_content_for("fillMandatorySmoking") %>
 <% end %>
 
 <%= content_for(:header_image) do %>
@@ -42,7 +42,9 @@
                         <div class="control-group">
                           <div class="controls">
                             <div class="row">
-                              <h4 class="white drink_smoke_font">Smoking</h4>
+                              <h4 class="white drink_smoke_font">
+                                Smoking
+                              </h4>
                               <%#= d.text_field :smoking, :id=>"me_smoking_textfield", :class=>"hidden_elems" %>
                               <%= d.hidden_field :smoking, :id => "me_smoking_textfield", :class => "hidden_elems" %>
                               <div class="carousel slide" id="carousel-smoking" data-interval="false" data-ride="carousel">

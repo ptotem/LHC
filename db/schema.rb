@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140527133103) do
+ActiveRecord::Schema.define(version: 20140528121639) do
 
   create_table "about_lists", force: true do |t|
     t.string   "name"
@@ -421,6 +421,7 @@ ActiveRecord::Schema.define(version: 20140527133103) do
     t.string   "current_route",          default: "/fill_dates"
     t.datetime "last_matched_time"
     t.boolean  "first_visit",            default: false
+    t.string   "provider"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree

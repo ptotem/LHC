@@ -288,108 +288,111 @@
 <%# if @current_user_route == "/welcome_dashboard" %>
 <% @cntrl = params[:controller] %>
 <!-- dashboards, demographics -->
+<% @action = params[:action] %>
+<!-- profile, my_dashboard -->
+
 
 <%#= @user_first_visit %>
-
-<div class="interactive-div">
-
-
-  <div class="arrow-1">
-    <img src="/assets/down-arrow.png" width="80px" height="70px">
-
-    <p class="arrow-text-p-pic">This is your profile picture</p>
-  </div>
-
-  <div class="arrow-2">
-    <img src="/assets/down-arrow.png" width="80px" height="70px">
-
-    <p class="arrow-text-matches">click here to go to profile page</p>
-  </div>
-
-  <div class="arrow-3">
-    <img src="/assets/left-arrow.png" width="80px" height="70px">
-
-    <p class="arrow-text">click here to go to matches page</p>
-  </div>
-
-  <div class="arrow-4">
-    <img src="/assets/left-arrow.png" width="80px" height="70px">
-
-    <p class="arrow-text">click here to go to mutual likes page</p>
-  </div>
-
-  <div class="arrow-5">
-    <img src="/assets/left-arrow.png" width="80px" height="70px">
-
-    <p class="arrow-text">click here to go to conversations page</p>
-  </div>
-
-  <div class="arrow-6">
-    <img src="/assets/left-arrow.png" width="80px" height="70px">
-
-    <p class="arrow-text">click here to go to snaz me up page</p>
-  </div>
+<% if @action == "profile" or @action == "my_dashboard" %>
+    <div class="interactive-div">
 
 
-  <div class="arrow-7">
-    <img src="/assets/top-arrow.png" width="80px" height="80px">
+      <div class="arrow-1">
+        <img src="/assets/down-arrow.png" width="80px" height="70px">
 
-    <p class="top-arrow-text">click here to<br> go to Dashboard</p>
-  </div>
-
-  <div class="arrow-8">
-    <img src="/assets/top-arrow.png" width="80px" height="80px">
-
-    <p class="top-arrow-text">click here to<br> go to about</p>
-  </div>
-
-  <div class="arrow-10">
-    <img src="/assets/top-arrow.png" width="80px" height="80px">
-
-    <p class="top-arrow-text">click here to<br> go to contact us page</p>
-  </div>
-
-  <% if @cntrl == "demographics" %>
-      <div class="arrow-11">
-        <img src="/assets/right-arrow.png" width="80px" height="80px">
-        <p class="right-arrow-text">This is your profile meter</p>
+        <p class="arrow-text-p-pic">This is your profile picture</p>
       </div>
-  <% else %>
-      <div id="dashboard_hrs_remaining">
-        <img src="/assets/right-arrow.png" width="80px" height="80px">
-        <p class="right-arrow-text">Hours remaining for matches</p>
-      </div>
-  <% end %>
 
-  <% if @cntrl == "demographics" %>
-      <div class="arrow-12">
-        <img src="/assets/right-arrow.png" width="80px" height="80px">
-        <p class="right-arrow-text">click here to invite your friend</p>
-      </div>
-  <% else %>
-      <div id="dashboard_invite_friend">
-        <img src="/assets/right-arrow.png" width="80px" height="80px">
-        <p class="right-arrow-text">click here to invite your friend</p>
-      </div>
-  <% end %>
+      <div class="arrow-2">
+        <img src="/assets/down-arrow.png" width="80px" height="70px">
 
-  <% if @cntrl == "demographics" %>
-      <div class="arrow-13">
-        <img src="/assets/right-arrow.png" width="80px" height="80px">
-        <p class="right-arrow-text">click here to edit your profile</p>
+        <p class="arrow-text-matches">click here to go to profile page</p>
       </div>
-  <% else %>
-      <div id="dashboard_try_quiz">
-        <img src="/assets/right-arrow.png" width="80px" height="80px">
-        <p class="right-arrow-text">click here to try our quizzes</p>
-      </div>
-  <% end %>
 
-  <div class="close_button">
-    <i class="fa fa-times-circle fa-2"></i>
-  </div>
-</div>
-<%# end %>
+      <div class="arrow-3">
+        <img src="/assets/left-arrow.png" width="80px" height="70px">
+
+        <p class="arrow-text">click here to go to matches page</p>
+      </div>
+
+      <div class="arrow-4">
+        <img src="/assets/left-arrow.png" width="80px" height="70px">
+
+        <p class="arrow-text">click here to go to mutual likes page</p>
+      </div>
+
+      <div class="arrow-5">
+        <img src="/assets/left-arrow.png" width="80px" height="70px">
+
+        <p class="arrow-text">click here to go to conversations page</p>
+      </div>
+
+      <div class="arrow-6">
+        <img src="/assets/left-arrow.png" width="80px" height="70px">
+
+        <p class="arrow-text">click here to go to snaz me up page</p>
+      </div>
+
+
+      <div class="arrow-7">
+        <img src="/assets/top-arrow.png" width="80px" height="80px">
+
+        <p class="top-arrow-text">click here to<br> go to Dashboard</p>
+      </div>
+
+      <div class="arrow-8">
+        <img src="/assets/top-arrow.png" width="80px" height="80px">
+
+        <p class="top-arrow-text">click here to<br> go to about</p>
+      </div>
+
+      <div class="arrow-10">
+        <img src="/assets/top-arrow.png" width="80px" height="80px">
+
+        <p class="top-arrow-text">click here to<br> go to contact us page</p>
+      </div>
+
+      <% if @cntrl == "demographics" %>
+          <div class="arrow-11">
+            <img src="/assets/right-arrow.png" width="80px" height="80px">
+            <p class="right-arrow-text">This is your profile meter</p>
+          </div>
+      <% else %>
+          <div id="dashboard_hrs_remaining">
+            <img src="/assets/right-arrow.png" width="80px" height="80px">
+            <p class="right-arrow-text">Hours remaining for matches</p>
+          </div>
+      <% end %>
+
+      <% if @cntrl == "demographics" %>
+          <div class="arrow-12">
+            <img src="/assets/right-arrow.png" width="80px" height="80px">
+            <p class="right-arrow-text">click here to invite your friend</p>
+          </div>
+      <% else %>
+          <div id="dashboard_invite_friend">
+            <img src="/assets/right-arrow.png" width="80px" height="80px">
+            <p class="right-arrow-text">click here to invite your friend</p>
+          </div>
+      <% end %>
+
+      <% if @cntrl == "demographics" %>
+          <div class="arrow-13">
+            <img src="/assets/right-arrow.png" width="80px" height="80px">
+            <p class="right-arrow-text">click here to edit your profile</p>
+          </div>
+      <% else %>
+          <div id="dashboard_try_quiz">
+            <img src="/assets/right-arrow.png" width="80px" height="80px">
+            <p class="right-arrow-text">click here to try our quizzes</p>
+          </div>
+      <% end %>
+
+      <div class="close_button">
+        <i class="fa fa-times-circle fa-2"></i>
+      </div>
+    </div>
+<% end %>
 
 <!--interactive how to code ending  here-->
 
@@ -484,13 +487,13 @@
             $('#send_message_btn').addClass('active-btn');
         }
 
-        var user_first_visit = <%= @user_first_visit %>
-        if (user_first_visit == false){
-            show_interactive_how_to();
-        }
-        else{
-            hide_interactive_how_to();
-        }
+        //var user_first_visit = <%#= @user_first_visit %>
+//        if (user_first_visit == false){
+//            show_interactive_how_to();
+//        }
+//        else{
+//            hide_interactive_how_to();
+//        }
 
 
 
