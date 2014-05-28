@@ -49,7 +49,9 @@ class DemographicsController < ApplicationController
         @user_quizzes = Array.new
         @user_quiz_ans_questions = @user.quiz_answers.map(&:question_id)
         @user_quiz_ans_questions.each do |q|
-          @user_quizzes << Question.find(q).quizzes.first.name
+          if !Question.find(q).quizzes.first.quiz_category.personal
+            @user_quizzes << Question.find(q).quizzes.first.name
+          end
           #@user_quizzes << q.quizzes.map(&:name)
         end
         @user_quizzes = @user_quizzes.uniq
