@@ -1,12 +1,12 @@
 <%= content_for(:page_header) do %>
-    In 5 years, I would be...
+    <%= get_content_for("fillMandatoryFuturePlanHeader") %>
 <% end %>
 
 <%#= content_for(:page_description) do %>
     <%#= get_content_for('futureDescription') %>
 <%# end %>
 <%= content_for(:page_desc) do %>
-    <%= get_content_for("aboutmeDescription") %>
+    <%= get_content_for("fillMandatoryFuturePlanText") %>
 <% end %>
 
 

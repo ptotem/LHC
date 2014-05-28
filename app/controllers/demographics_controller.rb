@@ -32,6 +32,7 @@ class DemographicsController < ApplicationController
         end
         @user_age = @user.age rescue nil
         @user_religion = @user.demographic.religion rescue ""
+        @user_current_student = @user.demographic.current_student
         @user_smoking = @user.demographic.smoking rescue ""
         @user_drinking = @user.demographic.drinking rescue ""
         @user_desc = @user.demographic.description rescue ""
@@ -48,7 +49,9 @@ class DemographicsController < ApplicationController
         @user_quizzes = Array.new
         @user_quiz_ans_questions = @user.quiz_answers.map(&:question_id)
         @user_quiz_ans_questions.each do |q|
-          @user_quizzes << Question.find(q).quizzes.first.name
+          if !Question.find(q).quizzes.first.quiz_category.personal
+            @user_quizzes << Question.find(q).quizzes.first.name
+          end
           #@user_quizzes << q.quizzes.map(&:name)
         end
         @user_quizzes = @user_quizzes.uniq

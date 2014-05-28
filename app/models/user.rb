@@ -135,6 +135,7 @@ class User < ActiveRecord::Base
         count = count+1
       end
     end
+    Notification.create!(:content=>"You have got a new match, check your matches", :user_id=>self.id, :pointer_link=>"/quick_matches")
     return tmp
 
   end

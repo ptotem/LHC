@@ -1,12 +1,12 @@
 <%= content_for(:page_header) do %>
-    5 things my friends say about me...
+    <%= get_content_for("fillMandatoryFriendSpeakHeader") %>
 <% end %>
 
 <%#= content_for(:page_description) do %>
     <%#= get_content_for('friendsayDescription') %>
 <%# end %>
 <%= content_for(:page_desc) do %>
-    <%= get_content_for("aboutmeDescription") %>
+    <%= get_content_for("fillMandatoryFriendSpeakText") %>
 <% end %>
 
 
@@ -72,26 +72,21 @@
 
 <script type="text/javascript">
     $(document).ready( function(){
+
         $(".cb-enable").click(function(){
-            var parent = $(this).parents('.switch');
-            $('.cb-disable',parent).removeClass('selected');
-            $(this).toggleClass('selected');
-            var current_state = $('.checkbox',parent).attr("checked");
-            console.log(current_state);
-            $('.checkbox',parent).attr('checked',!current_state);
-            if (($("input:checkbox:checked").length) >= 5) {
-                $('#error_modal').trigger('click');
-                $("input:checkbox:not(:checked)").each(function(){
-                    $(this).prev().css('pointer-events','none');
-                })
-            }
-            else{
-                $("input:checkbox:not(:checked)").each(function(){
-                    $(this).prev().css('pointer-events','auto');
-                })
+            if(($(".cb-enable.selected").length < 5)||($(this).hasClass('selected'))) {
+                var parent = $(this).parents('.switch');
+                //console.log(parent);
+                $('.cb-disable',parent).removeClass('selected');
+                $(this).toggleClass('selected');
+                var current_state = $('.checkbox',parent).attr("checked");
+                //console.log(current_state);
+                $('.checkbox',parent).attr('checked',!current_state);
+
             }
 
         });
+
         $(".cb-disable").click(function(){
             var parent = $(this).parents('.switch');
             $('.cb-enable',parent).removeClass('selected');

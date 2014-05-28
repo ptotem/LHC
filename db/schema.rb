@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140527133103) do
+ActiveRecord::Schema.define(version: 20140528132658) do
 
   create_table "about_lists", force: true do |t|
     t.string   "name"
@@ -124,19 +124,16 @@ ActiveRecord::Schema.define(version: 20140527133103) do
   end
 
   create_table "ice_breakers", force: true do |t|
+    t.integer  "sender_id"
+    t.integer  "receiver_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "ice_status", default: false
+    t.boolean  "ice_status",  default: false
   end
 
   create_table "ice_breakers_questions", force: true do |t|
     t.integer "ice_breaker_id"
     t.integer "question_id"
-  end
-
-  create_table "ice_breakers_users", id: false, force: true do |t|
-    t.integer "ice_breaker_id", null: false
-    t.integer "user_id",        null: false
   end
 
   create_table "icebreaker_answers", force: true do |t|
@@ -291,6 +288,7 @@ ActiveRecord::Schema.define(version: 20140527133103) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.boolean  "personal"
   end
 
   create_table "quiz_results", force: true do |t|
@@ -424,6 +422,7 @@ ActiveRecord::Schema.define(version: 20140527133103) do
     t.string   "current_route",          default: "/fill_dates"
     t.datetime "last_matched_time"
     t.boolean  "first_visit",            default: false
+    t.string   "provider"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree

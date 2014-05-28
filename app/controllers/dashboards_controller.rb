@@ -31,6 +31,7 @@ class DashboardsController < ApplicationController
     #render :json => @like_requests
     #return
 
+
     # TODO: Why was this code commented ? I wrote it for a reason- Rushabh
     if current_user.notifications.blank? and @like_requests.blank?
       redirect_to user_profile_path(current_user.id),:notice => "You have no notifications"
@@ -279,6 +280,9 @@ class DashboardsController < ApplicationController
       @opposite_user_q_name << Option.find(ouda).question.name
       @opposite_user_ans_name << Option.find(ouda).name
     end
+
+  @quizzes=QuizCategory.where(:personal => 't').first.quizzes
+
 
 
   end

@@ -101,6 +101,17 @@
                       <td class="user_detail"><%= @user_religion %></td>
                     </tr>
 
+                    <tr>
+                      <td class="user_detail"><i class="fa fa-sliders"></i></td>
+                      <td class="user_detail">
+                        <% if @user_current_student == false  %>
+                            Alumn.
+                        <% else %>
+                            Student
+                        <% end %>
+                      </td>
+                    </tr>
+
                   </table>
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
@@ -344,7 +355,7 @@
               <!--<div class="row">-->
                 <!--<div class="col-lg-12" id="view-profile-movies-caraousel-container1">-->
 
-                  <div id="carousel-for-movies" class="carousel slide" data-ride="carousel" style="height: 190px; padding: 1%">
+                  <div id="carousel-for-movies" class="carousel slide" data-ride="carousel" data-interval="false" style="height: 190px; padding: 1%">
                     <div class="carousel-inner">
                       <div class="item active">
                         <% @user.movies.each_with_index do |user_movie, index| %>
@@ -401,7 +412,7 @@
 
             <div class="row">
               <div class="col-lg-12" id="edit-profile-movies-caraousel-container2">
-                <div id="carousel-for-songs" class="carousel slide" data-ride="carousel" style="height: 190px; padding: 1%">
+                <div id="carousel-for-songs" class="carousel slide" data-ride="carousel" data-interval="false" style="height: 190px; padding: 1%">
                   <div class="carousel-inner">
                     <div class="item active">
                       <% @user.songs.each_with_index do |user_song, index| %>
@@ -457,7 +468,7 @@
 
             <!--<div class="row">-->
               <!--<div class="col-lg-12" id="edit-profile-movies-caraousel-container3">-->
-                <div id="carousel-for-books" class="carousel slide" data-ride="carousel" style="height: 190px; padding: 1%">
+                <div id="carousel-for-books" class="carousel slide" data-ride="carousel" data-interval="false" style="height: 190px; padding: 1%">
 
                   <div class="carousel-inner">
                     <div class="item active">
