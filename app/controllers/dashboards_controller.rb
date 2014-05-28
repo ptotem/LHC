@@ -323,7 +323,8 @@ class DashboardsController < ApplicationController
     if Like.find_by_receiver_id_and_sender_id(@receiver_id,@sender_id) or Like.find_by_receiver_id_and_sender_id(@sender_id,@receiver_id)
       #render :text => "Request Already Sent"
       #return
-      redirect_to my_dashboard_path,:notice=>"Like request already sent !"
+      #redirect_to my_dashboard_path,:notice=>"Like request already sent !"
+      redirect_to user_profile_path(@receiver_id),:notice=>"Like request already sent !"
       return
     else
       @like=Like.create(:receiver_id => @receiver_id,:sender_id => @sender_id,:status => false)
