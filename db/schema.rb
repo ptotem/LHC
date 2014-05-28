@@ -124,16 +124,19 @@ ActiveRecord::Schema.define(version: 20140527133103) do
   end
 
   create_table "ice_breakers", force: true do |t|
-    t.integer  "sender_id"
-    t.integer  "receiver_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "ice_status",  default: false
+    t.boolean  "ice_status", default: false
   end
 
   create_table "ice_breakers_questions", force: true do |t|
     t.integer "ice_breaker_id"
     t.integer "question_id"
+  end
+
+  create_table "ice_breakers_users", id: false, force: true do |t|
+    t.integer "ice_breaker_id", null: false
+    t.integer "user_id",        null: false
   end
 
   create_table "icebreaker_answers", force: true do |t|
