@@ -28,9 +28,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
     #return
 
 
-    if params[:user][:demographic_attributes][:avatar].nil? and params[:user][:current_route] == "/welcome_dashboard"
-      redirect_to fill_profilepic_path, notice: 'Please add a photograph!'
-      return
+    if !params[:user][:demographic_attributes].nil?
+      if params[:user][:demographic_attributes][:avatar].nil? and params[:user][:current_route] == "/welcome_dashboard"
+        redirect_to fill_profilepic_path, notice: 'Please add a photograph!'
+        return
+      end
     end
 
     if !params[:user][:hobby_list_ids].nil?
