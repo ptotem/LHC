@@ -7,6 +7,6 @@ class QuickMatchMailer < ActionMailer::Base
     #  attachments.inline[User.find(u).demographic.avatar.url] = File.read("#{Rails.root}"+User.find(u).demographic.avatar.url)
     #end
     @current_user=User.find(current_user).email
-    mail(to: current_user, subject: 'Hey hey hey! We have matches for you!')
+    mail(to: @current_user, subject: 'Hey hey hey! We have matches for you!')
   end
 end
