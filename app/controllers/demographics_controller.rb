@@ -23,6 +23,19 @@ class DemographicsController < ApplicationController
     if !User.where(:id=>params[:id]).first.nil?
       #@user = User.find(params[:id])
         @user = User.where(:id=>params[:id]).first
+        c=0;
+        if @user.movies.count >=5
+          c = c+10
+        end
+        if @user.songs.count >=5
+          c = c+10
+        end
+        if @user.books.count >=5
+          c = c+10
+        end
+
+        @profileStatus = c+50;
+
         @user_name = @user.demographic.name
         @user_nick_name = @user.demographic.nickname
         if @user.demographic.male?
