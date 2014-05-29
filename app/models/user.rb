@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,:confirmable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
+  validates :confirmation_token, :uniqueness => true, :allow_blank => true
+
   has_many :authentications, :dependent => :destroy
 
   has_one :demographic, dependent: :destroy
