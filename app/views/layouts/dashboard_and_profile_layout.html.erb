@@ -487,13 +487,13 @@
             $('#send_message_btn').addClass('active-btn');
         }
 
-        //var user_first_visit = <%#= @user_first_visit %>
-//        if (user_first_visit == false){
-//            show_interactive_how_to();
-//        }
-//        else{
-//            hide_interactive_how_to();
-//        }
+        var user_first_visit = <%= @user_first_visit %>
+        if (user_first_visit == false){
+            show_interactive_how_to();
+        }
+        else{
+            hide_interactive_how_to();
+        }
 
 
 
