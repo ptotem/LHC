@@ -35,6 +35,7 @@ class DemographicsController < ApplicationController
         end
 
         @profileStatus = c+50;
+        eachQuizWeight = 20/Quiz.all.count
 
         @user_name = @user.demographic.name
         @user_nick_name = @user.demographic.nickname
@@ -68,6 +69,7 @@ class DemographicsController < ApplicationController
           #@user_quizzes << q.quizzes.map(&:name)
         end
         @user_quizzes = @user_quizzes.uniq
+        @profileStatus = @profileStatus + @user_quizzes.count*eachQuizWeight
         #render :text => @user_quizzes
         #return
 
