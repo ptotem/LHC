@@ -9,5 +9,5 @@ ActionMailer::Base.smtp_settings = {
     :enable_starttls_auto => true
 }
 
-ActionMailer::Base.default :from => 'contact@letshavecoffee.com'
+ActionMailer::Base.default :from => 'contact@letshavecoffee.in'
 
