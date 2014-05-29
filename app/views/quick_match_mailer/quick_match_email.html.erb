@@ -5,7 +5,7 @@
 
 <ul>
   <% @user.each do |match| %>
-      <li> <%= image_tag attachments[get_user_image(match)].url %> </li>
+      <!--<li> <%#= image_tag attachments[get_user_image(match)].url %> </li>-->
       <li> <%= get_user_name(match) %> </li>
       <li> <%= get_user_gender(match) %>, <%= get_user_age(match) %> </li>
       <li> <%= get_user_institute(match) %> </li>
