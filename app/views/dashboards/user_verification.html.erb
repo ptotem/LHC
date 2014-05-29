@@ -61,7 +61,7 @@
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
       <%= form_for @user_document, :url => url_for(:controller => 'user_documents', :action => 'create'), :html => {:multipart => true} do |user_doc_form| %>
-
+      <%#= form_for :user, :url => url_for(:controller => 'dashboards', :action => 'upload_user_doc'), :html => {:multipart => true} do |user_doc_form| %>
           <div class="row">
             <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
               <h5 class="white" style="font-size: 1.3em">
@@ -109,7 +109,7 @@
        <br>
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-      <%= form_for :user, :url => url_for(:controller => 'dashboards', :action => 'verify_user_institute_email') do |user_form| %>
+      <%= form_for :user, :url => url_for(:controller => 'dashboards', :action => 'verify_user_linkedin_url') do |user_form| %>
           <div class="row">
             <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
               <%= user_form.hidden_field :user_id, :value => current_user.id %>

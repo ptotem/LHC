@@ -97,10 +97,58 @@
 
     #drinking_nav {
         background: white;
-        background: white;
         line-height: 6px;
         margin-top: 15px;
     }
+
+  .mandatory-title-white{
+      background: url("/assets/icons/arrow.png") no-repeat scroll left 1% bottom #3E4549;
+      padding-bottom: 1.7%;
+  }
+
+  #drinking_nav{
+      margin-bottom: 5%;
+  }
+
+  #smoking_nav{
+      margin-bottom: 5%;
+  }
+
+  .mandatory-submit-btn-col-right-aligned{
+      padding-left:50.6%;
+  }
+
+  .mandatory-submit-btn-col-middle-aligned{
+      padding-left:46%;
+  }
+
+  @media (min-width: 1700px) and (max-width: 2200px) {
+      .mandatory-title-white{
+          background: url("/assets/icons/arrow.png") no-repeat scroll left 1% bottom #3E4549;
+          padding-top: 1.2%;
+          padding-bottom: 2.1%;
+      }
+
+      .large-screen-col-3-offset{
+          margin-left: 31.5%;
+      }
+
+      #drinking_nav{
+          padding-bottom: 5.2%;
+      }
+
+      #smoking_nav{
+          padding-bottom: 4.2%;
+      }
+
+      .mandatory-submit-btn-col-right-aligned{
+          padding-left:52.6%;
+      }
+
+      .mandatory-submit-btn-col-middle-aligned{
+          padding-left:47%;
+      }
+  }
 
 </style>
 
@@ -108,15 +156,20 @@
 
 <section id="page-title" style="padding-top: 0%;">
   <!--<section id="match_criteria_page_title_section">  -->
-  <div class="container">
+  <!--<div class="container">-->
     <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 title-white">
+      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+          <a href="#">
+            <%= image_tag "logo.png", :style => "width:100%;" %>
+          </a>
+      </div>
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 mandatory-title-white">
         <h2>
           <%= get_content_for("fillMandatoryDetailsHeader") %>
         </h2>
       </div>
     </div>
-  </div>
+  <!--</div>-->
 </section>
 
 
@@ -129,7 +182,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-lg-6 col-lg-offset-3">
+      <div class="col-lg-6 col-lg-offset-3 large-screen-col-3-offset">
         <%= yield(:header_image) %>
 
       </div>

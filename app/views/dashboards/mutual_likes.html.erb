@@ -37,7 +37,7 @@
                 <div class="row">
                   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <% if check_icebreaker_status(m.id) %>
-                        <button class="buttonmenu" id="send_message_btn" onclick="window.location='<%= conversations_with_users_path(m.id) %>'">Send a Message</button>
+                        <button class="send-message_btn" id="send_message_btn" onclick="window.location='<%= conversations_with_users_path(m.id) %>'">Send Message</button>
                     <% else %>
                         <button class="send-icebreaker_btn" id="send_icebreaker_btn" onclick="window.location='<%= start_ice_breaker_path(m.id) %>'">Send Icebreaker</button>
                     <% end %>

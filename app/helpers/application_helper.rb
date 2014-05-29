@@ -71,6 +71,15 @@ module ApplicationHelper
     User.find(id).demographic.location
   end
 
+  def get_user_institute(id)
+    Institution.find(User.find(id).demographic.last_institute).name rescue "NA"
+  end
+
+  def get_user_about_list(id)
+    u=User.find(id)
+    u.about_lists
+  end
+
   def timer_countdown(id)
     u=User.find(id)
     if u.last_matched_time.nil? || ((((u.last_matched_time+3.days).to_i - Time.now.to_i)/3600) <= 0)

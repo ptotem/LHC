@@ -801,37 +801,54 @@
                         data: JSON.stringify(data),
                         contentType: "application/json",
                         success: function (data) {
-                            var music_name, music_poster, music_release_date, music_id;
+                            var artist_name, artist_poster, music_release_date, artist_id;
+                            //var music_name, music_poster, music_release_date, music_id;
+                              //console.log(data.artistmatches.artist);
+                              $.each(data, function (i, obj) {
+                                  //console.log(obj.artistmatches);
+                                  $.each(obj.artistmatches.artist, function (k, objj) {
+                                      if ( (typeof objj.image!='undefined') && (objj.mbid.length > 0) ) {
+                                          //console.log(objj);
+                                          //console.log(objj.mbid.length);
+                                          artist_name = objj.name;
+                                          artist_id = objj.mbid;
+                                          artist_poster = objj.image[2]["#text"];
+                                          musicNameTags.push(artist_name);
+                                          musicJSON.push({"name": artist_name, "id": artist_id, "image": artist_poster});
+                                      }
 
-                            $.each(data, function (i, obj) {
-                                $.each(obj.trackmatches.track, function (k, objj) {
-                                    console.log(objj);
-                                    if ( (typeof objj.image!='undefined')) {
-                                        if (!objj.mbid=="") {
-                                            music_name = objj.name;
-                                            music_poster = objj.image[2]["#text"];
-                                            music_id = objj.mbid;
-                                            console.log("music_name :- " + music_name) ;
-                                            console.log("music_poster :- " + music_poster);
-                                            console.log("music_id :- " + music_id);
-                                            musicNameTags.push(music_name);
-                                            musicJSON.push({"name": music_name, "id": music_id, "image": music_poster});
-                                        }
-                                    }
-                                    else if (!objj.mbid=="") {
-                                        if ( (typeof objj.image!='undefined')) {
-                                            music_name = objj.name;
-                                            music_poster = objj.image[2]["#text"];
-                                            music_id = objj.mbid;
-                                            console.log("music_name :- " + music_name) ;
-                                            console.log("music_poster :- " + music_poster);
-                                            console.log("music_id :- " + music_id);
-                                            musicNameTags.push(music_name);
-                                            musicJSON.push({"name": music_name, "id": music_id, "image": music_poster});
-                                        }
-                                    }
-                                });
-                            })
+                                  })
+                              });
+
+//                            $.each(data, function (i, obj) {
+//                                $.each(obj.trackmatches.track, function (k, objj) {
+//                                    console.log(objj);
+//                                    if ( (typeof objj.image!='undefined')) {
+//                                        if (!objj.mbid=="") {
+//                                            music_name = objj.name;
+//                                            music_poster = objj.image[2]["#text"];
+//                                            music_id = objj.mbid;
+//                                            console.log("music_name :- " + music_name) ;
+//                                            console.log("music_poster :- " + music_poster);
+//                                            console.log("music_id :- " + music_id);
+//                                            musicNameTags.push(music_name);
+//                                            musicJSON.push({"name": music_name, "id": music_id, "image": music_poster});
+//                                        }
+//                                    }
+//                                    else if (!objj.mbid=="") {
+//                                        if ( (typeof objj.image!='undefined')) {
+//                                            music_name = objj.name;
+//                                            music_poster = objj.image[2]["#text"];
+//                                            music_id = objj.mbid;
+//                                            console.log("music_name :- " + music_name) ;
+//                                            console.log("music_poster :- " + music_poster);
+//                                            console.log("music_id :- " + music_id);
+//                                            musicNameTags.push(music_name);
+//                                            musicJSON.push({"name": music_name, "id": music_id, "image": music_poster});
+//                                        }
+//                                    }
+//                                });
+//                            })
                         }
                     });
 

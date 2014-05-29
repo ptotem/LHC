@@ -329,7 +329,7 @@ class DemographicsController < ApplicationController
 
   def search_music_by_lastfm
     @music_search_text = URI::escape(params[:music_search_text][0])
-    result = Net::HTTP.get(URI.parse('http://ws.audioscrobbler.com/2.0/?method=track.search&track='+@music_search_text+'&api_key=6078900945f603ee0a48da7cb32ab1dc&format=json'))
+    result = Net::HTTP.get(URI.parse('http://ws.audioscrobbler.com/2.0/?method=artist.search&artist='+@music_search_text+'&api_key=6078900945f603ee0a48da7cb32ab1dc&format=json'))
     render :json => result
     return
   end

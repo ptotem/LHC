@@ -1,0 +1,19 @@
+<h1>Let's Have Coffee!</h1>>
+<p>Hey <%= @current_user %></p>
+
+<p>We have new matches for you! Let’s check them out, shall we?</p>
+
+<ul>
+  <% @user.each do |match| %>
+      <li> <%= image_tag attachments[get_user_image(match)].url %> </li>
+      <li> <%= get_user_name(match) %> </li>
+      <li> <%= get_user_gender(match) %>, <%= get_user_age(match) %> </li>
+      <li> <%= get_user_institute(match) %> </li>
+      <li> <%= get_user_about_list(match).shuffle[0..1].map(&:name) %> </li>
+  <% end %>
+</ul>
+
+<p>Like any of them? <a href="http://lhcmocks.herokuapp.com/quick_matches" target="_blank">Go to your Matches page</a> to like them and see if they like you too! Remember, you have 3 days to like or reject these matches.</p>
+
+<p>Cheers!</p>
+<p>Team LHC</p>

@@ -34,7 +34,8 @@ class DashboardsController < ApplicationController
 
     # TODO: Why was this code commented ? I wrote it for a reason- Rushabh
     if current_user.notifications.blank? and @like_requests.blank?
-      redirect_to user_profile_path(current_user.id),:notice => "You have no notifications"
+      #redirect_to user_profile_path(current_user.id),:notice => "You have no notifications"
+      redirect_to welcome_dashboard_path,:notice => "You do not have any notifications."
     end
   end
 
@@ -50,9 +51,8 @@ class DashboardsController < ApplicationController
     @user = User.find(params[:user][:user_id])
     @user.verification_text = params[:user][:verification_text]
     @user.save!
-    redirect_to "/profile/#{@user.id}"
-    #render :text => "Successfully updated"
-    #return
+    #redirect_to "/profile/#{@user.id}"
+    redirect_to welcome_dashboard_path,:notice => "Your institute mail is saved for verification."
   end
 
   def verify_user_linkedin_url
@@ -60,7 +60,14 @@ class DashboardsController < ApplicationController
     @user = User.find(params[:user][:user_id])
     @user.verification_text = params[:user][:verification_text]
     @user.save!
-    render :text => "Successfully updated"
+    redirect_to welcome_dashboard_path,:notice => "Your linkedin url is saved for verification."
+    return
+  end
+
+  def upload_user_doc
+    @user = User.find(params[:user][:user_id])
+
+    render :text => params
     return
   end
 
@@ -79,7 +86,8 @@ class DashboardsController < ApplicationController
       end
     end
     if @conversations.blank?
-      redirect_to user_profile_path(current_user.id), :notice=>"You do not have any conversations"
+      #redirect_to user_profile_path(current_user.id), :notice=>"You do not have any conversations"
+      redirect_to my_dashboard_path, :notice=>"You do not have any conversations."
     end
     #@messages = current_user.sent_messages.where(:receiver_id=>user_list) + current_user.received_messages.where(sender_id:user_list)
 
@@ -187,8 +195,13 @@ class DashboardsController < ApplicationController
 
      if Like.where(:sender_id => current_user.id, :receiver_id => ubm).first and Like.where(:sender_id => current_user.id, :receiver_id => ubm).first.status and Like.where(:sender_id => ubm, :receiver_id => current_user.id).first and Like.where(:sender_id => current_user.id, :receiver_id => ubm).first.status and Like.where(:sender_id => ubm, :receiver_id => current_user.id).first.status
        @mutual_likes << User.find(ubm)
+       #MindMatch.create(:user_id=>current_user.id, :target_id=>@mutual_likes.id)
      end
    end
+
+   #render :json=>@mutual_likes
+   #return
+
 
  end
 
@@ -347,7 +360,9 @@ class DashboardsController < ApplicationController
    @accept.save!
 
    redirect_to user_profile_path(@accept.sender_id), notice: 'You have accepted the request.'
-   #return
+   MutualLikeMailer.mutual_like_mailer(@accept.sender_id, current_user).deliver
+
+    #return
   end
 
   def reject_request
@@ -371,6 +386,8 @@ class DashboardsController < ApplicationController
     #render :json => params[:id]
     #return
     @base_match = BaseMatch.find(params[:id])
+    @rejected_match = RejectedMatch.create(:rejected_target=>@base_match.target_id, :user_id=>current_user.id)
+    @rejected_match.save!
     @base_match.destroy
     redirect_to quick_matches_path, notice: 'You have rejected the request.'
   end

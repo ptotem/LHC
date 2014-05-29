@@ -408,6 +408,16 @@ input[type="radio"] + .custom-radio-btn.opposite_user_gender {
     padding: 4%;
 }
 
+.send-message_btn{
+    background: none repeat scroll 0 0 #FF0000;
+    border: medium none;
+    color: #FFFFFF;
+    /*font-family: 'Open Sans',sans-serif;*/
+    padding: 4%;
+    /*text-align: left;*/
+}
+
+
 
 /*input[type="radio"]:checked + #user_male_lable, input[type="radio"]:checked + .opposite_user_gender_male {*/
 /*background:url('/assets/blue_male.png');*/

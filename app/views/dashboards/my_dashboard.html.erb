@@ -64,7 +64,11 @@
             <div class="row">
               <div class="col-lg-12 whiteblock">
                 <div class="left-part">
-                  <img class="profile_pic_thumbnail img-circle123" src="<%= get_user_image(notification.sender_id) rescue nil %>" style="border-radius: 50%;"> </div>
+                  <% if notification.sender_id.nil? %>
+                    <img class="profile_pic_thumbnail img-circle123" src="/assets/notification-icon.png" style="border-radius: 50%;"> </div>
+                  <% else %>
+                    <img class="profile_pic_thumbnail img-circle123" src="<%= get_user_image(notification.sender_id) rescue nil %>" style="border-radius: 50%;"> </div>
+                  <% end %>
                 <div class="mid-part">
                   <div class="recentactivitytext">
                     <!--Your Match <a>Sagarika</a> sent you a message-->

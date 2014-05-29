@@ -24,10 +24,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def update
     @user = current_user
+    #render :text=>params[:user][:current_route]
+    #return
 
-    #if params[:user][:demographic_attributes][:avatar].nil?
-    #  redirect_to fill_profilepic_path, notice: 'Your profile was not updated.You must exactly specify 5 likes!'
-    #end
+
+    if params[:user][:demographic_attributes][:avatar].nil? and params[:user][:current_route] == "/welcome_dashboard"
+      redirect_to fill_profilepic_path, notice: 'Please add a photograph!'
+      return
+    end
 
     if !params[:user][:hobby_list_ids].nil?
     if !(params[:user][:hobby_list_ids]-[""]).blank?

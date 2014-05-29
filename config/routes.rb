@@ -90,6 +90,8 @@ Lhc::Application.routes.draw do
   get '/user_verification', to: 'dashboards#user_verification', as: :user_verification
   match '/verify_user_institute_email', to: 'dashboards#verify_user_institute_email', via: [:post]
   match '/verify_user_linkedin_url', to: 'dashboards#verify_user_linkedin_url', via: [:post]
+  match '/upload_user_doc', to: 'dashboards#upload_user_doc', via: [:post]
+
   get '/start_ice_breaker/:id/(:prev_msg)', to: 'dashboards#start_ice_breaker', as: :start_ice_breaker
 
   get '/take_test/:id/:question_id', to: 'quiz_categories#take_test',as: :take_test
