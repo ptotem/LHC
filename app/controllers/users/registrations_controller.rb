@@ -39,7 +39,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if !(params[:user][:hobby_list_ids]-[""]).blank?
       params[:user][:hobby_list_ids].reject!{|a| a==""}
       if params[:user][:hobby_list_ids].length !=5
-        redirect_to authenticated_root_path, notice: 'Your profile was not updated.You must exactly specify 5 likes!'
+        redirect_to user_profile_path(current_user.id), notice: 'Your profile was not updated.You must exactly specify 5 likes!'
         return
       end
       end
@@ -49,7 +49,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if !(params[:user][:about_list_ids]-[""]).blank?
       params[:user][:about_list_ids].reject!{|a| a==""}
       if params[:user][:about_list_ids].length !=5
-        redirect_to authenticated_root_path, notice: 'Your profile was not updated.You must exactly specify 5 likes!'
+        redirect_to user_profile_path(current_user.id), notice: 'Your profile was not updated.You must exactly specify 5 likes!'
         return
       end
       end
