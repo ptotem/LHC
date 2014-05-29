@@ -71,7 +71,13 @@ RailsAdmin.config do |config|
     history_show
     show_in_app
   end
-
+    config.model 'User' do
+      edit do
+        configure :confirmation_token do
+          hide
+        end
+      end
+    end
 
 
 end
