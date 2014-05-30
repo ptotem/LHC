@@ -28,7 +28,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     #return
 
     if !params[:user][:criterion_attributes].nil?
-      if !params[:user][:criterion_attributes][:minage].nil? and params[:user][:criterion_attributes][:maxage].nil?
+      if !params[:user][:criterion_attributes][:minage].nil? and !params[:user][:criterion_attributes][:maxage].nil?
       if params[:user][:criterion_attributes][:minage] >= params[:user][:criterion_attributes][:maxage]
         redirect_to fill_dates_path, notice: 'The minimum age cannot be greater than maximum age!'
         return
