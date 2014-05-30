@@ -759,12 +759,16 @@
                             var movie_name, movie_poster, movie_release_date, movie_id, movie_description;
                             //console.log(data);
                             $.each(data["movies"], function (i, obj) {
-                                movie_name = obj.title;
-                                movie_id = obj.id;
-                                movie_poster = obj.posters.profile;
-                                movie_release_date = obj.release_dates.theater;
-                                moviesNameTags.push(movie_name);
-                                moviesJSON.push({"name": movie_name, "id": movie_id, "poster": movie_poster, "release_date": movie_release_date});
+                                if ( (typeof obj.release_dates.dvd!='undefined') ) {
+                                    //console.log(obj.release_dates.dvd);
+                                    movie_name = obj.title;
+                                    movie_id = obj.id;
+                                    movie_poster = obj.posters.profile;
+                                    //movie_release_date = obj.release_dates.theater;
+                                    movie_release_date = obj.release_dates.dvd;
+                                    moviesNameTags.push(movie_name);
+                                    moviesJSON.push({"name": movie_name, "id": movie_id, "poster": movie_poster, "release_date": movie_release_date});
+                                }
                             })
 
                         }

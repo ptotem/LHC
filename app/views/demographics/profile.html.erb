@@ -541,9 +541,11 @@
                               <ol>
                               <% user_quiz.questions.each do |q| %>
                                     <li><b><%= q.name %></b></li>
+                                    <% if !QuizAnswer.find_by_question_id_and_user_id(q.id,params[:id]).nil? %>
                                     <ul>
                                       <li><%= Option.find(QuizAnswer.find_by_question_id_and_user_id(q.id,params[:id]).answer_id).name %></li>
                                     </ul>
+                                        <% end %>
                                   <% end %>
                               </ol>
                             </div>
