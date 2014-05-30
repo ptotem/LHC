@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140529093830) do
+ActiveRecord::Schema.define(version: 20140530062903) do
 
   create_table "about_lists", force: true do |t|
     t.string   "name"
@@ -305,6 +305,7 @@ ActiveRecord::Schema.define(version: 20140529093830) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "quiz_text"
   end
 
   create_table "rails_admin_histories", force: true do |t|
