@@ -29,7 +29,7 @@ class AuthenticationsController < ApplicationController
           @user.confirmed_at = Time.now
           @user.save!
           sign_in(:user, @user)
-          redirect_to welcome_dashboard_path
+          redirect_to authenticated_root_path
           #render :text => "User Created, #{@user}"
           #return
         else
