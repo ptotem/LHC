@@ -30,11 +30,11 @@ class UserDocumentsController < ApplicationController
     @user_document = UserDocument.new(user_document_params)
 
     respond_to do |format|
-      if @user_document.save
+      if @user_document.save!
         format.html { redirect_to my_dashboard_path, notice: 'User document was successfully created.' }
         #format.json { render action: 'show', status: :created, location: @user_document }
       else
-        format.html { render action: 'new' }
+        format.html { redirect_to my_dashboard_path }
         format.json { render json: @user_document.errors, status: :unprocessable_entity }
       end
     end
