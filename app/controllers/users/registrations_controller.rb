@@ -24,9 +24,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def update
     @user = current_user
-    #render :text=>params[:user][:current_route]
+    #render :text=>params
     #return
 
+    if !params[:user][:criterion_attributes].nil?
+      if params[:user][:criterion_attributes][:minage] > params[:user][:criterion_attributes][:maxage]
+        redirect_to fill_dates_path, notice: 'The minimum age cannot be greater than maximum age!'
+        return
+      end
+    end
 
     if !params[:user][:demographic_attributes].nil?
       if params[:user][:demographic_attributes][:avatar].nil? and params[:user][:current_route] == "/welcome_dashboard"

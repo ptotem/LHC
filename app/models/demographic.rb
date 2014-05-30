@@ -14,4 +14,5 @@ class Demographic < ActiveRecord::Base
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
   belongs_to :user
 
+
 end
