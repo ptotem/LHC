@@ -9,6 +9,6 @@ class Criterion < ActiveRecord::Base
 
   belongs_to :user
   validates_numericality_of :minage
-  validates_numericality_of :maxage, :greater_than => :minage,:message => "The minimum age cannot be greater than maximum age"
+  #validates_numericality_of :maxage, :greater_than => :minage,:message => "The minimum age cannot be greater than maximum age"
 
 end

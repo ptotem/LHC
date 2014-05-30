@@ -70,7 +70,7 @@ class DemographicsController < ApplicationController
         @user_quiz_ans_questions = @user.quiz_answers.map(&:question_id)
         @user_quiz_ans_questions.each do |q|
           if !Question.find(q).quizzes.first.quiz_category.personal
-            @user_quizzes << Question.find(q).quizzes.first.name
+            @user_quizzes << Question.find(q).quizzes.first
           end
           #@user_quizzes << q.quizzes.map(&:name)
         end

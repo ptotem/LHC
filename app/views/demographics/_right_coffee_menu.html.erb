@@ -1,1 +1,15 @@
-<img src="/assets/cup1.png" alt="" class="img-responsive pull-right" style="height:100px;margin-top: 50%;"/>
+<div class="row">
+<img src="/assets/cup1.png" alt="" class="img-responsive pull-right" style="margin-top: 50%;"/>
+</div>
+<div class="row">
+ <%= get_content_for('no_mutual_like') %>
+</div>
+<div class="row">
+  <div class="col-lg-2 col-lg-offset-1">
+    <button title="Send like request" onclick="window.location = '<%= user_like_path(params[:id]) %>'" class="transparent-background-btn" style="border-radius: 50%; padding: 30%;background: white"><i class="fa fa-thumbs-up fa-3x "></i></button>
+  </div>
+  <div class="col-lg-2 col-lg-offset-5">
+    <!--<button onclick="window.location = '<%#= reject_request_url(m.target_id) %>'" class="transparent-background-btn"><i class="fa fa-thumbs-down icon_font_size thumb_down_color"></i></button>-->
+    <button title="Reject the match" onclick="window.location = '<%= reject_match_path(params[:id]) %>'" class="transparent-background-btn" style="border-radius: 50%; padding: 30%;background: white"><i class="fa fa-thumbs-down fa-3x "></i></button>
+  </div>
+</div>

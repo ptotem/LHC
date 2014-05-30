@@ -117,8 +117,8 @@
                         <img src="/assets/calendar_icon.png" style="width:29%;margin-top: 0%">
                         <br>
                         <br>
-                        <% min_age = 18..28 %>
-                        <% max_age = 22..36 %>
+                        <% min_age = 18..60 %>
+                        <% max_age = 18..60 %>
                         <%= c.select(:minage, min_age.collect { |d| [d.to_s, d.to_s] }, {:prompt => "Age From"}, {:class => "lhc-chosen"}) %>
                         <span class="white between_text">to</span>
                         <%= c.select(:maxage, max_age.collect { |d| [d.to_s, d.to_s] }, {:prompt => "Age To"}, {:class => "lhc-chosen"}) %>
