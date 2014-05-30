@@ -142,7 +142,7 @@ module ApplicationHelper
       return Like.where(:sender_id => current_user.id, :receiver_id => uid).first.status
     end
     if !Like.where(:sender_id => uid, :receiver_id => current_user.id).first.nil?
-      return Like.where(:sender_id => current_user.id, :receiver_id => uid).first.status
+      return Like.where(:sender_id => uid, :receiver_id => current_user.id).first.status
     end
 
 
