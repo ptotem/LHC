@@ -12,8 +12,14 @@ class DashboardsController < ApplicationController
     @current_user_route = current_user.current_route
     current_user.current_route = my_dashboard_path
     current_user.save!
+    if current_user.last_matched_time.nil? or (Time.now - current_user.last_matched_time)/3600 > 72
+      current_user.update_match_status
+      current_user.find_matches
+      current_user.update_match
+      end
 
-  end
+
+    end
   
   def my_dashboard
     @user = current_user
@@ -22,6 +28,11 @@ class DashboardsController < ApplicationController
     @user_first_visit = @user.first_visit
     @user.first_visit = true
     @user.save!
+    if current_user.last_matched_time.nil? or (Time.now - current_user.last_matched_time)/3600 > 72
+      current_user.update_match_status
+      current_user.find_matches
+      current_user.update_match
+    end
 
     #render :text => @user.first_visit
     #return
@@ -121,7 +132,7 @@ class DashboardsController < ApplicationController
       current_user.find_matches
       current_user.update_match
 
-      puts "after 3 days"
+      #puts "after 3 days"
       #current_user.save!
       #render :text => "after 3 days"
       #return
