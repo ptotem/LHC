@@ -137,7 +137,20 @@ module ApplicationHelper
       #end
     end
   end
+  def get_like_status(uid)
+    if Like.where(:sender_id => current_user.id, :receiver_id => uid).first
+      return Like.where(:sender_id => current_user.id, :receiver_id => uid).first.status
+    end
+    if Like.where(:sender_id => uid, :receiver_id => current_user.id).first
+      return Like.where(:sender_id => current_user.id, :receiver_id => uid).first.status
+    end
 
+
+
+
+
+
+  end
 
 
 

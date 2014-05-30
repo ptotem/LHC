@@ -204,7 +204,7 @@ class DashboardsController < ApplicationController
    @mutual_likes =Array.new
    @user_base_matches.each do |ubm|
 
-     if Like.where(:sender_id => current_user.id, :receiver_id => ubm).first and Like.where(:sender_id => current_user.id, :receiver_id => ubm).first.status and Like.where(:sender_id => ubm, :receiver_id => current_user.id).first and Like.where(:sender_id => current_user.id, :receiver_id => ubm).first.status and Like.where(:sender_id => ubm, :receiver_id => current_user.id).first.status
+     if (Like.where(:sender_id => current_user.id, :receiver_id => ubm).first and Like.where(:sender_id => current_user.id, :receiver_id => ubm).first.status) or (Like.where(:sender_id => ubm, :receiver_id => current_user.id).first and Like.where(:sender_id => current_user.id, :receiver_id => ubm).first.status)
        @mutual_likes << User.find(ubm)
        #MindMatch.create(:user_id=>current_user.id, :target_id=>@mutual_likes.id)
      end

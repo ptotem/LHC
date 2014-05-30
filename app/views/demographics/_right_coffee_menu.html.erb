@@ -1,15 +1,60 @@
 <div class="row">
-<img src="/assets/cup1.png" alt="" class="img-responsive pull-right" style="margin-top: 50%;"/>
+  <% if get_like_status(params[:id]) %>
+      <% if !check_icebreaker_status(params[:id]) %>
+          <img src="/assets/cup_half.png" alt="" class="img-responsive pull-right" style="margin-top: 20%;margin-bottom: 10%;"/>
+          <div style="margin-top:10%">
+          <%= get_content_for('ice_breaker') %>
+          </div>
+          <% else %>
+          <img src="/assets/cup_full.png" alt="" class="img-responsive pull-right" style="margin-top: 20%;margin-bottom: 10%;"/>
+          <div style="margin-top:10%">
+            <%= get_content_for('message') %>
+          </div>
+          <% end %>
+
+
+      <% else %>
+      <img src="/assets/cup_empty.png" alt="" class="img-responsive pull-right" style="margin-top: 20%;margin-bottom: 10%;"/>
+      <div style="margin-top:10%">
+        <%= get_content_for('no_mutual_like') %>
+      </div>
+  <% end %>
 </div>
-<div class="row">
- <%= get_content_for('no_mutual_like') %>
+<div class="row" style="margin-top: 10%">
+
+
 </div>
-<div class="row">
-  <div class="col-lg-2 col-lg-offset-1">
-    <button title="Send like request" onclick="window.location = '<%= user_like_path(params[:id]) %>'" class="transparent-background-btn" style="border-radius: 50%; padding: 30%;background: white"><i class="fa fa-thumbs-up fa-3x "></i></button>
-  </div>
-  <div class="col-lg-2 col-lg-offset-5">
-    <!--<button onclick="window.location = '<%#= reject_request_url(m.target_id) %>'" class="transparent-background-btn"><i class="fa fa-thumbs-down icon_font_size thumb_down_color"></i></button>-->
-    <button title="Reject the match" onclick="window.location = '<%= reject_match_path(params[:id]) %>'" class="transparent-background-btn" style="border-radius: 50%; padding: 30%;background: white"><i class="fa fa-thumbs-down fa-3x "></i></button>
-  </div>
+<div class="row" style="margin-top: 10%">
+  <% if get_like_status(params[:id]) %>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-left: -3%">
+
+      <div class="col-lg-3 ">
+        <button title="In a nutshell" onclick="window.location = '<%= snazzmeup_path %>'" class="transparent-background-btn" style="border-radius: 50%; padding: 30%;background: white;color:#38c8e0"><i class="fa fa-rocket fa-3x "></i></button>
+      </div>
+        <% if !check_icebreaker_status(params[:id]) %>
+      <div class="col-lg-3 col-lg-offset-3 ">
+        <!--<button onclick="window.location = '<%#= reject_request_url(m.target_id) %>'" class="transparent-background-btn"><i class="fa fa-thumbs-down icon_font_size thumb_down_color"></i></button>-->
+        <button title="Start an ice breaker" onclick="window.location = '<%= start_ice_breaker_path(params[:id]) %>'" class="transparent-background-btn" style="border-radius: 50%; padding: 30%;background: white;color:#38c8e0"><i class="fa fa-bell fa-3x "></i></button>
+      </div>
+            <% else %>
+
+      <div class="col-lg-3 col-lg-offset-3">
+        <!--<button onclick="window.location = '<%#= reject_request_url(m.target_id) %>'" class="transparent-background-btn"><i class="fa fa-thumbs-down icon_font_size thumb_down_color"></i></button>-->
+        <button title="Send a message" onclick="window.location = '<%= conversations_with_users_path(params[:id]) %>'" class="transparent-background-btn" style="border-radius: 50%; padding: 30%;background: white;color:#38c8e0"><i class="fa fa-envelope fa-3x "></i></button>
+      </div>
+            <% end %>
+      </div>
+
+      <!--indicates all mutual likes-->
+
+  <% else %>
+      <div class="col-lg-2 col-lg-offset-1">
+        <button title="Send like request" onclick="window.location = '<%= user_like_path(params[:id]) %>'" class="transparent-background-btn" style="border-radius: 50%; padding: 30%;background: white;color:#38c8e0"><i class="fa fa-thumbs-up fa-3x "></i></button>
+      </div>
+      <div class="col-lg-2 col-lg-offset-5">
+        <!--<button onclick="window.location = '<%#= reject_request_url(m.target_id) %>'" class="transparent-background-btn"><i class="fa fa-thumbs-down icon_font_size thumb_down_color"></i></button>-->
+        <button title="Reject the match" onclick="window.location = '<%= reject_match_path(params[:id]) %>'" class="transparent-background-btn" style="border-radius: 50%; padding: 30%;background: white;color:#38c8e0"><i class="fa fa-thumbs-down fa-3x "></i></button>
+      </div>
+      <% end %>
+
 </div>
