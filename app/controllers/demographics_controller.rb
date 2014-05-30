@@ -19,7 +19,13 @@ class DemographicsController < ApplicationController
     @user_first_visit = current_user.first_visit
     current_user.first_visit = true
     current_user.save!
+    
+    if current_user.id != params[:id].to_i
+      if !current_user.verified
+        redirect_to user_verification_path,:notice=> "Please verify yourself before you proceed"
 
+      end
+    end
     if !User.where(:id=>params[:id]).first.nil?
       #@user = User.find(params[:id])
         @user = User.where(:id=>params[:id]).first

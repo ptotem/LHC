@@ -10,10 +10,8 @@ class Demographic < ActiveRecord::Base
   #t.text :description
   #t.text :goal
   #t.integer :diffthresh
-  has_attached_file :avatar,:default_url => "/app/assets/images/profile_pic.jpg"
-
+  has_attached_file :avatar,:default_url => "/assets/profile_pic.jpg"
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
-
   belongs_to :user
 
 end
