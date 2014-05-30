@@ -35,7 +35,7 @@ class AuthenticationsController < ApplicationController
         else
           @user=User.where(:email=>users_email).first
           sign_in(:user, @user)
-          redirect_to welcome_dashboard_path
+          redirect_to authenticated_root_path
           #render :text => "User Found, #{@user}"
           #return
         end
