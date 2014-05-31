@@ -145,7 +145,7 @@ class User < ActiveRecord::Base
           tmp << b.id
     end
     puts x.map(&:id)
-    Notification.create!(:content=>"You have got 3 new matches, check them out!", :user_id=>self.id, :pointer_link=>"/quick_matches")
+    Notification.create!(:content=>"You have got 3 new matches, check them out!", :user_id=>self.id, :pointer_link=>"/quick_matches",:notification_seen=>false)
     QuickMatchMailer.quick_match_email(x.map(&:id), self.id).deliver
     return tmp
 
