@@ -14,6 +14,7 @@
 <section id="dashboard_matches_section">
 
 
+  <% if @mutual_likes.length > 0 %>
       <ul class="list-inline portfolio text-center" style="height: 600px;overflow-x: hidden;overflow-y: auto;">
         <%# 4.times do |test_ans_option| %>
         <% @mutual_likes.each do |m| %>
@@ -50,6 +51,21 @@
         <% end %>
         <%# end %>
       </ul>
+    <% else %>
+      <div style="font-size: 20px">
+     <h1> “Bummer – no mutual likes yet it seems :(" </h1>
+      <p style="margin-top: 5%">But don’t worry soldier, you gotta keep trying!!! Never give up we say! Here’s what you can do to increase your chances of getting a mutual like:</p>
+      <ol style="margin-top: 5%">
+        <li><%= link_to "Complete your profile",user_profile_path(current_user.id) %> –Seriously, if it’s not complete yet, complete it. Really. Like right now.</li>
+<br>
+        <li><%= link_to "Snaz it up! ",snazzmeup_path %>– Basically, make it impossible for a match to look away from your profile. Take our quizzes found under Snaz it up!  to show off your interests and to show how you’ll be so much fun to talk to.</li>
+<br>
+        <li><%= link_to "Get a drink","https://www.google.co.in/search?q=bars+i%3Dnear+me&oq=bars+i%3Dnear+me&espv=2&es_sm=117&ie=UTF-8#q=bars+near+me",:target => "_blank" %> – Some things are just not in your control. Relax, get a drink, and chill. Patience is key.</li>
+
+      </ol>
+      </div>
+
+<% end %>
 
 
 
@@ -57,4 +73,4 @@
 
 
 
-</section>
+      </section>

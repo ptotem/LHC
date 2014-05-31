@@ -101,30 +101,9 @@
 
   <div class="row">
     <div class="col-lg-12">
-
-      <div class="countdown">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="countdowntext">
-              <%= timer_countdown(current_user.id) %>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="countdowntexthr">
-              Hours
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-12">
       <div class="countdown1">
         <div class="countdowntext1">
-          Remaining
+          Take Quiz
         </div>
       </div>
     </div>
@@ -132,10 +111,28 @@
   <div class="row">
     <div class="col-lg-12">
       <div class="match_text">
-        Check your matches now!
+        Make yourself more interesting to matches!
       </div>
     </div>
   </div>
+  <div class="row">
+    <div class="col-lg-12">
+
+      <a href=<%= snazzmeup_path %>>
+      <div class="countdown" style="cursor: pointer">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="countdowntext">
+              <i class="fa fa-trophy"></i>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      </a>
+    </div>
+  </div>
+
 
 
   <div class="row">
@@ -150,12 +147,13 @@
   </div>
   <div class="row" id="try_img">
     <div class="col-lg-12">
-      <%= link_to image_tag("/assets/banner-quiz.jpg", :height => "80"), snazzmeup_path %>
+      <i class="fa fa-edit fa-4x" style="color: white"></i>
+      <%#= link_to image_tag("/assets/banner-quiz.jpg", :height => "80"), snazzmeup_path %>
     </div>
   </div>
   <div class="row">
     <div class="col-lg-12">
-      <div class="try_out_quiz">Try our Quiz</div>
+      <div class="try_out_quiz">Edit Profile</div>
     </div>
   </div>
 
