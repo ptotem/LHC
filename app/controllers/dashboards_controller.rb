@@ -37,8 +37,13 @@ class DashboardsController < ApplicationController
     #render :text => @user.first_visit
     #return
 
+    @user.notifications.each do |n|
+      n.notification_seen = true
+      n.save!
+    end
 
-    @like_requests = Like.where(:receiver_id => current_user.id) rescue nil?
+    @like_requests = Like.where(:receiver_id => current_user.id,:status=>false) rescue nil?
+
     #render :json => @like_requests
     #return
 
@@ -352,8 +357,8 @@ class DashboardsController < ApplicationController
 
 
   def user_like
-    #render :json=> params
-    #return
+    # render :json=> params
+    # return
     @receiver_id=params[:id]
     @sender_id = current_user.id
     if Like.find_by_receiver_id_and_sender_id(@receiver_id,@sender_id) or Like.find_by_receiver_id_and_sender_id(@sender_id,@receiver_id)
@@ -364,6 +369,7 @@ class DashboardsController < ApplicationController
       return
     else
       @like=Like.create(:receiver_id => @receiver_id,:sender_id => @sender_id,:status => false)
+      Notification.create!(:content=>"You have liked "+User.find(@receiver_id).demographic.nickname, :user_id=>current_user.id, :pointer_link=>user_profile_path(@receiver_id),:sender_id => @receiver_id,:notification_type=>"Timed")
       #render :text => "Request  Sent"
       #return
       #Notification.create!(:content=>"#{current_user.demographic.name} has sent you a like request.", :user_id=>@receiver_id, :pointer_link=>user_profile_path(current_user.id))
@@ -379,6 +385,7 @@ class DashboardsController < ApplicationController
    @accept.save!
 
    redirect_to user_profile_path(@accept.sender_id), notice: 'You have accepted the request.'
+   Notification.create!(:content=>User.find(@accept.receiver_id).demographic.nickname + " likes you too !", :user_id=>@accept.sender_id, :pointer_link=>user_profile_path(@accept.receiver_id),:sender_id => @accept.receiver_id)
    MutualLikeMailer.mutual_like_mailer(@accept.sender_id, current_user).deliver
 
     #return

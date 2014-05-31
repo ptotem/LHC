@@ -68,8 +68,8 @@
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right menu">
             <li>
-              <% @like_requests_count = Like.where(:receiver_id => current_user.id).count rescue 0 %>
-              <% @notifications = current_user.notifications.count rescue 0 %>
+              <% @like_requests_count = Like.where(:receiver_id => current_user.id,:status=>false).count rescue 0 %>
+              <% @notifications = current_user.notifications.where(:notification_seen=>false).count rescue 0 %>
               <% @total_notifications = @like_requests_count + @notifications %>
               <% if @total_notifications > 0 %>
                   <%= link_to(raw("Dashboard <span class=bubble>#{@total_notifications}</span>"), my_dashboard_path)  %>
