@@ -49,6 +49,17 @@
 
 
 <section id="left_menu">
+  <% @current_user_quick_matches = BaseMatch.where(:user_id=>current_user.id,:match_status => true) %>
+
+  <%-
+      @mutual_likes =Array.new
+      User.all.each do |u|
+        if !get_like_status(u.id).nil?
+          @mutual_likes << u
+        end
+      end
+  %>
+
     <div class="row" id="dashboard_user_profile_pic" >
 
         <div class="thumbs" style="height: 216px; max-height: 216px;">
@@ -75,11 +86,25 @@
     </div>
 
     <div class="row" style="margin-top: 1%">
-        <button class="buttonmenu" id="matches_btn" onclick="window.location='/quick_matches'">Matches <span class=bubble> <%= currnoti rescue 0 %>   </span></button>
+        <button class="buttonmenu" id="matches_btn" onclick="window.location='/quick_matches'">Matches
+          <% if !@current_user_quick_matches.nil?%>
+
+          <span class=bubble>
+            <%= @current_user_quick_matches.count  %>
+
+          </span>
+          <% end %></button>
     </div>
 
     <div class="row" style="margin-top: 1%">
-        <button class="buttonmenu" id="mutual_likes_btn" onclick="window.location='/mutual_likes'">Mutual Likes <span class=bubble> <%= mutuallikes rescue 0 %> </span> </button>
+        <button class="buttonmenu" id="mutual_likes_btn" onclick="window.location='/mutual_likes'">Mutual Likes
+          <% if !@mutuallikes.nil?%>
+          <span class=bubble>
+
+            <%= @mutuallikes.count %>
+
+          </span>
+          <% end %></button>
     </div>
 
     <div class="row" style="margin-top: 1%">
