@@ -1,5 +1,5 @@
 <%= content_for(:left_menu) do %>
-    <%= render :partial=>"left_menu" %>
+    <%= render :partial=>"left_menu",locals:{ currnoti: @current_user_quick_matches.count , mutuallikes: @mutual_likes.count } %>
 <% end %>
 
 
@@ -14,7 +14,7 @@
 <section id="dashboard_matches_section">
 
 
-      <ul class="list-inline portfolio text-center">
+      <ul class="list-inline portfolio text-center" style="height: 600px;overflow-x: hidden;overflow-y: auto;">
         <%# 4.times do |test_ans_option| %>
         <% @mutual_likes.each do |m| %>
             <li data-tag="graphics">
