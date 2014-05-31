@@ -152,7 +152,19 @@ class DashboardsController < ApplicationController
       #return
     end
   #end
+
     @current_user_quick_matches = BaseMatch.where(:user_id=>current_user.id,:match_status => true)
+    @mutual_likes =Array.new
+    User.all.each do |u|
+      if !get_like_status(u.id).nil?
+        @mutual_likes << u
+      end
+
+      # if (Like.where(:sender_id => current_user.id, :receiver_id => ubm).first and Like.where(:sender_id => ubm, :receiver_id => current_user.id).first.status) or (Like.where(:sender_id => ubm, :receiver_id => current_user.id).first and Like.where(:sender_id => current_user.id, :receiver_id => ubm).first.status)
+      #   @mutual_likes << User.find(ubm)
+      #MindMatch.create(:user_id=>current_user.id, :target_id=>@mutual_likes.id)
+      # end
+    end
     #render :json => @current_user_quick_matches
     #return
   end
@@ -213,6 +225,8 @@ class DashboardsController < ApplicationController
 
  def mutual_likes
 
+
+   @current_user_quick_matches = BaseMatch.where(:user_id=>current_user.id,:match_status => true)
    @user_base_matches = BaseMatch.where(:user_id=>current_user.id).map{|i| i.target_id}
 
    @mutual_likes =Array.new
