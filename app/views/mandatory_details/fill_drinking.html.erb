@@ -3,7 +3,7 @@
 <% end %>
 
 <%= content_for(:header_image) do %>
-    <img src="/assets/glass.png" class="img-responsive cake top_images">
+    <img src="/assets/glass.png" class="img-responsive cake top_images" style="margin-top: -4%;">
 <% end %>
 
 
@@ -15,11 +15,12 @@
       <%= form_for @user, :url => { :controller => "users/registrations", :action => "update" }, :html => { :method => :post,:class => "form-horizontal" } do |f| %>
           <%= f.hidden_field :current_route,:value=>@next_page %>
           <!-- col for demographic - starts -->
-          <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 blue-background text-center" style="position: relative">
+          <!--<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 blue-background text-center" style="position: relative">-->
+          <div class="col-xs-4 col-sm-4 col-md-4 col-sm-offset-1 col-md-offset-1 col-lg-offset-1 col-lg-4 blue-background text-center" style="position: relative">
             <%= f.fields_for :demographic do |d| %>
 
                 <!-- row for me image - starts -->
-                <div class="row" style="margin-top: -12%">
+                <div class="row" style="margin-top: -20%">
                   <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-lg-offset-4" style="position: relative">
                     <div class="gender-pic">
                       <% if @user.demographic.male? %>
@@ -36,7 +37,7 @@
                 <!-- row for me dob, drinking, smoking (three diff. cols for each) - starts -->
                 <div class="row">
                   <!-- col for me dob - starts -->
-                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center demographic-fill-step" id="demographic_fill_step_2" style="position: relative; padding-top: 1%;">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center demographic-fill-step" id="demographic_fill_step_2" style="position: relative; padding-top: 0%;">
                     <div class="row">
                       <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-lg-offset-2">
                         <div class="control-group">
@@ -44,7 +45,7 @@
                             <div class="row">
                               <h4 class="white drink_smoke_font">Drinking</h4>
                               <%= d.hidden_field :drinking, :id => "me_drinking_textfield", :class => "hidden_elems" %>
-                              <div class="carousel slide" id="carousel-drinking" data-interval="false" data-ride="carousel">
+                              <div class="carousel slide" id="carousel-drinking" data-interval="false" data-ride="carousel" style="margin-bottom: -7%; margin-top: -3%;">
 
                                 <div class="carousel-inner">
                                   <div class="item active" id="user_demographic_drinking_never_div">
@@ -86,11 +87,12 @@
           <!-- col for demographic - ends -->
 
           <!-- col for criterion - starts -->
-          <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2 blue-background text-center" style="position: relative">
+          <!--<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2 blue-background text-center" style="position: relative">-->
+          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2 blue-background text-center" style="position: relative">
             <%= f.fields_for :criterion do |c| %>
 
                 <!-- row for opposite person image - starts -->
-                <div class="row" style="margin-top: -12%">
+                <div class="row" style="margin-top: -20%">
                   <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-lg-offset-4" style="position: relative">
                     <div class="gender-pic">
                       <% if @user.criterion.male? %>
@@ -156,7 +158,11 @@
             <!-- col for criterion - ends -->
 
             <%= render :partial => "buttons",:locals => {:form=>f,:prev_page_link=>@prev_page} %>
-            <%= render :partial => "bubble_pipe" %>
+            <div class="row">
+              <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11 col-lg-offset-1" style="width: 87%">
+                <%= render :partial => "bubble_pipe" %>
+              </div>
+            </div>
             <%# end %>
             </div>
             </div>

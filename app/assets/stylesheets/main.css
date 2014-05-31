@@ -191,7 +191,8 @@ iframe {
 }
 
 .criterion_field {
-                  padding-top: 5px;
+    /*padding-top: 5px;*/
+    margin-top: 1%;
     font-size: 20px;
 }
 
