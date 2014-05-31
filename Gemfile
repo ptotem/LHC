@@ -8,7 +8,7 @@ gem 'rails', '4.0.0'
 #gem 'sqlite3'
 gem 'pg'
 gem 'rails_admin',"0.6.0"
-gem "rails_admin_import"
+gem "rails_admin_import","0.1.8"
 gem "rails_12factor"
 
 # Use SCSS for stylesheets
