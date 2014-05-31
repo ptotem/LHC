@@ -551,7 +551,7 @@
               <div class="carousel-inner">
                 <div class="item active">
                   <% @user_quizzes.each_with_index do |user_quiz, index| %>
-                      <div class="col-lg-4" style="text-align: center" data-target="#1" data-toggle="modal" title="<%= user_quiz.name %>">
+                      <div class="col-lg-4" style="cursor:pointer;text-align: center" data-target="#1" data-toggle="modal" title="<%= user_quiz.name %>">
                         <%#= image_tag("arrow.png", class: "my-img") %>
                         <!--<i class="fa fa-question-circle fa-4" style="font-size: 6em"></i>-->
                         <%= image_tag get_image_from_content("image-for-quiz-"+user_quiz.name) ,:height => "100px",:width=>"100px" %>

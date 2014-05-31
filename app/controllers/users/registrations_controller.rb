@@ -89,7 +89,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
             format.html { redirect_to user_profile_path(@user.id), notice: 'Your profile was successfully updated.' }
             format.json { head :no_content }
           else
-            format.html { redirect_to authenticated_root_path, notice: 'Your profile was successfully updated.' }
+            format.html { redirect_to  user_profile_path(@user.id), notice: 'Your profile was successfully updated.' }
             format.json { head :no_content }
           end
         else
