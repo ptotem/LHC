@@ -32,7 +32,7 @@
                 </div>
                 <div class="mid-part">
                   <div class="recentactivitytext">
-                    <a href="<%= user_profile_path(e.sender_id) %>"><%= User.find(e.sender_id).demographic.nickname %></a> sent you a Like request
+                    <a href="<%= user_profile_path(e.sender_id) %>"><%= User.find(e.sender_id).demographic.nickname %></a>likes you !
 
                   </div>
                 </div>
@@ -168,7 +168,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel" style="color: #000000">Invitee Your Friends</h4>
+        <h4 class="modal-title" id="myModalLabel" style="color: #000000">Invite Your Friends</h4>
       </div>
       <div class="modal-body">
         <%= form_tag ('/invitee_friends') do %>

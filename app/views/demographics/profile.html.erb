@@ -53,10 +53,10 @@
   <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
     <ul class="nav nav-tabs" style="margin-bottom: 0px; border-bottom: none">
       <li class="active"><a href="#basic-info" data-toggle="tab" style="outline: none; border-top-left-radius: 10px; border-top-right-radius: 10px;">Basic Info</a></li>
-      <li class=""><a href="#movies" data-toggle="tab" style="outline: none; border-top-left-radius: 10px; border-top-right-radius: 10px;">Movies</a></li>
-      <li class=""><a href="#music" data-toggle="tab" style="outline: none; border-top-left-radius: 10px; border-top-right-radius: 10px;">Music</a></li>
-      <li class=""><a href="#books" data-toggle="tab" style="outline: none; border-top-left-radius: 10px; border-top-right-radius: 10px;">Books</a></li>
-      <li class=""><a href="#quiz" data-toggle="tab" style="outline: none; border-top-left-radius: 10px; border-top-right-radius: 10px;">Quiz</a></li>
+      <li class=""><a href="#movies" data-toggle="tab" style="outline: none; border-top-left-radius: 10px; border-top-right-radius: 10px;">Fave Movies</a></li>
+      <li class=""><a href="#music" data-toggle="tab" style="outline: none; border-top-left-radius: 10px; border-top-right-radius: 10px;">Fave Music</a></li>
+      <li class=""><a href="#books" data-toggle="tab" style="outline: none; border-top-left-radius: 10px; border-top-right-radius: 10px;">Fave Books</a></li>
+      <li class=""><a href="#quiz" data-toggle="tab" style="outline: none; border-top-left-radius: 10px; border-top-right-radius: 10px;">Stuff I like</a></li>
     </ul>
 
     <div id="myTabContent" class="tab-content">
@@ -348,6 +348,15 @@
                 </a>
               </div>
             </div>
+            <% if @user.movies.length ==0 %>
+            <div class="row">
+              <div class="col-lg-12">
+                <div><%= get_content_for("empty_movies_text") %></div>
+              </div>
+            </div>
+
+                <% else %>
+
 
           <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -389,6 +398,7 @@
             <!--</div>-->
 
           </div>
+            <% end %>
               </section>
         </div>
         <div class="tab-pane fade tabs-content-background" id="music" style="background-color: #FFFFFF; margin-top: 0">
@@ -410,6 +420,13 @@
               </div>
             </div>
 
+            <% if @user.songs.length == 0 %>
+            <div class="row">
+              <div class="col-lg-12">
+                <div><%= get_content_for("empty_music_text") %></div>
+              </div>
+            </div>
+                <% else %>
             <div class="row">
               <div class="col-lg-12" id="edit-profile-movies-caraousel-container2">
                 <div id="carousel-for-songs" class="carousel slide" data-ride="carousel" data-interval="false" style="height: 190px; padding: 1%">
@@ -442,7 +459,7 @@
             </div>
 
 
-
+<% end %>
 
 
               </section>
@@ -466,6 +483,13 @@
               </div>
             </div>
 
+            <% if @user.books.length ==0 %>
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div><%= get_content_for("empty_books_text") %></div>
+                  </div>
+                </div>
+                <% else %>
             <!--<div class="row">-->
               <!--<div class="col-lg-12" id="edit-profile-movies-caraousel-container3">-->
                 <div id="carousel-for-books" class="carousel slide" data-ride="carousel" data-interval="false" style="height: 190px; padding: 1%">
@@ -498,6 +522,7 @@
               <!--</div>-->
             <!--</div>-->
 
+                <% end %>
               </section>
         </div>
         <div class="tab-pane fade" id="quiz" style="background-color: #FFFFFF; margin-top: 0">
@@ -512,6 +537,13 @@
 
             </div>
 
+            <% if @user_quizzes.length == 0 %>
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div><%= get_content_for("empty_quiz_text") %></div>
+                  </div>
+                </div>
+            <% else %>
             <!--<div class="row">-->
             <!--<div class="col-lg-12" id="edit-profile-movies-caraousel-container3">-->
             <div id="carousel-for-quizzes" class="carousel slide" data-ride="carousel" style="height: 190px; padding: 1%">
@@ -521,12 +553,14 @@
                   <% @user_quizzes.each_with_index do |user_quiz, index| %>
                       <div class="col-lg-4" style="text-align: center" data-target="#1" data-toggle="modal">
                         <%#= image_tag("arrow.png", class: "my-img") %>
-                        <i class="fa fa-question-circle fa-4" style="font-size: 6em"></i>
+                        <!--<i class="fa fa-question-circle fa-4" style="font-size: 6em"></i>-->
+                        <%= image_tag get_image_from_content("image-for-quiz-"+user_quiz.name) ,:height => "100px",:width=>"100px" %>
                         <div class="carousel-caption custom-carousel-caption-quiz">
                           <p> <%= user_quiz.name.truncate(15) %></p>
+                          <p> Show <%= current_user.demographic.nickname %>'s result</p>
                         </div>
                       </div>
-                      <% if (index+1)%3==0 %>
+                      <% if (index+1)%3==0 %>z
                           </div> <div class="item ">
                       <% end %>
 
@@ -570,6 +604,7 @@
 
             </div>
             <!--</div>-->
+                <% end %>
 
           </section>
         </div>

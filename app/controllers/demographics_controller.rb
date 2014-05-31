@@ -23,6 +23,7 @@ class DemographicsController < ApplicationController
     if current_user.id != params[:id].to_i
       if !current_user.verified
         redirect_to user_verification_path,:notice=> "Please verify yourself before you proceed"
+        return
 
       end
     end

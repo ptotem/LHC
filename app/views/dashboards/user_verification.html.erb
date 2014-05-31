@@ -113,7 +113,7 @@
           <div class="row">
             <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
               <%= user_form.hidden_field :user_id, :value => current_user.id %>
-              <%= user_form.text_field :verification_text, :class => "col-xs-12 col-sm-12 col-md-12 col-lg-12", :placeholder => "Enter your linkedin url" %>
+              <%= user_form.text_field :verification_text, :class => "col-xs-12 col-sm-12 col-md-12 col-lg-12", :placeholder => "Enter your linkedin public profile" %>
             </div>
             <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
               <%= user_form.submit "Verify", :class => "btn btn-main red-btn" %>

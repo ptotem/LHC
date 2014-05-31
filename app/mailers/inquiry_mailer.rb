@@ -1,5 +1,5 @@
 class InquiryMailer < ActionMailer::Base
-  default from: "from@example.com"
+  default from: "Let's Have coffee"
   def inform_about_inquiry(user,body)
     @from_user = user
     @body = body

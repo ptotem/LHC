@@ -1,4 +1,5 @@
 class MutualLikeMailer < ActionMailer::Base
+  default from: "Let's Have coffee"
   def mutual_like_mailer(user,current_user)
     @user = User.find(user).email
     @current_user=current_user

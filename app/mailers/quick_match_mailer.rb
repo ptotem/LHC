@@ -1,5 +1,5 @@
 class QuickMatchMailer < ActionMailer::Base
-
+  default from: "Let's Have coffee"
   helper :application
   def quick_match_email(user,current_user)
     @user = user

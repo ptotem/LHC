@@ -28,6 +28,10 @@ class UserDocumentsController < ApplicationController
     #return
 
     @user_document = UserDocument.new(user_document_params)
+    @user = current_user
+    @user.verification_request_sent = true
+    @user.verification_request_sent_at = Time.now.to_i
+    @user.save!
 
     respond_to do |format|
       if @user_document.save!

@@ -52,6 +52,10 @@ class DashboardsController < ApplicationController
 
   def user_verification
     @user = current_user
+    if current_user.verification_request_sent
+      redirect_to user_profile_path(current_user.id),notice:"Verification request sent, please wait while the admin verifies your account!"
+      return
+    end
     @user_document = UserDocument.new
     #render :text => params
     #return
@@ -61,17 +65,21 @@ class DashboardsController < ApplicationController
     #@user = current_user
     @user = User.find(params[:user][:user_id])
     @user.verification_text = params[:user][:verification_text]
+    @user.verification_request_sent = true
+    @user.verification_request_sent_at = Time.now.to_i
     @user.save!
     #redirect_to "/profile/#{@user.id}"
-    redirect_to welcome_dashboard_path,:notice => "Your institute mail is saved for verification."
+    redirect_to user_profile_path(current_user.id),:notice => "Your institute mail is saved for verification."
   end
 
   def verify_user_linkedin_url
     #@user = current_user
     @user = User.find(params[:user][:user_id])
     @user.verification_text = params[:user][:verification_text]
+    @user.verification_request_sent = true
+    @user.verification_request_sent_at = Time.now.to_i
     @user.save!
-    redirect_to welcome_dashboard_path,:notice => "Your linkedin url is saved for verification."
+    redirect_to user_profile_path(current_user.id),:notice => "Your linkedin url is saved for verification."
     return
   end
 
@@ -359,7 +367,7 @@ class DashboardsController < ApplicationController
       #render :text => "Request  Sent"
       #return
       #Notification.create!(:content=>"#{current_user.demographic.name} has sent you a like request.", :user_id=>@receiver_id, :pointer_link=>user_profile_path(current_user.id))
-      redirect_to user_profile_path(@receiver_id),:notice=>"Like request sent !"
+      redirect_to user_profile_path(@receiver_id),:notice=>"Cool! Now let's see wait and watch"
       return
     end
   end

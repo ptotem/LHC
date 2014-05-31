@@ -36,7 +36,7 @@ class QuizAnswersController < ApplicationController
       if @quiz_answer.save!
 
         if @next_question == []
-          redirect_to authenticated_root_path,:alert=>"Successfully given quiz response"
+          redirect_to user_profile_path(current_user.id),:alert=>"Successfully given quiz response"
           return
         else
           @next_question = @next_question[0]

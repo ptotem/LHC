@@ -24,8 +24,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def update
     @user = current_user
-    #render :text=>params
-    #return
+    # render :text=>params
+    # return
 
     if !params[:user][:criterion_attributes].nil?
       if !params[:user][:criterion_attributes][:minage].nil? and !params[:user][:criterion_attributes][:maxage].nil?
@@ -37,10 +37,23 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
 
     if !params[:user][:demographic_attributes].nil?
-      if params[:user][:demographic_attributes][:avatar].nil? and params[:user][:current_route] == "/welcome_dashboard"
+      if params[:user][:current_route] == "/welcome_dashboard" and (params[:user][:demographic_attributes][:avatar].nil? )
         redirect_to fill_profilepic_path, notice: 'Please add a photograph!'
         return
       end
+
+      # To make sure about me is not blank
+      if params[:user][:current_route] == "/fill_ilike" and  params[:user][:demographic_attributes][:description].blank?
+        redirect_to fill_about_me_path, notice: 'Please write something about yourself'
+        return
+      end
+  # To make sure future plan is not blank
+      if params[:user][:current_route] == "/fill_friend_speak" and  params[:user][:demographic_attributes][:goal].blank?
+        redirect_to fill_future_plan_path, notice: 'Please write something about future plan'
+        return
+      end
+
+
     end
 
     if !params[:user][:hobby_list_ids].nil?
