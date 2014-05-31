@@ -1,6 +1,7 @@
 class MutualLikeMailer < ActionMailer::Base
   default from: "Let's Have coffee"
   def mutual_like_mailer(user,current_user)
+    @nick = User.find(user).demographic.nickname
     @user = User.find(user).email
     @current_user=current_user
     @gender = User.find(user).demographic.male ? "Guy" : "Gal"
