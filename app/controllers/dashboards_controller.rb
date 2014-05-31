@@ -340,6 +340,7 @@ class DashboardsController < ApplicationController
     end
 
   @quizzes=QuizCategory.where(:personal => 't').first.quizzes
+  @quizzes=QuizCategory.where(:personal => 't').first.quizzes
 
 
 
@@ -406,7 +407,7 @@ class DashboardsController < ApplicationController
    @accept.save!
 
    redirect_to user_profile_path(@accept.sender_id), notice: 'You have accepted the request.'
-   Notification.create!(:content=>User.find(@accept.receiver_id).demographic.nickname + " likes you too !", :user_id=>@accept.sender_id, :pointer_link=>user_profile_path(@accept.receiver_id),:sender_id => @accept.receiver_id)
+   Notification.create!(:content=>User.find(@accept.receiver_id).demographic.nickname + " likes you too !", :user_id=>@accept.sender_id, :pointer_link=>user_profile_path(@accept.receiver_id),:sender_id => @accept.receiver_id,:notification_type=>"Timed")
    MutualLikeMailer.mutual_like_mailer(@accept.sender_id, current_user).deliver
 
     #return
