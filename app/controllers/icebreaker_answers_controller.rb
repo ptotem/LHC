@@ -41,7 +41,7 @@ class IcebreakerAnswersController < ApplicationController
     respond_to do |format|
       if @icebreaker_answer.save!
         if @next_question == []
-          redirect_to authenticated_root_path, :notice=>"Now its your turn to send an Ice-breaker."
+          redirect_to start_ice_breaker_path(@ice.sender_id), :notice=>"Now its your turn to send an Ice-breaker."
           #format.html { redirect_to authenticated_root_path, notice: 'Now its your turn to send an Ice-breaker.' }
           return
         else

@@ -28,9 +28,7 @@
   <% if get_like_status(params[:id]) %>
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-left: -3%">
 
-      <div class="col-lg-3 ">
-        <button title="In a nutshell" onclick="window.location = '<%= younme_path(params[:id]) %>'" class="transparent-background-btn" style="border-radius: 50%; padding: 30%;background: white;color:#38c8e0"><i class="fa fa-rocket fa-3x "></i></button>
-      </div>
+
         <% if !check_icebreaker_status(params[:id]) %>
       <div class="col-lg-3 col-lg-offset-3 ">
         <!--<button onclick="window.location = '<%#= reject_request_url(m.target_id) %>'" class="transparent-background-btn"><i class="fa fa-thumbs-down icon_font_size thumb_down_color"></i></button>-->

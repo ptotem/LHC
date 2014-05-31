@@ -34,6 +34,7 @@
 </style>
 <section id="dashboard_messages_section">
 
+  <% if @conversations.length > 0 %>
     <div class="white-background">
       <ul class="media-list">
         <% @conversations.each do |m| %>
@@ -60,48 +61,27 @@
             <hr class="chat-separtor">
         <% end %>
 
-        <!--<li class="media message-item">-->
-          <!--<a class="pull-left" href="#">-->
-            <!--<img class="img-circle img-responsive" src="/assets/male.png" height="80px" width="80px">-->
-          <!--</a>-->
 
-          <!--<div class="media-body hover-text">-->
-            <!--<div class="row">-->
-              <!--<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">-->
-                <!--<h5 class="media-heading hover-text">Ashwin Kumar</h5>-->
-              <!--</div>-->
-              <!--<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">-->
-                <!--<p class="pull-right date-time-text hover-text">6 PM, 24<sup>th</sup> March 2014</p>-->
-              <!--</div>-->
-            <!--</div>-->
-            <!--Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin-->
-            <!--commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.-->
-          <!--</div>-->
-        <!--</li>-->
-
-        <!--<hr class="chat-separtor">-->
-
-        <!--<li class="media message-item">-->
-          <!--<a class="pull-left" href="#">-->
-            <!--<img class="img-circle img-responsive" src="/assets/male.png" height="80px" width="80px">-->
-          <!--</a>-->
-
-          <!--<div class="media-body hover-text">-->
-            <!--<div class="row">-->
-              <!--<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">-->
-                <!--<h5 class="media-heading hover-text">Sunny Singh</h5>-->
-              <!--</div>-->
-              <!--<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">-->
-                <!--<p class="pull-right date-time-text hover-text">6 PM, 24<sup>th</sup> March 2014</p>-->
-              <!--</div>-->
-            <!--</div>-->
-            <!--Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin-->
-            <!--commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.-->
-          <!--</div>-->
-        <!--</li>-->
       </ul>
     </div>
+      <% else %>
+      <div style="font-size: 20px">
+        <h1>“There are no conversations yet to show." </h1>
+        <p style="margin-top: 5%">This can happen in one of the following cases:</p>
+        <ol style="margin-top: 5%">
+          <li>You haven’t received a Mutual Like yet: If this is the case, you need to check out your <%= link_to "Mutual Likes ",mutual_likes_path %> page to see what you can do to fix this.</li>
+          <br>
+          <li>You haven’t liked anyone yet: Ok, either you’re too picky or you’re too lazy or our product sucks. Which one is it? If our product sucks, send us <%= link_to "Feedback",contact_us_path%>– here. For the other two options, c’mon get on with it!</li>
+          <br>
+          <li> You’ve received a Mutual Like but haven’t messaged yet: Ok, seriously??? Are you kidding us?? What’re you waiting for exactly??? You want a kick or what?? Here’s where you message if you’re just too daft to figure that out.</li>
 
+        </ol>
+      </div>
+
+
+
+
+  <% end %>
 
 </section>
 

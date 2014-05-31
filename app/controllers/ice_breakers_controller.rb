@@ -37,7 +37,7 @@ class IceBreakersController < ApplicationController
 
     if question_count > 5 or question_count < 5
     @ice_breaker.destroy!
-    redirect_to authenticated_root_path ,:notice=>"Ice-breaker not created, please select exactly 5 questions."
+    redirect_to start_ice_breaker_path(params[:ice_breaker][:receiver_id]) ,:notice=>"Ice-breaker not created, please select exactly 5 questions."
     return
     end
     Notification.create!(:content=>"#{current_user.demographic.nickname} has sent you a ice-breaker", :user_id=>params[:ice_breaker][:receiver_id], :pointer_link=>answer_icebreaker_path(@ice_breaker.id,@ice_breaker.questions.first.id),:sender_id => params[:ice_breaker][:sender_id])

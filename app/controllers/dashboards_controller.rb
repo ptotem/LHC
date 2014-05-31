@@ -110,10 +110,10 @@ class DashboardsController < ApplicationController
         @conversations << {"user"=>i,"message"=> current_user.received_messages.where(:sender_id => i).last.body, "time"=>current_user.received_messages.where(:sender_id => i).last.created_at}
       end
     end
-    if @conversations.blank?
-      #redirect_to user_profile_path(current_user.id), :notice=>"You do not have any conversations"
-      redirect_to my_dashboard_path, :notice=>"You do not have any conversations."
-    end
+    # if @conversations.blank?
+    #   #redirect_to user_profile_path(current_user.id), :notice=>"You do not have any conversations"
+    #   redirect_to my_dashboard_path, :notice=>"You do not have any conversations."
+    # end
     #@messages = current_user.sent_messages.where(:receiver_id=>user_list) + current_user.received_messages.where(sender_id:user_list)
 
     #@conversions = current_user.recipients

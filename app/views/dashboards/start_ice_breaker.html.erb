@@ -70,7 +70,7 @@
           <%= form_for(@ice_breaker) do |f| %>
               <%= f.hidden_field :receiver_id,:value => params[:id] %>
               <%= f.hidden_field :sender_id,:value => current_user.id %>
-              <% Question.all.each do |e| %>
+              <% Question.where(:ice_breaker => true).each do |e| %>
                   <%= f.fields_for :questions do |q| %>
                       <div class="blue-background_ice_breaker">
                         <h4 class="text_styling_ice_breaker"><label>
