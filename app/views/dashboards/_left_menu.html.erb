@@ -87,24 +87,24 @@
 
     <div class="row" style="margin-top: 1%">
         <button class="buttonmenu" id="matches_btn" onclick="window.location='/quick_matches'">Matches
-          <% if !@current_user_quick_matches.nil?%>
-
+          <% if !@current_user_quick_matches.nil? %>
           <span class=bubble>
             <%= @current_user_quick_matches.count  %>
-
           </span>
-          <% end %></button>
+          <% end %>
+        </button>
     </div>
 
     <div class="row" style="margin-top: 1%">
         <button class="buttonmenu" id="mutual_likes_btn" onclick="window.location='/mutual_likes'">Mutual Likes
-          <% if !@mutuallikes.nil?%>
+          <% if !@mutual_likes.nil?%>
           <span class=bubble>
 
-            <%= @mutuallikes.count %>
+            <%= @mutual_likes.count %>
 
           </span>
-          <% end %></button>
+          <% end %>
+        </button>
     </div>
 
     <div class="row" style="margin-top: 1%">

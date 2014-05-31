@@ -66,6 +66,9 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :notifications
   accepts_nested_attributes_for :hobby_lists
 
+
+
+
   def demographic
     super || build_demographic
   end
@@ -176,5 +179,18 @@ class User < ActiveRecord::Base
     true
   end
 
+
+
+  after_create :domain_name_checking
+
+
+  def domain_name_checking
+    extracted_email=self.email.split("@").last
+    domain_array=DomainName.all.map(&:name)
+    if domain_array.any?{|s| s.include?(extracted_email)}
+      self.verified=true
+      self.save!
+    end
+  end
 
 end
