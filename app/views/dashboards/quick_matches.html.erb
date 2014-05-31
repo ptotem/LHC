@@ -18,7 +18,7 @@
         <% @current_user_quick_matches.each do |m| %>
             <li data-tag="graphics">
               <div class="test-thumbs">
-                <img src="<%= get_user_image(m.target_id) %>" class="img-responsive" alt="Image Size 430x280" style="height: 265px; padding-left: 7%;">
+                <img src="<%= get_user_image(m.target_id) %>" class="img-responsive" alt="Image Size 430x280" style="height: 265px; padding-left: 10%;width: 90%;">
                 <a href="<%= user_profile_path(m.target_id) %>">
                   <span class="title">
                     <span class="match_age">

@@ -1,6 +1,7 @@
 class DashboardsController < ApplicationController
   before_action :set_dashboard, only: [:show, :edit, :update, :destroy]
   layout 'dashboard_and_profile_layout'
+  include ApplicationHelper
 
   # GET /dashboards
   # GET /dashboards.json
@@ -215,14 +216,19 @@ class DashboardsController < ApplicationController
    @user_base_matches = BaseMatch.where(:user_id=>current_user.id).map{|i| i.target_id}
 
    @mutual_likes =Array.new
-   @user_base_matches.each do |ubm|
-
-     if (Like.where(:sender_id => current_user.id, :receiver_id => ubm).first and Like.where(:sender_id => current_user.id, :receiver_id => ubm).first.status) or (Like.where(:sender_id => ubm, :receiver_id => current_user.id).first and Like.where(:sender_id => current_user.id, :receiver_id => ubm).first.status)
-       @mutual_likes << User.find(ubm)
-       #MindMatch.create(:user_id=>current_user.id, :target_id=>@mutual_likes.id)
+   User.all.each do |u|
+     if !get_like_status(u.id).nil?
+       @mutual_likes << u
      end
+
+     # if (Like.where(:sender_id => current_user.id, :receiver_id => ubm).first and Like.where(:sender_id => ubm, :receiver_id => current_user.id).first.status) or (Like.where(:sender_id => ubm, :receiver_id => current_user.id).first and Like.where(:sender_id => current_user.id, :receiver_id => ubm).first.status)
+     #   @mutual_likes << User.find(ubm)
+       #MindMatch.create(:user_id=>current_user.id, :target_id=>@mutual_likes.id)
+     # end
    end
 
+  # render :text=>@mutual_likes
+  # return
    #render :json=>@mutual_likes
    #return
 
