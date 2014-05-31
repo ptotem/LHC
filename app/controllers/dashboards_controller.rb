@@ -226,6 +226,7 @@ class DashboardsController < ApplicationController
        #MindMatch.create(:user_id=>current_user.id, :target_id=>@mutual_likes.id)
      # end
    end
+   # @mutual_likes = []
 
   # render :text=>@mutual_likes
   # return
