@@ -44,7 +44,7 @@ class IcebreakerAnswersController < ApplicationController
           if !check_icebreaker_status(@ice.sender_id)
             redirect_to start_ice_breaker_path(@ice.sender_id), :notice=>"Now its your turn to send an Ice-breaker."
           else
-            redirect_to user_profile_path(@ice.receiver_id), :notice=>"Now wait for the conversations"
+            redirect_to user_profile_path(@ice.receiver_id), :notice=>"Now Start the conversations"
           end
 
           #format.html { redirect_to authenticated_root_path, notice: 'Now its your turn to send an Ice-breaker.' }
