@@ -1,6 +1,6 @@
 class IcebreakerAnswersController < ApplicationController
   before_action :set_icebreaker_answer, only: [:show, :edit, :update, :destroy]
-
+  include ApplicationHelper
   # GET /icebreaker_answers
   # GET /icebreaker_answers.json
   def index
@@ -41,7 +41,12 @@ class IcebreakerAnswersController < ApplicationController
     respond_to do |format|
       if @icebreaker_answer.save!
         if @next_question == []
-          redirect_to start_ice_breaker_path(@ice.sender_id), :notice=>"Now its your turn to send an Ice-breaker."
+          if !check_icebreaker_status(@ice.sender_id)
+            redirect_to start_ice_breaker_path(@ice.sender_id), :notice=>"Now its your turn to send an Ice-breaker."
+          else
+            redirect_to user_profile_path(@ice.receiver_id), :notice=>"Now wait for the conversations"
+          end
+
           #format.html { redirect_to authenticated_root_path, notice: 'Now its your turn to send an Ice-breaker.' }
           return
         else
