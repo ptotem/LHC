@@ -24,7 +24,7 @@
                   <div class="col-lg-2" style="text-align: left">
                     <p class="field switch">
 
-                      <label class="cb-enable"><span><%= a.name %></span></label>
+                      <label class="cb-enable" title="<%= a.name %>"><span><%= a.name.truncate(10) %></span></label>
                       <!--<label class="cb-disable selected"><span>NO</span></label>-->
                       <%= check_box_tag "user[about_list_ids][]",a.id,false,:class=>"checkbox" %>
                       <!--<input type="checkbox" id="checkbox" class="checkbox" name="field2" />-->
