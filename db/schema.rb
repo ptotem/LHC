@@ -267,10 +267,10 @@ ActiveRecord::Schema.define(version: 20140531174421) do
   end
 
   create_table "questions", force: true do |t|
-    t.text     "name",        limit: 255
+    t.text     "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "ice_breaker",             default: false
+    t.boolean  "ice_breaker", default: false
   end
 
   create_table "questions_quizzes", force: true do |t|
@@ -322,12 +322,12 @@ ActiveRecord::Schema.define(version: 20140531174421) do
     t.integer  "item"
     t.string   "table"
     t.integer  "month",      limit: 2
-    t.integer  "year",       limit: 5
+    t.integer  "year",       limit: 8
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "rails_admin_histories", ["item", "table", "month", "year"], name: "index_rails_admin_histories"
+  add_index "rails_admin_histories", ["item", "table", "month", "year"], name: "index_rails_admin_histories", using: :btree
 
   create_table "rating_scales", force: true do |t|
     t.string   "name"
@@ -371,7 +371,7 @@ ActiveRecord::Schema.define(version: 20140531174421) do
 
   create_table "site_contents", force: true do |t|
     t.string   "key"
-    t.text     "value",               limit: 255
+    t.text     "value"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "avatar_file_name"
@@ -416,12 +416,12 @@ ActiveRecord::Schema.define(version: 20140531174421) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "email",                        default: "",            null: false
-    t.string   "encrypted_password",           default: "",            null: false
+    t.string   "email",                        default: "",          null: false
+    t.string   "encrypted_password",           default: "",          null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                default: 0,             null: false
+    t.integer  "sign_in_count",                default: 0,           null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -435,7 +435,7 @@ ActiveRecord::Schema.define(version: 20140531174421) do
     t.datetime "confirmation_sent_at"
     t.string   "verification_text"
     t.boolean  "verified"
-    t.string   "current_route",                default: "/fill_dates"
+    t.string   "current_route",                default: "/fill_dob"
     t.datetime "last_matched_time"
     t.boolean  "first_visit",                  default: false
     t.string   "provider"
@@ -443,8 +443,8 @@ ActiveRecord::Schema.define(version: 20140531174421) do
     t.datetime "verification_request_sent_at"
   end
 
-  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end
