@@ -1,0 +1,77 @@
+@media (max-width: 480px) {
+    .scaled-mobile-device{
+        transform:scale(0.5);
+    }
+
+    .mob-device-margin-top-n2{
+        margin-top: -2%;
+    }
+
+    .mob-device-margin-top-n11{
+        margin-top: -11%;
+    }
+
+    .mob-device-col-offset-2{
+        margin-left: 16.6667%;
+    }
+
+    .mob-device-col-offset-3{
+        margin-left: 25%;
+    }
+
+    input[type="radio"] + .mob-device-signup-radio-btn-first.my_gender {
+        margin: 5px 4px 0 -20px;
+    }
+
+    input[type="radio"] + .mob-device-signup-radio-btn.my_gender {
+        margin: 5px 4px 0 -10px;
+    }
+
+    .home-box i{
+        padding-bottom: 0;
+    }
+
+}
+
+/* Landscape phones and portrait tablets */
+@media (max-width: 767px) {
+    .scaled-mobile-device{
+        transform:scale(0.5);
+    }
+
+    .mob-device-margin-top-n2{
+        margin-top: -2%;
+    }
+
+    .mob-device-margin-top-n11{
+        margin-top: -11%;
+    }
+
+    .mob-device-col-offset-2{
+        margin-left: 16.6667%;
+    }
+
+    .mob-device-custom-offset-2{
+        margin-left: 16.6667%;
+    }
+
+    .mob-device-col-offset-3{
+        margin-left: 25%;
+    }
+
+    .mob-device-full-width{
+        width: 100%;
+    }
+
+    input[type="radio"] + .mob-device-signup-radio-btn-first.my_gender {
+        margin: 5px 4px 0 -60px;
+    }
+
+    input[type="radio"] + .mob-device-signup-radio-btn.my_gender {
+        margin: 5px 4px 0 -10px;
+    }
+
+    .home-box{
+        padding: 40px 0 0 0;
+    }
+}
