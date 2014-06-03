@@ -25,18 +25,48 @@
 <div class="row" style="margin-top: 10%">
   <% if get_like_status(params[:id]) %>
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-left: -3%">
-        <% if !check_icebreaker_status(params[:id]) %>
+    <% if !check_icebreaker_status(params[:id]) %>
+
+
       <div class="col-lg-3 col-lg-offset-3 ">
-        <!--<button onclick="window.location = '<%#= reject_request_url(m.target_id) %>'" class="transparent-background-btn"><i class="fa fa-thumbs-down icon_font_size thumb_down_color"></i></button>-->
-        <button title="Start an ice breaker" onclick="window.location = '<%= start_ice_breaker_path(params[:id]) %>'" class="transparent-background-btn" style="border-radius: 50%; padding: 30%;background: white;color:#38c8e0"><i class="fa fa-bell fa-3x "></i></button>
+
+
+
+
+        <% if IceBreaker.find_by_receiver_id_and_sender_id(params[:id],current_user.id).nil? and IceBreaker.find_by_receiver_id_and_sender_id(current_user.id,params[:id]).nil? %>
+            <button title="Start an ice breaker" onclick="window.location = '<%= start_ice_breaker_path(params[:id]) %>'" class="transparent-background-btn" style="border-radius: 50%; padding: 30%;background: white;color:#38c8e0"><i class="fa fa-bell fa-3x "></i></button>
+        <% else %>
+            <% if !IceBreaker.find_by_receiver_id_and_sender_id(params[:id],current_user.id).nil? %>
+                <% if IceBreaker.find_by_receiver_id_and_sender_id(params[:id],current_user.id).ice_status == true %>
+                    <!--<h1>Done</h1>-->
+                <% end %>
+                <% end %>
+            <% if !IceBreaker.find_by_receiver_id_and_sender_id(current_user.id,params[:id]).nil? %>
+                <% if IceBreaker.find_by_receiver_id_and_sender_id(current_user.id,params[:id]).ice_status == true %>
+                        <% if IceBreaker.find_by_receiver_id_and_sender_id(current_user.id,params[:id]).icebreaker_answers.blank?  %>
+                        <button title="Answer ice breaker" onclick="window.location = '<%= answer_icebreaker_path(IceBreaker.find_by_receiver_id_and_sender_id(current_user.id,params[:id]),IceBreaker.find_by_receiver_id_and_sender_id(current_user.id,params[:id]).questions.first.id) %>'" class="transparent-background-btn" style="border-radius: 50%; padding: 30%;background: white;color:#38c8e0"><i class="fa fa-bell fa-3x "></i></button>
+                        <% else %>
+                            <!--<h1>Done</h1>-->
+                        <% end %>
+
+
+
+
+        <% end %>
+        <% end %>
+        <% end %>
+
+
       </div>
-            <% else %>
+
+
+
+    <% else %>
 
       <div class="col-lg-3 col-lg-offset-3">
-        <!--<button onclick="window.location = '<%#= reject_request_url(m.target_id) %>'" class="transparent-background-btn"><i class="fa fa-thumbs-down icon_font_size thumb_down_color"></i></button>-->
         <button title="Send a message" onclick="window.location = '<%= conversations_with_users_path(params[:id]) %>'" class="transparent-background-btn" style="border-radius: 50%; padding: 30%;background: white;color:#38c8e0"><i class="fa fa-envelope fa-3x "></i></button>
       </div>
-            <% end %>
+    <% end %>
       </div>
 
       <!--indicates all mutual likes-->
