@@ -50,7 +50,7 @@ class DashboardsController < ApplicationController
     @like_requests = Like.where(:receiver_id => current_user.id,:status=>false) rescue nil?
 
 
-    @like_requests.each do |e|
+    Like.where(:receiver_id => current_user.id).each do |e|
      if ((((3.days.since(e.created_at) - Time.now)/3600).to_i ) <= 0)
         e.destroy
      end

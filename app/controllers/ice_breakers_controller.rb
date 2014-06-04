@@ -1,6 +1,7 @@
 class IceBreakersController < ApplicationController
   before_action :set_ice_breaker, only: [:show, :edit, :update, :destroy]
   layout 'dashboard_and_profile_layout'
+  include ApplicationHelper
 
   # GET /ice_breakers
   # GET /ice_breakers.json
@@ -25,26 +26,34 @@ class IceBreakersController < ApplicationController
   # POST /ice_breakers
   # POST /ice_breakers.json
   def create
+
     question_count = 0
+    #if IceBreaker.find_by_sender_id_and_receiver_id(params[:ice_breaker][:sender_id],params[:ice_breaker][:receiver_id])
+    #if check_icebreaker_status(params[:ice_breaker][:receiver_id])
+    #  @ice_breaker = IceBreaker.create!(:receiver_id=>params[:ice_breaker][:receiver_id],:sender_id=>params[:ice_breaker][:sender_id],:ice_status => true)
+    #else
+    #  redirect_to user_profile_path(params[:ice_breaker][:receiver_id]), notice: 'Ice Breaker already sent'
+    #  return
+    #end
 
 
-
-    if IceBreaker.find_by_sender_id_and_receiver_id(params[:ice_breaker][:sender_id],params[:ice_breaker][:receiver_id]).nil? or IceBreaker.find_by_sender_id_and_receiver_id(params[:ice_breaker][:receiver_id],params[:ice_breaker][:sender_id]).nil?
+    #
+    #if IceBreaker.find_by_sender_id_and_receiver_id(params[:ice_breaker][:sender_id],params[:ice_breaker][:receiver_id]).nil? and IceBreaker.find_by_sender_id_and_receiver_id(params[:ice_breaker][:receiver_id],params[:ice_breaker][:sender_id]).nil?
       @ice_breaker = IceBreaker.create!(:receiver_id=>params[:ice_breaker][:receiver_id],:sender_id=>params[:ice_breaker][:sender_id],:ice_status => true)
-    else
-      if !IceBreaker.find_by_sender_id_and_receiver_id(params[:ice_breaker][:sender_id],params[:ice_breaker][:receiver_id]).nil?
-        if IceBreaker.find_by_sender_id_and_receiver_id(params[:ice_breaker][:sender_id],params[:ice_breaker][:receiver_id]).ice_status == true
-          redirect_to user_profile_path(params[:ice_breaker][:receiver_id]), notice: 'Ice Breaker already sent'
-          return
-        end
-      end
-      if !IceBreaker.find_by_sender_id_and_receiver_id(params[:ice_breaker][:receiver_id],params[:ice_breaker][:sender_id]).nil?
-        if IceBreaker.find_by_sender_id_and_receiver_id(params[:ice_breaker][:receiver_id],params[:ice_breaker][:sender_id]).ice_status == true
-          redirect_to user_profile_path(params[:ice_breaker][:receiver_id]), notice: 'Ice Breaker already sent'
-          return
-        end
-      end
-    end
+    #else
+    #  if !IceBreaker.find_by_sender_id_and_receiver_id(params[:ice_breaker][:sender_id],params[:ice_breaker][:receiver_id]).nil?
+    #    if IceBreaker.find_by_sender_id_and_receiver_id(params[:ice_breaker][:sender_id],params[:ice_breaker][:receiver_id]).ice_status == true
+    #      redirect_to user_profile_path(params[:ice_breaker][:receiver_id]), notice: 'Ice Breaker already sent'
+    #      return
+    #    end
+    #  end
+    #  if !IceBreaker.find_by_sender_id_and_receiver_id(params[:ice_breaker][:receiver_id],params[:ice_breaker][:sender_id]).nil?
+    #    if IceBreaker.find_by_sender_id_and_receiver_id(params[:ice_breaker][:receiver_id],params[:ice_breaker][:sender_id]).ice_status == true
+    #      redirect_to user_profile_path(params[:ice_breaker][:receiver_id]), notice: 'Ice Breaker already sent'
+    #      return
+    #    end
+    #  end
+    #end
 
     params[:ice_breaker][:questions].each do |q|
       if q[1].to_i == 1
