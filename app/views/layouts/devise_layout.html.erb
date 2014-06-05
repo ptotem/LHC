@@ -3,6 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
+  <meta name="description" content="Let’s Have Coffee is an exclusive platform for guys and girls from top colleges in India to meet each other.">
+  <meta name="keywords" content="Online dating, Dating, Find someone, IIT guy, IIM guy, Dating website, India Dating, Free dating website, Dating website India, Website for dating, Dating sites free, Dating sites, Free online dating, Free dating online, Free dating India, Dating site, Dating site free, Indian dating free, Find a girlfriend, Find a boyfriend, Let’s have coffee, Meet someone, Shaadi, Shaadi.com, Online matrimony, Matrimonial sites, Free online matrimonial, Free matrimonial sites, Online matrimonial sites, Top colleges in India">
   <title><%= get_content_for("siteTitle") %></title>
   <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
   <!--TODO: Why was this line here ?-->
@@ -20,7 +22,7 @@
 <script>
     window.fbAsyncInit = function () {
         FB.init({
-            appId: '628824307167447',
+            appId: '305852526246421',
             status: true, // check login status
             cookie: true, // enable cookies to allow the server to access the session
             xfbml: true  // parse XFBML
@@ -36,7 +38,7 @@
                 // The response object is returned with a status field that lets the app know the current
                 // login status of the person. In this case, we're handling the situation where they
                 // have logged in to the app.
-                console.log("b4 calling testAPI(), response.authResponse.userID :- " + response.authResponse.userID);
+                //console.log("b4 calling testAPI(), response.authResponse.userID :- " + response.authResponse.userID);
                 testAPI();
             } else if (response.status === 'not_authorized') {
                 // In this case, the person is logged into Facebook, but not into the app, so we call
@@ -74,11 +76,11 @@
     // Here we run a very simple test of the Graph API after login is successful.
     // This testAPI() function is only called in those cases.
     function testAPI() {
-        console.log('Welcome!  Fetching your information.... ');
+        //console.log('Welcome!  Fetching your information.... ');
         FB.api('/me', function (response) {
-            console.log('Good to see you, ' + response.name + '.');
+            //console.log('Good to see you, ' + response.name + '.');
         });
-        console.log("myCheck() called from testAPI()");
+        //console.log("myCheck() called from testAPI()");
         myCheck();
     }
 
@@ -92,7 +94,7 @@
                 // and signed request each expire
                 var uid = response.authResponse.userID;
                 var accessToken = response.authResponse.accessToken;
-                console.log("uid :- " + uid);
+                //console.log("uid :- " + uid);
             } else if (response.status === 'not_authorized') {
                 // the user is logged in to Facebook,
                 // but has not authenticated your app
