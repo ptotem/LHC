@@ -182,9 +182,14 @@ class User < ActiveRecord::Base
     true
   end
 
+  def set_profession
+    @profession = Profession.create!(:name=>"")
+    self.profession = @profession
+    self.save!
+  end
 
 
-  after_create :domain_name_checking
+  after_create :domain_name_checking, :set_profession
 
 
   def domain_name_checking
