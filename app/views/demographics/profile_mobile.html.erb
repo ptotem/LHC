@@ -1,3 +1,30 @@
+<style>
+    body {
+        background: none repeat scroll 0 0 #38C8E0;
+    }
+
+    .col-style {
+        padding-right: 0;
+        border: 1px solid #000000;
+        border-radius: 5%;
+    }
+
+    /*for row-col structure - starts*/
+    /*ul.nav li{*/
+    /*display: table-cell;*/
+    /*height: 36px;*/
+    /*text-align: center;*/
+    /*vertical-align: middle;*/
+    /*}*/
+    /*for row-col structure - ends*/
+
+    ul.nav li {
+        width: 33.3%;
+        border: 1px solid #000000;
+        border-radius: 5%;
+    }
+</style>
+
 <%= content_for(:dialogue_bar_header) do %>
     <% if params[:id].to_s != (current_user.id).to_s %>
         Profile
@@ -7,46 +34,96 @@
 <% end %>
 
 <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="background-color: red;">
 
-      <div class="bs-example bs-example-tabs" content="a" style='content: "a"'>
-        <div class="row">
-          <div class="col-xs-offset-1 col-xs-11 col-sm-12 col-md-12 col-lg-12">
-            <ul class="nav nav-tabs" id="myTab">
-              <li class="active"><a style="color: #000000" data-toggle="tab" href="#home">Home</a></li>
-              <li class=""><a style="color: #000000" data-toggle="tab" href="#profile">Profile</a></li>
-              <li class="dropdown">
-                <a style="color: #000000" data-toggle="dropdown" class="dropdown-toggle" id="myTabDrop1" href="#">Dropdown <b class="caret"></b></a>
-                <ul aria-labelledby="myTabDrop1" role="menu" class="dropdown-menu">
-                  <li><a data-toggle="tab" tabindex="-1" href="#dropdown1">@fat</a></li>
-                  <li><a data-toggle="tab" tabindex="-1" href="#dropdown2">@mdo</a></li>
-                </ul>
-              </li>
-            </ul>
-          </div>
+    <div class="bs-example bs-example-tabs">
+      <div class="row">
+        <div class="col-xs-offset-1 col-xs-11 col-sm-12 col-md-12 col-lg-12">
+          <ul class="nav nav-tabs" id="myTab" style="text-align: center">
+
+            <!--<div class="row">-->
+            <!--<div class="col-xs-4 col-style">-->
+            <!--<li class="active text-center">-->
+            <!--<a style="color: #000000" data-toggle="tab" href="#basic_info">Basic Info</a></li>-->
+            <!--</div>-->
+            <!--<div class="col-xs-4 col-style">-->
+            <!--<li class="text-center">-->
+            <!--<a style="color: #000000" data-toggle="tab" href="#fav_movies">Fave Movies</a></li>-->
+            <!--</div>-->
+            <!--<div class="col-xs-4 col-style">-->
+            <!--<li class="text-center">-->
+            <!--<a style="color: #000000" data-toggle="tab" href="#fav_musics">Fave Music</a></li>-->
+            <!--</div>-->
+            <!--</div>-->
+
+            <!--<div class="row">-->
+            <!--<div class="col-xs-offset-2 col-xs-4 col-style">-->
+            <!--<li class="">-->
+            <!--<a style="color: #000000" data-toggle="tab" href="#fav_books">Fave Books</a></li>-->
+            <!--</div>-->
+            <!--<div class="col-xs-4 col-style">-->
+            <!--<li class="">-->
+            <!--<a style="color: #000000" data-toggle="tab" href="#stuff_i_like">Stuff I like</a></li>-->
+            <!--</div>-->
+            <!--</div>-->
+
+            <li class="active">
+              <a style="color: #000000" data-toggle="tab" href="#basic_info">Basic Info</a>
+            </li>
+            <li class="">
+              <a style="color: #000000" data-toggle="tab" href="#fav_movies">Fave Movies</a>
+            </li>
+            <li class="">
+              <a style="color: #000000" data-toggle="tab" href="#fav_musics">Fave Music</a>
+            </li>
+            <li class="" style="margin-left:17.5%;">
+              <a style="color: #000000" data-toggle="tab" href="#fav_books">Fave Books</a>
+            </li>
+            <li class="">
+              <a style="color: #000000" data-toggle="tab" href="#stuff_i_like">Stuff I like</a>
+            </li>
+
+
+          </ul>
         </div>
+      </div>
 
-        <div class="row">
-          <div class="col-xs-offset-1 col-xs-11 col-sm-12 col-md-12 col-lg-12">
-            <div class="tab-content" id="myTabContent">
-              <div id="home" class="tab-pane fade active in">
-                <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
+      <div class="row">
+        <div class="col-xs-offset-1 col-xs-11 col-sm-12 col-md-12 col-lg-12">
+          <div class="tab-content" id="myTabContent">
+            <div id="basic_info" class="tab-pane fade active in">
+
+
+              <div class="row">
+
               </div>
-              <div id="profile" class="tab-pane fade">
-                <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
-              </div>
-              <div id="dropdown1" class="tab-pane fade">
-                <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl craft beer blog stumptown. Pitchfork sustainable tofu synth chambray yr.</p>
-              </div>
-              <div id="dropdown2" class="tab-pane fade">
-                <p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater. Lomo wolf viral, mustache readymade thundercats keffiyeh craft beer marfa ethical. Wolf salvia freegan, sartorial keffiyeh echo park vegan.</p>
-              </div>
+
+
+            </div>
+            <div id="fav_movies" class="tab-pane fade">
+              <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation
+                +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table
+                craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco
+                ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar
+                helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes
+                anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party
+                scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+            </div>
+            <div id="fav_musics" class="tab-pane fade">
+              <p>Fav Music</p>
+            </div>
+            <div id="fav_books" class="tab-pane fade">
+              <p>Fav Books</p>
+            </div>
+            <div id="stuff_i_like" class="tab-pane fade">
+              <p>Stuff I like</p>
             </div>
           </div>
         </div>
-
       </div>
 
-
     </div>
+
+
+  </div>
 </div>

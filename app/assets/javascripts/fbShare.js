@@ -49,13 +49,14 @@ $(function () {
 
 });
 
-function share_result(){
+
+function share_result(fb_share_app_logo){
     FB.ui(
         {
             method: 'feed',
             name: 'Let\'s Have Coffee',
             link: 'http://www.letshavecoffee.in',
-            picture: 'http://www.letshavecoffee.in/assets/logo.png',
+            picture: fb_share_app_logo,
             description: 'Let\'s Have Coffee is an exclusive platform for guys and girls from top colleges in India to meet each other.'
         },
         function(response) {
