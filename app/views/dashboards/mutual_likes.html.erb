@@ -1,5 +1,5 @@
 <%= content_for(:left_menu) do %>
-    <%= render :partial=>"left_menu"%>
+    <%= render :partial => "left_menu" %>
 <% end %>
 
 
@@ -15,12 +15,12 @@
 
 
   <% if @mutual_likes.length > 0 %>
-      <ul class="list-inline portfolio text-center" style="height: 600px;overflow-x: hidden;overflow-y: auto;">
+      <ul class="list-inline portfolio text-center mutual-likes-list">
         <%# 4.times do |test_ans_option| %>
         <% @mutual_likes.each do |m| %>
             <li data-tag="graphics">
               <div class="test-thumbs">
-                <img src="<%= get_user_image(m.id) %>" class="img-responsive" alt="Image Size 430x280" style="height: 265px; padding-left: 10%;width: 90%;">
+                <img src="<%= get_user_image(m.id) %>" class="img-responsive mutual-like-profile-img mob-device-mutual-like-profile-img" alt="Image Size 430x280">
                 <a href="<%= user_profile_path(m.id) %>">
                   <span class="title">
                     <span class="match_age">
@@ -38,9 +38,13 @@
                 <div class="row">
                   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <% if check_icebreaker_status(m.id) %>
-                        <button class="send-message_btn" id="send_message_btn" onclick="window.location='<%= conversations_with_users_path(m.id) %>'">Send Message</button>
+                        <button class="send-message_btn" id="send_message_btn" onclick="window.location='<%= conversations_with_users_path(m.id) %>'">Send
+                          Message
+                        </button>
                     <% else %>
-                        <button class="send-icebreaker_btn" id="send_icebreaker_btn" onclick="window.location='<%= start_ice_breaker_path(m.id) %>'">Send Icebreaker</button>
+                        <button class="send-icebreaker_btn" id="send_icebreaker_btn" onclick="window.location='<%= start_ice_breaker_path(m.id) %>'">Send
+                          Icebreaker
+                        </button>
                     <% end %>
 
                   </div>
@@ -51,26 +55,38 @@
         <% end %>
         <%# end %>
       </ul>
-    <% else %>
+  <% else %>
       <div style="font-size: 20px">
-     <h1> “Bummer – no mutual likes yet it seems :(" </h1>
-      <p style="margin-top: 5%">But don’t worry soldier, you gotta keep trying!!! Never give up we say! Here’s what you can do to increase your chances of getting a mutual like:</p>
-      <ol style="margin-top: 5%">
-        <li><%= link_to "Complete your profile",user_profile_path(current_user.id) %> –Seriously, if it’s not complete yet, complete it. Really. Like right now.</li>
-<br>
-        <li><%= link_to "Snaz it up! ",snazzmeup_path %>– Basically, make it impossible for a match to look away from your profile. Take our quizzes found under Snaz it up!  to show off your interests and to show how you’ll be so much fun to talk to.</li>
-<br>
-        <li><%= link_to "Get a drink","https://www.google.co.in/search?q=bars+i%3Dnear+me&oq=bars+i%3Dnear+me&espv=2&es_sm=117&ie=UTF-8#q=bars+near+me",:target => "_blank" %> – Some things are just not in your control. Relax, get a drink, and chill. Patience is key.</li>
+        <h1> “Bummer – no mutual likes yet it seems :(" </h1>
 
-      </ol>
+        <p style="margin-top: 5%">But don’t worry soldier, you gotta keep trying!!! Never give up we say! Here’s what
+          you can do to increase your chances of getting a mutual like:</p>
+        <ol style="margin-top: 5%">
+          <li><%= link_to "Complete your profile", user_profile_path(current_user.id) %> –Seriously, if it’s not
+            complete yet, complete it. Really. Like right now.
+          </li>
+          <br>
+          <li><%= link_to "Snaz it up! ", snazzmeup_path %>– Basically, make it impossible for a match to look away from
+            your profile. Take our quizzes found under Snaz it up! to show off your interests and to show how you’ll be
+            so much fun to talk to.
+          </li>
+          <br>
+          <li><%= link_to "Get a drink", "https://www.google.co.in/search?q=bars+i%3Dnear+me&oq=bars+i%3Dnear+me&espv=2&es_sm=117&ie=UTF-8#q=bars+near+me", :target => "_blank" %>
+            – Some things are just not in your control. Relax, get a drink, and chill. Patience is key.
+          </li>
+
+        </ol>
       </div>
 
-<% end %>
+  <% end %>
 
 
+</section>
 
-
-
-
-
-      </section>
+<script>
+  $(function(){
+     //alert("window width :- " + $(window).width());
+     //alert("document width :- " + $(document).width());
+     //alert("screen width :- " + screen.width);
+  });
+</script>

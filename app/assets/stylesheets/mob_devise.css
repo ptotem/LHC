@@ -7,6 +7,18 @@
         margin-top: -2%;
     }
 
+    .mob-device-margin-top-n3{
+        margin-top: -3%;
+    }
+
+    .mob-device-margin-top-n5{
+        margin-top: -5%;
+    }
+
+    .mob-device-margin-top-n15{
+        margin-top: -15%;
+    }
+
     .mob-device-margin-top-n11{
         margin-top: -11%;
     }
@@ -31,6 +43,36 @@
         padding-bottom: 0;
     }
 
+    .mob-device-scale-07{
+        -webkit-transform: scale(0.7);
+    }
+
+    .mob-device-scale-08{
+        -webkit-transform: scale(0.8);
+    }
+
+    /*.mob-device-navbar-brand{*/
+        /*height: 15px;*/
+    /*}*/
+
+    /*.mob-device-navbar-brand img{*/
+        /*height: 100%;*/
+    /*}*/
+
+}
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+    .mob-device-mutual-like-profile-img{
+        height: 195px;
+        padding-left: 10%;
+        width: 90%;
+    }
+
+    .mob-device-mutual-likes-list{
+        height: 300px;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
 }
 
 /* Landscape phones and portrait tablets */
@@ -39,8 +81,28 @@
         transform:scale(0.5);
     }
 
+    .mob-device-scale-07{
+        -webkit-transform: scale(0.7);
+    }
+
+    .mob-device-scale-08{
+        -webkit-transform: scale(0.8);
+    }
+
+    .mob-device-scale-09{
+        -webkit-transform: scale(0.9);
+    }
+
     .mob-device-margin-top-n2{
         margin-top: -2%;
+    }
+
+    .mob-device-margin-top-n3{
+        margin-top: -3%;
+    }
+
+    .mob-device-margin-top-n15{
+        margin-top: -15%;
     }
 
     .mob-device-margin-top-n11{
@@ -59,6 +121,10 @@
         margin-left: 25%;
     }
 
+    .mob-device-col-offset-4{
+        margin-left: 33.3333%;
+    }
+
     .mob-device-full-width{
         width: 100%;
     }
@@ -73,5 +139,27 @@
 
     .home-box{
         padding: 40px 0 0 0;
+    }
+
+    .mob-device-font-1em{
+        font-size: 1em;
+    }
+
+    .mob-device-match_text{
+        font-size: 1.1em;
+        line-height: 1.2em;
+    }
+
+    .mob-device-buttonmenu{
+        font-size: 1.28em;
+        /*font-weight: 250;*/
+        padding: 5% 10% 5% 10%;
+        margin: 2% 0 0 0;
+    }
+
+    .mob-device-mutual-like-profile-img{
+        height: 195px;
+        padding-left: 10%;
+        width: 90%;
     }
 }

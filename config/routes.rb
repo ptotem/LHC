@@ -100,6 +100,7 @@ Lhc::Application.routes.draw do
   get '/user_answer/:id', to: 'quiz_categories#user_answer',as: :user_answer
 
   get '/profile/:id', to: 'demographics#profile',as: :user_profile
+  get '/profile_mobile/:id', to: 'demographics#profile_mobile',as: :profile_mobile
   get '/edit_profile/:id', to: 'demographics#edit_profile', as: :edit_profile
   #post '/update_profile', to: 'demographics#update_profile'
 

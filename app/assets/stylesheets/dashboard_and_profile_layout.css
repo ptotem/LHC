@@ -1,0 +1,244 @@
+/* css from layout - starts */
+.interactive-div {
+    height: 136%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.65);
+    /*opacity: 0.7;*/
+    z-index: 99999;
+    color: white;
+    position: absolute;
+    top: 0;
+    overflow: hidden;
+    font-family: "DK Crayon";
+    font-size: 20px;
+    display: none;
+}
+
+.arrow-text {
+    margin-left: 22%;
+    margin-top: -5%;
+    font-family: "DK Crayon";
+}
+
+.arrow-text-matches {
+    margin-left: 22%;
+    margin-top: -31%;
+    font-family: "DK Crayon";
+}
+
+.arrow-text-p-pic {
+    margin-left: 22%;
+    margin-top: -34%;
+    font-family: "DK Crayon";
+}
+
+.top-arrow-text {
+    margin-left: -15%;
+    margin-top: 1%;
+    font-family: "DK Crayon";
+}
+
+.right-arrow-text {
+    margin-left: -95%;
+    margin-top: -6%;
+    /*font-family:;*/
+    font-family: "DK Crayon";
+}
+
+@font-face {
+    font-family: "DK Crayon";
+    src: url(/assets/DKCrayonCrumble.ttf);
+}
+
+.arrow-1 {
+    left: 18%;
+    /*position: absolute;*/
+    top: 20%;
+    /*margin-left: 18%;*/
+    /*margin-top: 27%;*/
+    position: absolute;
+}
+
+.arrow-2 {
+    left: 18%;
+    /*position: absolute;*/
+    top: 44%;
+    /*margin-left: 18%;*/
+    /*margin-top: 27%;*/
+    position: absolute;
+}
+
+.arrow-3 {
+    left: 18%;
+    position: absolute;
+    top: 56%;
+    /*margin-left: 18%;*/
+    /*margin-top: 31%;*/
+}
+
+.arrow-4 {
+    left: 18%;
+    position: absolute;
+    top: 63%;
+    /*margin-left: 18%;*/
+    /*margin-top: 36%;*/
+}
+
+.arrow-5 {
+    left: 18%;
+    position: absolute;
+    top: 69%;
+    /*margin-left: 18%;*/
+    /*margin-top: 40%;*/
+}
+
+.arrow-6 {
+    left: 18%;
+    position: absolute;
+    top: 74%;
+    /*margin-left: 18%;*/
+    /*margin-top: 44%;*/
+}
+
+.arrow-7 {
+    left: 61%;
+    position: fixed;
+    top: 10%;
+    /*margin-top: 5%;*/
+    /*margin-left: 61%;*/
+}
+
+.arrow-8 {
+    left: 70%;
+    position: fixed;
+    top: 10%;
+    /*margin-top: 5%;*/
+    /*margin-left: 70%;*/
+}
+
+.arrow-10 {
+    left: 80%;
+    position: fixed;
+    top: 10%;
+    /*margin-left: 79%;*/
+    /*margin-top: 5%;*/
+}
+
+.arrow-11 {
+    position: absolute;
+    top: 38%;
+    left: 78%;
+    /*margin-left: 80%;*/
+    /*margin-to/p: 25%;*/
+}
+
+#dashboard_hrs_remaining {
+    position: absolute;
+    top: 27%;
+    left: 78%;
+}
+
+.arrow-12 {
+    position: absolute;
+    top: 60%;
+    left: 78%;
+    /*margin-left: 80%;*/
+    /*margin-top: 40%;*/
+}
+
+#dashboard_invite_friend {
+    position: absolute;
+    top: 45%;
+    left: 78%;
+}
+
+.arrow-13 {
+    position: absolute;
+    top: 69%;
+    left: 78%;
+    /*margin-left: 80%;*/
+    /*margin-top: 45%;*/
+}
+
+#dashboard_try_quiz {
+    position: absolute;
+    top: 57%;
+    left: 78%;
+}
+
+.close_button {
+    position: absolute;
+    right: 2%;
+    top: 2%;
+    cursor: pointer;
+}
+
+/* css from layout - ends */
+
+/* individual pages css comes here - starts */
+/*----------------------------------------------*/
+
+/* left_menu - partial - starts */
+.buttonmenu {
+    width: 100%;
+    background-color: #3E4549;
+    font-size: 1.5em;
+    color: white;
+    font-weight: 350;
+    padding: 5%;
+    border: none;
+    font-family: 'Open Sans', sans-serif;
+    text-align: left;
+    position: relative;
+}
+
+.buttonmenu:hover {
+    width: 100%;
+    background-color: #ff0000;
+    text-align: left;
+    border: none;
+    padding: 5%;
+    font-weight: 350;
+    color: white;
+    font-size: 1.5em;
+}
+
+.profilepic {
+    width: 100%;
+    height: 100%;
+}
+
+.active-btn {
+    background-color: #ff0000;
+}
+
+.buttonmenu .bubble {
+    background: none repeat scroll 0 0 #E02424;
+    border-radius: 3px 3px 3px 3px;
+    color: #FFFFFF;
+    right: 0;
+    top: 0;
+    position: absolute;
+    padding: 2px 6px;
+    font: bold 0.9em Tahoma, Arial, Helvetica;
+}
+
+/* left_menu - partial - ends */
+
+/* mutual_likes page - starts */
+.mutual-like-profile-img {
+    height: 265px;
+    padding-left: 10%;
+    width: 90%;
+}
+
+.mutual-likes-list {
+    height: 600px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+/* mutual_likes page - ends */
+
+/*----------------------------------------------*/
+/* individual pages css comes here - ends */

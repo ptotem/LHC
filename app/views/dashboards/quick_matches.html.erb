@@ -48,18 +48,24 @@
       </ul>
   <% else %>
 
-      <div style="font-size: 20px">
-        <h1> "We just launched so it will it take us a little bit of time to generate matches for you. Sit tight - you'll be hearing from us very very soon :)" </h1>
-        <p style="margin-top: 5%"> Until then, here's what you can do:</p>
-        <ol style="margin-top: 5%">
-          <li><%= link_to "Get your profile ready",user_profile_path(current_user.id) %> –Make sure you're ready to impress once matches start checking out your profile.<%= link_to "Complete all the fields",edit_profile_path(current_user.id) %> and add interesting info through <%= link_to "Snaz it up! ",snazzmeup_path %>!</li>
-          <br>
-          <li><a href="#" data-toggle="modal" data-target="#email_modal">Invite your friends</a>:– Don't keep this great product to yourself! Sharing only increases happiness. You may earn some good karma too.
-          <br>
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div style="font-size: 20px">
+            <h1 class="hidden-xs hidden-sm hidden-md"> "We just launched so it will it take us a little bit of time to generate matches for you. Sit tight - you'll be hearing from us very very soon :)" </h1>
+            <h3 class="visible-xs visible-sm visible-md"> "We just launched so it will it take us a little bit of time to generate matches for you. Sit tight - you'll be hearing from us very very soon :)" </h3>
+            <p style="margin-top: 5%"> Until then, here's what you can do:</p>
+            <ol style="margin-top: 5%">
+              <li><%= link_to "Get your profile ready",user_profile_path(current_user.id) %> –Make sure you're ready to impress once matches start checking out your profile.<%= link_to "Complete all the fields",edit_profile_path(current_user.id) %> and add interesting info through <%= link_to "Snaz it up! ",snazzmeup_path %>!</li>
+              <br>
+              <li><a href="#" data-toggle="modal" data-target="#email_modal">Invite your friends</a>:– Don't keep this great product to yourself! Sharing only increases happiness. You may earn some good karma too.
+                <br>
 
 
-        </ol>
+            </ol>
+          </div>
+        </div>
       </div>
+
   <% end %>
 
 

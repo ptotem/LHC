@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title><%= get_content_for("siteTitle") %></title>
-  <meta name="viewport" content="width=device-width">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=0.5">
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
   <script src="http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
 
@@ -12,188 +12,96 @@
 
   <%= csrf_meta_tags %>
 
-
-
-  <style>
-
-
-      .interactive-div {
-          height: 136%;
-          width: 100%;
-          background-color: rgba(0, 0, 0, 0.65);
-          /*opacity: 0.7;*/
-          z-index: 99999;
-          color: white;
-          position: absolute;
-          top: 0;
-          overflow: hidden;
-          font-family: "DK Crayon";
-          font-size: 20px;
-          display: none;
-      }
-
-      .arrow-text {
-          margin-left: 22%;
-          margin-top: -5%;
-          font-family: "DK Crayon";
-      }
-
-      .arrow-text-matches {
-          margin-left: 22%;
-          margin-top: -31%;
-          font-family: "DK Crayon";
-      }
-
-      .arrow-text-p-pic {
-          margin-left: 22%;
-          margin-top: -34%;
-          font-family: "DK Crayon";
-      }
-
-      .top-arrow-text {
-          margin-left: -15%;
-          margin-top: 1%;
-          font-family: "DK Crayon";
-      }
-
-      .right-arrow-text {
-          margin-left: -95%;
-          margin-top: -6%;
-          /*font-family:;*/
-          font-family: "DK Crayon";
-      }
-
-      @font-face {
-          font-family: "DK Crayon";
-          src: url(/assets/DKCrayonCrumble.ttf);
-      }
-
-      .arrow-1 {
-          left: 18%;
-          /*position: absolute;*/
-          top: 20%;
-          /*margin-left: 18%;*/
-          /*margin-top: 27%;*/
-          position: absolute;
-      }
-
-      .arrow-2 {
-          left: 18%;
-          /*position: absolute;*/
-          top: 44%;
-          /*margin-left: 18%;*/
-          /*margin-top: 27%;*/
-          position: absolute;
-      }
-
-      .arrow-3 {
-          left: 18%;
-          position: absolute;
-          top: 56%;
-          /*margin-left: 18%;*/
-          /*margin-top: 31%;*/
-      }
-
-      .arrow-4 {
-          left: 18%;
-          position: absolute;
-          top: 63%;
-          /*margin-left: 18%;*/
-          /*margin-top: 36%;*/
-      }
-
-      .arrow-5 {
-          left: 18%;
-          position: absolute;
-          top: 69%;
-          /*margin-left: 18%;*/
-          /*margin-top: 40%;*/
-      }
-
-      .arrow-6 {
-          left: 18%;
-          position: absolute;
-          top: 74%;
-          /*margin-left: 18%;*/
-          /*margin-top: 44%;*/
-      }
-
-      .arrow-7 {
-          left: 61%;
-          position: fixed;
-          top: 10%;
-          /*margin-top: 5%;*/
-          /*margin-left: 61%;*/
-      }
-
-      .arrow-8 {
-          left: 70%;
-          position: fixed;
-          top: 10%;
-          /*margin-top: 5%;*/
-          /*margin-left: 70%;*/
-      }
-
-      .arrow-10 {
-          left: 80%;
-          position: fixed;
-          top: 10%;
-          /*margin-left: 79%;*/
-          /*margin-top: 5%;*/
-      }
-
-      .arrow-11 {
-          position: absolute;
-          top: 38%;
-          left: 78%;
-          /*margin-left: 80%;*/
-          /*margin-to/p: 25%;*/
-      }
-
-      #dashboard_hrs_remaining{
-          position: absolute;
-          top: 27%;
-          left: 78%;
-      }
-
-      .arrow-12 {
-          position: absolute;
-          top: 60%;
-          left: 78%;
-          /*margin-left: 80%;*/
-          /*margin-top: 40%;*/
-      }
-
-      #dashboard_invite_friend{
-          position: absolute;
-          top: 45%;
-          left: 78%;
-      }
-
-      .arrow-13 {
-          position: absolute;
-          top: 69%;
-          left: 78%;
-          /*margin-left: 80%;*/
-          /*margin-top: 45%;*/
-      }
-
-      #dashboard_try_quiz{
-          position: absolute;
-          top: 57%;
-          left: 78%;
-      }
-          .close_button{
-              position: absolute;
-              right: 2%;
-              top: 2%;
-              cursor: pointer;
-          }
-
-  </style>
 </head>
 <%= js add_gritter(flash[:notice], :image => '/assets/bulb_48_48.png', :title => "Notification!", :sticky => false, :time => 10000, :position => :bottom_left, :class_name => "gritter_style") %>
 <body>
+
+<div id="fb-root"></div>
+<script>
+    window.fbAsyncInit = function () {
+        FB.init({
+            appId: '305852526246421',
+            status: true, // check login status
+            cookie: true, // enable cookies to allow the server to access the session
+            xfbml: true  // parse XFBML
+        });
+
+        // Here we subscribe to the auth.authResponseChange JavaScript event. This event is fired
+        // for any authentication related change, such as login, logout or session refresh. This means that
+        // whenever someone who was previously logged out tries to log in again, the correct case below
+        // will be handled.
+        FB.Event.subscribe('auth.authResponseChange', function (response) {
+            // Here we specify what we do with the response anytime this event occurs.
+            if (response.status === 'connected') {
+                // The response object is returned with a status field that lets the app know the current
+                // login status of the person. In this case, we're handling the situation where they
+                // have logged in to the app.
+                //console.log("b4 calling testAPI(), response.authResponse.userID :- " + response.authResponse.userID);
+                testAPI();
+            } else if (response.status === 'not_authorized') {
+                // In this case, the person is logged into Facebook, but not into the app, so we call
+                // FB.login() to prompt them to do so.
+                // In real-life usage, you wouldn't want to immediately prompt someone to login
+                // like this, for two reasons:
+                // (1) JavaScript created popup windows are blocked by most browsers unless they
+                // result from direct interaction from people using the app (such as a mouse click)
+                // (2) it is a bad experience to be continually prompted to login upon page load.
+                FB.login();
+            } else {
+                // In this case, the person is not logged into Facebook, so we call the login()
+                // function to prompt them to do so. Note that at this stage there is no indication
+                // of whether they are logged into the app. If they aren't then they'll see the Login
+                // dialog right after they log in to Facebook.
+                // The same caveats as above apply to the FB.login() call here.
+                FB.login();
+            }
+        });
+    };
+
+    // Load the SDK asynchronously
+    (function (d) {
+        var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+        if (d.getElementById(id)) {
+            return;
+        }
+        js = d.createElement('script');
+        js.id = id;
+        js.async = true;
+        js.src = "//connect.facebook.net/en_US/all.js";
+        ref.parentNode.insertBefore(js, ref);
+    }(document));
+
+    // Here we run a very simple test of the Graph API after login is successful.
+    // This testAPI() function is only called in those cases.
+    function testAPI() {
+        //console.log('Welcome!  Fetching your information.... ');
+        FB.api('/me', function (response) {
+            //console.log('Good to see you, ' + response.name + '.');
+        });
+        //console.log("myCheck() called from testAPI()");
+        myCheck();
+    }
+
+    function myCheck() {
+        FB.getLoginStatus(function (response) {
+            if (response.status === 'connected') {
+                // the user is logged in and has authenticated your
+                // app, and response.authResponse supplies
+                // the user's ID, a valid access token, a signed
+                // request, and the time the access token
+                // and signed request each expire
+                var uid = response.authResponse.userID;
+                var accessToken = response.authResponse.accessToken;
+                //console.log("uid :- " + uid);
+            } else if (response.status === 'not_authorized') {
+                // the user is logged in to Facebook,
+                // but has not authenticated your app
+            } else {
+                // the user isn't logged in to Facebook.
+            }
+        });
+    }
+</script>
 
 <%= render "generic_partials/topbar" %>
 
@@ -279,6 +187,18 @@
         <p></p>
       </div>
     </div>
+
+    <div class="row">
+      <div class="col-xs-offset-11 col-sm-offset-11 col-md-offset-11 col-lg-offset-11 col-xs-1 col-sm-1 col-md-1 col-lg-1">
+        <!--<div class="fb-like" data-href="http://www.letshavecoffee.in/" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>-->
+
+        <div class="fb-share-div" onclick='share_result();' style="height: 25px; width: 10%; cursor: pointer;">
+          <img src="/assets/fbshare.png" style="height: 100%;">
+        </div>
+
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -486,7 +406,6 @@
             $('.buttonmenu').removeClass('active-btn');
             $('#send_message_btn').addClass('active-btn');
         }
-
 
         var user_first_visit = <%= current_user.first_visit %>
         if (user_first_visit == false){

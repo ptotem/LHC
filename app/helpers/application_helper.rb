@@ -1,5 +1,14 @@
 module ApplicationHelper
 
+  def current_layout
+    layout = controller.send(:_layout)
+    if layout.instance_of? String
+      layout
+    else
+      File.basename(layout.identifier).split('.').first
+    end
+  end
+
   def get_content_for(key)
     if SiteContent.find_by_key(key).nil?
       "Content Unavailable"

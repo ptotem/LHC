@@ -124,6 +124,10 @@ GEM
     mime-types (1.25.1)
     mini_portile (0.5.2)
     minitest (4.7.5)
+    mobileesp_converted (0.2.3)
+    mobvious (0.3.2)
+      mobileesp_converted (~> 0.2.0)
+      rack (>= 1.1.0)
     multi_json (1.8.4)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
@@ -265,6 +269,7 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   jquery-rails
   jquery-ui-rails
+  mobvious
   omniauth
   omniauth-facebook
   omniauth-linkedin

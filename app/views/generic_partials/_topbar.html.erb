@@ -52,8 +52,9 @@
         <span class="icon-bar"></span>
       </button>
       <% if user_signed_in? %>
-          <a class="navbar-brand " href="<%= my_dashboard_path %>">
-            <%= image_tag get_image_from_content('applogo'), :class => "img-responsive coffee-logo-styling", :id=>"lhc-logo"%>
+          <a class="navbar-brand mob-device-navbar-brand" href="<%= my_dashboard_path %>">
+            <%#= image_tag get_image_from_content('applogo'), :class => "img-responsive coffee-logo-styling", :id=>"lhc-logo"%>
+            <%= image_tag 'logo.png', :class => "img-responsive coffee-logo-styling", :id=>"lhc-logo"%>
           </a>
       <% else %>
           <a class="navbar-brand " href="/">
@@ -79,13 +80,19 @@
               <% end %>
             </li>
 
-            <!--<li class="dropdown">-->
-              <!--<%#= link_to "Tests <b class=caret></b>".html_safe, "#", :class => "dropdown-toggle", :data => {:toggle=>"dropdown"} %>-->
-              <!--<ul class="dropdown-menu">-->
-                <!--<li><a href="/tests">Relationship Tests</a></li>-->
-                <!--<li><a href="/take_test">Personality Test</a></li>-->
-              <!--</ul>-->
-            <!--</li>-->
+            <% if params[:action]=="profile_mobile" %>
+                <li class="dropdown">
+                  <a data-toggle="dropdown" class="dropdown-toggle" href="#">Navigation Menu <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Profile</a></li>
+                    <li><a href="#">Matches</a></li>
+                    <li><a href="#">Mutual Likes</a></li>
+                    <li><a href="#">Conversations</a></li>
+                    <li><a href="#">Snaz Me Up!</a></li>
+                  </ul>
+                </li>
+            <% end %>
+
 
             <li><a href="/about_us">About</a></li>
             <li>

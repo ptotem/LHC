@@ -1,8 +1,24 @@
 class DemographicsController < ApplicationController
   before_action :set_demographic, only: [:show, :edit, :update, :destroy]
-  layout 'dashboard_and_profile_layout'
+  #layout 'dashboard_and_profile_layout', only: [:profile]
+  #layout "profile_layout_mobile", only: [:profile_mobile]
 
+  #layout nil
+  #layout 'dashboard_and_profile_layout', :except => :profile_mobile
+  #layout 'profile_layout_mobile', :only => :profile_mobile
 
+  layout :resolve_layout
+
+  #private
+
+  def resolve_layout
+    puts "action_name :- #{action_name}"
+    if action_name == "profile"
+      "dashboard_and_profile_layout"
+    elsif action_name == "profile_mobile"
+      "profile_layout_mobile"
+    end
+  end
 
   # GET /demographics
   # GET /demographics.json
@@ -16,19 +32,30 @@ class DemographicsController < ApplicationController
   end
 
   def profile
-    @user_first_visit = current_user.first_visit
-    current_user.first_visit = true
-    current_user.save!
 
-    if current_user.id != params[:id].to_i
-      if !current_user.verified
-        redirect_to user_verification_path,:notice=> "Please verify yourself before you proceed"
-        return
+    if device_type == :mobile
+      #render :text => "render mobile pages"
+      #return
+      redirect_to profile_mobile_path
+    elsif device_type == :tablet
+      render :text => "render tablet pages"
+      return
+    else
+      #render :text => "render desktop pages"
+      #return
+      @user_first_visit = current_user.first_visit
+      current_user.first_visit = true
+      current_user.save!
 
+      if current_user.id != params[:id].to_i
+        if !current_user.verified
+          redirect_to user_verification_path,:notice=> "Please verify yourself before you proceed"
+          return
+
+        end
       end
-    end
-    if !User.where(:id=>params[:id]).first.nil?
-      #@user = User.find(params[:id])
+      if !User.where(:id=>params[:id]).first.nil?
+        #@user = User.find(params[:id])
         @user = User.where(:id=>params[:id]).first
         c=0;
         if @user.movies.count >=5
@@ -80,10 +107,89 @@ class DemographicsController < ApplicationController
         #render :text => @user_quizzes
         #return
 
+      else
+        #redirect_to user_profile_path(current_user.id)
+        respond_to do |format|
+          format.html { redirect_to user_profile_path(current_user.id), notice: 'User not found.' }
+        end
+      end
+
+    end
+
+  end
+
+  def profile_mobile
+    #render :text => "profile_mobile"
+    #return
+
+    @user_first_visit = current_user.first_visit
+    current_user.first_visit = true
+    current_user.save!
+
+    if current_user.id != params[:id].to_i
+      if !current_user.verified
+        redirect_to user_verification_path,:notice=> "Please verify yourself before you proceed"
+        return
+
+      end
+    end
+    if !User.where(:id=>params[:id]).first.nil?
+      #@user = User.find(params[:id])
+      @user = User.where(:id=>params[:id]).first
+      c=0;
+      if @user.movies.count >=5
+        c = c+10
+      end
+      if @user.songs.count >=5
+        c = c+10
+      end
+      if @user.books.count >=5
+        c = c+10
+      end
+
+      @profileStatus = c+50;
+      eachQuizWeight = 20/Quiz.all.count
+
+      @user_name = @user.demographic.name
+      @user_nick_name = @user.demographic.nickname
+      if @user.demographic.male?
+        @user_gender = "Male"
+      else
+        @user_gender = "Female"
+      end
+      @user_age = @user.age rescue nil
+      @user_religion = @user.demographic.religion rescue ""
+      @user_current_student = @user.demographic.current_student
+      @user_smoking = @user.demographic.smoking rescue ""
+      @user_drinking = @user.demographic.drinking rescue ""
+      @user_desc = @user.demographic.description rescue ""
+      @user_location = @user.demographic.location rescue ""
+      @user_goal = @user.demographic.goal rescue ""
+      @user_profession = @user.profession.name rescue ""
+      @user_last_institute_id = @user.demographic.last_institute rescue nil?
+      @user_last_institute_name = Institution.find(@user_last_institute_id).name rescue ""
+
+      #render :text => @user_last_institute_name
+      #return
+      @user_email = @user.email
+
+      @user_quizzes = Array.new
+      @user_quiz_ans_questions = @user.quiz_answers.map(&:question_id)
+      @user_quiz_ans_questions.each do |q|
+        if !Question.find(q).quizzes.first.quiz_category.personal
+          @user_quizzes << Question.find(q).quizzes.first
+        end
+        #@user_quizzes << q.quizzes.map(&:name)
+      end
+      @user_quizzes = @user_quizzes.uniq
+      @profileStatus = @profileStatus + @user_quizzes.count*eachQuizWeight
+      #render :text => @user_quizzes
+      #return
+
     else
       #redirect_to user_profile_path(current_user.id)
       respond_to do |format|
-          format.html { redirect_to user_profile_path(current_user.id), notice: 'User not found.' }
+        format.html { redirect_to user_profile_path(current_user.id), notice: 'User not found.' }
       end
     end
 

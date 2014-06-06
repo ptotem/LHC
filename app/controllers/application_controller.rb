@@ -6,6 +6,10 @@ class ApplicationController < ActionController::Base
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  helper_method :device_type
+  def device_type
+    request.env['mobvious.device_type']
+  end
 
   rescue_from CanCan::AccessDenied do |exception|
     flash[:alert] = "Access denied."
