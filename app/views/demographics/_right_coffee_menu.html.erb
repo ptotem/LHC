@@ -11,8 +11,6 @@
             <%= get_content_for('message') %>
           </div>
           <% end %>
-
-
       <% else %>
       <img src="/assets/cup_empty.png" alt="" class="img-responsive pull-right" style="margin-top: 20%;margin-bottom: 10%;"/>
       <div style="margin-top:10%">
@@ -27,8 +25,6 @@
 <div class="row" style="margin-top: 10%">
   <% if get_like_status(params[:id]) %>
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-left: -3%">
-
-
         <% if !check_icebreaker_status(params[:id]) %>
       <div class="col-lg-3 col-lg-offset-3 ">
         <!--<button onclick="window.location = '<%#= reject_request_url(m.target_id) %>'" class="transparent-background-btn"><i class="fa fa-thumbs-down icon_font_size thumb_down_color"></i></button>-->
@@ -46,13 +42,38 @@
       <!--indicates all mutual likes-->
 
   <% else %>
-      <div class="col-lg-2 col-lg-offset-1">
-        <button title="Send like request" onclick="window.location = '<%= user_like_path(params[:id]) %>'" class="transparent-background-btn" style="border-radius: 50%; padding: 30%;background: white;color:#38c8e0"><i class="fa fa-thumbs-up fa-3x "></i></button>
-      </div>
-      <div class="col-lg-2 col-lg-offset-5">
-        <!--<button onclick="window.location = '<%#= reject_request_url(m.target_id) %>'" class="transparent-background-btn"><i class="fa fa-thumbs-down icon_font_size thumb_down_color"></i></button>-->
-        <button title="Reject the match" onclick="window.location = '<%= reject_match_path(params[:id]) %>'" class="transparent-background-btn" style="border-radius: 50%; padding: 30%;background: white;color:#38c8e0"><i class="fa fa-thumbs-down fa-3x "></i></button>
-      </div>
+
+      <% if Like.find_by_receiver_id_and_sender_id(params[:id],current_user.id).nil? and Like.find_by_receiver_id_and_sender_id(current_user.id,params[:id]).nil? %>
+          <div class="col-lg-2 col-lg-offset-1">
+            <button title="Like the match" onclick="window.location = '<%= user_like_path(params[:id]) %>'" class="transparent-background-btn" style="border-radius: 50%; padding: 30%;background: white;color:#38c8e0"><i class="fa fa-thumbs-up fa-3x "></i></button>
+          </div>
+          <div class="col-lg-2 col-lg-offset-5">
+            <button title="Reject the match" onclick="window.location = '<%= reject_match_path(params[:id]) %>'" class="transparent-background-btn" style="border-radius: 50%; padding: 30%;background: white;color:#38c8e0"><i class="fa fa-thumbs-down fa-3x "></i></button>
+          </div>
+      <% else %>
+          <% if !Like.find_by_receiver_id_and_sender_id(params[:id],current_user.id).nil? %>
+            <% if Like.find_by_receiver_id_and_sender_id(params[:id],current_user.id).status == false %>
+              <div class="col-lg-2 col-lg-offset-5">
+                <button title="Reject the match" onclick="window.location = '<%= reject_match_path(params[:id]) %>'" class="transparent-background-btn" style="border-radius: 50%; padding: 30%;background: white;color:#38c8e0"><i class="fa fa-thumbs-down fa-3x "></i></button>
+              </div>
+            <% end %>
+           <% end %>
+
+          <% if !Like.find_by_receiver_id_and_sender_id(current_user.id,params[:id]).nil? %>
+              <% if Like.find_by_receiver_id_and_sender_id(current_user.id,params[:id]).status == false %>
+                  <div class="col-lg-2 col-lg-offset-1">
+                    <button title="Like the match" onclick="window.location = '<%=  accept_request_path(Like.find_by_receiver_id_and_sender_id(current_user.id,params[:id]).id) %>'" class="transparent-background-btn" style="border-radius: 50%; padding: 30%;background: white;color:#38c8e0"><i class="fa fa-thumbs-up fa-3x "></i></button>
+                  </div>
+                  <div class="col-lg-2 col-lg-offset-5">
+                    <button title="Reject the match" onclick="window.location = '<%= reject_match_path(params[:id]) %>'" class="transparent-background-btn" style="border-radius: 50%; padding: 30%;background: white;color:#38c8e0"><i class="fa fa-thumbs-down fa-3x "></i></button>
+                  </div>
+              <% end %>
+          <% end %>
+
+      <% end %>
+
+
+
       <% end %>
 
 </div>

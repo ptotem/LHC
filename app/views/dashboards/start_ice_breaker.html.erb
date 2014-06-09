@@ -26,7 +26,13 @@
       min-width: 21% ! important;
       color: black;
       font-size: 0.8em;
+      margin-left: -114px;
   }
+
+  .popover.bottom .arrow{
+      left:92%;
+  }
+
 
   .popover h3 {
       color: #000000;
@@ -41,10 +47,10 @@
 
 <script>
   $(function(){
+
+
       $('.font_awesome_ice_breaker').popover({
           html: true
-
-
       });
 
 //      $('.font_awesome_ice_breaker').on('click', function (e) {
@@ -81,7 +87,7 @@
                           <% e.options.each do |o| %>
                               <% @option = @option+"<li>"+o.name+"</li>" %>
                           <% end %>
-                          <i class="fa fa-info-circle  font_awesome_ice_breaker pop_over_style" data-placement="left" data-content="<ul><%= @option %></ul>" title="" data-toggle="popover" data-original-title="Options"></i>
+                          <i class="fa fa-info-circle  font_awesome_ice_breaker pop_over_style" data-placement="bottom" data-content="<ul><%= @option %></ul>" title="" data-toggle="popover" data-original-title="Options"></i>
                         </h4>
                       </div>
                       <% end %>

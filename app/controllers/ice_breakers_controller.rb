@@ -25,20 +25,38 @@ class IceBreakersController < ApplicationController
   # POST /ice_breakers
   # POST /ice_breakers.json
   def create
-
     question_count = 0
-    @ice_breaker = IceBreaker.create!(:receiver_id=>params[:ice_breaker][:receiver_id],:sender_id=>params[:ice_breaker][:sender_id],:ice_status => true)
-    params[:ice_breaker][:questions].each do |q|
-    if q[1].to_i == 1
-      question_count = question_count+1
-      @ice_breaker.questions << Question.find(q[0])
+
+
+
+    if IceBreaker.find_by_sender_id_and_receiver_id(params[:ice_breaker][:sender_id],params[:ice_breaker][:receiver_id]).nil? and IceBreaker.find_by_sender_id_and_receiver_id(params[:ice_breaker][:receiver_id],params[:ice_breaker][:sender_id]).nil?
+      @ice_breaker = IceBreaker.create!(:receiver_id=>params[:ice_breaker][:receiver_id],:sender_id=>params[:ice_breaker][:sender_id],:ice_status => true)
+    else
+      if !IceBreaker.find_by_sender_id_and_receiver_id(params[:ice_breaker][:sender_id],params[:ice_breaker][:receiver_id]).nil?
+        if IceBreaker.find_by_sender_id_and_receiver_id(params[:ice_breaker][:sender_id],params[:ice_breaker][:receiver_id]).ice_status == true
+          redirect_to user_profile_path(params[:ice_breaker][:receiver_id]), notice: 'Ice Breaker already sent'
+          return
+        end
+      end
+      if !IceBreaker.find_by_sender_id_and_receiver_id(params[:ice_breaker][:receiver_id],params[:ice_breaker][:sender_id]).nil?
+        if IceBreaker.find_by_sender_id_and_receiver_id(params[:ice_breaker][:receiver_id],params[:ice_breaker][:sender_id]).ice_status == true
+          redirect_to user_profile_path(params[:ice_breaker][:receiver_id]), notice: 'Ice Breaker already sent'
+          return
+        end
+      end
     end
+
+    params[:ice_breaker][:questions].each do |q|
+      if q[1].to_i == 1
+        question_count = question_count+1
+        @ice_breaker.questions << Question.find(q[0])
+      end
     end
 
     if question_count > 5 or question_count < 5
-    @ice_breaker.destroy!
-    redirect_to start_ice_breaker_path(params[:ice_breaker][:receiver_id]) ,:notice=>"Ice-breaker not created, please select exactly 5 questions."
-    return
+      @ice_breaker.destroy!
+      redirect_to start_ice_breaker_path(params[:ice_breaker][:receiver_id]) ,:notice=>"Ice-breaker not created, please select exactly 5 questions."
+      return
     end
     Notification.create!(:content=>"#{current_user.demographic.nickname} has sent you a ice-breaker", :user_id=>params[:ice_breaker][:receiver_id], :pointer_link=>answer_icebreaker_path(@ice_breaker.id,@ice_breaker.questions.first.id),:sender_id => params[:ice_breaker][:sender_id])
 

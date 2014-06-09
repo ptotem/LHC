@@ -38,10 +38,12 @@
                 </div>
                 <div class="right-part">
                   <div class="recentactivitydate">
-                    <%= e.created_at.strftime("%d %B %Y") %>
+                    <% if e.like_type == "Timed" %>
+                        <b><%=  ((3.days.since(e.created_at) - Time.now)/3600).to_i %></b><br> hours left to respond
+                    <% else %>
+                        <%= e.created_at.strftime("%d %B %Y") %>
+                    <% end %>
                     <div class="pull-right">
-
-
                       <% if e.status %>
                           <button onclick="window.location = '<%= reject_request_url(e.id) %>'" class="transparent-background-btn">
                             <i class="fa fa-thumbs-down red fa-3x"></i></button>
@@ -215,22 +217,22 @@
 </div>
 
 
-<div class="modal fade" id="matching_content">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title black">Wait</h4>
-      </div>
-      <div class="modal-body">
-        <p>We've launched just today so it will take us a little bit of time to generate your matches. So sit tight, and expect to hear back from us shortly!"</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Got it!</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+<!--<div class="modal fade" id="matching_content">-->
+  <!--<div class="modal-dialog">-->
+    <!--<div class="modal-content">-->
+      <!--<div class="modal-header">-->
+        <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>-->
+        <!--<h4 class="modal-title black">Wait</h4>-->
+      <!--</div>-->
+      <!--<div class="modal-body">-->
+        <!--<p>We've launched just today so it will take us a little bit of time to generate your matches. So sit tight, and expect to hear back from us shortly!"</p>-->
+      <!--</div>-->
+      <!--<div class="modal-footer">-->
+        <!--<button type="button" class="btn btn-default" data-dismiss="modal">Got it!</button>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
 
 
 

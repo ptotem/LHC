@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140531174421) do
+ActiveRecord::Schema.define(version: 20140602092311) do
 
   create_table "about_lists", force: true do |t|
     t.string   "name"
@@ -175,6 +175,7 @@ ActiveRecord::Schema.define(version: 20140531174421) do
     t.boolean  "status",      default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "like_type"
   end
 
   create_table "messages", force: true do |t|

@@ -23,76 +23,84 @@
     </div>
     <div class="row">
       <div class="col-md-8  col-sm-8 col-lg-8 col-xs-8 icons-background-image">
-        <div class="row">
+            <% if @quizzes.blank? %>
+                <h1><%= get_content_for("no-quiz-taken") %></h1>
+            <% else %>
+            <div class="row">
 
-          <% @quizzes.each_with_index do |e,index| %>
-              <% if index==4 or index ==6 %>
-                  </div>
-                  <div class="row">
+              <% @quizzes.each_with_index do |e,index| %>
+                  <% if index==4 or index ==6 %>
+                      </div>
+                      <div class="row">
                   <% end %>
 
-                <% if index < 4 or index > 5 %>
-                  <div class="col-md-3 col-sm-3 col-lg-3 col-xs-3">
-                    <img src=<%= get_image_from_content("quiz-" + e.name) %>>
-                    <p><%= QuizResult.where("quiz_id = ? and ? BETWEEN min_value AND max_value", e.id, e.calculate_total_score_for(params[:id])).first.name rescue "NA"%></p>
-                  </div>
+                  <% if index < 4 or index > 5 %>
+                      <div class="col-md-3 col-sm-3 col-lg-3 col-xs-3">
+                        <img src=<%= get_image_from_content("quiz-" + e.name) %>>
+                        <p><%= QuizResult.where("quiz_id = ? and ? BETWEEN min_value AND max_value", e.id, e.calculate_total_score_for(params[:id])).first.name rescue "NA"%></p>
+                      </div>
 
                   <% else %>
-                    <div class="col-md-6 col-sm-6 col-lg-6 col-xs-6">
-                      <img src="/assets/mature1.png">
-                      <p>We don't know yet</p>
-                    </div>
-                <% end %>
-          <% end %>
+                      <div class="col-md-6 col-sm-6 col-lg-6 col-xs-6">
+                        <img src="/assets/mature1.png">
+                        <p>We don't know yet</p>
+                      </div>
+                  <% end %>
+              <% end %>
 
-          <!--<div class="col-md-3 col-sm-3 col-lg-3 col-xs-3">-->
-            <!--<img src="/assets/Expressive.png">-->
-            <!--<p>Very Expressive</p>-->
-          <!--</div>-->
-          <!--<div class="col-md-3 col-sm-3 col-lg-3 col-xs-3">-->
-            <!--<img src="/assets/careing.png">-->
-            <!--<p>Moderately caring</p>-->
-          <!--</div>-->
-          <!--<div class="col-md-3 col-sm-3 col-lg-3 col-xs-3">-->
-            <!--<img src="/assets/Romantic.png">-->
-            <!--<p>Less Romantic</p>-->
+              <!--<div class="col-md-3 col-sm-3 col-lg-3 col-xs-3">-->
+              <!--<img src="/assets/Expressive.png">-->
+              <!--<p>Very Expressive</p>-->
+              <!--</div>-->
+              <!--<div class="col-md-3 col-sm-3 col-lg-3 col-xs-3">-->
+              <!--<img src="/assets/careing.png">-->
+              <!--<p>Moderately caring</p>-->
+              <!--</div>-->
+              <!--<div class="col-md-3 col-sm-3 col-lg-3 col-xs-3">-->
+              <!--<img src="/assets/Romantic.png">-->
+              <!--<p>Less Romantic</p>-->
 
-          <!--</div>-->
-          <!--<div class="col-md-3 col-sm-3 col-lg-3 col-xs-3">-->
-            <!--<img src="/assets/sapiosexual.png">-->
-            <!--<p>Definately Sapiosexual</p>-->
-          <!--</div>-->
-        <!--</div>-->
-        <!--<div class="row">-->
-          <!--<div class="col-md-6 col-sm-6 col-lg-6 col-xs-6">-->
-            <!--<img src="/assets/mature1.png">-->
-            <!--<p>We don't know yet</p>-->
-          <!--</div>-->
-          <!--<div class="col-md-6 col-sm-6 col-lg-6 col-xs-6">-->
-            <!--<img src="/assets/openness.png">-->
-            <!--<p>We don't know yet</p>-->
-          <!--</div>-->
-        <!--</div>-->
-        <!--<div class="row">-->
-          <!--<div class="col-md-3 col-sm-3 col-lg-3 col-xs-3">-->
-            <!--<img src="/assets/Humorous.png">-->
-            <!--<p>Less Humurous</p>-->
-          <!--</div>-->
-          <!--<div class="col-md-3 col-sm-3 col-lg-3 col-xs-3">-->
-            <!--<img src="/assets/grammarnazi.png">-->
-            <!--<p>Budding Grammer Nazi</p>-->
-          <!--</div>-->
-          <!--<div class="col-md-3 col-sm-3 col-lg-3 col-xs-3">-->
-            <!--<img src="/assets/Stress.png">-->
-            <!--<p>Very Streesed</p>-->
-          <!--</div>-->
-          <!--<div class="col-md-3 col-sm-3 col-lg-3 col-xs-3">-->
-            <!--<img src="/assets/Agreessive.png">-->
-            <!--<p>Moderately Agressive </p>-->
-          <!--</div>-->
-        <!--</div>-->
-      </div>
+              <!--</div>-->
+              <!--<div class="col-md-3 col-sm-3 col-lg-3 col-xs-3">-->
+              <!--<img src="/assets/sapiosexual.png">-->
+              <!--<p>Definately Sapiosexual</p>-->
+              <!--</div>-->
+              <!--</div>-->
+              <!--<div class="row">-->
+              <!--<div class="col-md-6 col-sm-6 col-lg-6 col-xs-6">-->
+              <!--<img src="/assets/mature1.png">-->
+              <!--<p>We don't know yet</p>-->
+              <!--</div>-->
+              <!--<div class="col-md-6 col-sm-6 col-lg-6 col-xs-6">-->
+              <!--<img src="/assets/openness.png">-->
+              <!--<p>We don't know yet</p>-->
+              <!--</div>-->
+              <!--</div>-->
+              <!--<div class="row">-->
+              <!--<div class="col-md-3 col-sm-3 col-lg-3 col-xs-3">-->
+              <!--<img src="/assets/Humorous.png">-->
+              <!--<p>Less Humurous</p>-->
+              <!--</div>-->
+              <!--<div class="col-md-3 col-sm-3 col-lg-3 col-xs-3">-->
+              <!--<img src="/assets/grammarnazi.png">-->
+              <!--<p>Budding Grammer Nazi</p>-->
+              <!--</div>-->
+              <!--<div class="col-md-3 col-sm-3 col-lg-3 col-xs-3">-->
+              <!--<img src="/assets/Stress.png">-->
+              <!--<p>Very Streesed</p>-->
+              <!--</div>-->
+              <!--<div class="col-md-3 col-sm-3 col-lg-3 col-xs-3">-->
+              <!--<img src="/assets/Agreessive.png">-->
+              <!--<p>Moderately Agressive </p>-->
+              <!--</div>-->
+              <!--</div>-->
+              </div>
+            <% end %>
+
+
+
     </div>
 
   </div>
+</div>
 </div>

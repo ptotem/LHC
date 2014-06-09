@@ -114,29 +114,10 @@ module ApplicationHelper
         end
       end
         return (final_verdict_sent and final_verdict_rec)
-
-      #
-      #if IceBreaker.find_by_sender_id_and_receiver_id(uid,current_user.id).nil?
-      #  if IceBreaker.find_by_sender_id_and_receiver_id(current_user.id,uid).nil?
-      #    return false
-      #  else
-      #    i=IceBreaker.find_by_sender_id_and_receiver_id(current_user.id,uid)
-      #    if i.ice_status == true
-      #      if i.icebreaker_answers.where(:ice_ans_status => false).blank?
-      #        final_verdict = true
-      #      end
-      #    end
-      #  end
-      #else
-      #  i=IceBreaker.find_by_sender_id_and_receiver_id(uid,current_user.id)
-      #  if i.ice_status == true
-      #    if i.icebreaker_answers.where(:ice_ans_status => false).blank?
-      #      final_verdict = true
-      #    end
-      #  end
-      #end
     end
   end
+
+
   def get_like_status(uid)
     if !Like.where(:sender_id => current_user.id, :receiver_id => uid).first.nil?
       return Like.where(:sender_id => current_user.id, :receiver_id => uid).first.status

@@ -41,9 +41,20 @@ class DashboardsController < ApplicationController
     @user.notifications.each do |n|
       n.notification_seen = true
       n.save!
+
+      if ((((3.days.since(n.created_at) - Time.now)/3600).to_i ) <= 0)
+        n.destroy
+      end
     end
 
     @like_requests = Like.where(:receiver_id => current_user.id,:status=>false) rescue nil?
+
+
+    @like_requests.each do |e|
+     if ((((3.days.since(e.created_at) - Time.now)/3600).to_i ) <= 0)
+        e.destroy
+     end
+    end
 
     #render :json => @like_requests
     #return
@@ -154,6 +165,7 @@ class DashboardsController < ApplicationController
   #end
 
     @current_user_quick_matches = BaseMatch.where(:user_id=>current_user.id,:match_status => true)
+
     @mutual_likes =Array.new
     User.all.each do |u|
       if !get_like_status(u.id).nil?
@@ -339,8 +351,7 @@ class DashboardsController < ApplicationController
       @opposite_user_ans_name << Option.find(ouda).name
     end
 
-  @quizzes=QuizCategory.where(:personal => 't').first.quizzes
-  @quizzes=QuizCategory.where(:personal => 't').first.quizzes
+  @quizzes=QuizCategory.where(:personal => 't').first.quizzes rescue []
 
 
 
@@ -390,7 +401,7 @@ class DashboardsController < ApplicationController
       redirect_to user_profile_path(@receiver_id),:notice=>"Like request already sent !"
       return
     else
-      @like=Like.create(:receiver_id => @receiver_id,:sender_id => @sender_id,:status => false)
+      @like=Like.create(:receiver_id => @receiver_id,:sender_id => @sender_id,:status => false,:like_type => "Timed")
       Notification.create!(:content=>"You have liked "+User.find(@receiver_id).demographic.nickname, :user_id=>current_user.id, :pointer_link=>user_profile_path(@receiver_id),:sender_id => @receiver_id,:notification_type=>"Timed")
       #render :text => "Request  Sent"
       #return
