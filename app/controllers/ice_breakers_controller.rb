@@ -29,7 +29,7 @@ class IceBreakersController < ApplicationController
 
 
 
-    if IceBreaker.find_by_sender_id_and_receiver_id(params[:ice_breaker][:sender_id],params[:ice_breaker][:receiver_id]).nil? and IceBreaker.find_by_sender_id_and_receiver_id(params[:ice_breaker][:receiver_id],params[:ice_breaker][:sender_id]).nil?
+    if IceBreaker.find_by_sender_id_and_receiver_id(params[:ice_breaker][:sender_id],params[:ice_breaker][:receiver_id]).nil? or IceBreaker.find_by_sender_id_and_receiver_id(params[:ice_breaker][:receiver_id],params[:ice_breaker][:sender_id]).nil?
       @ice_breaker = IceBreaker.create!(:receiver_id=>params[:ice_breaker][:receiver_id],:sender_id=>params[:ice_breaker][:sender_id],:ice_status => true)
     else
       if !IceBreaker.find_by_sender_id_and_receiver_id(params[:ice_breaker][:sender_id],params[:ice_breaker][:receiver_id]).nil?
