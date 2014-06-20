@@ -89,6 +89,7 @@ Lhc::Application.routes.draw do
 
   get '/user_verification', to: 'dashboards#user_verification', as: :user_verification
   match '/verify_user_institute_email', to: 'dashboards#verify_user_institute_email', via: [:post]
+  get '/start_verify_user_institute_email/:user_id/:token', to: 'dashboards#start_verify_user_institute_email', as: :start_verifying_user
   match '/verify_user_linkedin_url', to: 'dashboards#verify_user_linkedin_url', via: [:post]
   match '/upload_user_doc', to: 'dashboards#upload_user_doc', via: [:post]
 
@@ -118,6 +119,8 @@ Lhc::Application.routes.draw do
   match '/delete_user_movie', to: 'demographics#delete_user_movie', via: [:get, :post]
   match '/delete_user_book', to: 'demographics#delete_user_book', via: [:get, :post]
   match '/delete_user_song', to: 'demographics#delete_user_song', via: [:get, :post]
+  match '/delete_user_quiz', to: 'demographics#delete_user_quiz', via: [:get, :post]
+  match '/add_user_quiz', to: 'demographics#add_user_quiz', via: [:get, :post]
 
   match '/search_music_gmusic', to: 'demographics#search_music_gmusic', via: [:get, :post]
   match '/search_music_by_lastfm', to: 'demographics#search_music_by_lastfm', via: [:get, :post]

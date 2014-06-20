@@ -1,0 +1,5 @@
+<p>Welcome <%= @email %>! You can verify your academic credentials by clicking the link below</p>
+<p><%= link_to 'Verify Institute Credentials', "http://www.letshavecoffee.in/start_verify_user_institute_email/"+@current_user.id.to_s+"/"+@current_user.institutional_mail %></p>
+<br>
+<p>Cheers!</p>
+<p>Team LHC</p>

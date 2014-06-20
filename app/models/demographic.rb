@@ -22,7 +22,7 @@ class Demographic < ActiveRecord::Base
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
   belongs_to :user
 
-  #validates_presence_of :male, :nickname, :last_institute
-  #validates_inclusion_of :male, :in => [true, false]
+  validates_presence_of :nickname,:last_institute
+  validates_inclusion_of :male, :in => [true, false]
 
 end

@@ -82,12 +82,32 @@ class DashboardsController < ApplicationController
     #@user = current_user
     @user = User.find(params[:user][:user_id])
     @user.verification_text = params[:user][:verification_text]
-    @user.verification_request_sent = true
     @user.verification_request_sent_at = Time.now.to_i
+    @user.institutional_mail = Devise.friendly_token
     @user.save!
-    #redirect_to "/profile/#{@user.id}"
-    redirect_to user_profile_path(current_user.id),:notice => "Your institute mail is saved for verification."
+    extracted_email= @user.verification_text.split("@").last
+    domain_array=DomainName.all.map(&:name)
+    if domain_array.any?{|s| s.include?(extracted_email)}
+      @user.verification_request_sent = true
+      @user.save!
+      VerMailer.ver_email(@user.verification_text,@user).deliver
+      redirect_to user_profile_path(current_user.id),:notice => "Your institute mail is saved for verification."
+    else
+      @user.verification_request_sent = false
+      @user.save!
+      redirect_to user_profile_path(@user.id),:notice => "Please enter a valid institute email id"
+    end
   end
+
+  def start_verify_user_institute_email
+    @user = User.find(params[:user_id])
+    if @user.institutional_mail == params[:token]
+      @user.verified = true
+      @user.save!
+      redirect_to user_profile_path(@user.id),:notice => "You are Verified Now."
+    end
+  end
+
 
   def verify_user_linkedin_url
     #@user = current_user
