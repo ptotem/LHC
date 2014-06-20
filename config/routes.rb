@@ -136,6 +136,8 @@ Lhc::Application.routes.draw do
 
   get '/users/auth/:provider/callback' => 'authentications#create'
 
+  get '/import_domain', to: 'dashboards#import_domain_name' ,as: :domain_name
+  match '/import_domain_name', to: 'dashboards#importing_institute' ,as: :importing, via: [:get, :post]
 
 
 

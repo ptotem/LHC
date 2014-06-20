@@ -26,6 +26,7 @@ gem 'coffee-rails', '~> 4.0.0'
 
 gem 'execjs'
 gem 'therubyracer'
+gem 'roo'
 
 
 # Use jquery as the JavaScript library

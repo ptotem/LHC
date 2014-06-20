@@ -88,14 +88,19 @@ class DashboardsController < ApplicationController
     extracted_email= @user.verification_text.split("@").last
     domain_array=DomainName.all.map(&:name)
     if domain_array.any?{|s| s.include?(extracted_email)}
+      @inst= DomainName.where(:name => extracted_email).first
+      if @inst.institute_name == Institution.find(@user.demographic.last_institute).name
       @user.verification_request_sent = true
       @user.save!
       VerMailer.ver_email(@user.verification_text,@user).deliver
-      redirect_to user_profile_path(current_user.id),:notice => "Your institute mail is saved for verification."
+        redirect_to user_profile_path(current_user.id),:notice => "An email has been sent for verification."
+      else
+        redirect_to user_verification_path,:notice => "Please enter a valid institute email id"
+      end
     else
       @user.verification_request_sent = false
       @user.save!
-      redirect_to user_profile_path(@user.id),:notice => "Please enter a valid institute email id"
+      redirect_to user_verification_path,:notice => "Please enter a valid institute email id"
     end
   end
 
@@ -104,7 +109,7 @@ class DashboardsController < ApplicationController
     if @user.institutional_mail == params[:token]
       @user.verified = true
       @user.save!
-      redirect_to user_profile_path(@user.id),:notice => "You are Verified Now."
+      redirect_to user_profile_path(@user.id),:notice => "Your academic credentials have been verified."
     end
   end
 
@@ -511,6 +516,15 @@ class DashboardsController < ApplicationController
     redirect_to quick_matches_path, notice: 'You have blocked the user.'
   end
 
+  def importing_institute
+    if request.post? && params[:file].present?
+      DomainName.import(params[:file])
+      #redirect_to '/employee_masters', notice: "Slides imported."
+    else
+      redirect_to '/', notice: "Slides couldn't be imported."
+    end
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -522,6 +536,12 @@ class DashboardsController < ApplicationController
     def dashboard_params
       params[:dashboard]
     end
+
+
+  def import_domain_name
+    render :layout => false
+  end
+
 
 
 end

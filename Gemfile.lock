@@ -213,7 +213,13 @@ GEM
     remotipart (1.2.1)
     rest-client (1.6.7)
       mime-types (>= 1.16)
+    roo (1.13.2)
+      nokogiri
+      rubyzip
+      spreadsheet (> 0.6.4)
     ruby-imagespec (0.3.1)
+    ruby-ole (1.2.11.7)
+    rubyzip (1.1.4)
     safe_yaml (0.9.7)
     sass (3.2.14)
     sass-rails (4.0.1)
@@ -223,6 +229,8 @@ GEM
     sdoc (0.4.0)
       json (~> 1.8)
       rdoc (~> 4.0, < 5.0)
+    spreadsheet (0.9.7)
+      ruby-ole (>= 1.0)
     sprockets (2.11.0)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -283,6 +291,7 @@ DEPENDENCIES
   rails_admin (= 0.6.0)
   rails_admin_import (= 0.1.8)
   rails_log_stdout!
+  roo
   sass-rails (~> 4.0.0)
   sdoc
   themoviedb (~> 0.0.21)
