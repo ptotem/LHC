@@ -547,15 +547,39 @@ input[type="radio"] + .custom-radio-btn.opposite_user_gender {
     display: block;
 }
 
-.edit-profile-delete-quiz-item-block,.edit-profile-add-quiz-item-block  {
+
+.edit-profile-profile-citem:hover > .edit-profile-delete-quiz-item-block{
+    display: block;
+}
+
+.edit-profile-profile-citem:hover > .edit-profile-add-quiz-item-block{
+    display: block;
+}
+
+.edit-profile-delete-quiz-item-block {
     background-color: #38C8E0;
     color: #FFFFFF;
     cursor: pointer;
     font-weight: bold;
     padding: 0 4px;
     position: absolute;
-    right: 30%;
+    right: 23%;
     top: 1%;
+    display: none;
+
+}
+
+.edit-profile-add-quiz-item-block {
+    background-color: #38C8E0;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 0 4px;
+    position: absolute;
+    right: 21%;
+    top: 1%;
+    display: none;
+    font-size: 1.4em;
 }
 /*.edit-profile-music-item:hover > .edit-profile-delete-music-item-block{*/
 /*display: block;*/
