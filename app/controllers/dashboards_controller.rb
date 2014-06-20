@@ -297,17 +297,28 @@ class DashboardsController < ApplicationController
 
 
   def conversations_with_users
+
     @target_user = User.find(params[:id])
 
-    @messages = current_user.sent_messages.map{|m|m if m.receiver_id == @target_user.id } + current_user.received_messages.map{|m| m if m.sender_id == @target_user.id }
-    @messages.compact!
 
-    if !@messages.blank?
-      @messages = @messages.sort{|m1,m2| m1.created_at <=> m2.created_at}
-    end
-    @messages.reverse!
-    #render :text=>@messages
+    #render :text => !RejectedMatch.where(:rejected_target=>@target_user, :user_id=>current_user.id).first.nil?
     #return
+
+    if RejectedMatch.where(:rejected_target=>@target_user, :user_id=>current_user.id).first.nil?
+      @messages = current_user.sent_messages.map{|m|m if m.receiver_id == @target_user.id } + current_user.received_messages.map{|m| m if m.sender_id == @target_user.id }
+      @messages.compact!
+
+      if !@messages.blank?
+        @messages = @messages.sort{|m1,m2| m1.created_at <=> m2.created_at}
+      end
+      @messages.reverse!
+      #render :text=>@messages
+      #return
+    else
+      redirect_to user_profile_path(current_user.id), notice: 'You have blocked the user.'
+    end
+
+
 
   end
 
@@ -479,10 +490,25 @@ class DashboardsController < ApplicationController
     #render :json => params[:id]
     #return
     @base_match = BaseMatch.find(params[:id])
+    #render :json => @base_match
+    #return
     @rejected_match = RejectedMatch.create(:rejected_target=>@base_match.target_id, :user_id=>current_user.id)
     @rejected_match.save!
     @base_match.destroy
     redirect_to quick_matches_path, notice: 'You have rejected the request.'
+  end
+
+  def block_user
+    @user_to_be_blocked = params[:id]
+    #render :text => @user_to_be_blocked
+    #return
+    @base_match = BaseMatch.where(:user_id => current_user.id, :target_id => @user_to_be_blocked).first
+    #render :json => @base_match
+    #return
+    @rejected_match = RejectedMatch.create(:rejected_target=>@base_match.target_id, :user_id=>current_user.id)
+    @rejected_match.save!
+    @base_match.destroy
+    redirect_to quick_matches_path, notice: 'You have blocked the user.'
   end
 
 

@@ -132,6 +132,7 @@ Lhc::Application.routes.draw do
   get '/accept_request/:id', to: 'dashboards#accept_request', as: :accept_request
   get '/reject_request/:id', to: 'dashboards#reject_request', as: :reject_request
   match '/reject_match/:id', to: 'dashboards#reject_match', as: :reject_match, via: [:get, :post]
+  match '/block_user/:id', to: 'dashboards#block_user', as: :block_user, via: [:get, :post]
 
   get '/users/auth/:provider/callback' => 'authentications#create'
 
