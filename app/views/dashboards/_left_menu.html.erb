@@ -69,7 +69,8 @@
                 <img alt="Image Size 430x280" class="img-responsive profilepic" src="/assets/profile_pic.jpg">
               </a>
           <% else %>
-              <img alt="Image Size 430x280" class="img-responsive profilepic" src="<%= current_user.demographic.avatar.url %>">
+              <!--<img alt="Image Size 430x280" class="img-responsive profilepic" src="<%#= current_user.demographic.avatar.url(:thumb) %>">-->
+              <img alt="Image Size 430x280" class="img-responsive profilepic" src="<%= get_user_image(current_user.id) %>">
           <% end %>
         </div>
 

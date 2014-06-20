@@ -257,7 +257,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
                   <div class="form-group">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                       <h6 class="white">What Friends Say About Me</h6>
@@ -267,23 +267,14 @@
                 </div>
 
 
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                  <div class="form-group">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                      <h6 class="white">Institution</h6>
-                      <%#= f.fields_for :attendances do |a| %>
-                      <%#= a.collection_select(:institution_id, Institution.all, :id, :name,{}, {:class=>"lhc_chosen"}) %>
-                      <%# end %>
-                      <%= f.collection_select(:institution_ids, Institution.order('name ASC').all, :id, :name, {:include_blank => false}, {:multiple => true, :class => "multiple", :style => "width: 100%;"}) %>
-                    </div>
-
-                    <!--<div class="col-sm-4 col-lg-4">-->
-                    <!--<%#= f.fields_for :profession do |p| %>-->
-                    <!--<%#= p.text_field :name , :placeholder=>"Profession",:class=>"form-control" %>-->
-                    <!--<%# end %>-->
+                <!--<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">-->
+                  <!--<div class="form-group">-->
+                    <!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">-->
+                      <!--<h6 class="white">Institution</h6>-->
+                      <!--<%#= f.collection_select(:institution_ids, Institution.order('name ASC').all, :id, :name, {:include_blank => false}, {:multiple => true, :class => "multiple", :style => "width: 100%;"}) %>-->
                     <!--</div>-->
-                  </div>
-                </div>
+                  <!--</div>-->
+                <!--</div>-->
               </div>
 
 

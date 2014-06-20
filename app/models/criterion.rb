@@ -11,4 +11,7 @@ class Criterion < ActiveRecord::Base
   #validates_numericality_of :minage
   #validates_numericality_of :maxage, :greater_than => :minage,:message => "The minimum age cannot be greater than maximum age"
 
+  #validates_presence_of :male
+  #validates_inclusion_of :male, :in => [true, false]
+
 end

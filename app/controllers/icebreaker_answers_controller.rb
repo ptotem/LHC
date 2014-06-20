@@ -44,7 +44,7 @@ class IcebreakerAnswersController < ApplicationController
           if !check_icebreaker_status(@ice.sender_id)
             redirect_to start_ice_breaker_path(@ice.sender_id), :notice=>"Now its your turn to send an Ice-breaker."
           else
-            redirect_to user_profile_path(@ice.receiver_id), :notice=>"Now Start the conversations"
+            redirect_to user_profile_path(@ice.sender_id), :notice=>"Now Start the conversations"
           end
 
           #format.html { redirect_to authenticated_root_path, notice: 'Now its your turn to send an Ice-breaker.' }
@@ -54,7 +54,7 @@ class IcebreakerAnswersController < ApplicationController
         end
 
 
-        format.html { redirect_to answer_icebreaker_path(@ice.id,@next_question), notice: 'Icebreaker answer was successfully created.' }
+        format.html { redirect_to answer_icebreaker_path(@ice.id,@next_question), notice: 'Icebreaker answer was successfully saved.' }
         format.json { render action: 'show', status: :created, location: @icebreaker_answer }
       else
         format.html { render action: 'new' }

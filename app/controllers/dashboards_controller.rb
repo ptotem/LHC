@@ -11,7 +11,7 @@ class DashboardsController < ApplicationController
 
   def welcome_dashboard
     @current_user_route = current_user.current_route
-    current_user.current_route = my_dashboard_path
+    #current_user.current_route = my_dashboard_path
     current_user.save!
     if current_user.last_matched_time.nil? or (Time.now - current_user.last_matched_time)/3600 > 72
       current_user.update_match_status
@@ -96,7 +96,7 @@ class DashboardsController < ApplicationController
     @user.verification_request_sent = true
     @user.verification_request_sent_at = Time.now.to_i
     @user.save!
-    redirect_to user_profile_path(current_user.id),:notice => "Your linkedin url is saved for verification."
+    redirect_to user_profile_path(current_user.id),:notice => "Great! You will be verified pretty soon. "
     return
   end
 
@@ -264,7 +264,15 @@ class DashboardsController < ApplicationController
 
 
  def snazzmeup
-
+   #render :text => current_user.current_route
+   #return
+   if current_user.current_route.include?("take_test")
+     redirect_to current_user.current_route, notice: 'Answer the questions first.'
+     #render :text => "CT"
+     #return
+   #else
+   #  redirect_to current_user.current_route
+   end
  end
 
 
@@ -283,6 +291,12 @@ class DashboardsController < ApplicationController
 
   end
 
+  def quiz_review
+    @quiz = Quiz.find(params[:quiz_id])
+    @user = current_user
+    #render :json => @user
+    #return
+  end
 
   def younme
     @opposite_user = User.find(params[:id])
@@ -398,7 +412,7 @@ class DashboardsController < ApplicationController
       #render :text => "Request Already Sent"
       #return
       #redirect_to my_dashboard_path,:notice=>"Like request already sent !"
-      redirect_to user_profile_path(@receiver_id),:notice=>"Like request already sent !"
+      redirect_to user_profile_path(@receiver_id),:notice=>"Already liked. Stay Cool!!"
       return
     else
       @like=Like.create(:receiver_id => @receiver_id,:sender_id => @sender_id,:status => false,:like_type => "Timed")
@@ -417,7 +431,7 @@ class DashboardsController < ApplicationController
    @accept.status=true
    @accept.save!
 
-   redirect_to user_profile_path(@accept.sender_id), notice: 'You have accepted the request.'
+   redirect_to user_profile_path(@accept.sender_id), notice: 'Great! You two like each other.'
    Notification.create!(:content=>User.find(@accept.receiver_id).demographic.nickname + " likes you too !", :user_id=>@accept.sender_id, :pointer_link=>user_profile_path(@accept.receiver_id),:sender_id => @accept.receiver_id,:notification_type=>"Timed")
    MutualLikeMailer.mutual_like_mailer(@accept.sender_id, current_user).deliver
 

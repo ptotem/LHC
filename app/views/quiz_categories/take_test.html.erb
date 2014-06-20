@@ -2,24 +2,43 @@
     <%= render :partial=>"dashboards/left_menu" %>
 <% end %>
 <%= content_for(:dialogue_bar_header) do %>
-    Prove yourself !
+    <%= get_content_for("takeTestText") %>
 <% end %>
 
 <%#= content_for(:page_header) do %>
     <!--Question n-->
 <%# end %>
 
+
 <!--<section id="take_test_blue-container">-->
   <!--<div class="custom-container">-->
     <div class="row" style="margin-top: -5%;">
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 no-padding" style="margin-top: 5%;">
-        <div class="row" >
-          <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 no-padding" style="margin-top: 5%;">
+        <div class="row">
+          <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+            <h3 style="font-size: 2em; margin-top: 5%; padding: 0 0 0 4%"><%= @quiz.name %></h3>
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            <!--<img src="/assets/cup4.png" class="img-responsive">-->
+            <img src="<%= get_image_from_content("quiz-" + @quiz.name) %>" width="80%" class="img-responsive">
+          </div>
+        </div>
 
+        <div class="row" >
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+            <!--<div class="row">-->
+              <!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">-->
+                <!--<h4 style="font-size: 1.8em;"><%#= @quiz.name %></h4>-->
+              <!--</div>-->
+            <!--</div>-->
                 <!--<div id="step_<%#= @question.id %>" class="test-steps" style="display: none;">-->
                 <div id="step_<%= @question.id %>" class="test-steps" style="display: none; height: 500px; min-height: 500px; overflow-x: hidden; overflow-y: auto; padding: 0 4% 4%;">
-                  <div class="row" style="margin-top: 3%;">
-                    <h4 style="font-size: 1.8em;"><%= @question.name %></h4>
+                  <div class="row">
+                    <h4 style="font-size: 1.8em;">
+                      <%= @current_question_index.index(@question.id) + 1 %>.
+                      <%= @question.name %>
+                    </h4>
                   </div>
                    <div class="row">
                      <ul class="test_ul">
@@ -35,18 +54,26 @@
                            <div class="field">
                              <% @question.options.each do |test_ans_option| %>
                                  <li>
-                                   <%= f.radio_button :answer_id,test_ans_option.id, :checked=>true, :style=>"float: left;" %>
+                                   <%= f.radio_button :answer_id,test_ans_option.id, :style=>"float: left;" %>
                                    <p class="radio_text" style="padding-top: 0"><%= test_ans_option.name %></p>
                                  </li>
                              <% end %>
                            </div>
 
                            <div class="actions" style="margin-top: 5%;">
-                             <%= f.submit "Answer", :class=>"btn-main ans_btn" %>
-                             <div class="status" style="  float: right; margin-right: 30%; margin-top: 8px;">
-                               <%= @current_question_index.index(@question.id) + 1 %> /
-                               <%= @quiz.questions.count %>
+                             <div class="row">
+                               <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                 <%= f.submit "Answer", :class=>"btn-main ans_btn" %>
+                               </div>
+                               <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                 <div class="status" style="margin-top: 8px;">
+                                   <%= @current_question_index.index(@question.id) + 1 %> /
+                                   <%= @quiz.questions.count %>
+                                 </div>
+                               </div>
                              </div>
+
+
                            </div>
                        <% end %>
                      </ul>
@@ -69,9 +96,10 @@
 
       </div>
 
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        <img alt="Title"  src="/assets/cofee.jpg">
-      </div>
+      <!--<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2" style="height: 100%;">-->
+        <!--&lt;!&ndash;<img src="<%#= get_image_from_content("quiz-" + @quiz.name) %>" style="width: 100%; margin-top: 34%; min-height: 345px; max-height: 345px;">&ndash;&gt;-->
+        <!--&lt;!&ndash;<img alt="Title"  src="/assets/cofee.jpg">&ndash;&gt;-->
+      <!--</div>-->
 
     </div>
   <!--</div>-->
@@ -102,6 +130,14 @@
                 $('#current_step').text(current_step+1);
             }
         });
+
+        $('input:radio').click(function(){
+            //alert("d");
+            $('.radio_text').css('font-weight','normal');
+            $('.radio_text').css('color','white');
+            $(this).next().css('font-weight','bold');
+            $(this).next().css('color','red');
+        })
 
     });
 </script>

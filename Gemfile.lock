@@ -154,11 +154,16 @@ GEM
       oauth2 (~> 0.9.3)
       omniauth (~> 1.2)
     orm_adapter (0.5.0)
+    os (0.9.6)
     paperclip (4.1.1)
       activemodel (>= 3.0.0)
       activesupport (>= 3.0.0)
       cocaine (~> 0.5.3)
       mime-types
+    paperclip-compression (0.3.6)
+      os (~> 0.9.6)
+      paperclip (>= 3.3)
+      ruby-imagespec (~> 0.3.1)
     pg (0.17.1)
     pg (0.17.1-x86-mingw32)
     polyglot (0.3.4)
@@ -208,6 +213,7 @@ GEM
     remotipart (1.2.1)
     rest-client (1.6.7)
       mime-types (>= 1.16)
+    ruby-imagespec (0.3.1)
     safe_yaml (0.9.7)
     sass (3.2.14)
     sass-rails (4.0.1)
@@ -269,6 +275,7 @@ DEPENDENCIES
   omniauth-facebook
   omniauth-linkedin
   paperclip (~> 4.1)
+  paperclip-compression
   pg
   rails (= 4.0.0)
   rails3_serve_static_assets!

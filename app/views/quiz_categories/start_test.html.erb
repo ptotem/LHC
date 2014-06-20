@@ -8,6 +8,17 @@
 
 
 
+<div class="row">
+  <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1" style="margin-left: 4%;">
+    <h3 class="white">
+      <% if @test.name=="trivia questions" %>
+          <%= get_content_for('triviaTestText') %>
+      <% elsif @test.name=="personal questions" %>
+          <%= get_content_for('personalTestText') %>
+      <% end %>
+    </h3>
+  </div>
+</div>
 <!--<section id="take_test_blue-container">-->
 
     <!--<div class="custom-container">-->
@@ -20,19 +31,21 @@
           </div>
 
 
-          <div class="row" style="height:576px;max-height:576px;overflow-y:auto;">
+          <div class="row">
 
             <% @test.quizzes.each do |e| %>
 
                   <!--<img src="/assets/assertiveness.jpg" class="img-responsive" alt="Image Size 430x280" style="width: 100%;">-->
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
                   <!--<div>-->
-                   <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 ans_btn indi-test test-thumbs"  >
+
+                   <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 ans_btn indi-test test-thumbs" style="background-image: url('<%= get_image_from_content("quiz-" + e.name) %>'); background-size: 100% 100%;">
                   <% if !e.questions.first.nil? %>
 
                     <a style="width:100%;height: 100%; display:table-cell;vertical-align: middle" href="<%= take_test_path(e.id,e.questions.first.id) %>" id="ans_test_btn"><%= e.quiz_text %></a>
+
                   <% end  %>
-                  <div class="hover-text" style="display: table-cell;vertical-align: middle"> <%= e.name %></div>
+                  <div class="hover-text" style="display: table-cell;vertical-align: middle"> <%#= e.name %></div>
                 </div>
                   </div>
                 <!--</div>-->

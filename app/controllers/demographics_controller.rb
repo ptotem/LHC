@@ -77,7 +77,7 @@ class DemographicsController < ApplicationController
         end
         @user_quizzes = @user_quizzes.uniq
         @profileStatus = @profileStatus + @user_quizzes.count*eachQuizWeight
-        #render :text => @user_quizzes
+        #render :json => @user_quizzes
         #return
 
     else

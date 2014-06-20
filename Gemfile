@@ -67,6 +67,8 @@ gem "devise"
 gem "cancan"
 
 gem "paperclip", "~> 4.1"
+gem "paperclip-compression"
+#gem "paperclip-compression","~> 0.1.1"
 
 gem 'omniauth'
 gem 'omniauth-facebook'

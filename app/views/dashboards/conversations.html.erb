@@ -38,8 +38,8 @@
     <div class="white-background">
       <ul class="media-list">
         <% @conversations.each do |m| %>
-            <li class="media message-item">
-              <a class="pull-left" href="#">
+            <li class="media message-item" onclick="window.location='/conversations_with_users/'<%= m["user"] %>">
+              <a class="pull-left" href="/conversations_with_users/<%= m["user"] %>">
                 <img class="img-circle" src="<%= get_user_image(m["user"]) %>" height="80px" width="80px">
               </a>
 

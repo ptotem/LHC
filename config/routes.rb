@@ -94,7 +94,9 @@ Lhc::Application.routes.draw do
 
   get '/start_ice_breaker/:id/(:prev_msg)', to: 'dashboards#start_ice_breaker', as: :start_ice_breaker
 
-  get '/take_test/:id/:question_id', to: 'quiz_categories#take_test',as: :take_test
+  get '/take_test/:id/:question_id/(:seq)', to: 'quiz_categories#take_test',as: :take_test
+  get '/quiz_review/:quiz_id', to: 'dashboards#quiz_review',as: :quiz_review
+  get '/retest/:quiz_id', to: 'quiz_answers#retest',as: :retest
   get '/answer_icebreaker/:id/:question_id', to: 'dashboards#answer_icebreaker',as: :answer_icebreaker
   get '/start_test/:id', to: 'quiz_categories#start_test',as: :start_test
   get '/user_answer/:id', to: 'quiz_categories#user_answer',as: :user_answer
