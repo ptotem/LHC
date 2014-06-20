@@ -105,8 +105,7 @@
                       <%#= notification.created_at.strftime("%d %B %Y") %>
                       <!--<br>-->
                       <!--<b><%#=  ((3.days.since(notification.created_at) - Time.now)/3600).to_i %></b> hours left to respond-->
-
-                      <% if notification.notification_type == "Timed" %>
+                      <% if notification.notification_type == "Timed" || notification.content.include?("3 new matches") %>
                           <b><%= ((3.days.since(notification.created_at) - Time.now)/3600).to_i %></b><br> hours left to
                           respond
                       <% else %>
