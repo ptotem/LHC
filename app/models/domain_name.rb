@@ -20,7 +20,7 @@ class DomainName < ActiveRecord::Base
       puts spreadsheet.row(i)[3]
       @d = DomainName.where(:name => spreadsheet.row(i)[3]).first
       if !@d.nil?
-        @d.institute_name = spreadsheet.row(i)[1]
+        @d.institute_name = "#{spreadsheet.row(i)[1]}, #{spreadsheet.row(i)[2]}"
         @d.save
       end
     end
