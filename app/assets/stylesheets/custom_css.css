@@ -547,6 +547,16 @@ input[type="radio"] + .custom-radio-btn.opposite_user_gender {
     display: block;
 }
 
+.edit-profile-delete-quiz-item-block,.edit-profile-add-quiz-item-block  {
+    background-color: #38C8E0;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 0 4px;
+    position: absolute;
+    right: 30%;
+    top: 1%;
+}
 /*.edit-profile-music-item:hover > .edit-profile-delete-music-item-block{*/
 /*display: block;*/
 /*}*/

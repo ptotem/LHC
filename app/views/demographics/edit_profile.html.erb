@@ -53,6 +53,9 @@
       <li id="books_tab">
         <a href="#dropdown5" data-toggle="tab" style="border-top-left-radius: 10px; border-top-right-radius: 10px;outline: 0">Books</a>
       </li>
+      <li id="quiz_tab">
+        <a href="#dropdown6" data-toggle="tab" style="border-top-left-radius: 10px; border-top-right-radius: 10px;outline: 0">Quiz</a>
+      </li>
     </ul>
     <div id="myTabContent" class="tab-content">
     <div class="tab-pane fade active in" id="home">
@@ -282,195 +285,284 @@
       <% end %>
 
       </div>
-      <div class="tab-pane fade" id="dropdown2">
 
-        <section id="looking_for">
+          <div class="tab-pane fade" id="dropdown2">
+
+            <section id="looking_for">
 
 
-          <%= f.fields_for :criterion do |c| %>
+              <%= f.fields_for :criterion do |c| %>
+
+                  <div class="form-group">
+                    <div class="col-sm-2 col-lg-2 col-md-2">
+                      <h6 class="white">Gender</h6>
+                      <%= c.radio_button :male, true, {:checked => @user.criterion.male, :class => "my_gender lhc-radio-btn"} %>
+                      <label for="user_criterion_attributes_male_true" class="custom-radio-btn male-radio-btn my_gender" id="user_male_lable"></label>
+                      <%= c.radio_button :male, false, {:checked => !@user.criterion.male, :class => "my_gender lhc-radio-btn"} %>
+                      <!--<%#= c.label :male,' ',:class=>"custom-radio-btn female-radio-btn my_gender" %>-->
+                      <label for="user_criterion_attributes_male_false" class="custom-radio-btn female-radio-btn my_gender" id="user_female_lable"></label>
+                    </div>
+
+                    <div class="col-sm-2 col-lg-2 col-md-2">
+                      <h6 class="white">Smoking</h6>
+                      <%= c.select :smoking, ['Never', 'Socially', 'Often'], {:selected => @user.criterion.smoking}, {:class => 'lhc_chosen'} %>
+                    </div>
+                    <div class="col-sm-3 col-lg-3 col-md-3">
+                      <h6 class="white">Drinking</h6>
+                      <%= c.select :drinking, ['Never', 'Socially', 'Often'], {:selected => @user.criterion.drinking}, {:class => 'lhc_chosen'} %>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <% min_age = 18..28 %>
+                    <% max_age = 22..36 %>
+                    <div class="col-sm-2 col-lg-2 col-md-2  col-lg-offset-2">
+                      <h6 class="white">Age From</h6>
+                      <%= c.select(:minage, min_age.collect { |d| [d.to_s, d.to_s] }, {:selected => @user.criterion.minage}, {:class => "lhc_chosen"}) %>
+                    </div>
+
+                    <div class="col-sm-2 col-lg-2 col-md-2">
+                      <h6 class="white">Age To</h6>
+                      <%= c.select(:maxage, max_age.collect { |d| [d.to_s, d.to_s] }, {:selected => @user.criterion.maxage}, {:class => "lhc_chosen"}) %>
+                    </div>
+                  </div>
+              <% end %>
+            </section>
+
+
+          </div>
+
+          <div class="tab-pane fade" id="dropdown3">
+
+            <section id="more">
+
 
               <div class="form-group">
-                <div class="col-sm-2 col-lg-2 col-md-2">
-                  <h6 class="white">Gender</h6>
-                  <%= c.radio_button :male, true, {:checked => @user.criterion.male, :class => "my_gender lhc-radio-btn"} %>
-                  <label for="user_criterion_attributes_male_true" class="custom-radio-btn male-radio-btn my_gender" id="user_male_lable"></label>
-                  <%= c.radio_button :male, false, {:checked => !@user.criterion.male, :class => "my_gender lhc-radio-btn"} %>
-                  <!--<%#= c.label :male,' ',:class=>"custom-radio-btn female-radio-btn my_gender" %>-->
-                  <label for="user_criterion_attributes_male_false" class="custom-radio-btn female-radio-btn my_gender" id="user_female_lable"></label>
-                </div>
-
-                <div class="col-sm-2 col-lg-2 col-md-2">
-                  <h6 class="white">Smoking</h6>
-                  <%= c.select :smoking, ['Never', 'Socially', 'Often'], {:selected => @user.criterion.smoking}, {:class => 'lhc_chosen'} %>
-                </div>
-                <div class="col-sm-3 col-lg-3 col-md-3">
-                  <h6 class="white">Drinking</h6>
-                  <%= c.select :drinking, ['Never', 'Socially', 'Often'], {:selected => @user.criterion.drinking}, {:class => 'lhc_chosen'} %>
+                <div class="col-sm-8 col-lg-8">
+                  <div class="ui-widget">
+                    <h6 class="white">Search Movie</h6>
+                    <!--<input id="movie_search_textfield" class="form-control">-->
+                    <%= text_field_tag 'movie_search_textfield', nil, placeholder: 'Enter search term...', :class => "form-control" %>
+                  </div>
                 </div>
               </div>
 
+              <div class="row">
+                <div class="col-lg-12" id="edit-profile-movies-caraousel-container1">
+                  <div id="carousel-for-movies" class="carousel slide" data-ride="carousel" data-interval="false" style="height: 200px;">
+                    <div class="carousel-inner" style="margin-left: 3%">
+                      <div class="item active">
+                        <% @user.movies.each_with_index do |user_movie, index| %>
+                            <div class="col-lg-3 edit-profile-movie-citem" id="<%= user_movie.movie_api_id %>">
+                              <%= image_tag user_movie.poster, :class => "my-img", :title => user_movie.name %>
+                              <div class="edit-profile-delete-movie-item-block">&#10006;</div>
+                              <div class="carousel-caption edit-profile-custom-carousel-caption">
+                                <p> <%= user_movie.name.truncate(15) %></p>
+                              </div>
+
+                            </div>
+                            <% if (index+1)%4==0 %>
+                                </div>
+                                <div class="item ">
+                            <% end %>
+                        <% end %>
+                        </div>
+                        <!-- Controls -->
+
+                        </div>
+                    <a style="background-image: none; outline: none; left: -4%;" class="left carousel-control" href="#carousel-for-movies" data-slide="prev">
+                      <span class="fa  fa-chevron-left"></span>
+                    </a>
+                    <a style="background-image: none; outline: none; " class="right carousel-control" href="#carousel-for-movies" data-slide="next">
+                      <span class="fa fa-chevron-right"></span>
+                    </a>
+
+                  </div>
+                </div>
+              </div>
+
+
+            </section>
+
+          </div>
+
+          <div class="tab-pane fade" id="dropdown4">
+            <section id="more">
               <div class="form-group">
-                <% min_age = 18..28 %>
-                <% max_age = 22..36 %>
-                <div class="col-sm-2 col-lg-2 col-md-2  col-lg-offset-2">
-                  <h6 class="white">Age From</h6>
-                  <%= c.select(:minage, min_age.collect { |d| [d.to_s, d.to_s] }, {:selected => @user.criterion.minage}, {:class => "lhc_chosen"}) %>
-                </div>
-
-                <div class="col-sm-2 col-lg-2 col-md-2">
-                  <h6 class="white">Age To</h6>
-                  <%= c.select(:maxage, max_age.collect { |d| [d.to_s, d.to_s] }, {:selected => @user.criterion.maxage}, {:class => "lhc_chosen"}) %>
+                <div class="col-sm-8 col-lg-8">
+                  <div class="ui-widget">
+                    <h6 class="white">Search Music</h6>
+                    <!--<input id="music_search_textfield" class="form-control">-->
+                    <%= text_field_tag 'music_search_textfield', nil, placeholder: 'Enter search term...', :class => "form-control" %>
+                  </div>
                 </div>
               </div>
-          <% end %>
-        </section>
 
+              <div class="row">
+                <div class="col-lg-12" id="edit-profile-movies-caraousel-container2">
 
-      </div>
-      <div class="tab-pane fade" id="dropdown3">
+                  <div id="carousel-for-songs" class="carousel slide" data-ride="carousel" data-interval="false" style="height: 200px;">
+                    <div class="carousel-inner" style="margin-left: 3%">
+                      <div class="item active">
+                        <% @user.songs.each_with_index do |user_song, index| %>
+                            <div class="col-lg-3 edit-profile-song-citem" id="<%= user_song.song_api_id %>">
+                              <%= image_tag user_song.song_poster, :class => "my-img", :title=> user_song.name %>
+                              <div class="edit-profile-delete-music-item-block">&#10006;</div>
+                              <div class="carousel-caption edit-profile-custom-carousel-caption">
+                                <p> <%= user_song.name.truncate(15) %></p>
+                              </div>
 
-        <section id="more">
-
-
-          <div class="form-group">
-            <div class="col-sm-8 col-lg-8">
-              <div class="ui-widget">
-                <h6 class="white">Search Movie</h6>
-                <!--<input id="movie_search_textfield" class="form-control">-->
-                <%= text_field_tag 'movie_search_textfield', nil, placeholder: 'Enter search term...', :class => "form-control" %>
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-lg-12" id="edit-profile-movies-caraousel-container1">
-              <div id="carousel-for-movies" class="carousel slide" data-ride="carousel" data-interval="false" style="height: 200px;">
-                <div class="carousel-inner" style="margin-left: 3%">
-                  <div class="item active">
-                    <% @user.movies.each_with_index do |user_movie, index| %>
-                        <div class="col-lg-3 edit-profile-movie-citem" id="<%= user_movie.movie_api_id %>">
-                          <%= image_tag user_movie.poster, :class => "my-img", :title => user_movie.name %>
-                          <div class="edit-profile-delete-movie-item-block">&#10006;</div>
-                          <div class="carousel-caption edit-profile-custom-carousel-caption">
-                            <p> <%= user_movie.name.truncate(15) %></p>
-                          </div>
-
-                        </div>
-                        <% if (index+1)%4==0 %>
                             </div>
-                            <div class="item ">
+                            <% if (index+1)%4==0 %>
+                                </div>
+                                <div class="item ">
+                            <% end %>
                         <% end %>
-                    <% end %>
-                    </div>
-                    <!-- Controls -->
-
-                    </div>
-                <a style="background-image: none; outline: none; left: -4%;" class="left carousel-control" href="#carousel-for-movies" data-slide="prev">
-                  <span class="fa  fa-chevron-left"></span>
-                </a>
-                <a style="background-image: none; outline: none; " class="right carousel-control" href="#carousel-for-movies" data-slide="next">
-                  <span class="fa fa-chevron-right"></span>
-                </a>
-
-              </div>
-            </div>
-          </div>
-
-
-        </section>
-
-      </div>
-      <div class="tab-pane fade" id="dropdown4">
-        <section id="more">
-          <div class="form-group">
-            <div class="col-sm-8 col-lg-8">
-              <div class="ui-widget">
-                <h6 class="white">Search Music</h6>
-                <!--<input id="music_search_textfield" class="form-control">-->
-                <%= text_field_tag 'music_search_textfield', nil, placeholder: 'Enter search term...', :class => "form-control" %>
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-lg-12" id="edit-profile-movies-caraousel-container2">
-
-              <div id="carousel-for-songs" class="carousel slide" data-ride="carousel" data-interval="false" style="height: 200px;">
-                <div class="carousel-inner" style="margin-left: 3%">
-                  <div class="item active">
-                    <% @user.songs.each_with_index do |user_song, index| %>
-                        <div class="col-lg-3 edit-profile-song-citem" id="<%= user_song.song_api_id %>">
-                          <%= image_tag user_song.song_poster, :class => "my-img", :title=> user_song.name %>
-                          <div class="edit-profile-delete-music-item-block">&#10006;</div>
-                          <div class="carousel-caption edit-profile-custom-carousel-caption">
-                            <p> <%= user_song.name.truncate(15) %></p>
-                          </div>
+                        </div>
+                        <!-- Controls -->
 
                         </div>
-                        <% if (index+1)%4==0 %>
+                    <a style="background-image: none; outline: none; left: -4%;" class="left carousel-control" href="#carousel-for-songs" data-slide="prev">
+                      <span class="fa  fa-chevron-left"></span>
+                    </a>
+                    <a style="background-image: none; outline: none; " class="right carousel-control" href="#carousel-for-songs" data-slide="next">
+                      <span class="fa fa-chevron-right"></span>
+                    </a>
+
+                  </div>
+
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <div class="tab-pane fade" id="dropdown5">
+
+            <div class="form-group">
+              <div class="col-sm-8 col-lg-8">
+                <div class="ui-widget">
+                  <h6 class="white">Search Book</h6>
+                  <!--<input id="books_search_textfield" class="form-control">-->
+                  <%= text_field_tag 'books_search_textfield', nil, placeholder: 'Enter search term...', :class => "form-control" %>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-12" id="edit-profile-movies-caraousel-container3">
+
+                <div id="carousel-for-books" class="carousel slide" data-ride="carousel" data-interval="false" style="height: 200px;">
+                  <div class="carousel-inner" style="margin-left: 3%">
+                    <div class="item active">
+                      <% @user.books.each_with_index do |user_book, index| %>
+                          <div class="col-lg-3 edit-profile-book-citem" id="<%= user_book.book_api_id %>">
+                            <%= image_tag user_book.cover, :class => "my-img", :title => user_book.name %>
+                            <div class="edit-profile-delete-book-item-block">&#10006;</div>
+                            <div class="carousel-caption edit-profile-custom-carousel-caption">
+                              <p> <%= user_book.name.truncate(15) %></p>
                             </div>
-                            <div class="item ">
-                        <% end %>
-                    <% end %>
-                    </div>
-                    <!-- Controls -->
 
-                    </div>
-                <a style="background-image: none; outline: none; left: -4%;" class="left carousel-control" href="#carousel-for-songs" data-slide="prev">
-                  <span class="fa  fa-chevron-left"></span>
-                </a>
-                <a style="background-image: none; outline: none; " class="right carousel-control" href="#carousel-for-songs" data-slide="next">
-                  <span class="fa fa-chevron-right"></span>
-                </a>
-
-              </div>
-
-            </div>
-          </div>
-        </section>
-      </div>
-
-
-      <div class="tab-pane fade" id="dropdown5">
-
-        <div class="form-group">
-          <div class="col-sm-8 col-lg-8">
-            <div class="ui-widget">
-              <h6 class="white">Search Book</h6>
-              <!--<input id="books_search_textfield" class="form-control">-->
-              <%= text_field_tag 'books_search_textfield', nil, placeholder: 'Enter search term...', :class => "form-control" %>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-12" id="edit-profile-movies-caraousel-container3">
-
-            <div id="carousel-for-books" class="carousel slide" data-ride="carousel" data-interval="false" style="height: 200px;">
-              <div class="carousel-inner" style="margin-left: 3%">
-                <div class="item active">
-                  <% @user.books.each_with_index do |user_book, index| %>
-                      <div class="col-lg-3 edit-profile-book-citem" id="<%= user_book.book_api_id %>">
-                        <%= image_tag user_book.cover, :class => "my-img", :title => user_book.name %>
-                        <div class="edit-profile-delete-book-item-block">&#10006;</div>
-                        <div class="carousel-caption edit-profile-custom-carousel-caption">
-                          <p> <%= user_book.name.truncate(15) %></p>
-                        </div>
+                          </div>
+                          <% if (index+1)%4==0 %>
+                              </div>
+                              <div class="item ">
+                          <% end %>
+                      <% end %>
+                      </div>
+                      <!-- Controls -->
 
                       </div>
-                      <% if (index+1)%4==0 %>
-                          </div>
-                          <div class="item ">
+                  <a style="background-image: none; outline: none; left: -4%;" class="left carousel-control" href="#carousel-for-books" data-slide="prev">
+                    <span class="fa  fa-chevron-left"></span>
+                  </a>
+                  <a style="background-image: none; outline: none; " class="right carousel-control" href="#carousel-for-books" data-slide="next">
+                    <span class="fa fa-chevron-right"></span>
+                  </a>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+      <div class="tab-pane fade" id="dropdown6">
+
+        <!--<div class="form-group">-->
+          <!--<div class="col-sm-8 col-lg-8">-->
+            <!--<div class="ui-widget">-->
+              <!--<h6 class="white">Search Book</h6>-->
+              <!--&lt;!&ndash;<input id="books_search_textfield" class="form-control">&ndash;&gt;-->
+              <!--<%#= text_field_tag '_search_textfield', nil, placeholder: 'Enter search term...', :class => "form-control" %>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+
+        <div class="row">
+          <div class="col-lg-12" id="edit-profile-movies-caraousel-container4">
+
+            <div id="carousel-for-quizzes" class="carousel slide" data-ride="carousel" data-interval="false" style="height: 190px; padding: 1%">
+
+              <div class="carousel-inner">
+                <div class="item active">
+                  <% @user_quizzes.each_with_index do |user_quiz, index| %>
+                      <div class="col-lg-4" style="cursor:pointer;text-align: center" data-target="#<%= index %>" data-toggle="modal" title="<%= user_quiz.name %>" id=<%= user_quiz.id %>>
+                        <%#= image_tag("arrow.png", class: "my-img") %>
+                        <!--<i class="fa fa-question-circle fa-4" style="font-size: 6em"></i>-->
+                        <%= image_tag get_image_from_content("image-for-quiz-"+user_quiz.name) ,:height => "100px",:width=>"100px" %>
+                        <% if index < @ucount %>
+                            <div class="edit-profile-delete-quiz-item-block">&#10006;</div>
+                        <% else %>
+                            <div class="edit-profile-add-quiz-item-block">+</div>
+                        <% end %>
+                        <div class="carousel-caption custom-carousel-caption-quiz">
+                          <p> <%= user_quiz.name.truncate(15) %></p>
+                          <p> Show <%= current_user.demographic.nickname %>'s answers</p>
+                        </div>
+                      </div>
+                      <% if (index+1)%3==0 %>
+                          </div> <div class="item ">
                       <% end %>
+
+                      <div class="modal fade" id="<%= index %>">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                              <h4 class="modal-title" style="color: #000000"><%= user_quiz.name %></h4>
+                            </div>
+                            <div class="modal-body">
+                              <ol>
+                                <% user_quiz.questions.each do |q| %>
+                                    <li><b><%= q.name %></b></li>
+                                    <% if !QuizAnswer.find_by_question_id_and_user_id(q.id,params[:id]).nil? %>
+                                        <ul>
+                                          <li><%= Option.find(QuizAnswer.find_by_question_id_and_user_id(q.id,params[:id]).answer_id).name %></li>
+                                        </ul>
+                                    <% end %>
+                                <% end %>
+                              </ol>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                          </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                      </div><!-- /.modal -->
                   <% end %>
+
                   </div>
+
                   <!-- Controls -->
 
                   </div>
-              <a style="background-image: none; outline: none; left: -4%;" class="left carousel-control" href="#carousel-for-books" data-slide="prev">
+              <a style="background-image: none; outline: none; padding-top: 10%; left: -5%;" class="left carousel-control padding-control-indicator" href="#carousel-for-quizzes" data-slide="prev">
                 <span class="fa  fa-chevron-left"></span>
               </a>
-              <a style="background-image: none; outline: none; " class="right carousel-control" href="#carousel-for-books" data-slide="next">
+              <a style="background-image: none; outline: none; padding-top: 10%; right: -1%;" class="right carousel-control padding-control-indicator" href="#carousel-for-quizzes" data-slide="next">
                 <span class="fa fa-chevron-right"></span>
               </a>
 
@@ -634,6 +726,58 @@
             });
 
         });
+
+
+        $('.edit-profile-delete-quiz-item-block').on('click', function (e) {
+            e.stopPropagation();
+            var this_obj = $(this)
+            var quiz_item = $(this).parent();
+            var quiz_api_id = $(this).parent().attr('id');
+
+            var data = {quiz_api_id: []};
+            data["quiz_api_id"].push(quiz_api_id);
+
+            $.ajax({
+                url: "/delete_user_quiz",
+                type: "post",
+                async: false,
+                data: JSON.stringify(data),
+                contentType: "application/json",
+                success: function (data) {
+                    console.log(data);
+//                    $(this_obj).text("+");
+                    window.location = "/edit_profile/"+<%= params[:id] %>+"#quiz_tab"
+                    window.location.reload();
+                }
+            });
+
+        });
+
+
+        $('.edit-profile-add-quiz-item-block').on('click', function (e) {
+            e.stopPropagation();
+            var this_obj = $(this)
+            var quiz_item = $(this).parent();
+            var quiz_api_id = $(this).parent().attr('id');
+
+            var data = {quiz_api_id: []};
+            data["quiz_api_id"].push(quiz_api_id);
+
+            $.ajax({
+                url: "/add_user_quiz",
+                type: "post",
+                async: false,
+                data: JSON.stringify(data),
+                contentType: "application/json",
+                success: function (data) {
+                    window.location = "/edit_profile/"+<%= params[:id] %>+"#quiz_tab"
+                    window.location.reload();
+                }
+            });
+
+        });
+
+
 
 
         $('.carousel').carousel({interval: false});
