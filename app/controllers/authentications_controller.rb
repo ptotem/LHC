@@ -35,6 +35,7 @@ class AuthenticationsController < ApplicationController
             @user.criterion.male = true
 
           end
+          @user.demographic.nickname = "No Nickname"
           @user.confirmed_at = Time.now
           @user.save!
           sign_in(:user, @user)
