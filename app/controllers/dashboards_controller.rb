@@ -401,7 +401,23 @@ class DashboardsController < ApplicationController
       @opposite_user_ans_name << Option.find(ouda).name
     end
 
-   @quizzes = QuizCategory.where(:personal => 't').first.quizzes rescue []
+    @user_quizzes = Array.new
+    @uquizzes = Array.new
+    @user_quiz_ans_questions = @opposite_user.quiz_answers.where(:shared=>true).map(&:question_id)
+
+    @user_quiz_ans_questions.each do |q|
+      if Question.find(q).quizzes.first.quiz_category.personal
+        @user_quizzes << Question.find(q).quizzes.first
+      end
+      #@user_quizzes << q.quizzes.map(&:name)
+    end
+    @user_quizzes = @user_quizzes.uniq
+    @user_quizzes.each do |i|
+      @uquizzes << Quiz.find(i)
+    end
+    #render :json =>@uquizzes
+    #return
+   @quizzes = QuizCategory.where(:personal => true).first.quizzes rescue []
    #render :json => @quizzes
    #return
 
@@ -485,7 +501,7 @@ class DashboardsController < ApplicationController
     if !@reject.nil?
       @reject.status=false
       @reject.save!
-      redirect_to user_profile_path(@reject.sender_id), notice: 'You have rejected the request.'
+      redirect_to user_profile_path(@reject.sender_id), notice: 'Bummer! Better luck next time ;)'
     else
       redirect_to quick_matches_path, notice: "You haven't sent request to this person."
     end
@@ -502,7 +518,7 @@ class DashboardsController < ApplicationController
     @rejected_match = RejectedMatch.create(:rejected_target=>@base_match.target_id, :user_id=>current_user.id)
     @rejected_match.save!
     @base_match.destroy
-    redirect_to quick_matches_path, notice: 'You have rejected the request.'
+    redirect_to quick_matches_path, notice: 'Bummer! Better luck next time ;)'
   end
 
   def block_user
