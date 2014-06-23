@@ -34,10 +34,10 @@
       </div>
       <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1 text-center ">
 
-        <% if @quiz.quiz_category.name=="personal questions" %>
-            <button class="send-icebreaker_btn" id="send_icebreaker_btn" onclick="window.location='<%= younme_path(current_user.id) %>'">View Snapshot</button>
-        <% elsif @quiz.quiz_category.name=="trivia questions" %>
+        <% if @quiz.quiz_category.name.include?("Trivia") %>
             <button class="send-icebreaker_btn" id="send_icebreaker_btn" onclick="window.location='<%= user_profile_path(current_user.id) %>#stuff-i-like'">View Your Responses</button>
+        <% else %>
+            <button class="send-icebreaker_btn" id="send_icebreaker_btn" onclick="window.location='<%= younme_path(current_user.id) %>'">View Snapshot</button>
         <% end %>
 
 
