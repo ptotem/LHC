@@ -81,18 +81,19 @@ class Users::RegistrationsController < Devise::RegistrationsController
     #  redirect_to "/edit_profile/#{@user.id}", notice: 'Your profile was not updated.You must exactly specify 5 likes!'
     #  return
     #end
+    
     respond_to do |format|
       if params[:user][:current_password].blank?
         if @user.update(params.require(:user).permit(:username,:email,:validate_username,:avatar,:current_route,:first_visit, :avatar_cache, :remove_avatar, :demographic_attributes=>[:id,:male, :name,:nickname,:dob,:smoking,:drinking,:location,:religion,:avatar, :description, :goal,:last_institute,:current_student], :criterion_attributes=>[:id,:male,:minage,:maxage,:smoking,:drinking], :attendances_attributes=>[:user_id, :institution_id], :hobby_list_ids=>[], :about_list_ids=>[], :profession_attributes=>[:name]))
           #sign_in @user, :bypass => true
           #TODO: Check this
-          #if ( (params[:user][:current_route] == "/welcome_dashboard") || (params[:user][:current_route] == "/my_dashboard") )
+          if ( (params[:user][:current_route] == "/welcome_dashboard") || (params[:user][:current_route] == "/my_dashboard") )
             format.html { redirect_to user_profile_path(@user.id), notice: 'Your profile was successfully updated.' }
             format.json { head :no_content }
-          #else
-          #  format.html { redirect_to authenticated_root_path, notice: 'Your profile was successfully updated.' }
-          #  format.json { head :no_content }
-          #end
+          else
+            format.html { redirect_to authenticated_root_path, notice: 'Your profile was successfully updated.' }
+            format.json { head :no_content }
+          end
         else
           format.html { redirect_to edit_profile_path(@user.id), notice: 'Password Incorrect.' }
           format.json { render json: @demographic.errors, status: :unprocessable_entity }
