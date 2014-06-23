@@ -20,10 +20,10 @@
     <!--<p class="white"><%#= get_content_for('quizReviewText') %></p>-->
     <div class="row" style="margin-top: 2%;">
       <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11 text-center">
-        <% if @quiz.quiz_category.name=="personal questions" %>
-            <h3 class="white"><%= get_content_for('personalQuizSummaryText') %></h3>
-        <% elsif @quiz.quiz_category.name=="trivia questions" %>
+        <% if @quiz.quiz_category.name.include?("Trivia") %>
             <h3 class="white"><%= get_content_for('triviaQuizSummaryText') %></h3>
+        <% else %>
+            <h3 class="white"><%= get_content_for('personalQuizSummaryText') %></h3>
         <% end %>
 
       </div>
