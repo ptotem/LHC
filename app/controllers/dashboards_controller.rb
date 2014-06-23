@@ -401,7 +401,9 @@ class DashboardsController < ApplicationController
       @opposite_user_ans_name << Option.find(ouda).name
     end
 
-  @quizzes=QuizCategory.where(:personal => 't').first.quizzes rescue []
+   @quizzes = QuizCategory.where(:personal => 't').first.quizzes rescue []
+   #render :json => @quizzes
+   #return
 
 
 
