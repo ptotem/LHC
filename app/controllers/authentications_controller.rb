@@ -12,6 +12,8 @@ class AuthenticationsController < ApplicationController
 
   def create
     auth=request.env["omniauth.auth"]
+    render :json => auth
+    return
     #render :json => "#{auth.extra.raw_info.email}, #{auth.extra.raw_info.email.nil?}"
     #return
 
