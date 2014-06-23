@@ -405,19 +405,20 @@ class DashboardsController < ApplicationController
     @uquizzes = Array.new
     @user_quiz_ans_questions = @opposite_user.quiz_answers.where(:shared=>true).map(&:question_id)
 
+
     @user_quiz_ans_questions.each do |q|
       if Question.find(q).quizzes.first.quiz_category.personal
-        @user_quizzes << Question.find(q).quizzes.first
+        @user_quizzes << Question.find(q).quizzes.first.id
       end
-      #@user_quizzes << q.quizzes.map(&:name)
     end
     @user_quizzes = @user_quizzes.uniq
+
     @user_quizzes.each do |i|
       @uquizzes << Quiz.find(i)
     end
     #render :json =>@uquizzes
     #return
-   @quizzes = QuizCategory.where(:personal => true).first.quizzes rescue []
+    @quizzes = QuizCategory.where(:personal => true).first.quizzes rescue []
    #render :json => @quizzes
    #return
 

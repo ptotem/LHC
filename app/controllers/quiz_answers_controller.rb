@@ -48,7 +48,7 @@ class QuizAnswersController < ApplicationController
           current_user.current_route = "/my_dashboard"
           current_user.save!
           #redirect_to snazzmeup_path,:alert=>"Successfully given quiz response"
-          redirect_to quiz_review_path(@quiz.id), :alert=>"Successfully given quiz response"
+          redirect_to   quiz_review_path(@quiz.id), :alert=>"Successfully given quiz response"
           return
         else
           @next_question = @next_question[0]
