@@ -12,8 +12,6 @@ class AuthenticationsController < ApplicationController
 
   def create
     auth=request.env["omniauth.auth"]
-    render :json => auth
-    return
     #render :json => "#{auth.extra.raw_info.email}, #{auth.extra.raw_info.email.nil?}"
     #return
 
@@ -37,7 +35,7 @@ class AuthenticationsController < ApplicationController
             @user.criterion.male = true
 
           end
-          @user.demographic.nickname = "No Nickname"
+          @user.demographic.nickname = auth.extra.raw_info.first_name
           @user.confirmed_at = Time.now
           @user.save!
           sign_in(:user, @user)
