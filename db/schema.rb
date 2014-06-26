@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140620161809) do
+ActiveRecord::Schema.define(version: 20140626054919) do
 
   create_table "about_lists", force: true do |t|
     t.string   "name"
@@ -446,6 +446,8 @@ ActiveRecord::Schema.define(version: 20140620161809) do
     t.datetime "verification_request_sent_at"
     t.string   "institutional_mail"
     t.boolean  "verified_by_lhc"
+    t.string   "gender"
+    t.string   "institute_name"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree

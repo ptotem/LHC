@@ -192,7 +192,7 @@ class User < ActiveRecord::Base
   end
 
 
-  after_create :domain_name_checking, :set_profession
+  after_create :domain_name_checking, :set_profession, :set_gender_and_institute
 
 
   def domain_name_checking
@@ -202,6 +202,19 @@ class User < ActiveRecord::Base
       self.verified=true
       self.save!
     end
+  end
+
+  def set_gender_and_institute
+    if self.demographic.male?
+      self.gender = "Male"
+    else
+      self.gender = "Female"
+    end
+
+    if !self.demographic.last_institute.nil?
+      self.institute_name = Institution.find(self.demographic.last_institute).name rescue ""
+    end
+    self.save!
   end
 
 end
