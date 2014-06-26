@@ -11,6 +11,8 @@ gem 'rails_admin',"0.6.0"
 gem "rails_admin_import","0.1.8"
 gem "rails_12factor"
 
+gem 'newrelic_rpm'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 gem 'aws-sdk'
