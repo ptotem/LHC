@@ -1,0 +1,79 @@
+<%#= content_for(:page_header) do %>
+    <%#= get_content_for("fillMandotaryDetailWelcomeHeader") %>
+<%# end %>
+
+<%= content_for(:page_desc) do %>
+    <%= get_content_for("fillMandotaryDetailWelcomeText") %>
+<% end %>
+
+
+<div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <%= form_for @user, :url => { :controller => "users/registrations", :action => "update" }, :html => { :method => :post,:class => "form-horizontal" } do |f| %>
+        <%= f.hidden_field :current_route,:value=>@next_page %>
+
+
+            <div class="row">
+              <%= f.fields_for :demographic do |d| %>
+                  <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="text-align: center">
+                    <div class="gender-pic">
+                      <% if @user.demographic.male? %>
+                          <img class="thumbnail" src="/assets/male.png" style="margin-bottom: 10%">
+                      <% else %>
+                          <img class="thumbnail" src="/assets/female.png" style="margin-bottom: 10%">
+                      <% end %>
+                      <div class="black" style="font-size: 1.6em;">YOU</div>
+                    </div>
+                  </div>
+                  <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                    <%= d.date_select :dob, {:order => [:day, :month, :year], :start_year => (Time.now.year-64), :end_year => (Time.now.year-18), :prompt => {:day => 'Select day', :month => 'Select month', :year => 'Select year'}}, {:class => "lhc-chosen", :style=>"width:100%;"} %>
+                  </div>
+              <% end %>
+            </div>
+
+            <div class="row" style="margin-top: 2%;">
+              <%= f.fields_for :criterion do |c| %>
+                  <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="text-align: center">
+                    <div class="gender-pic">
+                      <% if @user.criterion.male? %>
+                          <img class="thumbnail" src="/assets/male.png" style="margin-bottom: 10%">
+                          <div class="black" style="font-size: 1.6em;">HIM</div>
+                      <% else %>
+                          <img class="thumbnail" src="/assets/female.png" style="margin-bottom: 10%">
+                          <div class="black" style="font-size: 1.6em;">HER</div>
+                      <% end %>
+
+                    </div>
+                  </div>
+                  <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                    <% min_age = 18..60 %>
+                    <% max_age = 18..60 %>
+                    <div class="row">
+                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <%= c.select(:minage, min_age.collect { |d| [d.to_s, d.to_s] }, {:prompt => "Age From"}, {:class => "lhc-chosen", :style=>"width:100%;"}) %>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                        <span class="black between_text">To</span>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <%= c.select(:maxage, max_age.collect { |d| [d.to_s, d.to_s] }, {:prompt => "Age To"}, {:class => "lhc-chosen", :style=>"width:100%; margin-top: 10%;"}) %>
+                      </div>
+                    </div>
+                  </div>
+              <% end %>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <%= render :partial => "buttons_mobile",:locals => {:form=>f,:prev_page_link=>@prev_page} %>
+              </div>
+            </div>
+
+    <% end %>
+
+  </div>
+</div>

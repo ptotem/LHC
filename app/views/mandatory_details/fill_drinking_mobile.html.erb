@@ -1,0 +1,119 @@
+<%= content_for(:page_desc) do %>
+    <%= get_content_for("fillMandatoryDrinking") %>
+<% end %>
+
+<div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <%= form_for @user, :url => { :controller => "users/registrations", :action => "update" }, :html => { :method => :post,:class => "form-horizontal" } do |f| %>
+        <%= f.hidden_field :current_route,:value=>@next_page %>
+
+
+
+        <div class="row">
+          <%= f.fields_for :demographic do |d| %>
+              <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="text-align: center">
+                <div class="gender-pic">
+                  <% if @user.demographic.male? %>
+                      <img class="thumbnail" src="/assets/male.png" style="margin-bottom: 10%">
+                  <% else %>
+                      <img class="thumbnail" src="/assets/female.png" style="margin-bottom: 10%">
+                  <% end %>
+                  <div class="black" style="font-size: 1.6em;">YOU</div>
+                </div>
+              </div>
+              <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                <%= d.hidden_field :drinking, :id => "me_drinking_textfield", :class => "hidden_elems" %>
+                <ul class="demographic-drinking-options-images" style="list-style: none; margin-left: 5%;">
+                  <li id="demographic_drinking_never"><img alt="Never" src="/assets/empty_1_glass.png" class="img-responsive" style="width: 40%;"></li>
+                  <li id="demographic_drinking_socially" style="display: none;"><img alt="Socially" src="/assets/empty_3_glass.png" class="img-responsive" style="width: 40%;"></li>
+                  <li id="demographic_drinking_often" style="display: none;"><img alt="Often" src="/assets/empty_2_glass.png" class="img-responsive" style="width: 40%;"></li>
+                </ul>
+                <%= select_tag "demographic_drinking", "<option>Never</option><option>Socially</option><option>Often</option>".html_safe,  {:onchange => 'get_selected_val($(this))', :class => "lhc-chosen", :style=>"width:100%; margin-top: -5%"} %>
+              </div>
+          <% end %>
+        </div>
+
+        <div class="row" style="margin-top: 2%;">
+          <%= f.fields_for :criterion do |c| %>
+              <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="text-align: center">
+                <div class="gender-pic">
+                  <% if @user.criterion.male? %>
+                      <img class="thumbnail" src="/assets/male.png" style="margin-bottom: 10%">
+                      <div class="black" style="font-size: 1.6em;">HIM</div>
+                  <% else %>
+                      <img class="thumbnail" src="/assets/female.png" style="margin-bottom: 10%">
+                      <div class="black" style="font-size: 1.6em;">HER</div>
+                  <% end %>
+                </div>
+              </div>
+              <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                <%= c.hidden_field :drinking, :id => "opposite_person_drinking_textfield", :class => "hidden_elems" %>
+                <ul class="criterion-drinking-options-images" style="list-style: none; margin-left: 5%;">
+                  <li id="criterion_drinking_never"><img alt="Never" src="/assets/empty_1_glass.png" class="img-responsive" style="width: 40%;"></li>
+                  <li id="criterion_drinking_socially" style="display: none;"><img alt="Socially" src="/assets/empty_3_glass.png" class="img-responsive" style="width: 40%"></li>
+                  <li id="criterion_drinking_often" style="display: none;"><img alt="Often" src="/assets/empty_2_glass.png" class="img-responsive" style="width: 40%"></li>
+                  <li id="criterion_drinking_dont_care" style="display: none;"><img alt="Don't Care" src="/assets/empty_1_glass.png" class="img-responsive" style="width: 40%"></li>
+                </ul>
+                <%= select_tag "criterion_drinking", "<option>Never</option><option>Socially</option><option>Often</option><option>Don't Care</option>".html_safe, {:onchange => 'get_selected_val($(this))', :class => "lhc-chosen", :style=>"width:100%; margin-top: -5%"} %>
+              </div>
+          <% end %>
+        </div>
+
+        <div class="row" style="margin-top: 5%;">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <%= render :partial => "buttons_mobile",:locals => {:form=>f,:prev_page_link=>@prev_page} %>
+          </div>
+        </div>
+
+    <% end %>
+
+  </div>
+</div>
+
+
+<script>
+  $(function(){
+
+  });
+
+   function get_selected_val(this_obj){
+       if (this_obj.attr('id').indexOf("demographic") >= 0) {
+           //console.log(this_obj.attr('id'));
+           //console.log(this_obj.val().toLowerCase());
+
+           $("#me_drinking_textfield").val(this_obj.val());
+           $('.demographic-drinking-options-images').find('li').hide();
+
+           if ( this_obj.val().toLowerCase() == "never" ) {
+               $('.demographic-drinking-options-images').find('#demographic_drinking_never').show();
+           }
+           else if ( this_obj.val().toLowerCase() == "socially" ) {
+               $('.demographic-drinking-options-images').find('#demographic_drinking_socially').show();
+           }
+           else if ( this_obj.val().toLowerCase() == "often" ) {
+               $('.demographic-drinking-options-images').find('#demographic_drinking_often').show();
+           }
+
+       }
+       else if (this_obj.attr('id').indexOf("criterion") >= 0) {
+           //console.log(this_obj.attr('id'));
+           //console.log(this_obj.val());
+
+           $('#opposite_person_drinking_textfield').val(this_obj.val());
+           $('.criterion-drinking-options-images').find('li').hide();
+
+           if ( this_obj.val().toLowerCase() == "never" ) {
+               $('.criterion-drinking-options-images').find('#criterion_drinking_never').show();
+           }
+           else if ( this_obj.val().toLowerCase() == "socially" ) {
+               $('.criterion-drinking-options-images').find('#criterion_drinking_socially').show();
+           }
+           else if ( this_obj.val().toLowerCase() == "often" ) {
+               $('.criterion-drinking-options-images').find('#criterion_drinking_often').show();
+           }
+           else if ( this_obj.val().toLowerCase() == "don't care" ) {
+               $('.criterion-drinking-options-images').find('#criterion_drinking_dont_care').show();
+           }
+       }
+   }
+</script>

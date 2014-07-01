@@ -1,6 +1,21 @@
 class QuizCategoriesController < ApplicationController
   before_action :set_quiz_category, only: [:show, :edit, :update, :destroy]
-  layout "dashboard_and_profile_layout"
+
+  #layout "dashboard_and_profile_layout"
+  layout :resolve_layout
+
+  def resolve_layout
+    puts "action_name :- #{action_name}"
+    puts "device_type :- #{device_type}"
+    if action_name == "start_test" || action_name == "take_test"
+    #if device_type == :desktop
+      "dashboard_and_profile_layout"
+    elsif action_name == "start_test_mobile" || action_name == "take_test_mobile"
+    #elsif device_type == :mobile
+      "dashboard_and_profile_layout_mobile"
+    end
+  end
+
   # GET /quiz_categories
   # GET /quiz_categories.json
   def index
@@ -63,10 +78,47 @@ class QuizCategoriesController < ApplicationController
 
 
   def start_test
+    if device_type == :mobile
+      #render :text => "render mobile pages"
+      #return
+      redirect_to start_test_mobile_path
+    elsif device_type == :tablet
+      render :text => "render tablet pages"
+      return
+    else
+      #render :text => "render desktop pages"
+      #return
+      @test=QuizCategory.find(params[:id])
+    end
+  end
+
+  def start_test_mobile
     @test=QuizCategory.find(params[:id])
   end
 
   def take_test
+    if device_type == :mobile
+      #render :text => "render mobile pages"
+      #return
+      redirect_to take_test_mobile_path
+    elsif device_type == :tablet
+      render :text => "render tablet pages"
+      return
+    else
+      #render :text => "render desktop pages"
+      #return
+      @quiz_answer = QuizAnswer.new
+      @quiz=Quiz.find(params[:id])
+      @total_questions = @quiz.questions.map(&:id).count
+      @current_question_index = @quiz.questions.map(&:id)
+      @question=Question.find(params[:question_id])
+      @next_question = (@quiz.questions - [@question])[0]
+    end
+  end
+
+  def take_test_mobile
+    #render :text => "here is take_test_mobile"
+    #return
     @quiz_answer = QuizAnswer.new
     @quiz=Quiz.find(params[:id])
     @total_questions = @quiz.questions.map(&:id).count

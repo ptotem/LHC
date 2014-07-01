@@ -45,7 +45,8 @@
               <div class="row">
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                   <div class="blue name_text">
-                    <%= get_user_name(@user.id) %> <%= current_layout %>
+                    <%= get_user_name(@user.id) %>
+                    <%#= current_layout %>
                     <!--<a href="<%#= edit_profile_path(current_user.id) %>#about_user">-->
                     <a href="<%= edit_profile_path(current_user.id) %>#personal_details_tab">
                     <% if current_user.id == @user.id %>

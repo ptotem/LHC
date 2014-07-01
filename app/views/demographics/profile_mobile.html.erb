@@ -1,7 +1,7 @@
 <style>
-    body {
-        background: none repeat scroll 0 0 #38C8E0;
-    }
+    /*body {*/
+        /*background: none repeat scroll 0 0 #38C8E0;*/
+    /*}*/
 
     .col-style {
         padding-right: 0;
@@ -18,10 +18,35 @@
     /*}*/
     /*for row-col structure - ends*/
 
-    ul.nav li {
-        width: 33.3%;
+    ul.profile-tabs li {
+        /*width: 33.3%;*/
+        width: 30%;
+        /*border: 1px solid #000000;*/
+        /*border-radius: 5%;*/
+        margin: 1% 1% 1% 1%;
+    }
+
+    ul.profile-tabs li a{
+        /*padding: 10% 0 10% 0;*/
+        /*border: 1px solid #000000;*/
+        /*border-radius: 5%;*/
+
         border: 1px solid #000000;
-        border-radius: 5%;
+        border-radius: 5% 5% 5% 5%;
+    }
+
+
+    ul.profile-tabs > li > a{
+        border: 1px solid #000000;
+        border-radius: 5% 5% 5% 5%;
+        color: #000000;
+    }
+
+    ul.profile-tabs > li.active > a, ul.profile-tabs > li.active > a:hover, ul.profile-tabs > li.active > a:focus{
+        border: 1px solid #38C8E0;
+        border-radius: 5% 5% 5% 5%;
+        background-color: #ffffff;
+        color: #38C8E0;
     }
 </style>
 
@@ -33,13 +58,205 @@
     <% end %>
 <% end %>
 
-<div class="row">
-  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="background-color: red;">
+<!-- row for profile_pic, profile'o meter starts -->
+<div class="row" style="padding: 2% 0 2% 0;">
+  <div class="col-xs-11 col-sm-12 col-md-12 col-lg-12 col-xs-offset-1">
+    <div class="row">
+      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        <% if params[:id].to_s == (current_user.id).to_s %>
+            <% if current_user.demographic.avatar.nil? %>
+                <img alt="Image Size 430x280" class="img-responsive profilepic" src="/assets/profile_pic.jpg">
+            <% else %>
+                <img alt="Image Size 430x280" class="img-responsive profilepic" src="<%= current_user.demographic.avatar.url %>" style="height: 78px; max-height: 78px;">
+            <% end %>
+        <% else %>
+            <% if @user.demographic.avatar.nil? %>
+                <img alt="Image Size 430x280" class="img-responsive profilepic" src="/assets/profile_pic.jpg">
+            <% else %>
+                <img alt="Image Size 430x280" class="img-responsive profilepic" src="<%= @user.demographic.avatar.url %>">
+            <% end %>
+        <% end %>
+      </div>
 
-    <div class="bs-example bs-example-tabs">
+      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="padding-left: 0; padding-right: 0; text-align: center">
+        <% if params[:id].to_s == (current_user.id).to_s %>
+            <span class="red" style="display: block; font-size: 0.7em; line-height: 1em;">Profile 'o' Meter</span>
+            <div class="knob_container" style="margin:8% 0 0 -10%;">
+              <div style="margin:0 0 0 15%;" id="myStat" data-dimension="68" data-text="<%= @profileStatus %>%" data-info="" data-width="5" data-fontsize="14" data-percent="<%= @profileStatus %>" data-fgcolor="red" data-bgcolor="#eee" data-fill="#ddd" data-total="150" data-part="72" data-border="inline" data-icon="users" data-icon-size="28" data-icon-color="#ccc"></div>
+            </div>
+        <% else %>
+            <% if get_like_status(params[:id]) %>
+                <% if !check_icebreaker_status(params[:id]) %>
+                    <img src="/assets/cup_half.png" alt="" class="img-responsive pull-right" style="width: 95%;"/>
+                    <!--<div style="margin-top:10%">-->
+                      <!--<%#= get_content_for('ice_breaker') %>-->
+                    <!--</div>-->
+                <% else %>
+                    <img src="/assets/cup_full.png" alt="" class="img-responsive pull-right" style="width: 95%;"/>
+                    <!--<div style="margin-top:10%">-->
+                      <!--<%#= get_content_for('message') %>-->
+                    <!--</div>-->
+                <% end %>
+            <% else %>
+                <img src="/assets/cup_empty.png" alt="" class="img-responsive pull-right" style="width: 95%;"/>
+                <!--<div style="margin-top:10%">-->
+                  <!--<%#= get_content_for('no_mutual_like') %>-->
+                <!--</div>-->
+            <% end %>
+        <% end %>
+      </div>
+
+      <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+        <% if params[:id].to_s == (current_user.id).to_s %>
+            <div class="row" style="padding-top: 1%">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div data-toggle="modal" data-target="#email_modal" class="blue" style="text-align: center; padding:5%; background-color: #ffffff; font-size: 0.9em; cursor: pointer">
+                  <i class="fa fa-envelope fa-1x" style="float: left; padding-top: 2%;"></i>
+                  <span style="font-weight: bold; padding: 5% 0% 5% 0%; font-size: 0.9em;">Invite A Friend</span>
+                </div>
+
+                <!--<div data-toggle="modal" data-target="#email_modal" style="font-size: 0.9em;">-->
+                  <!--<i class="fa fa-envelope fa-1x"></i> Invite A Friend-->
+                <!--</div>-->
+              </div>
+            </div>
+            <div class="row" style="padding-top: 18%;">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div onclick="window.location = '<%= edit_profile_path(current_user.id) %>'" style="text-align: center; padding:5%; background-color: #ffffff; font-size: 0.9em; cursor: pointer">
+                  <%#= link_to 'Edit My Profile', edit_profile_path(current_user.id), :class => "blue" %>
+                  <%= link_to 'Edit My Profile', "#", :class => "blue" %>
+                </div>
+
+              </div>
+            </div>
+        <% else %>
+            <% if get_like_status(params[:id]) %>  <!-- change this not -->
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-left: -3%">
+                  <% if !check_icebreaker_status(params[:id]) %>
+                      <div class="row" style="padding-top: 20%; display: table-cell">
+                          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xs-offset-3 col-sm-offset-3 col-md-offset-3 col-lg-offset-3">
+                            <% if IceBreaker.find_by_receiver_id_and_sender_id(params[:id],current_user.id).nil? and IceBreaker.find_by_receiver_id_and_sender_id(current_user.id,params[:id]).nil? %>
+                                <button title="Start an ice breaker" onclick="window.location = '<%= start_ice_breaker_path(params[:id]) %>'" class="transparent-background-btn" style="border-radius: 50%; padding: 5px;background: white;color:#38c8e0"><i class="fa fa-bell fa-2x"></i></button>
+                            <% else %>
+                                <% if !IceBreaker.find_by_receiver_id_and_sender_id(params[:id],current_user.id).nil? %>
+                                    <% if IceBreaker.find_by_receiver_id_and_sender_id(params[:id],current_user.id).ice_status == true %>
+                                        <!--<h1>Done</h1>-->
+                                    <% end %>
+                                <% end %>
+                                <% if !IceBreaker.find_by_receiver_id_and_sender_id(current_user.id,params[:id]).nil? %>
+                                    <% if IceBreaker.find_by_receiver_id_and_sender_id(current_user.id,params[:id]).ice_status == true %>
+                                        <% if IceBreaker.find_by_receiver_id_and_sender_id(current_user.id,params[:id]).icebreaker_answers.blank?  %>
+                                            <button title="Answer ice breaker" onclick="window.location = '<%= answer_icebreaker_path(IceBreaker.find_by_receiver_id_and_sender_id(current_user.id,params[:id]),IceBreaker.find_by_receiver_id_and_sender_id(current_user.id,params[:id]).questions.first.id) %>'" class="transparent-background-btn" style="border-radius: 50%; padding: 5px;background: white;color:#38c8e0"><i class="fa fa-bell fa-2x"></i></button>
+                                        <% else %>
+                                            <!--<h1>Done</h1>-->
+                                        <% end %>
+
+                                    <% end %>
+                                <% end %>
+                            <% end %>
+                          </div>
+                      </div>
+                  <% else %>
+                      <div class="row" style="padding-top: 20%; display: table-cell">
+                          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xs-offset-3 col-sm-offset-3 col-md-offset-3 col-lg-offset-3">
+                            <button title="Send a message" onclick="window.location = '<%= conversations_with_users_path(params[:id]) %>'" class="transparent-background-btn" style="border-radius: 50%; padding: 5px;background: white;color:#38c8e0"><i class="fa fa-envelope fa-2x"></i></button>
+                          </div>
+                      </div>
+                  <% end %>
+                </div>
+                <!--indicates all mutual likes-->
+            <% else %>
+                <% if Like.find_by_receiver_id_and_sender_id(params[:id],current_user.id).nil? and Like.find_by_receiver_id_and_sender_id(current_user.id,params[:id]).nil? %>
+                    <div class="row" style="padding-top: 20%; display: table-cell">
+                      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                        <button title="Like the match" onclick="window.location = '<%= user_like_path(params[:id]) %>'" class="transparent-background-btn" style="border-radius: 50%; padding: 5px;background: white;color:#38c8e0"><i class="fa fa-thumbs-up fa-2x"></i></button>
+                      </div>
+                      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
+                        <button title="Reject the match" onclick="window.location = '<%= reject_match_path(params[:id]) %>'" class="transparent-background-btn" style="border-radius: 50%; padding: 5px;background: white;color:#38c8e0"><i class="fa fa-thumbs-down fa-2x"></i></button>
+                      </div>
+                    </div>
+                <% else %>
+                    <% if !Like.find_by_receiver_id_and_sender_id(params[:id],current_user.id).nil? %>
+                        <% if Like.find_by_receiver_id_and_sender_id(params[:id],current_user.id).status == false %>
+                            <div class="row" style="padding-top: 20%; display: table-cell">
+                              <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xs-offset-3 col-sm-offset-3 col-md-offset-3 col-lg-offset-3">
+                                <button title="Reject the match" onclick="window.location = '<%= reject_match_path(params[:id]) %>'" class="transparent-background-btn" style="border-radius: 50%; padding: 30%;background: white;color:#38c8e0"><i class="fa fa-thumbs-down fa-3x "></i></button>
+                              </div>
+                            </div>
+                        <% end %>
+                    <% end %>
+                    <% if !Like.find_by_receiver_id_and_sender_id(current_user.id,params[:id]).nil? %>
+                        <% if Like.find_by_receiver_id_and_sender_id(current_user.id,params[:id]).status == false %>
+                            <div class="row" style="padding-top: 20%; display: table-cell">
+                                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                  <button title="Like the match" onclick="window.location = '<%=  accept_request_path(Like.find_by_receiver_id_and_sender_id(current_user.id,params[:id]).id) %>'" class="transparent-background-btn" style="border-radius: 50%; padding: 5px;background: white;color:#38c8e0"><i class="fa fa-thumbs-up fa-2x"></i></button>
+                                </div>
+                                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
+                                  <button title="Reject the match" onclick="window.location = '<%= reject_match_path(params[:id]) %>'" class="transparent-background-btn" style="border-radius: 50%; padding: 5px;background: white;color:#38c8e0"><i class="fa fa-thumbs-down fa-2x"></i></button>
+                                </div>
+                            </div>
+                    <% end %>
+                <% end %>
+            <% end %>
+
+
+            <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- row for profile_pic, profile'o meter ends -->
+
+<!-- row for modal starts -->
+<div class="row">
+  <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+    <div class="modal fade" id="email_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel" style="color: #000000">Invitee Your Friends</h4>
+          </div>
+          <div class="modal-body">
+            <%= form_tag ('/invitee_friends') do %>
+                <div class="row">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="row">
+                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <%= label_tag "Enter Email" %>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <%= text_field_tag :email, params[:email], :class=>"col-xs-12" %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                </div>
+                <div class="modal-footer">
+                  <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                      <%= submit_tag "Send" %>
+                    </div>
+                  </div>
+            <% end %>
+            </div>
+            </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- row for modal ends -->
+
+<div class="row">
+  <div class="col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1 col-xs-11 col-sm-11 col-md-11 col-lg-11">
+
+    <div class="bs-example bs-example-tabs" style="background-color: #ffffff">
       <div class="row">
-        <div class="col-xs-offset-1 col-xs-11 col-sm-12 col-md-12 col-lg-12">
-          <ul class="nav nav-tabs" id="myTab" style="text-align: center">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="nav nav-tabs profile-tabs" id="myTab" style="text-align: center; border: none;">
 
             <!--<div class="row">-->
             <!--<div class="col-xs-4 col-style">-->
@@ -68,19 +285,19 @@
             <!--</div>-->
 
             <li class="active">
-              <a style="color: #000000" data-toggle="tab" href="#basic_info">Basic Info</a>
+              <a data-toggle="tab" href="#basic_info">Basic Info</a>
             </li>
             <li class="">
-              <a style="color: #000000" data-toggle="tab" href="#fav_movies">Fave Movies</a>
+              <a data-toggle="tab" href="#fav_movies">Fave Movies</a>
             </li>
             <li class="">
-              <a style="color: #000000" data-toggle="tab" href="#fav_musics">Fave Music</a>
+              <a data-toggle="tab" href="#fav_musics">Fave Music</a>
             </li>
             <li class="" style="margin-left:17.5%;">
-              <a style="color: #000000" data-toggle="tab" href="#fav_books">Fave Books</a>
+              <a data-toggle="tab" href="#fav_books">Fave Books</a>
             </li>
             <li class="">
-              <a style="color: #000000" data-toggle="tab" href="#stuff_i_like">Stuff I like</a>
+              <a data-toggle="tab" href="#stuff_i_like">Stuff I like</a>
             </li>
 
 
@@ -89,34 +306,374 @@
       </div>
 
       <div class="row">
-        <div class="col-xs-offset-1 col-xs-11 col-sm-12 col-md-12 col-lg-12">
-          <div class="tab-content" id="myTabContent">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="tab-content" id="myTabContent" style="padding: 2%; background-color: #ffffff">
             <div id="basic_info" class="tab-pane fade active in">
-
-
               <div class="row">
-
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                  <div class="blue" style="font-size: 1.5em">
+                    <%= get_user_name(@user.id) %>
+                    <a href="<%= edit_profile_path(current_user.id) %>#personal_details_tab">
+                      <% if current_user.id == @user.id %>
+                          <i class="fa fa-edit "></i>
+                      <% end %>
+                    </a>
+                  </div>
+                </div>
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                  <div class="prof-demo-container" style="background-color: #38C8E0">
+                    <% if @user_drinking == "Never" %>
+                        <img src="/assets/no-drinking.png" alt="" class="img-responsive" style="margin-left: 25%; width: 50%;"/>
+                    <% else %>
+                        <img src="/assets/whiteglass.png" alt="" class="img-responsive" style="margin-left: 25%; width: 50%;"/>
+                    <% end %>
+                    <p class="text-center" style="color: #000000"><%= @user_drinking %></p>
+                  </div>
+                </div>
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                  <div class="prof-demo-container" style="background-color: #38C8E0">
+                    <% if @user_smoking == "Never" %>
+                        <img src="/assets/no-smoking.png" alt="" class="img-responsive" style="margin-left: 25%; width: 50%;"/>
+                    <% else %>
+                        <img src="/assets/whitesmokes.png" alt="" class="img-responsive" style="margin-left: 25%; width: 50%;"/>
+                    <% end %>
+                    <p class="text-center" style="margin-top: 1%; color: #000000"><%= @user_smoking %></p>
+                  </div>
+                </div>
               </div>
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                  <table style="color: #3E4549;">
+                    <tr>
+                      <td class="user_detail"><i class="fa fa-user"></i></td>
+                      <td class="user_detail"><%= "#{@user_gender}, #{@user_age}" %></td>
+                    </tr>
+                    <tr>
+                      <td class="user_detail"><i class="fa fa-building-o"></i></td>
+                      <td class="user_detail"><%= @user_last_institute_name %></td>
+                    </tr>
+                    <tr>
+                      <td class="user_detail"><i class="fa fa-map-marker "></i></td>
+                      <td class="user_detail"><%= @user_location %></td>
+                    </tr>
+                    <tr>
+                      <td class="user_detail"><i class="fa fa-suitcase"></i></td>
+                      <td class="user_detail"><%= @user_profession %></td>
+                    </tr>
 
+                    <tr>
+                      <td class="user_detail"><i class="fa fa-book"></i></td>
+                      <td class="user_detail"><%= @user_religion %></td>
+                    </tr>
 
+                    <tr>
+                      <td class="user_detail"><i class="fa fa-info"></i></td>
+                      <td class="user_detail">
+                        <% if @user_current_student == false  %>
+                            Alum
+                        <% else %>
+                            Currently a Student
+                        <% end %>
+                      </td>
+                    </tr>
+
+                  </table>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                  <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                      <h5 class="white" style="background-color: #38C8E0; padding: 2%; font-size: 1.3em;">About myself
+                        <!--<a href="<%#= edit_profile_path(current_user.id) %>#about_myself">-->
+                        <a href="<%= edit_profile_path(current_user.id) %>#about_me_tab">
+                          <% if current_user.id == @user.id %>
+                              <i class="fa fa-edit pull-right"></i>
+                          <% end %>
+                        </a>
+                      </h5>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                      <p style="color: #3E4549"><%= @user_desc %></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                  <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                      <h5 class="white" style="background-color: #38C8E0; padding: 2%; font-size: 1.3em">
+                        Hobbies
+                        <a href="<%= edit_profile_path(current_user.id) %>#about_me_tab">
+                          <% if current_user.id == @user.id %>
+                              <i class="fa fa-edit pull-right"></i>
+                          <% end %>
+                        </a>
+                      </h5>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 white">
+                      <i class="fa fa-info-circle font_awesome_icon blue" style="font-size: 8em;"></i>
+                    </div>
+                    <div class="col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                      <% current_user.hobby_lists.each do |h| %>
+                          <div class="hd_list" style="color: #3E4549"><%= h.name.truncate(22) %></div>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                  <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                      <h5 class="white" style="background-color: #38C8E0; padding: 2%; font-size: 1.3em">How my friends Describe me
+                        <a href="<%= edit_profile_path(current_user.id) %>#about_me_tab">
+                          <% if current_user.id == @user.id %>
+                              <i class="fa fa-edit pull-right"></i>
+                          <% end %>
+                        </a>
+                      </h5>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-5 white">
+                      <i class="fa fa-comments font_awesome_icon blue" style="font-size: 8em;"></i>
+                    </div>
+                    <div class="col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-xs-5 col-sm-5 col-md-5 col-lg-6">
+                      <% current_user.about_lists.each do |h| %>
+                          <div class="hd_list" style="color: #3E4549"><%= h.name.truncate(22) %></div>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
             <div id="fav_movies" class="tab-pane fade">
-              <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation
-                +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table
-                craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco
-                ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar
-                helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes
-                anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party
-                scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+              <div class="row">
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                  <div class="blue" style="font-size: 1.5em">
+                    Movies I like
+                  </div>
+                </div>
+                <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xs-offset-2 col-sm-offset-2 col-ms-offset-2 col-lg-offset-2" style="padding-top: 2%">
+                  <a href="<%= edit_profile_path(current_user.id) %>#movies_tab" class="blue">
+                    <% if current_user.id == @user.id %>
+                        <i class="fa fa-edit" style="font-size: 1.5em;"></i>
+                    <% end %>
+                  </a>
+                </div>
+              </div>
+              <div class="row" style="padding-top: 5%;">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                  <% if @user.movies.length == 0 %>
+                      <div><%= get_content_for("empty_movies_text") %></div>
+                  <% else %>
+                      <div id="carousel-for-movies" class="carousel slide" data-ride="carousel" data-interval="false" style="height: 190px; padding: 1%">
+                        <div class="carousel-inner">
+                          <div class="item active">
+                            <% @user.movies.each_with_index do |user_movie, index| %>
+                                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" title="<%= user_movie.name %>">
+                                  <%= image_tag user_movie.poster ,:class=>"my-img", :style => "width: 80%; height:75px;" %>
+                                  <div class="carousel-caption custom-carousel-caption" style="top: 75%;">
+                                    <p><%= user_movie.name.truncate(15) %></p>
+                                  </div>
+                                </div>
+                                <% if (index+1)%3==0 %>
+                                    </div> <div class="item ">
+                                <% end %>
+                            <% end %>
+                            </div>
+                            <!-- Controls -->
+
+                          </div>
+                          <a style="background-image: none; outline: none; padding-top: 10%; left: -5%;" class="left carousel-control padding-control-indicator" href="#carousel-for-movies" data-slide="prev">
+                            <span class="fa fa-chevron-left"></span>
+                          </a>
+                          <a style="background-image: none; outline: none; padding-top: 10%; right: -1%" class="right carousel-control padding-control-indicator" href="#carousel-for-movies" data-slide="next">
+                            <span class="fa fa-chevron-right"></span>
+                          </a>
+                      </div>
+                  <% end %>
+                </div>
+              </div>
             </div>
             <div id="fav_musics" class="tab-pane fade">
-              <p>Fav Music</p>
+              <div class="row">
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                  <div class="blue" style="font-size: 1.5em">
+                    Music I like
+                  </div>
+                </div>
+                <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xs-offset-2 col-sm-offset-2 col-ms-offset-2 col-lg-offset-2" style="padding-top: 2%">
+                  <a href="<%= edit_profile_path(current_user.id) %>#music_tab" class="blue">
+                    <% if current_user.id == @user.id %>
+                        <i class="fa fa-edit" style="font-size: 1.5em;"></i>
+                    <% end %>
+                  </a>
+                </div>
+              </div>
+              <div class="row" style="padding-top: 5%;">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="edit-profile-movies-caraousel-container2">
+                  <% if @user.songs.length == 0 %>
+                      <div><%= get_content_for("empty_music_text") %></div>
+                  <% else %>
+                      <div id="carousel-for-movies" class="carousel slide" data-ride="carousel" data-interval="false" style="height: 190px; padding: 1%">
+                        <div class="carousel-inner">
+                          <div class="item active">
+                            <% @user.songs.each_with_index do |user_song, index| %>
+                                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" title="<%= user_song.name %>">
+                                  <%= image_tag user_song.song_poster ,:class=>"my-img", :style => "width: 80%; height:75px;" %>
+                                  <div class="carousel-caption custom-carousel-caption" style="top: 75%;">
+                                    <p><%= user_song.name.truncate(15) %></p>
+                                  </div>
+                                </div>
+                                <% if (index+1)%3==0 %>
+                                    </div> <div class="item ">
+                                <% end %>
+                            <% end %>
+                            </div>
+                            <!-- Controls -->
+
+                          </div>
+                          <a style="background-image: none; outline: none; padding-top: 10%; left: -5%;" class="left carousel-control padding-control-indicator" href="#carousel-for-songs" data-slide="prev">
+                            <span class="fa  fa-chevron-left"></span>
+                          </a>
+                          <a style="background-image: none; outline: none; padding-top: 10%; right: -1%;" class="right carousel-control padding-control-indicator" href="#carousel-for-songs" data-slide="next">
+                            <span class="fa fa-chevron-right"></span>
+                          </a>
+                      </div>
+                  <% end %>
+                </div>
+              </div>
             </div>
             <div id="fav_books" class="tab-pane fade">
-              <p>Fav Books</p>
+              <div class="row">
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                  <div class="blue" style="font-size: 1.5em">
+                    Books I like
+                  </div>
+                </div>
+                <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xs-offset-2 col-sm-offset-2 col-ms-offset-2 col-lg-offset-2" style="padding-top: 2%">
+                  <a href="<%= edit_profile_path(current_user.id) %>#books_tab" class="blue">
+                    <% if current_user.id == @user.id %>
+                        <i class="fa fa-edit" style="font-size: 1.5em;"></i>
+                    <% end %>
+                  </a>
+                </div>
+              </div>
+              <div class="row" style="padding-top: 5%;">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="edit-profile-movies-caraousel-container2">
+                  <% if @user.books.length == 0 %>
+                      <div><%= get_content_for("empty_books_text") %></div>
+                  <% else %>
+                      <div id="carousel-for-books" class="carousel slide" data-ride="carousel" data-interval="false" style="height: 190px; padding: 1%">
+                        <div class="carousel-inner">
+                          <div class="item active">
+                            <% @user.books.each_with_index do |user_book, index| %>
+                                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" title="<%= user_book.name %>">
+                                  <%= image_tag user_book.cover ,:class=>"my-img", :style => "width: 80%; height:75px;" %>
+                                  <div class="carousel-caption custom-carousel-caption" style="top: 75%;">
+                                  <!--<div class="carousel-caption custom-carousel-caption-book" style="top: 75%;">-->
+                                    <p> <%= user_book.name.truncate(15) %></p>
+                                  </div>
+                                </div>
+                                <% if (index+1)%3==0 %>
+                                    </div> <div class="item ">
+                                <% end %>
+                            <% end %>
+                            </div>
+                            <!-- Controls -->
+                            </div>
+                            <a style="background-image: none; outline: none; padding-top: 10%; left: -5%;" class="left carousel-control padding-control-indicator" href="#carousel-for-books" data-slide="prev">
+                                <span class="fa  fa-chevron-left"></span>
+                            </a>
+                            <a style="background-image: none; outline: none; padding-top: 10%; right: -1%;" class="right carousel-control padding-control-indicator" href="#carousel-for-books" data-slide="next">
+                                <span class="fa fa-chevron-right"></span>
+                            </a>
+                      </div>
+                  <% end %>
+                </div>
+              </div>
             </div>
             <div id="stuff_i_like" class="tab-pane fade">
-              <p>Stuff I like</p>
+              <div class="row">
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                  <div class="blue" style="font-size: 1.5em">
+                    Quizzes
+                  </div>
+                </div>
+                <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xs-offset-2 col-sm-offset-2 col-ms-offset-2 col-lg-offset-2" style="padding-top: 2%">
+                  <a href="<%= edit_profile_path(current_user.id) %>#books_tab" class="blue">
+                    <% if current_user.id == @user.id %>
+                        <i class="fa fa-edit" style="font-size: 1.5em;"></i>
+                    <% end %>
+                  </a>
+                </div>
+              </div>
+              <div class="row" style="padding-top: 5%;">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="edit-profile-movies-caraousel-container2">
+                  <% if @user_quizzes.length == 0 %>
+                      <div><%= get_content_for("empty_quiz_text") %></div>
+                  <% else %>
+                      <div id="carousel-for-quizzes" class="carousel slide" data-ride="carousel" data-interval="false" style="height: 190px; padding: 1%">
+                        <div class="carousel-inner">
+                          <div class="item active">
+                            <% @user_quizzes.each_with_index do |user_quiz, index| %>
+                                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="cursor:pointer;" data-target="#<%= index %>" data-toggle="modal" title="<%= user_quiz.name %>">
+                                  <%#= image_tag user_book.cover ,:class=>"my-img", :style => "width: 80%; height:75px;" %>
+                                  <%= image_tag get_image_from_content("image-for-quiz-"+user_quiz.name) ,:height => "75px",:width=>"80%" %>
+                                  <div class="carousel-caption custom-carousel-caption" style="top: 75%;">
+                                    <p> <%= user_quiz.name.truncate(15) %></p>
+                                    <p style="position: absolute; bottom: -99px;"> Show <%= current_user.demographic.nickname %>'s answers</p>
+                                  </div>
+                                </div>
+                                <% if (index+1)%3==0 %>
+                                    </div> <div class="item ">
+                                <% end %>
+                                <div class="modal fade" id="<%= index %>">
+                                  <div class="modal-dialog">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title" style="color: #000000"><%= user_quiz.name %></h4>
+                                      </div>
+                                      <div class="modal-body">
+                                        <ol>
+                                          <% user_quiz.questions.each do |q| %>
+                                              <li><b><%= q.name %></b></li>
+                                              <% if !QuizAnswer.find_by_question_id_and_user_id(q.id,params[:id]).nil? %>
+                                                  <ul>
+                                                    <li><%= Option.find(QuizAnswer.find_by_question_id_and_user_id(q.id,params[:id]).answer_id).name %></li>
+                                                  </ul>
+                                              <% end %>
+                                          <% end %>
+                                        </ol>
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                      </div>
+                                    </div><!-- /.modal-content -->
+                                  </div><!-- /.modal-dialog -->
+                                </div><!-- /.modal -->
+                            <% end %>
+                          </div>
+                            <!-- Controls -->
+                        </div>
+                        <a style="background-image: none; outline: none; padding-top: 10%; left: -5%;" class="left carousel-control padding-control-indicator" href="#carousel-for-quizzes" data-slide="prev">
+                          <span class="fa fa-chevron-left"></span>
+                        </a>
+                        <a style="background-image: none; outline: none; padding-top: 10%; right: -1%;" class="right carousel-control padding-control-indicator" href="#carousel-for-quizzes" data-slide="next">
+                          <span class="fa fa-chevron-right"></span>
+                        </a>
+                      </div>
+                  <% end %>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -127,3 +684,9 @@
 
   </div>
 </div>
+
+<script>
+    $(function () {
+        $('#myStat').circliful();
+    });
+</script>

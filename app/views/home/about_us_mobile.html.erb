@@ -1,0 +1,35 @@
+<%= content_for(:dialogue_bar_header) do %>
+    About Us
+<% end %>
+
+<div class="row" style="margin-top: 5%;">
+  <div class="col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1 col-xs-11 col-sm-11 col-md-11 col-lg-11">
+
+    <div class="row">
+      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        <div class="about-second-image" style="height: 68px; width: 68px;">
+        </div>
+      </div>
+      <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+        <p class="white"> <%= get_content_for("aboutUs1") %> </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 about-plus-text"> +</div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+        <p class="white">
+          <%= get_content_for("aboutUs2") %>
+        </p>
+      </div>
+      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        <div class="about-first-image" style="height: 68px; width: 68px; margin-left: -33%;">
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

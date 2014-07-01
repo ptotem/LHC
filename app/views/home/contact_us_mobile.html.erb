@@ -1,0 +1,74 @@
+<%= content_for(:dialogue_bar_header) do %>
+    Contact Us
+<% end %>
+
+<div class="row" style="margin-top: 5%;">
+  <div class="col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1 col-xs-11 col-sm-11 col-md-11 col-lg-11">
+
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <p class="white"><%= get_content_for("contactUsBody") %></p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <%= form_for @query, :class => "form-horizontal" do |f| %>
+
+            <div class="control-group">
+              <div class="controls">
+                <div class="row">
+                  <div class="col-lg-8 col-lg-offset-2">
+                    <%= f.text_field :name, placeholder: 'Name', class: 'form-control' %>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <div class="controls">
+                <div class="row">
+                  <div class="col-lg-8 col-lg-offset-2">
+                    <%= f.email_field :email,  placeholder: 'E-mail', class: 'form-control' %>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <div class="controls">
+                <div class="row">
+                  <div class="col-lg-8 col-lg-offset-2">
+                    <%= f.select :subject, ["I want to share my story","I want to know more about Let's Have Coffee","I have an interesting proposal for you","I want to add my college to Let's Have Coffee","I just generally want to talk to you guys!"], {},prompt: "Subject", class: '', :style=>"width: 100%; border:none;" %>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <div class="controls">
+                <div class="row">
+                  <div class="col-lg-8 col-lg-offset-2">
+                    <%= f.text_area :body , placeholder: 'Message', class: 'form-control', :rows => 5, :style=>"resize: vertical;" %>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="control-group" style="margin-top: 3%">
+              <div class="controls">
+                <div class="row">
+                  <div class="col-lg-8 col-lg-offset-2">
+                    <%= f.submit 'Send Message', :class=>"btn-main lhc-red-btn" %>
+                  </div>
+                </div>
+              </div>
+            </div>
+        <% end -%>
+      </div>
+    </div>
+
+
+  </div>
+</div>

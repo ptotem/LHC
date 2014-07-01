@@ -1,0 +1,30 @@
+<%= content_for(:dialogue_bar_header) do %>
+    In a nutshell
+<% end %>
+
+<div class="row">
+  <div class="col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1 col-xs-11 col-sm-11 col-md-11 col-lg-11">
+    <p class="about-user">We think, <%= @opposite_user.demographic.nickname %> might be...</p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1 col-xs-11 col-sm-11 col-md-11 col-lg-11">
+    <% @quizzes.each_with_index do |e,index| %>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="margin-bottom: 10%;">
+          <div class="white-block" style="background: none repeat scroll 0 0 #FFFFFF; text-align: center; display: block">
+            <a style="cursor:default; width:100%;height: 100%; text-align: center; display: inline-block; vertical-align: middle" href="<%#= take_test_path(e.id,e.questions.first.id) %>" id="ans_test_btn">
+              <%#= QuizResult.where("quiz_id = ? and ? BETWEEN min_value AND max_value", e.id, e.calculate_total_score_for(params[:id])).first.name rescue "NA"%>
+            </a>
+            <!--<img src="/assets/cofee1.jpg" class="img-responsive" style="width: 72%; display: inline-block; text-align: center;">-->
+            <img src="<%= get_image_from_content("quiz-" + e.name) %>" class="img-responsive" style="min-width:72%; width: 72%; max-width: 72%; display: inline-block;">
+            <p style="color: #3E4549; margin-bottom: 0"><b><%= e.name %></b></p>
+            <div style="color: #906B41; font-size: 0.9em; font-weight: bold; padding-bottom: 1%;">
+              <%= QuizResult.where("quiz_id = ? and ? BETWEEN min_value AND max_value", e.id, e.calculate_total_score_for(params[:id])).first.name rescue "We don't know yet" %>
+            </div>
+          </div>
+        </div>
+    <% end %>
+
+  </div>
+</div>

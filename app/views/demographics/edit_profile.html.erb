@@ -33,8 +33,11 @@
 
     <ul class="nav nav-tabs" style="margin-bottom: 15px;">
       <li id="personal_details_tab" class="active">
-        <a href="#home" data-toggle="tab" style="border-top-left-radius: 10px; border-top-right-radius: 10px;outline: 0">Personal
-          Details</a></li>
+        <a href="#home" data-toggle="tab" style="border-top-left-radius: 10px; border-top-right-radius: 10px;outline: 0">
+          <%#= current_layout %>
+          Personal Details
+        </a>
+      </li>
       <li id="password_tab">
         <a href="#profile" data-toggle="tab" style="border-top-left-radius: 10px; border-top-right-radius: 10px;outline: 0">Password</a>
       </li>
@@ -648,7 +651,7 @@
         $('.carousel').carousel({interval: false});
         //var totalItems = $('.item').length;
         var totalMovieItems = $('#carousel-for-movies').find('.item').length;
-        console.log("totalMovieItems :- " + totalMovieItems);
+        //console.log("totalMovieItems :- " + totalMovieItems);
 
         //var user_movies_len = <%#= @user.movies.count %>
         //console.log(user_movies_len);

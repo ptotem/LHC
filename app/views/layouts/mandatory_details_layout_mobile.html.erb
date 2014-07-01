@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title><%= get_content_for("siteTitle") %></title>
+  <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1">
+
+  <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+
+  <%= csrf_meta_tags %>
+
+</head>
+
+<body style="background-color: #ffffff">
+
+
+    <div class="row" style="background: none repeat scroll 0 0 #3E4549;">
+      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        <%= image_tag get_image_from_content('applogo'), :class => "img-responsive" %>
+      </div>
+      <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9" style="background: url('/assets/icons/arrow.png') no-repeat scroll left 3% bottom #3E4549; background-size: 8% 20%">
+        <h5 class="white">
+          <%= get_content_for("fillMandatoryDetailsHeader") %>
+        </h5>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1 col-xs-11 col-sm-11 col-md-11 col-lg-11">
+
+        <div class="row">
+          <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11">
+            <h3 class="black"><%= yield(:page_header) %></h3>
+            <p><%= yield(:page_desc) %></p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <%= yield %>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+
+    <%= js add_gritter(flash[:notice], :image => '/assets/bulb_48_48.png', :title => "Notification!", :sticky => false, :time => 10000, :position => :bottom_left, :class_name => "gritter_style") %>
+
+</body>
+
+</html>

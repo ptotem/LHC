@@ -1,0 +1,67 @@
+<%= content_for(:dialogue_bar_header) do %>
+    Prove yourself !
+<% end %>
+
+<div class="row">
+  <div class="col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1 col-xs-11 col-sm-11 col-md-11 col-lg-11">
+    <div class="row">
+      <div class="col-xs-8 col-sm-9 col-md-9 col-lg-9">
+        <h3 class="white"><%= @quiz.name %></h3>
+      </div>
+      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        <img src="/assets/cup4.png" class="img-responsive" style="margin-top: 20px">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div id="step_<%= @question.id %>" class="test-steps" style="padding: 0 4% 4%;">
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <h4 style="font-size: 1.4em; line-height: 1.4em;" class="white">
+                  <%= @current_question_index.index(@question.id) + 1 %>.
+                  <%= @question.name %>
+                </h4>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              <ul class="test_ul">
+                <%= form_for(@quiz_answer) do |f| %>
+
+                    <%= f.hidden_field :user_id,:value => current_user.id %>
+                    <%= f.hidden_field :question_id,:value => @question.id %>
+                    <%= hidden_field_tag :quiz_id, @quiz.id %>
+
+                    <!--<div class="field" style="height: 395px; overflow-y: auto">-->
+                    <div class="field">
+                      <% @question.options.each do |test_ans_option| %>
+                          <li>
+                            <%= f.radio_button :answer_id,test_ans_option.id, :style=>"float: left;" %>
+                            <p class="radio_text" style="padding-top: 0; margin-left: 2%"><%= test_ans_option.name %></p>
+                          </li>
+                      <% end %>
+                    </div>
+
+                    <div class="actions" style="margin-top: 5%;">
+                      <div class="row">
+                        <div class="col-xs-5 col-sm-6 col-md-6 col-lg-6">
+                          <%= f.submit "Answer", :class=>"btn-main ans_btn" %>
+                        </div>
+                        <div class="col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2 col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                          <div class="status" style="margin-top: 8px;">
+                            <%= @current_question_index.index(@question.id) + 1 %> /
+                            <%= @quiz.questions.count %>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

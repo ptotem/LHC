@@ -1,0 +1,16 @@
+<div class="row">
+
+  <% if !prev_page_link.blank? %>
+    <div class="col-xs-5 col-sm-6 col-md-6 col-lg-6">
+      <input type="submit" value="Back" class="btn-main btn criteria-fill-step-btn red-btn" style="width: 75%; padding: 10px 12px;" onclick="window.location='<%= prev_page_link %>';return false;">
+    </div>
+    <div class="col-xs-offset-2 col-xs-5 col-sm-6 col-md-6 col-lg-6">
+      <%= form.submit "Submit", :id=>"criteria_submit_btn", :class=>"btn btn-main criteria-fill-step-btn red-btn", :style=>"width:75%; padding: 10px 12px;"%>
+    </div>
+  <% else %>
+    <div class="col-xs-offset-7 col-sm-offset-7 col-md-offset-7 col-lg-offset-7 col-xs-4 col-sm-4 col-md-4 col-lg-4">
+      <%= form.submit "Submit", :id=>"criteria_submit_btn", :class=>"btn btn-main criteria-fill-step-btn red-btn", :style=>"padding: 10px 12px;" %>
+    </div>
+  <% end %>
+
+</div>

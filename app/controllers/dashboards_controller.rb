@@ -1,7 +1,23 @@
 class DashboardsController < ApplicationController
   before_action :set_dashboard, only: [:show, :edit, :update, :destroy]
-  layout 'dashboard_and_profile_layout'
+  #layout 'dashboard_and_profile_layout'
   include ApplicationHelper
+
+  layout :resolve_layout
+
+  #private
+
+  def resolve_layout
+    puts "action_name :- #{action_name}"
+    puts "device_type :- #{device_type}"
+    if action_name == "my_dashboard" || action_name == "welcome_dashboard" || action_name == "quick_matches" || action_name == "mutual_likes" || action_name == "snazzmeup"  || action_name == "conversations" || action_name == "conversations_with_users" || action_name == "younme" || action_name == "start_ice_breaker" || action_name == "answer_icebreaker" || action_name == "user_verification" || action_name == "quiz_review"
+    #if device_type == :desktop
+      "dashboard_and_profile_layout"
+    elsif action_name == "my_dashboard_mobile" || action_name == "welcome_dashboard_mobile" || action_name == "quick_matches_mobile" || action_name == "mutual_likes_mobile" || action_name == "snazzmeup_mobile"|| action_name == "conversations_mobile" || action_name == "conversations_with_users_mobile" || action_name == "younme_mobile" || action_name == "start_ice_breaker_mobile" || action_name == "answer_icebreaker_mobile" || action_name == "user_verification_mobile" || action_name == "quiz_review_mobile"
+    #elsif device_type == :mobile
+      "dashboard_and_profile_layout_mobile"
+    end
+  end
 
   # GET /dashboards
   # GET /dashboards.json
@@ -10,6 +26,30 @@ class DashboardsController < ApplicationController
   end
 
   def welcome_dashboard
+
+    if device_type == :mobile
+      #render :text => "render mobile pages"
+      #return
+      redirect_to welcome_dashboard_mobile_path
+    elsif device_type == :tablet
+      render :text => "render tablet pages"
+      return
+    else
+      #render :text => "render desktop pages"
+      #return
+      @current_user_route = current_user.current_route
+      current_user.current_route = my_dashboard_path
+      current_user.save!
+      if current_user.last_matched_time.nil? or (Time.now - current_user.last_matched_time)/3600 > 72
+        current_user.update_match_status
+        current_user.find_matches
+        current_user.update_match
+      end
+    end
+
+  end
+
+  def welcome_dashboard_mobile
     @current_user_route = current_user.current_route
     current_user.current_route = my_dashboard_path
     current_user.save!
@@ -17,12 +57,12 @@ class DashboardsController < ApplicationController
       current_user.update_match_status
       current_user.find_matches
       current_user.update_match
-      end
-
-
     end
-  
-  def my_dashboard
+  end
+
+  def my_dashboard_mobile
+    #render :text => "my_dashboard_mobile"
+    #return
     @user = current_user
     @user_name = current_user.demographic.name
 
@@ -42,18 +82,18 @@ class DashboardsController < ApplicationController
       n.notification_seen = true
       n.save!
 
-      if ((((3.days.since(n.created_at) - Time.now)/3600).to_i ) <= 0)
+      if ((((3.days.since(n.created_at) - Time.now)/3600).to_i) <= 0)
         n.destroy
       end
     end
 
-    @like_requests = Like.where(:receiver_id => current_user.id,:status=>false) rescue nil?
+    @like_requests = Like.where(:receiver_id => current_user.id, :status => false) rescue nil?
 
 
     Like.where(:receiver_id => current_user.id).each do |e|
-     if ((((3.days.since(e.created_at) - Time.now)/3600).to_i ) <= 0)
+      if ((((3.days.since(e.created_at) - Time.now)/3600).to_i) <= 0)
         e.destroy
-     end
+      end
     end
 
     #render :json => @like_requests
@@ -63,14 +103,94 @@ class DashboardsController < ApplicationController
     # TODO: Why was this code commented ? I wrote it for a reason- Rushabh
     if current_user.notifications.blank? and @like_requests.blank?
       #redirect_to user_profile_path(current_user.id),:notice => "You have no notifications"
-      redirect_to welcome_dashboard_path,notice: "You do not have any notifications."
+      redirect_to welcome_dashboard_path, notice: "You do not have any notifications."
     end
   end
 
+  def my_dashboard
+    if device_type == :mobile
+      #render :text => "render mobile pages"
+      #return
+      redirect_to my_dashboard_mobile_path
+    elsif device_type == :tablet
+      render :text => "render tablet pages"
+      return
+    else
+      #render :text => "render desktop pages"
+      #return
+      @user = current_user
+      @user_name = current_user.demographic.name
+
+      @user_first_visit = @user.first_visit
+      @user.first_visit = true
+      @user.save!
+      if current_user.last_matched_time.nil? or (Time.now - current_user.last_matched_time)/3600 > 72
+        current_user.update_match_status
+        current_user.find_matches
+        current_user.update_match
+      end
+
+      #render :text => @user.first_visit
+      #return
+
+      @user.notifications.each do |n|
+        n.notification_seen = true
+        n.save!
+
+        if ((((3.days.since(n.created_at) - Time.now)/3600).to_i) <= 0)
+          n.destroy
+        end
+      end
+
+      @like_requests = Like.where(:receiver_id => current_user.id, :status => false) rescue nil?
+
+
+      Like.where(:receiver_id => current_user.id).each do |e|
+        if ((((3.days.since(e.created_at) - Time.now)/3600).to_i) <= 0)
+          e.destroy
+        end
+      end
+
+      #render :json => @like_requests
+      #return
+
+
+      # TODO: Why was this code commented ? I wrote it for a reason- Rushabh
+      if current_user.notifications.blank? and @like_requests.blank?
+        #redirect_to user_profile_path(current_user.id),:notice => "You have no notifications"
+        redirect_to welcome_dashboard_path, notice: "You do not have any notifications."
+      end
+    end
+
+  end
+
   def user_verification
+    if device_type == :mobile
+      #render :text => "render mobile pages"
+      #return
+      redirect_to user_verification_mobile_path
+    elsif device_type == :tablet
+      render :text => "render tablet pages"
+      return
+    else
+      #render :text => "render desktop pages"
+      #return
+      @user = current_user
+      if current_user.verification_request_sent
+        redirect_to user_profile_path(current_user.id), notice: "Verification request sent, please wait while the admin verifies your account!"
+        return
+      end
+      @user_document = UserDocument.new
+      #render :text => params
+      #return
+    end
+
+  end
+
+  def user_verification_mobile
     @user = current_user
     if current_user.verification_request_sent
-      redirect_to user_profile_path(current_user.id),notice:"Verification request sent, please wait while the admin verifies your account!"
+      redirect_to user_profile_path(current_user.id), notice: "Verification request sent, please wait while the admin verifies your account!"
       return
     end
     @user_document = UserDocument.new
@@ -86,7 +206,7 @@ class DashboardsController < ApplicationController
     @user.verification_request_sent_at = Time.now.to_i
     @user.save!
     #redirect_to "/profile/#{@user.id}"
-    redirect_to user_profile_path(current_user.id),:notice => "Your institute mail is saved for verification."
+    redirect_to user_profile_path(current_user.id), :notice => "Your institute mail is saved for verification."
   end
 
   def verify_user_linkedin_url
@@ -96,7 +216,7 @@ class DashboardsController < ApplicationController
     @user.verification_request_sent = true
     @user.verification_request_sent_at = Time.now.to_i
     @user.save!
-    redirect_to user_profile_path(current_user.id),:notice => "Your linkedin url is saved for verification."
+    redirect_to user_profile_path(current_user.id), :notice => "Your linkedin url is saved for verification."
     return
   end
 
@@ -110,15 +230,53 @@ class DashboardsController < ApplicationController
   #include ApplicationHelper
 
   def conversations
+    if device_type == :mobile
+      #render :text => "render mobile pages"
+      #return
+      redirect_to conversations_mobile_path
+    elsif device_type == :tablet
+      render :text => "render tablet pages"
+      return
+    else
+      #render :text => "render desktop pages"
+      #return
+      #TODO: not done optimally, change as soon as possible
+      @user_list = User.all.map(&:id)
+      @conversations = Array.new
+      sent_messages = current_user.sent_messages.map(&:receiver_id)
+      received_messages = current_user.received_messages.map(&:sender_id)
+      @user_list.each do |i|
+        if sent_messages.include?(i) or received_messages.include?(i)
+
+          @conversations << {"user" => i, "message" => current_user.received_messages.where(:sender_id => i).last.body, "time" => current_user.received_messages.where(:sender_id => i).last.created_at}
+        end
+      end
+      # if @conversations.blank?
+      #   #redirect_to user_profile_path(current_user.id), :notice=>"You do not have any conversations"
+      #   redirect_to my_dashboard_path, :notice=>"You do not have any conversations."
+      # end
+      #@messages = current_user.sent_messages.where(:receiver_id=>user_list) + current_user.received_messages.where(sender_id:user_list)
+
+      #@conversions = current_user.recipients
+      #@receivers = @conversions.map{|i| i.receiver_id}.uniq
+      #render :text => @conversions.map{|i| i.receiver_id}.uniq
+      #return
+    end
+  end
+
+  def conversations_mobile
+    #render :text => "here is conversations_mobile"
+    #return
+
     #TODO: not done optimally, change as soon as possible
-    @user_list =  User.all.map(&:id)
+    @user_list = User.all.map(&:id)
     @conversations = Array.new
     sent_messages = current_user.sent_messages.map(&:receiver_id)
     received_messages = current_user.received_messages.map(&:sender_id)
     @user_list.each do |i|
       if sent_messages.include?(i) or received_messages.include?(i)
 
-        @conversations << {"user"=>i,"message"=> current_user.received_messages.where(:sender_id => i).last.body, "time"=>current_user.received_messages.where(:sender_id => i).last.created_at}
+        @conversations << {"user" => i, "message" => current_user.received_messages.where(:sender_id => i).last.body, "time" => current_user.received_messages.where(:sender_id => i).last.created_at}
       end
     end
     # if @conversations.blank?
@@ -134,19 +292,94 @@ class DashboardsController < ApplicationController
   end
 
   def start_ice_breaker
+    if device_type == :mobile
+      #render :text => "render mobile pages"
+      #return
+      redirect_to start_ice_breaker_mobile_path
+    elsif device_type == :tablet
+      render :text => "render tablet pages"
+      return
+    else
+      #render :text => "render desktop pages"
+      #return
+      @opposite_user = User.find(params[:id])
+      @message = Message.new
+      @ice_breaker = IceBreaker.new
+      #redirect_to conversations_with_users_path(params[:id])
+      #@ice=IceBreaker.create( :sender_id => current_user.id, :receiver_id => params[:id])
+      #@icequestion=@ice.questions
+    end
+
+  end
+
+  def start_ice_breaker_mobile
+    #render :text => "here is start_ice_breaker_mobile"
+    #return
     @opposite_user = User.find(params[:id])
     @message = Message.new
     @ice_breaker = IceBreaker.new
     #redirect_to conversations_with_users_path(params[:id])
     #@ice=IceBreaker.create( :sender_id => current_user.id, :receiver_id => params[:id])
     #@icequestion=@ice.questions
-    #
   end
 
-
   def quick_matches
-  #if current_user.verified
-  #  current_user.update_match
+    if device_type == :mobile
+      #render :text => "render mobile pages"
+      #return
+      redirect_to quick_matches_mobile_path
+    elsif device_type == :tablet
+      render :text => "render tablet pages"
+      return
+    else
+      #render :text => "render desktop pages"
+      #return
+
+      #if current_user.verified
+      #  current_user.update_match
+
+      #render :text=>current_user.last_matched_time
+      #render :text=>(Time.now - current_user.last_matched_time)/3600
+      #return
+
+      if current_user.last_matched_time.nil? or (Time.now - current_user.last_matched_time)/3600 > 72
+        current_user.update_match_status
+        current_user.find_matches
+        current_user.update_match
+
+        #puts "after 3 days"
+        #current_user.save!
+        #render :text => "after 3 days"
+        #return
+      end
+      #end
+
+      @current_user_quick_matches = BaseMatch.where(:user_id => current_user.id, :match_status => true)
+
+      @mutual_likes =Array.new
+      User.all.each do |u|
+        if !get_like_status(u.id).nil?
+          @mutual_likes << u
+        end
+
+        # if (Like.where(:sender_id => current_user.id, :receiver_id => ubm).first and Like.where(:sender_id => ubm, :receiver_id => current_user.id).first.status) or (Like.where(:sender_id => ubm, :receiver_id => current_user.id).first and Like.where(:sender_id => current_user.id, :receiver_id => ubm).first.status)
+        #   @mutual_likes << User.find(ubm)
+        #MindMatch.create(:user_id=>current_user.id, :target_id=>@mutual_likes.id)
+        # end
+      end
+      #render :json => @current_user_quick_matches
+      #return
+
+    end
+
+  end
+
+  def quick_matches_mobile
+    #render :text => "here is quick_matches_mobile"
+    #return
+
+    #if current_user.verified
+    #  current_user.update_match
 
     #render :text=>current_user.last_matched_time
     #render :text=>(Time.now - current_user.last_matched_time)/3600
@@ -162,9 +395,9 @@ class DashboardsController < ApplicationController
       #render :text => "after 3 days"
       #return
     end
-  #end
+    #end
 
-    @current_user_quick_matches = BaseMatch.where(:user_id=>current_user.id,:match_status => true)
+    @current_user_quick_matches = BaseMatch.where(:user_id => current_user.id, :match_status => true)
 
     @mutual_likes =Array.new
     User.all.each do |u|
@@ -179,6 +412,7 @@ class DashboardsController < ApplicationController
     end
     #render :json => @current_user_quick_matches
     #return
+
   end
 
   # GET /dashboards/1
@@ -235,64 +469,242 @@ class DashboardsController < ApplicationController
     end
   end
 
- def mutual_likes
+  def mutual_likes
+    if device_type == :mobile
+      #render :text => "render mobile pages"
+      #return
+      redirect_to mutual_likes_mobile_path
+    elsif device_type == :tablet
+      render :text => "render tablet pages"
+      return
+    else
+      #render :text => "render desktop pages"
+      #return
+      @current_user_quick_matches = BaseMatch.where(:user_id => current_user.id, :match_status => true)
+      @user_base_matches = BaseMatch.where(:user_id => current_user.id).map { |i| i.target_id }
 
+      @mutual_likes =Array.new
+      User.all.each do |u|
+        if !get_like_status(u.id).nil?
+          @mutual_likes << u
+        end
 
-   @current_user_quick_matches = BaseMatch.where(:user_id=>current_user.id,:match_status => true)
-   @user_base_matches = BaseMatch.where(:user_id=>current_user.id).map{|i| i.target_id}
+        # if (Like.where(:sender_id => current_user.id, :receiver_id => ubm).first and Like.where(:sender_id => ubm, :receiver_id => current_user.id).first.status) or (Like.where(:sender_id => ubm, :receiver_id => current_user.id).first and Like.where(:sender_id => current_user.id, :receiver_id => ubm).first.status)
+        #   @mutual_likes << User.find(ubm)
+        #MindMatch.create(:user_id=>current_user.id, :target_id=>@mutual_likes.id)
+        # end
+      end
+      # @mutual_likes = []
 
-   @mutual_likes =Array.new
-   User.all.each do |u|
-     if !get_like_status(u.id).nil?
-       @mutual_likes << u
-     end
+      # render :text=>@mutual_likes
+      # return
+      #render :json=>@mutual_likes
+      #return
+    end
 
-     # if (Like.where(:sender_id => current_user.id, :receiver_id => ubm).first and Like.where(:sender_id => ubm, :receiver_id => current_user.id).first.status) or (Like.where(:sender_id => ubm, :receiver_id => current_user.id).first and Like.where(:sender_id => current_user.id, :receiver_id => ubm).first.status)
-     #   @mutual_likes << User.find(ubm)
-       #MindMatch.create(:user_id=>current_user.id, :target_id=>@mutual_likes.id)
-     # end
-   end
-   # @mutual_likes = []
+  end
 
-  # render :text=>@mutual_likes
-  # return
-   #render :json=>@mutual_likes
-   #return
+  def mutual_likes_mobile
+    #render :text => "here is mutual_likes_mobile"
+    #return
+    @current_user_quick_matches = BaseMatch.where(:user_id => current_user.id, :match_status => true)
+    @user_base_matches = BaseMatch.where(:user_id => current_user.id).map { |i| i.target_id }
 
+    @mutual_likes =Array.new
+    User.all.each do |u|
+      if !get_like_status(u.id).nil?
+        @mutual_likes << u
+      end
 
- end
+      # if (Like.where(:sender_id => current_user.id, :receiver_id => ubm).first and Like.where(:sender_id => ubm, :receiver_id => current_user.id).first.status) or (Like.where(:sender_id => ubm, :receiver_id => current_user.id).first and Like.where(:sender_id => current_user.id, :receiver_id => ubm).first.status)
+      #   @mutual_likes << User.find(ubm)
+      #MindMatch.create(:user_id=>current_user.id, :target_id=>@mutual_likes.id)
+      # end
+    end
+    # @mutual_likes = []
 
+    # render :text=>@mutual_likes
+    # return
+    #render :json=>@mutual_likes
+    #return
+  end
 
- def snazzmeup
+  def snazzmeup
+    if device_type == :mobile
+      #render :text => "render mobile pages"
+      #return
+      redirect_to snazzmeup_mobile_path
+    elsif device_type == :tablet
+      render :text => "render tablet pages"
+      return
+    else
+      #render :text => "render desktop pages"
+      #return
+    end
+  end
 
- end
+  def snazzmeup_mobile
+    #render :text => "here is snazzmeup_mobile"
+    #return
+  end
 
 
   def conversations_with_users
+    if device_type == :mobile
+      #render :text => "render mobile pages"
+      #return
+      redirect_to conversations_with_users_mobile_path
+    elsif device_type == :tablet
+      render :text => "render tablet pages"
+      return
+    else
+      #render :text => "render desktop pages"
+      #return
+      @target_user = User.find(params[:id])
+
+      @messages = current_user.sent_messages.map { |m| m if m.receiver_id == @target_user.id } + current_user.received_messages.map { |m| m if m.sender_id == @target_user.id }
+      @messages.compact!
+
+      if !@messages.blank?
+        @messages = @messages.sort { |m1, m2| m1.created_at <=> m2.created_at }
+      end
+      @messages.reverse!
+      #render :text=>@messages
+      #return
+    end
+
+  end
+
+  def conversations_with_users_mobile
+    #render :text => "here is conversations_with_users_mobile"
+    #return
     @target_user = User.find(params[:id])
 
-    @messages = current_user.sent_messages.map{|m|m if m.receiver_id == @target_user.id } + current_user.received_messages.map{|m| m if m.sender_id == @target_user.id }
+    @messages = current_user.sent_messages.map { |m| m if m.receiver_id == @target_user.id } + current_user.received_messages.map { |m| m if m.sender_id == @target_user.id }
     @messages.compact!
 
     if !@messages.blank?
-      @messages = @messages.sort{|m1,m2| m1.created_at <=> m2.created_at}
+      @messages = @messages.sort { |m1, m2| m1.created_at <=> m2.created_at }
     end
     @messages.reverse!
     #render :text=>@messages
     #return
+  end
 
+  def quiz_review
+    if device_type == :mobile
+      #render :text => "render mobile pages"
+      #return
+      redirect_to quiz_review_mobile_path
+    elsif device_type == :tablet
+      render :text => "render tablet pages"
+      return
+    else
+      @quiz = Quiz.find(params[:quiz_id])
+      @user = current_user
+    end
+
+  end
+
+  def quiz_review_mobile
+    @quiz = Quiz.find(params[:quiz_id])
+    @user = current_user
   end
 
 
   def younme
+    if device_type == :mobile
+      #render :text => "render mobile pages"
+      #return
+      redirect_to younme_mobile_path
+    elsif device_type == :tablet
+      render :text => "render tablet pages"
+      return
+    else
+      #render :text => "render desktop pages"
+      #return
+      @opposite_user = User.find(params[:id])
+
+      #Sunny's code starts
+      @current_user_quiz = current_user.quiz_answers
+      @opposite_user_quiz = User.find(params[:id]).quiz_answers
+      @common_questions = @current_user_quiz - @opposite_user_quiz
+      @my_ans = @current_user_quiz.map { |i| i.answer_id }
+      @opp_ans = @opposite_user_quiz.map { |i| i.answer_id }
+      #@diff_answer =
+      #render :json => @common_questions
+      #render :json => QuizAnswer.where("user_id = ? OR user_id = ?",current_user.id, params[:id])
+      #return
+      #Sunny's code ends
+
+      #Nilesh' code starts
+      @current_user_quiz_quests = Array.new
+      current_user.quiz_answers.each do |cu_qa|
+        @current_user_quiz_quests << cu_qa.question_id
+      end
+
+      @current_user_quiz_ans = Array.new
+      current_user.quiz_answers.each do |cu_qa_ans|
+        @current_user_quiz_ans << cu_qa_ans.answer_id
+      end
+
+      @opposite_user_quiz_quests = Array.new
+      @opposite_user.quiz_answers.each do |ou_qa|
+        @opposite_user_quiz_quests << ou_qa.question_id
+      end
+
+      @opposite_user_quiz_ans = Array.new
+      @opposite_user.quiz_answers.each do |ou_qa_ans|
+        @opposite_user_quiz_ans << ou_qa_ans.answer_id
+      end
+
+      #@current_user_quiz_quests
+      #@opposite_user_quiz_quests
+
+      @both_users_quiz_quests_same = Array.new
+      @both_users_quiz_quests_same = @current_user_quiz_quests & @opposite_user_quiz_quests
+      #@both_users_quiz_quests_same
+
+      #@current_user_quiz_ans
+      #@opposite_user_quiz_ans
+
+      @both_users_quiz_ans_same = Array.new
+      @both_users_quiz_ans_same = @current_user_quiz_ans & @opposite_user_quiz_ans
+      #@both_users_quiz_ans_same
+      @current_user_diff_ans = @current_user_quiz_ans - @both_users_quiz_ans_same
+      @opposite_user_diff_ans = @opposite_user_quiz_ans - @both_users_quiz_ans_same
+      #Nilesh' code ends
+
+      @current_user_q_name = Array.new
+      @current_user_ans_name = Array.new
+      @current_user_diff_ans.each do |cuda|
+        @current_user_q_name << Option.find(cuda).question.name
+        @current_user_ans_name << Option.find(cuda).name
+      end
+
+      @opposite_user_q_name = Array.new
+      @opposite_user_ans_name = Array.new
+      @opposite_user_diff_ans.each do |ouda|
+        @opposite_user_q_name << Option.find(ouda).question.name
+        @opposite_user_ans_name << Option.find(ouda).name
+      end
+
+      @quizzes=QuizCategory.where(:personal => 't').first.quizzes rescue []
+    end
+
+  end
+
+  def younme_mobile
+    #render :text => "here is younme_mobile"
+    #return
     @opposite_user = User.find(params[:id])
 
     #Sunny's code starts
     @current_user_quiz = current_user.quiz_answers
     @opposite_user_quiz = User.find(params[:id]).quiz_answers
     @common_questions = @current_user_quiz - @opposite_user_quiz
-    @my_ans = @current_user_quiz.map{|i| i.answer_id}
-    @opp_ans = @opposite_user_quiz.map{|i| i.answer_id}
+    @my_ans = @current_user_quiz.map { |i| i.answer_id }
+    @opp_ans = @opposite_user_quiz.map { |i| i.answer_id }
     #@diff_answer =
     #render :json => @common_questions
     #render :json => QuizAnswer.where("user_id = ? OR user_id = ?",current_user.id, params[:id])
@@ -351,13 +763,31 @@ class DashboardsController < ApplicationController
       @opposite_user_ans_name << Option.find(ouda).name
     end
 
-  @quizzes=QuizCategory.where(:personal => 't').first.quizzes rescue []
-
-
-
+    @quizzes=QuizCategory.where(:personal => 't').first.quizzes rescue []
   end
 
   def answer_icebreaker
+    if device_type == :mobile
+      #render :text => "render mobile pages"
+      #return
+      redirect_to answer_icebreaker_mobile_path
+    elsif device_type == :tablet
+      render :text => "render tablet pages"
+      return
+    else
+      #render :text => "render desktop pages"
+      #return
+      @icebreaker_answer = IcebreakerAnswer.new
+      @ice_break=IceBreaker.find(params[:id])
+      @question_icebreaker=Question.find(params[:question_id])
+      @total_questions = @ice_break.questions.count
+      @current_question_index = @ice_break.questions.map(&:id).index(@question_icebreaker.id) + 1
+      #render :text => @current_question_index
+      #return
+    end
+  end
+
+  def answer_icebreaker_mobile
     @icebreaker_answer = IcebreakerAnswer.new
     @ice_break=IceBreaker.find(params[:id])
     @question_icebreaker=Question.find(params[:question_id])
@@ -365,25 +795,24 @@ class DashboardsController < ApplicationController
     @current_question_index = @ice_break.questions.map(&:id).index(@question_icebreaker.id) + 1
     #render :text => @current_question_index
     #return
-
   end
 
   def create_message
-    Message.create!(:receiver_id=>params[:receiver_id],:body=>params[:body],:sender_id=>current_user.id)
-    Notification.create!(:content=>"#{current_user.demographic.nickname} has sent you a message", :user_id=>params[:receiver_id], :pointer_link=>conversations_with_users_path(current_user.id),:sender_id => current_user.id)
+    Message.create!(:receiver_id => params[:receiver_id], :body => params[:body], :sender_id => current_user.id)
+    Notification.create!(:content => "#{current_user.demographic.nickname} has sent you a message", :user_id => params[:receiver_id], :pointer_link => conversations_with_users_path(current_user.id), :sender_id => current_user.id)
     redirect_to conversations_with_users_path(params[:receiver_id])
   end
 
- def under_construction
-   render :layout => false
- end
+  def under_construction
+    render :layout => false
+  end
 
 
   def invitee_friends
     @emails=params[:email]
     @addresses=@emails.split(',')
     @addresses.each do |invitee|
-      InviteeMailer.invitee_email(invitee,current_user.id).deliver
+      InviteeMailer.invitee_email(invitee, current_user.id).deliver
     end
     redirect_to user_profile_path(current_user.id), notice: 'Mail has been successfully sent to your friend.'
   end
@@ -394,32 +823,32 @@ class DashboardsController < ApplicationController
     # return
     @receiver_id=params[:id]
     @sender_id = current_user.id
-    if Like.find_by_receiver_id_and_sender_id(@receiver_id,@sender_id) or Like.find_by_receiver_id_and_sender_id(@sender_id,@receiver_id)
+    if Like.find_by_receiver_id_and_sender_id(@receiver_id, @sender_id) or Like.find_by_receiver_id_and_sender_id(@sender_id, @receiver_id)
       #render :text => "Request Already Sent"
       #return
       #redirect_to my_dashboard_path,:notice=>"Like request already sent !"
-      redirect_to user_profile_path(@receiver_id),:notice=>"Like request already sent !"
+      redirect_to user_profile_path(@receiver_id), :notice => "Like request already sent !"
       return
     else
-      @like=Like.create(:receiver_id => @receiver_id,:sender_id => @sender_id,:status => false,:like_type => "Timed")
-      Notification.create!(:content=>"You have liked "+User.find(@receiver_id).demographic.nickname, :user_id=>current_user.id, :pointer_link=>user_profile_path(@receiver_id),:sender_id => @receiver_id,:notification_type=>"Timed")
+      @like=Like.create(:receiver_id => @receiver_id, :sender_id => @sender_id, :status => false, :like_type => "Timed")
+      Notification.create!(:content => "You have liked "+User.find(@receiver_id).demographic.nickname, :user_id => current_user.id, :pointer_link => user_profile_path(@receiver_id), :sender_id => @receiver_id, :notification_type => "Timed")
       #render :text => "Request  Sent"
       #return
       #Notification.create!(:content=>"#{current_user.demographic.name} has sent you a like request.", :user_id=>@receiver_id, :pointer_link=>user_profile_path(current_user.id))
-      redirect_to user_profile_path(@receiver_id),:notice=>"Cool! Now let's see wait and watch"
+      redirect_to user_profile_path(@receiver_id), :notice => "Cool! Now let's see wait and watch"
       return
     end
   end
 
   def accept_request
 
-   @accept=Like.find(params[:id])
-   @accept.status=true
-   @accept.save!
+    @accept=Like.find(params[:id])
+    @accept.status=true
+    @accept.save!
 
-   redirect_to user_profile_path(@accept.sender_id), notice: 'You have accepted the request.'
-   Notification.create!(:content=>User.find(@accept.receiver_id).demographic.nickname + " likes you too !", :user_id=>@accept.sender_id, :pointer_link=>user_profile_path(@accept.receiver_id),:sender_id => @accept.receiver_id,:notification_type=>"Timed")
-   MutualLikeMailer.mutual_like_mailer(@accept.sender_id, current_user).deliver
+    redirect_to user_profile_path(@accept.sender_id), notice: 'You have accepted the request.'
+    Notification.create!(:content => User.find(@accept.receiver_id).demographic.nickname + " likes you too !", :user_id => @accept.sender_id, :pointer_link => user_profile_path(@accept.receiver_id), :sender_id => @accept.receiver_id, :notification_type => "Timed")
+    MutualLikeMailer.mutual_like_mailer(@accept.sender_id, current_user).deliver
 
     #return
   end
@@ -445,7 +874,7 @@ class DashboardsController < ApplicationController
     #render :json => params[:id]
     #return
     @base_match = BaseMatch.find(params[:id])
-    @rejected_match = RejectedMatch.create(:rejected_target=>@base_match.target_id, :user_id=>current_user.id)
+    @rejected_match = RejectedMatch.create(:rejected_target => @base_match.target_id, :user_id => current_user.id)
     @rejected_match.save!
     @base_match.destroy
     redirect_to quick_matches_path, notice: 'You have rejected the request.'
@@ -453,15 +882,15 @@ class DashboardsController < ApplicationController
 
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_dashboard
-      @dashboard = Dashboard.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_dashboard
+    @dashboard = Dashboard.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def dashboard_params
-      params[:dashboard]
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def dashboard_params
+    params[:dashboard]
+  end
 
 
 end

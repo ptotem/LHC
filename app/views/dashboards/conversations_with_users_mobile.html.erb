@@ -1,0 +1,94 @@
+<%= content_for(:page_header) do %>
+    Conversation with <%= get_user_name(@target_user.id) %>
+<% end %>
+<%= content_for(:dialogue_bar_header) do %>
+    Chat
+<% end %>
+
+<div class="row" style="padding: 2% 0 2% 0;">
+  <div class="col-xs-11 col-sm-12 col-md-12 col-lg-12 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
+    <!--<h1 class="red"><%#= @target_user.id %> Conversation with user</h1>-->
+    <div class="white-background">
+
+      <ul class="media-list" style="height: 275px; overflow-y: auto">
+
+        <% @messages.each do |m| %>
+            <% if m.sender_id == current_user.id %>
+                <li class="media message-item">
+                  <a class="pull-left" href="#">
+                    <!--<img class="img-circle img-responsive" src="/assets/male.png" height="80px" width="80px">-->
+                    <img class="img-circle" src="<%= get_user_image(current_user.id) %>" height="80px" width="80px">
+                  </a>
+
+                  <div class="media-body">
+                    <h4 class="media-heading" style="color:darkcyan;"><%= get_user_name(m.sender_id) %></h4>
+                    <%= m.body %>
+                  </div>
+                </li>
+            <% else %>
+                <li class="media message-item">
+                  <a class="pull-right" href="#">
+                    <img class="img-circle" src="<%= get_user_image(m.sender_id) %>" height="80px" width="80px">
+                  </a>
+
+                  <div class="media-body">
+                    <h4 class="media-heading pull-right" style="color:darkcyan;"><%= get_user_name(m.sender_id) %></h4>
+                    <br>
+                    <br>
+                    <br>
+              <span style="float: right">
+             <%= m.body %>
+              </span>
+                  </div>
+                </li>
+            <% end %>
+
+            <hr class="chat-separtor">
+        <% end %>
+
+        <!--<li class="media message-item">-->
+        <!--<a class="pull-right" href="#">-->
+        <!--<img class="img-circle" src="/assets/female.png" height="80px" width="80px" >-->
+        <!--</a>-->
+
+        <!--<div class="media-body">-->
+        <!--<h4 class="media-heading pull-right" style="color:darkcyan;">Monika jain</h4>-->
+        <!--<br>-->
+        <!--<br>-->
+        <!--<br>-->
+        <!--<span>-->
+        <!--Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin-->
+        <!--commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.-->
+        <!--</span>-->
+        <!--</div>-->
+        <!--</li>-->
+        <!--<hr class="chat-separtor">-->
+
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+<div class="row" style="margin-top:3%">
+  <div class="col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1 col-xs-11 col-sm-11 col-md-11 col-lg-11">
+
+    <%= form_tag(:action => "create_message") do %>
+
+        <%= hidden_field_tag :receiver_id, @target_user.id %>
+        <div class="new_message_area">
+          <%= text_area_tag "body", nil, :class => "form-control", :placeholder => "Type in the message here" %>
+          <!--<textarea class="form-control" placeholder="Type in the message here"></textarea>-->
+        </div>
+        <div class="new_message_btn">
+          <%= submit_tag "Send", :class => "ans_btn", :style => "font-size: 1.0em;line-height: 1.0em;float:right;" %>
+        </div>
+        <!--<button id="new_coffee_request" class="ans_btn" onclick="alert('functionality on hold!');return false;" style="float: left">Send Coffee request</button>-->
+        <!--<button id="new_coffee_request" class="ans_btn" data-toggle="modal" data-target="#temp-modal" style="float: left">Send Coffee request</button>-->
+
+
+    <% end %>
+  </div>
+
+
+</div>

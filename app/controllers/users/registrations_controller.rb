@@ -81,6 +81,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     #  redirect_to "/edit_profile/#{@user.id}", notice: 'Your profile was not updated.You must exactly specify 5 likes!'
     #  return
     #end
+    #render :json => params
+    #return
     respond_to do |format|
       if params[:user][:current_password].blank?
         if @user.update(params.require(:user).permit(:username,:email,:validate_username,:avatar,:current_route,:first_visit, :avatar_cache, :remove_avatar, :demographic_attributes=>[:id,:male, :name,:nickname,:dob,:smoking,:drinking,:location,:religion,:avatar, :description, :goal,:last_institute,:current_student], :criterion_attributes=>[:id,:male,:minage,:maxage,:smoking,:drinking], :attendances_attributes=>[:user_id, :institution_id], :hobby_list_ids=>[], :about_list_ids=>[], :profession_attributes=>[:name]))

@@ -1,0 +1,43 @@
+<%= content_for(:page_header) do %>
+    <%= get_content_for("fillMandatoryProfilePicHeader") %>
+<% end %>
+
+<%= content_for(:page_desc) do %>
+    <%= get_content_for("fillMandatoryProfilePicText") %>
+<% end %>
+
+
+<div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <%= form_for @user, :url => { :controller => "users/registrations", :action => "update" }, :html => { :method => :post,:class => "form-horizontal" } do |f| %>
+        <%= f.hidden_field :current_route,:value=>@next_page %>
+
+
+        <div class="row">
+          <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11 text-center">
+            <% if @user.demographic.male? %>
+                <%= image_tag "male.png", :style => "width: 50%;" %>
+            <% else %>
+                <%= image_tag "female.png", :style => "width: 50%;" %>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 2%">
+          <%= f.fields_for :demographic do |d| %>
+              <div class="col-xs-offset-2 col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center">
+                <%= d.file_field :avatar %>
+              </div>
+          <% end %>
+        </div>
+
+        <div class="row" style="margin-top: 5%;">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <%= render :partial => "buttons_mobile",:locals => {:form=>f,:prev_page_link=>@prev_page} %>
+          </div>
+        </div>
+
+    <% end %>
+
+  </div>
+</div>

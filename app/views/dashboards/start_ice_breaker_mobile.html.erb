@@ -1,0 +1,148 @@
+<%= content_for(:page_header) do %>
+    Start a conversation with <%= @opposite_user.demographic.name %> !
+<% end %>
+<%= content_for(:dialogue_bar_header) do %>
+    Ice Breaker !
+<% end %>
+
+<!-- row for profile_pic, profile'o meter starts -->
+<div class="row" style="padding: 2% 0 2% 0;">
+  <div class="col-xs-11 col-sm-12 col-md-12 col-lg-12 col-xs-offset-1">
+    <div class="row">
+      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        <% if @opposite_user.demographic.avatar.nil? %>
+            <img alt="Image Size 430x280" class="img-responsive profilepic" src="/assets/profile_pic.jpg">
+        <% else %>
+            <img alt="Image Size 430x280" class="img-responsive profilepic" src="<%= @opposite_user.demographic.avatar.url %>">
+        <% end %>
+      </div>
+
+      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="padding-left: 0; padding-right: 0; text-align: center">
+        <% if get_like_status(params[:id]) %>
+            <% if !check_icebreaker_status(params[:id]) %>
+                <img src="/assets/cup_half.png" alt="" class="img-responsive pull-right" style="width: 95%;"/>
+            <% else %>
+                <img src="/assets/cup_full.png" alt="" class="img-responsive pull-right" style="width: 95%;"/>
+            <% end %>
+        <% else %>
+            <img src="/assets/cup_empty.png" alt="" class="img-responsive pull-right" style="width: 95%;"/>
+        <% end %>
+      </div>
+
+      <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+            <% if get_like_status(params[:id]) %>  <!-- change this not -->
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-left: -3%">
+                  <% if !check_icebreaker_status(params[:id]) %>
+                      <div class="row" style="padding-top: 20%; display: table-cell">
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xs-offset-3 col-sm-offset-3 col-md-offset-3 col-lg-offset-3">
+                          <% if IceBreaker.find_by_receiver_id_and_sender_id(params[:id],current_user.id).nil? and IceBreaker.find_by_receiver_id_and_sender_id(current_user.id,params[:id]).nil? %>
+                              <button title="Start an ice breaker" onclick="window.location = '<%= start_ice_breaker_path(params[:id]) %>'" class="transparent-background-btn" style="border-radius: 50%; padding: 5px;background: white;color:#38c8e0"><i class="fa fa-bell fa-2x"></i></button>
+                          <% else %>
+                              <% if !IceBreaker.find_by_receiver_id_and_sender_id(params[:id],current_user.id).nil? %>
+                                  <% if IceBreaker.find_by_receiver_id_and_sender_id(params[:id],current_user.id).ice_status == true %>
+                                      <!--<h1>Done</h1>-->
+                                  <% end %>
+                              <% end %>
+                              <% if !IceBreaker.find_by_receiver_id_and_sender_id(current_user.id,params[:id]).nil? %>
+                                  <% if IceBreaker.find_by_receiver_id_and_sender_id(current_user.id,params[:id]).ice_status == true %>
+                                      <% if IceBreaker.find_by_receiver_id_and_sender_id(current_user.id,params[:id]).icebreaker_answers.blank?  %>
+                                          <button title="Answer ice breaker" onclick="window.location = '<%= answer_icebreaker_path(IceBreaker.find_by_receiver_id_and_sender_id(current_user.id,params[:id]),IceBreaker.find_by_receiver_id_and_sender_id(current_user.id,params[:id]).questions.first.id) %>'" class="transparent-background-btn" style="border-radius: 50%; padding: 5px;background: white;color:#38c8e0"><i class="fa fa-bell fa-2x"></i></button>
+                                      <% else %>
+                                          <!--<h1>Done</h1>-->
+                                      <% end %>
+
+                                  <% end %>
+                              <% end %>
+                          <% end %>
+                        </div>
+                      </div>
+                  <% else %>
+                      <div class="row" style="padding-top: 20%; display: table-cell">
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xs-offset-3 col-sm-offset-3 col-md-offset-3 col-lg-offset-3">
+                          <button title="Send a message" onclick="window.location = '<%= conversations_with_users_path(params[:id]) %>'" class="transparent-background-btn" style="border-radius: 50%; padding: 5px;background: white;color:#38c8e0"><i class="fa fa-envelope fa-2x"></i></button>
+                        </div>
+                      </div>
+                  <% end %>
+                </div>
+                <!--indicates all mutual likes-->
+            <% else %>
+                <% if Like.find_by_receiver_id_and_sender_id(params[:id],current_user.id).nil? and Like.find_by_receiver_id_and_sender_id(current_user.id,params[:id]).nil? %>
+                    <div class="row" style="padding-top: 20%; display: table-cell">
+                      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                        <button title="Like the match" onclick="window.location = '<%= user_like_path(params[:id]) %>'" class="transparent-background-btn" style="border-radius: 50%; padding: 5px;background: white;color:#38c8e0"><i class="fa fa-thumbs-up fa-2x"></i></button>
+                      </div>
+                      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
+                        <button title="Reject the match" onclick="window.location = '<%= reject_match_path(params[:id]) %>'" class="transparent-background-btn" style="border-radius: 50%; padding: 5px;background: white;color:#38c8e0"><i class="fa fa-thumbs-down fa-2x"></i></button>
+                      </div>
+                    </div>
+                <% else %>
+                    <% if !Like.find_by_receiver_id_and_sender_id(params[:id],current_user.id).nil? %>
+                        <% if Like.find_by_receiver_id_and_sender_id(params[:id],current_user.id).status == false %>
+                            <div class="row" style="padding-top: 20%; display: table-cell">
+                              <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xs-offset-3 col-sm-offset-3 col-md-offset-3 col-lg-offset-3">
+                                <button title="Reject the match" onclick="window.location = '<%= reject_match_path(params[:id]) %>'" class="transparent-background-btn" style="border-radius: 50%; padding: 30%;background: white;color:#38c8e0"><i class="fa fa-thumbs-down fa-3x "></i></button>
+                              </div>
+                            </div>
+                        <% end %>
+                    <% end %>
+                    <% if !Like.find_by_receiver_id_and_sender_id(current_user.id,params[:id]).nil? %>
+                        <% if Like.find_by_receiver_id_and_sender_id(current_user.id,params[:id]).status == false %>
+                            <div class="row" style="padding-top: 20%; display: table-cell">
+                              <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                <button title="Like the match" onclick="window.location = '<%=  accept_request_path(Like.find_by_receiver_id_and_sender_id(current_user.id,params[:id]).id) %>'" class="transparent-background-btn" style="border-radius: 50%; padding: 5px;background: white;color:#38c8e0"><i class="fa fa-thumbs-up fa-2x"></i></button>
+                              </div>
+                              <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
+                                <button title="Reject the match" onclick="window.location = '<%= reject_match_path(params[:id]) %>'" class="transparent-background-btn" style="border-radius: 50%; padding: 5px;background: white;color:#38c8e0"><i class="fa fa-thumbs-down fa-2x"></i></button>
+                              </div>
+                            </div>
+                        <% end %>
+                    <% end %>
+                <% end %>
+            <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- row for profile_pic, profile'o meter ends -->
+
+<div class="row">
+  <div class="col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1 col-xs-11 col-sm-11 col-md-11 col-lg-11">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <!--<h1 class="white">Start Ice Breaker</h1>-->
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 white-background_ice_breaker">
+            <%= form_for(@ice_breaker) do |f| %>
+                <%= f.hidden_field :receiver_id,:value => params[:id] %>
+                <%= f.hidden_field :sender_id,:value => current_user.id %>
+                <% Question.where(:ice_breaker => true).each do |e| %>
+                    <%= f.fields_for :questions do |q| %>
+                        <div class="blue-background_ice_breaker">
+                          <h4 class="text_styling_ice_breaker" style="font-size: 1.2em; margin-top: -7%"><label>
+                            &nbsp;
+                          </label>
+                            <span style="padding-top: 0"> <%= q.check_box e.id %> <%= e.name %> </span>
+                            <% @option="" %>
+                            <% e.options.each do |o| %>
+                                <% @option = @option+"<li>"+o.name+"</li>" %>
+                            <% end %>
+                            <i class="fa fa-info-circle  font_awesome_ice_breaker pop_over_style" data-placement="bottom" data-content="<ul><%= @option %></ul>" title="" data-toggle="popover" data-original-title="Options"></i>
+                          </h4>
+                        </div>
+                    <% end %>
+
+                <% end %>
+          </div>
+        </div>
+            <div class="row" style="margin-top: 2%;">
+              <div class="col-xs-offset-3 col-sm-offset-3 col-md-offset-3 col-lg-offset-3 col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <%= f.submit "Send", :class=>"btn-main ans_btn" %>
+              </div>
+            </div>
+
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,11 +1,11 @@
 class DemographicsController < ApplicationController
   before_action :set_demographic, only: [:show, :edit, :update, :destroy]
   #layout 'dashboard_and_profile_layout', only: [:profile]
-  #layout "profile_layout_mobile", only: [:profile_mobile]
+  #layout "dashboard_and_profile_layout_mobile", only: [:profile_mobile]
 
   #layout nil
   #layout 'dashboard_and_profile_layout', :except => :profile_mobile
-  #layout 'profile_layout_mobile', :only => :profile_mobile
+  #layout 'dashboard_and_profile_layout_mobile', :only => :profile_mobile
 
   layout :resolve_layout
 
@@ -13,10 +13,13 @@ class DemographicsController < ApplicationController
 
   def resolve_layout
     puts "action_name :- #{action_name}"
-    if action_name == "profile"
+    puts "device_type :- #{device_type}"
+    if action_name == "profile" || action_name == "edit_profile"
+    #if device_type == :desktop
       "dashboard_and_profile_layout"
-    elsif action_name == "profile_mobile"
-      "profile_layout_mobile"
+    elsif action_name == "profile_mobile" || action_name == "edit_profile_mobile"
+    #elsif device_type == :mobile
+      "dashboard_and_profile_layout_mobile"
     end
   end
 
@@ -88,7 +91,9 @@ class DemographicsController < ApplicationController
         @user_goal = @user.demographic.goal rescue ""
         @user_profession = @user.profession.name rescue ""
         @user_last_institute_id = @user.demographic.last_institute rescue nil?
-        @user_last_institute_name = Institution.find(@user_last_institute_id).name rescue ""
+        #render :text => @user_last_institute_id
+        #return
+        @user_last_institute_name = Institution.find(@user_last_institute_id).name rescue "NA"
 
         #render :text => @user_last_institute_name
         #return
@@ -167,7 +172,7 @@ class DemographicsController < ApplicationController
       @user_goal = @user.demographic.goal rescue ""
       @user_profession = @user.profession.name rescue ""
       @user_last_institute_id = @user.demographic.last_institute rescue nil?
-      @user_last_institute_name = Institution.find(@user_last_institute_id).name rescue ""
+      @user_last_institute_name = Institution.find(@user_last_institute_id).name rescue "NA"
 
       #render :text => @user_last_institute_name
       #return
@@ -196,21 +201,44 @@ class DemographicsController < ApplicationController
   end
 
   def edit_profile
-    #render :text => "#{current_user.id}, #{current_user.email}, #{params[:id]}"
-    #render :json => current_user.movies
-    #return
+    if device_type == :mobile
+      #render :text => "render mobile pages"
+      #return
+      redirect_to edit_profile_mobile_path
+    elsif device_type == :tablet
+      render :text => "render tablet pages"
+      return
+    else
+      #render :text => "render desktop pages"
+      #return
+      #render :text => "#{current_user.id}, #{current_user.email}, #{params[:id]}"
+      #render :json => current_user.movies
+      #return
+      if params[:id].to_s != (current_user.id).to_s
+        render :text => "You can't edit others profile"
+        return
+      else
+        @user = current_user
+        #@user.build_demographic
+        #@user.build_criterion
+        #@user.attendances.new
+        #@user.professions.new
+        #@user.revelations.new
+        #@user.expectations.new
+
+        @user_name = current_user.demographic.name
+        @user_demographics = @user.demographic
+      end
+    end
+
+  end
+
+  def edit_profile_mobile
     if params[:id].to_s != (current_user.id).to_s
       render :text => "You can't edit others profile"
       return
     else
       @user = current_user
-      #@user.build_demographic
-      #@user.build_criterion
-      #@user.attendances.new
-      #@user.professions.new
-      #@user.revelations.new
-      #@user.expectations.new
-
       @user_name = current_user.demographic.name
       @user_demographics = @user.demographic
     end

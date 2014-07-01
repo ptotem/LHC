@@ -1,0 +1,117 @@
+<%= content_for(:page_header) do %>
+    <%= get_content_for("fillMandatoryFriendSpeakHeader") %>
+<% end %>
+
+<%= content_for(:page_desc) do %>
+    <%= get_content_for("fillMandatoryFriendSpeakText") %>
+<% end %>
+
+
+<div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <%= form_for @user, :url => { :controller => "users/registrations", :action => "update" }, :html => { :method => :post,:class => "form-horizontal" } do |f| %>
+        <%= f.hidden_field :current_route,:value=>@next_page %>
+
+
+        <div class="row">
+          <%= f.fields_for :demographic do |d| %>
+              <div class="col-xs-11 col-sm-12 col-md-12 col-lg-12" style="text-align: center">
+                <div class="row fill_friend_speak_row" style="padding-top: 1%; padding-bottom:1%; padding-left:0; background-color: white">
+
+                  <% AboutList.all.each do |a| %>
+                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="text-align: left">
+                        <p class="field switch">
+
+                          <label class="cb-enable" title="<%= a.name %>"><span><%= a.name.truncate(10) %></span></label>
+                          <!--<label class="cb-disable selected"><span>NO</span></label>-->
+                          <%= check_box_tag "user[about_list_ids][]",a.id,false,:class=>"checkbox" %>
+                          <!--<input type="checkbox" id="checkbox" class="checkbox" name="field2" />-->
+                        </p>
+
+                        <!--<input type="checkbox" name="vehicle" value="Car"> Football-->
+                      </div>
+
+                  <%  end %>
+
+                </div>
+              </div>
+          <% end %>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <%= render :partial => "buttons_mobile",:locals => {:form=>f,:prev_page_link=>@prev_page} %>
+          </div>
+        </div>
+
+    <% end %>
+    <% @user_about_lists = current_user.about_lists.map(&:id) rescue [] %>
+  </div>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title black" id="myModalLabel">Oops...</h4>
+      </div>
+      <div class="modal-body">
+        You Cannot Click More Than 5
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready( function(){
+
+        $(".cb-enable").click(function(){
+
+            if(($(".cb-enable.selected").length < 5)||($(this).hasClass('selected'))) {
+                var parent = $(this).parents('.switch');
+                //console.log(parent);
+                $('.cb-disable',parent).removeClass('selected');
+                $(this).toggleClass('selected');
+                var current_state = $('.checkbox',parent).attr("checked");
+                //console.log(current_state);
+                $('.checkbox',parent).attr('checked',!current_state);
+
+            }
+            else
+            {
+                $("#myModal").modal()
+            }
+
+        });
+
+        $(".cb-disable").click(function(){
+            var parent = $(this).parents('.switch');
+            $('.cb-enable',parent).removeClass('selected');
+            $(this).addClass('selected');
+
+            $('.checkbox',parent).attr('checked', false);
+        });
+
+        var user_about_lists = <%= @user_about_lists %>;
+        console.log(user_about_lists);
+
+        $('input[type="checkbox"]').each(function(index) {
+            //$('#t').append(', '+$(this).val());
+            //console.log("cb");
+            //console.log($(this).val());
+            //console.log(user_hobbies[index]);
+            for (var j=0; j<user_about_lists.length; j++){
+                if ($(this).val() == user_about_lists[j]){
+                    //console.log($(this).val());
+                    //console.log($(this).prev().attr('class'));
+                    $(this).attr('checked','checked');
+                    $(this).prev().addClass('selected')
+                }
+            }
+        });
+
+    });
+</script>

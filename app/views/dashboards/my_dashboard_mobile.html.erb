@@ -1,0 +1,186 @@
+<%= content_for(:dialogue_bar_header) do %>
+    Welcome, <%= current_user.demographic.nickname %>
+<% end %>
+<%= content_for(:page_header) do %>
+    Have a great time !
+<% end %>
+
+<!-- row for profile_pic, matches, edit_profile and invite friends starts -->
+<div class="row" style="padding: 2% 0 2% 0;">
+  <div class="col-xs-11 col-sm-12 col-md-12 col-lg-12 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
+    <div class="row">
+      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        <% if !current_user.demographic.avatar.nil? %>
+            <img alt="Image Size 430x280" class="img-responsive profilepic" src="/assets/profile_pic.jpg">
+        <% else %>
+            <img alt="Image Size 430x280" class="img-responsive profilepic" src="<%= current_user.demographic.avatar.url %>">
+        <% end %>
+      </div>
+      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="padding-left: 0; padding-right: 0;">
+          <div onclick="window.location = '<%= snazzmeup_path %>'" class="blue" style="text-align: center; padding:9% 5% 11% 5%; background-color: #ffffff; font-size: 0.8em; line-height: 1.4em; cursor: pointer">
+            <i class="fa fa-envelope fa-1x" style="float: left; padding-top: 3%; padding-left: 20%;"></i>
+            <span style="font-weight: bold; padding: 0;"><span style="margin-left: -10%;">Make</span> yourself more interesting to matches!</span>
+          </div>
+      </div>
+      <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+        <div class="row" style="padding-top: 1%">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div data-toggle="modal" data-target="#email_modal" class="blue" style="text-align: center; padding:5%; background-color: #ffffff; font-size: 0.9em; cursor: pointer">
+              <i class="fa fa-envelope fa-1x" style="float: left; padding-top: 2%;"></i>
+              <span style="font-weight: bold; padding: 5% 0% 5% 0%; font-size: 0.9em;">Invite A Friend</span>
+            </div>
+          </div>
+        </div>
+        <div class="row" style="padding-top: 18%;">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div onclick="window.location = '<%= edit_profile_path(current_user.id) %>'" style="text-align: center; padding:5%; background-color: #ffffff; font-size: 0.9em; cursor: pointer">
+              <%#= link_to 'Edit My Profile', edit_profile_path(current_user.id), :class => "blue" %>
+              <%= link_to 'Edit My Profile', "#", :class => "blue" %>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- row for profile_pic, matches, edit_profile and invite friends ends -->
+
+<!-- row for modal starts -->
+<div class="row">
+  <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+    <div class="modal fade" id="email_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel" style="color: #000000">Invite Your Friends</h4>
+          </div>
+          <div class="modal-body">
+            <%= form_tag ('/invitee_friends') do %>
+                <div class="row">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="row">
+                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <%= label_tag "Enter Email" %>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <%= text_field_tag :email, params[:email], :class=>"col-xs-12" %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                </div>
+                <div class="modal-footer">
+                  <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                      <%= submit_tag "Send" %>
+                    </div>
+                  </div>
+            <% end %>
+            <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+            <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+            </div>
+            </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- row for modal ends -->
+
+
+<!-- row for "Recent Activity" - Text - starts  -->
+<div class="row" style="margin-top: 2%;">
+  <div style="margin-left: 63%" class="col-xs-offset-7 col-sm-offset-7 col-md-offset-7 col-lg-offset-7 col-xs-5 col-sm-5 col-md-5 col-lg-5">
+    <b>Recent Activity</b>
+  </div>
+</div>
+<!-- row for "Recent Activity" - Text - ends  -->
+
+<!-- row for "Recent Activities - Like and Notifications" - starts  -->
+<div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <% if !@like_requests.blank? %>
+        <% @like_requests.each do |e| %>
+            <div class="row" style="margin-bottom: 2%;">
+              <div style="background-color: #ffffff; margin-left: 12%;" class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                <div class="row">
+                  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <img class="img-circle" src="<%= get_user_image(e.sender_id) %>" style="width: 100%; padding-top: 5%; padding-bottom: 5%;">
+                  </div>
+                  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-left: 0; padding-top: 1%;">
+                    <a href="<%= user_profile_path(e.sender_id) %>"><%= User.find(e.sender_id).demographic.nickname %></a> likes you !
+                  </div>
+                  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="position: relative">
+                    <div class="row">
+                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-left: 0; padding-right: 0;">
+                        <div style="font-size: 0.8em;">
+                          <% if e.like_type == "Timed" %>
+                              <b> <%= ((3.days.since(e.created_at) - Time.now)/3600).to_i %> </b> hours left to respond
+                          <% else %>
+                              <%= e.created_at.strftime("%d %B %Y") %>
+                          <% end %>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-left: 0; padding-right: 0;">
+                        <% if e.status %>
+                            <button onclick="window.location = '<%= reject_request_url(e.id) %>'" class="transparent-background-btn">
+                              <i class="fa fa-thumbs-down red fa-1x"></i>
+                            </button>
+                        <% else %>
+                            <button onclick="window.location = '<%= accept_request_url(e.id) %>'" class="transparent-background-btn">
+                              <i class="fa fa-thumbs-up blue fa-1x"></i>
+                            </button>
+                        <% end %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        <% end %>
+    <% end %>
+
+    <% if !current_user.notifications.blank? %>
+        <% current_user.notifications.reverse!.each do |notification| %>
+
+            <div class="row" style="margin-bottom: 2%;">
+              <div style="background-color: #ffffff; margin-left: 12%;" class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                <div class="row">
+                  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <% if notification.sender_id.nil? %>
+                        <img class="img-circle" src="/assets/notification-icon.png" style="width: 100%; padding-top: 5%; padding-bottom: 5%;">
+                    <% else %>
+                        <img class="img-circle" src="<%= get_user_image(notification.sender_id) rescue nil %>" style="width: 100%; padding-top: 5%; padding-bottom: 5%;">
+                    <% end %>
+                  </div>
+                  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-left: 0; padding-top: 1%; line-height: 1.2em;">
+                    <%= link_to notification.content, notification.pointer_link %>
+                  </div>
+                  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="position: relative">
+                    <div class="row">
+                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-left: 0; padding-right: 0;">
+                        <div style="font-size: 0.8em;">
+                          <% if notification.notification_type == "Timed" %>
+                              <b> <%= ((3.days.since(notification.created_at) - Time.now)/3600).to_i %> </b> hours left to respond
+                          <% else %>
+                              <%= notification.created_at.strftime("%d %B %Y") %>
+                          <% end %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+        <% end %>
+    <% end %>
+
+  </div>
+</div>
+<!-- row for "Recent Activities - Like and Notifications" - ends  -->
