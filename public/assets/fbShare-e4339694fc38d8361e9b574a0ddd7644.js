@@ -1,0 +1,1 @@
+function share_result(e){FB.ui({method:"feed",name:"Let's Have Coffee",link:"http://www.letshavecoffee.in",picture:e,description:"Let's Have Coffee is an exclusive platform for guys and girls from top colleges in India to meet each other."},function(e){console.log(e&&e.post_id?"Post was published.":"Post was not published.")})}$(function(){});
