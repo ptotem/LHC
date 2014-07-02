@@ -64,7 +64,6 @@
             <%= render :partial => "buttons_mobile",:locals => {:form=>f,:prev_page_link=>@prev_page} %>
           </div>
         </div>
-
     <% end %>
 
   </div>
@@ -72,7 +71,25 @@
 
 <script>
     $(function(){
+        var user_demographic_smoking = "<%= @user.demographic.smoking rescue "" %>";
+        console.log(user_demographic_smoking);
+        $("#demographic_smoking option").filter(function() {
+            //may want to use $.trim in here
+            return $(this).text() == user_demographic_smoking;
+        }).attr('selected', true);
 
+        $('.demographic-smoking-options-images').find('li').hide();
+        $('.demographic-smoking-options-images').find('#demographic_smoking_'+user_demographic_smoking.toLowerCase()).show();
+
+        var user_criterion_smoking = "<%= @user.criterion.smoking rescue "" %>";
+        console.log(user_criterion_smoking);
+        $("#criterion_smoking option").filter(function() {
+            //may want to use $.trim in here
+            return $(this).text() == user_criterion_smoking;
+        }).attr('selected', true);
+
+        $('.criterion-smoking-options-images').find('li').hide();
+        $('.criterion-smoking-options-images').find('#criterion_smoking_'+user_demographic_smoking.toLowerCase()).show();
     });
 
     function get_selected_val(this_obj){

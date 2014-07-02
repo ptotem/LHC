@@ -88,6 +88,20 @@
     #header{
         height: 92%;
     }
+
+    .indi-test-mobile
+    {
+        vertical-align: middle;
+        text-align: center;
+        cursor:pointer;
+        height:118px;
+        width:100%;
+        /*background: #E30000;*/
+        margin-left: 4%;
+        margin-top:4%;
+        display: table;
+
+    }
 }
 
 @media only screen and (min-width: 480px) and (max-width: 767px) {

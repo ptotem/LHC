@@ -11,6 +11,10 @@
 <div class="row">
   <div class="col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1 col-xs-11 col-sm-11 col-md-11 col-lg-11">
     <% @quizzes.each_with_index do |e,index| %>
+        <% if (index%2)==0 %>
+            <div class="row"></div>
+        <% else %>
+        <% end %>
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="margin-bottom: 10%;">
           <div class="white-block" style="background: none repeat scroll 0 0 #FFFFFF; text-align: center; display: block">
             <a style="cursor:default; width:100%;height: 100%; text-align: center; display: inline-block; vertical-align: middle" href="<%#= take_test_path(e.id,e.questions.first.id) %>" id="ans_test_btn">

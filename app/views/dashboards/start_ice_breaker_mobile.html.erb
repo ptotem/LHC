@@ -122,7 +122,7 @@
                             &nbsp;
                           </label>
                             <span style="padding-top: 0">
-                              <%= q.check_box e.id, :class => "ice-breaker-checkbox", :onchange => "check_limit()" %><%= e.name %>
+                              <%= q.check_box e.id, :class => "ice-breaker-checkbox", :style=>"float:left; margin-left: 2%;", :onchange => "check_limit()" %> <span style="display: inline-block;padding: 0;text-align: left;width: 82%;"><%= e.name %></span>
                             </span>
                             <% @option="" %>
                             <% e.options.each do |o| %>

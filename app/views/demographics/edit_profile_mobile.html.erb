@@ -65,25 +65,25 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <ul class="nav nav-tabs edit-profile-tabs" id="myTab" style="text-align: center; border: none;">
-                      <li class="active">
+                      <li id="personal_details_tab_item" class="active">
                         <a data-toggle="tab" href="#personal_details_tab">Personal Details</a>
                       </li>
-                      <li class="">
+                      <li id="password_tab_item">
                         <a data-toggle="tab" href="#passwords_tab">Password</a>
                       </li>
-                      <li class="">
+                      <li id="about_me_tab_item">
                         <a data-toggle="tab" href="#about_me_tab">About Me</a>
                       </li>
-                      <li class="">
+                      <li id="looking_for_tab_item">
                         <a data-toggle="tab" href="#looking_for_tab">Looking For</a>
                       </li>
-                      <li class="">
+                      <li id="movies_tab_item">
                         <a data-toggle="tab" href="#movies_tab">Movies</a>
                       </li>
-                      <li class="">
+                      <li id="music_tab_item">
                         <a data-toggle="tab" href="#musics_tab">Music</a>
                       </li>
-                      <li class="" style="margin-left: 34.2%;">
+                      <li id="books_tab_item" class="" style="margin-left: 34.2%;">
                         <a data-toggle="tab" href="#books_tabs">Books</a>
                       </li>
                     </ul>
@@ -570,6 +570,36 @@
     var added_book_item_counter = 0;
 
     $(function () {
+
+        var link = window.location.href.toString().split("#")[1];
+        var tab_id, anchor_link;
+        console.log(link);
+
+        if (link === undefined || link === null) {
+            //do something
+        }
+        else {
+            $('#myTabContent').find('.tab-pane').each(function (index) {
+                $(this).removeClass("active in")
+            });
+
+            $('.nav-tabs').find("li").each(function (index) {
+                $(this).removeClass("active");
+                tab_id = $(this).attr('id');
+
+
+                if (link+"_item" == tab_id) {
+                    //console.log($(this));
+                    //console.log($(this).attr('id'));
+                    anchor_link = $(this).find('a').attr('href');
+                    //console.log(anchor_link);
+                    $(this).addClass("active");
+                    $('#myTabContent').find(anchor_link).addClass("active in")
+                }
+
+            });
+        }
+
         var addressPicker = new AddressPicker();
         $('.location').typeahead(null, {
             displayKey: 'description',
@@ -735,6 +765,74 @@
 
                 }
             }
+
+        });
+
+        $('.edit-profile-delete-movie-item-block').on('click', function () {
+            var movie_item = $(this).parent();
+            var movie_api_id = $(this).parent().attr('id');
+
+            var data = {movie_api_id: []};
+            data["movie_api_id"].push(movie_api_id);
+
+            $.ajax({
+                url: "/delete_user_movie",
+                type: "post",
+                async: false,
+                data: JSON.stringify(data),
+                contentType: "application/json",
+                success: function (data) {
+                    console.log(data);
+                    $(movie_item).empty().remove();
+                    //$('#carousel-for-movies').carousel('next');
+                }
+            });
+
+        });
+
+        $('.edit-profile-delete-book-item-block').on('click', function () {
+            var book_item = $(this).parent();
+            var book_api_id = $(this).parent().attr('id');
+
+            console.log(book_item);
+            console.log(book_api_id);
+
+//            var data = {book_api_id: []};
+//            data["book_api_id"].push(book_api_id);
+//
+//            $.ajax({
+//                url: "/delete_user_book",
+//                type: "post",
+//                async: false,
+//                data: JSON.stringify(data),
+//                contentType: "application/json",
+//                success: function (data) {
+//                    console.log(data);
+//                    $(book_item).empty().remove();
+//                }
+//            });
+
+        });
+
+        $('.edit-profile-delete-music-item-block').on('click', function () {
+            var song_item = $(this).parent();
+            var song_api_id = $(this).parent().attr('id');
+            console.log(song_api_id);
+
+            var data = {song_api_id: []};
+            data["song_api_id"].push(song_api_id);
+
+            $.ajax({
+                url: "/delete_user_song",
+                type: "post",
+                async: false,
+                data: JSON.stringify(data),
+                contentType: "application/json",
+                success: function (data) {
+                    console.log(data);
+                    $(song_item).empty().remove();
+                }
+            });
 
         });
 
