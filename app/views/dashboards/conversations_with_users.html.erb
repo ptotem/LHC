@@ -10,7 +10,13 @@
 
 <div class="row">
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-11 ">
-
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-offset-10 col-lg-2 text-center">
+        <%#= @target_user.id %>
+        <%= link_to "Block this user", block_user_path(@target_user.id) %>
+        <!--<button title="Reject" onclick="window.location = '<%#= reject_match_path(@target_user.id) %>'" class="transparent-background-btn" style="border-radius: 50%; padding: 30%"><i class="fa fa-thumbs-down fa-3x thumb_up_color"></i></button>-->
+      </div>
+    </div>
     <div class="white-background">
 
       <ul class="media-list" style="height: 275px; overflow-y: auto">
@@ -30,7 +36,7 @@
                 </li>
             <% else %>
                 <li class="media message-item">
-                  <a class="pull-right" href="#">
+                  <a class="pull-right" href="#" style="cursor: default">
                     <img class="img-circle" src="<%= get_user_image(m.sender_id) %>" height="80px" width="80px">
                   </a>
 

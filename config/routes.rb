@@ -124,6 +124,7 @@ Lhc::Application.routes.draw do
   get '/user_verification_mobile', to: 'dashboards#user_verification_mobile', as: :user_verification_mobile
 
   match '/verify_user_institute_email', to: 'dashboards#verify_user_institute_email', via: [:post]
+  get '/start_verify_user_institute_email/:user_id/:token', to: 'dashboards#start_verify_user_institute_email', as: :start_verifying_user
   match '/verify_user_linkedin_url', to: 'dashboards#verify_user_linkedin_url', via: [:post]
   match '/upload_user_doc', to: 'dashboards#upload_user_doc', via: [:post]
 
@@ -138,6 +139,7 @@ Lhc::Application.routes.draw do
 
   get '/retest/:quiz_id', to: 'quiz_answers#retest',as: :retest
   get '/retest_mobile/:quiz_id', to: 'quiz_answers#retest_mobile',as: :retest_mobile
+
 
   get '/answer_icebreaker/:id/:question_id', to: 'dashboards#answer_icebreaker',as: :answer_icebreaker
   get '/answer_icebreaker_mobile/:id/:question_id', to: 'dashboards#answer_icebreaker_mobile',as: :answer_icebreaker_mobile
@@ -167,6 +169,8 @@ Lhc::Application.routes.draw do
   match '/delete_user_movie', to: 'demographics#delete_user_movie', via: [:get, :post]
   match '/delete_user_book', to: 'demographics#delete_user_book', via: [:get, :post]
   match '/delete_user_song', to: 'demographics#delete_user_song', via: [:get, :post]
+  match '/delete_user_quiz', to: 'demographics#delete_user_quiz', via: [:get, :post]
+  match '/add_user_quiz', to: 'demographics#add_user_quiz', via: [:get, :post]
 
   match '/search_music_gmusic', to: 'demographics#search_music_gmusic', via: [:get, :post]
   match '/search_music_by_lastfm', to: 'demographics#search_music_by_lastfm', via: [:get, :post]
@@ -178,9 +182,12 @@ Lhc::Application.routes.draw do
   get '/accept_request/:id', to: 'dashboards#accept_request', as: :accept_request
   get '/reject_request/:id', to: 'dashboards#reject_request', as: :reject_request
   match '/reject_match/:id', to: 'dashboards#reject_match', as: :reject_match, via: [:get, :post]
+  match '/block_user/:id', to: 'dashboards#block_user', as: :block_user, via: [:get, :post]
 
   get '/users/auth/:provider/callback' => 'authentications#create'
 
+  #get '/import_domain', to: 'dashboards#import_domain_name' ,as: :domain_name
+  #match '/import_domain_name', to: 'dashboards#importing_institute' ,as: :importing, via: [:get, :post]
 
 
 

@@ -14,11 +14,11 @@ class DemographicsController < ApplicationController
   def resolve_layout
     puts "action_name :- #{action_name}"
     puts "device_type :- #{device_type}"
-    if action_name == "profile" || action_name == "edit_profile"
-    #if device_type == :desktop
+    #if action_name == "profile" || action_name == "edit_profile"
+    if device_type == :desktop
       "dashboard_and_profile_layout"
-    elsif action_name == "profile_mobile" || action_name == "edit_profile_mobile"
-    #elsif device_type == :mobile
+    #elsif action_name == "profile_mobile" || action_name == "edit_profile_mobile"
+    elsif device_type == :mobile
       "dashboard_and_profile_layout_mobile"
     end
   end
@@ -40,9 +40,9 @@ class DemographicsController < ApplicationController
       #render :text => "render mobile pages"
       #return
       redirect_to profile_mobile_path
-    elsif device_type == :tablet
-      render :text => "render tablet pages"
-      return
+    #elsif device_type == :tablet
+    #  render :text => "render tablet pages"
+    #  return
     else
       #render :text => "render desktop pages"
       #return
@@ -100,7 +100,8 @@ class DemographicsController < ApplicationController
         @user_email = @user.email
 
         @user_quizzes = Array.new
-        @user_quiz_ans_questions = @user.quiz_answers.map(&:question_id)
+        @user_quiz_ans_questions = @user.quiz_answers.where(:shared=>true).map(&:question_id)
+
         @user_quiz_ans_questions.each do |q|
           if !Question.find(q).quizzes.first.quiz_category.personal
             @user_quizzes << Question.find(q).quizzes.first
@@ -109,7 +110,7 @@ class DemographicsController < ApplicationController
         end
         @user_quizzes = @user_quizzes.uniq
         @profileStatus = @profileStatus + @user_quizzes.count*eachQuizWeight
-        #render :text => @user_quizzes
+        #render :json => @user_quizzes
         #return
 
       else
@@ -205,9 +206,9 @@ class DemographicsController < ApplicationController
       #render :text => "render mobile pages"
       #return
       redirect_to edit_profile_mobile_path
-    elsif device_type == :tablet
-      render :text => "render tablet pages"
-      return
+    #elsif device_type == :tablet
+    #  render :text => "render tablet pages"
+    #  return
     else
       #render :text => "render desktop pages"
       #return
@@ -219,15 +220,28 @@ class DemographicsController < ApplicationController
         return
       else
         @user = current_user
-        #@user.build_demographic
-        #@user.build_criterion
-        #@user.attendances.new
-        #@user.professions.new
-        #@user.revelations.new
-        #@user.expectations.new
-
         @user_name = current_user.demographic.name
         @user_demographics = @user.demographic
+        @user_quizzes = Array.new
+        @user_quiz_ans_questions = @user.quiz_answers.where(:shared=>true).map(&:question_id)
+        @user_quiz_ans_questions.each do |q|
+          if !Question.find(q).quizzes.first.quiz_category.personal
+            @user_quizzes << Question.find(q).quizzes.first
+          end
+          #@user_quizzes << q.quizzes.map(&:name)
+        end
+
+        @ucount = @user_quizzes.uniq.length
+        @user_quizzes_unshared = Array.new
+        @user_quiz_ans_questions1 = @user.quiz_answers.where(:shared=>false).map(&:question_id)
+        @user_quiz_ans_questions1.each do |q|
+          if !Question.find(q).quizzes.first.quiz_category.personal
+            @user_quizzes_unshared << Question.find(q).quizzes.first
+          end
+          #@user_quizzes << q.quizzes.map(&:name)
+        end
+        @user_quizzes = @user_quizzes.uniq + @user_quizzes_unshared.uniq
+        #@user_quizzes_unshared =
       end
     end
 
@@ -241,6 +255,26 @@ class DemographicsController < ApplicationController
       @user = current_user
       @user_name = current_user.demographic.name
       @user_demographics = @user.demographic
+      @user_quizzes = Array.new
+      @user_quiz_ans_questions = @user.quiz_answers.where(:shared=>true).map(&:question_id)
+      @user_quiz_ans_questions.each do |q|
+        if !Question.find(q).quizzes.first.quiz_category.personal
+          @user_quizzes << Question.find(q).quizzes.first
+        end
+        #@user_quizzes << q.quizzes.map(&:name)
+      end
+
+      @ucount = @user_quizzes.uniq.length
+      @user_quizzes_unshared = Array.new
+      @user_quiz_ans_questions1 = @user.quiz_answers.where(:shared=>false).map(&:question_id)
+      @user_quiz_ans_questions1.each do |q|
+        if !Question.find(q).quizzes.first.quiz_category.personal
+          @user_quizzes_unshared << Question.find(q).quizzes.first
+        end
+        #@user_quizzes << q.quizzes.map(&:name)
+      end
+      @user_quizzes = @user_quizzes.uniq + @user_quizzes_unshared.uniq
+      #@user_quizzes_unshared =
     end
   end
 
@@ -285,6 +319,54 @@ class DemographicsController < ApplicationController
     return
     #@movie_api_id = params[["movie_name"][0]][0]
   end
+
+  def delete_user_quiz
+    @user = current_user
+    @quiz_api_id = params[["quiz_api_id"][0]][0].to_i
+
+    @questions = Quiz.find(@quiz_api_id).questions.map{|i| i.id}
+
+    #@user_q = QuizAnswer.where(:id=>@quiz_api_id,:user_id => current_user.id)
+    #if !@user_q.blank?
+    @questions.each do |uq|
+      @qa = QuizAnswer.where(:question_id => uq, :user_id => @user.id).first
+      @qa.shared = false
+      @qa.save
+    end
+    #end
+    render :text => @quiz_api_id
+    return
+    #@user.movies.delete(@user_movie)
+    #render :text => "Movie deleted"
+    #return
+    #@movie_api_id = params[["movie_name"][0]][0]
+  end
+
+  def add_user_quiz
+    @user = current_user
+    @quiz_api_id = params[["quiz_api_id"][0]][0].to_i
+
+    @questions = Quiz.find(@quiz_api_id).questions.map{|i| i.id}
+
+    #@user_q = QuizAnswer.where(:id=>@quiz_api_id,:user_id => current_user.id)
+    #if !@user_q.blank?
+    @questions.each do |uq|
+      @qa = QuizAnswer.where(:question_id => uq, :user_id => @user.id).first
+      @qa.shared = true
+      @qa.save
+    end
+    #end
+    render :text => @quiz_api_id
+    return
+    #@user.movies.delete(@user_movie)
+    #render :text => "Movie deleted"
+    #return
+    #@movie_api_id = params[["movie_name"][0]][0]
+  end
+
+
+
+
 
   def add_user_book
     @user = current_user

@@ -13,7 +13,7 @@
         <% if @opposite_user.demographic.avatar.nil? %>
             <img alt="Image Size 430x280" class="img-responsive profilepic" src="/assets/profile_pic.jpg">
         <% else %>
-            <img alt="Image Size 430x280" class="img-responsive profilepic" src="<%= @opposite_user.demographic.avatar.url %>">
+            <img alt="Image Size 430x280" class="img-responsive profilepic" src="<%= @opposite_user.demographic.avatar.url %>" style="height: 78px; max-height: 78px;">
         <% end %>
       </div>
 
@@ -117,16 +117,18 @@
                 <%= f.hidden_field :sender_id,:value => current_user.id %>
                 <% Question.where(:ice_breaker => true).each do |e| %>
                     <%= f.fields_for :questions do |q| %>
-                        <div class="blue-background_ice_breaker">
+                        <div class="gray-background_ice_breaker">
                           <h4 class="text_styling_ice_breaker" style="font-size: 1.2em; margin-top: -7%"><label>
                             &nbsp;
                           </label>
-                            <span style="padding-top: 0"> <%= q.check_box e.id %> <%= e.name %> </span>
+                            <span style="padding-top: 0">
+                              <%= q.check_box e.id, :class => "ice-breaker-checkbox", :onchange => "check_limit()" %><%= e.name %>
+                            </span>
                             <% @option="" %>
                             <% e.options.each do |o| %>
                                 <% @option = @option+"<li>"+o.name+"</li>" %>
                             <% end %>
-                            <i class="fa fa-info-circle  font_awesome_ice_breaker pop_over_style" data-placement="bottom" data-content="<ul><%= @option %></ul>" title="" data-toggle="popover" data-original-title="Options"></i>
+                            <i class="fa fa-info-circle  font_awesome_ice_breaker pop_over_style" data-placement="bottom" data-content="<ul style='color:#000000; padding-left: 8%'><%= @option %></ul>" title="" data-toggle="popover" data-original-title="Options"></i>
                           </h4>
                         </div>
                     <% end %>
@@ -146,3 +148,29 @@
     </div>
   </div>
 </div>
+
+<script>
+    $(function () {
+
+
+        $('.font_awesome_ice_breaker').popover({
+            html: true
+        });
+
+    });
+
+    function check_limit(){
+        //console.log("check_limit() called");
+        //console.log($("#new_ice_breaker").find('.ice-breaker-checkbox:checked').size());
+        //console.log($("#new_ice_breaker").find('.ice-breaker-checkbox').is(":checked"));
+
+        if ( $("#new_ice_breaker").find('.ice-breaker-checkbox:checked').size() >= 5 ) {
+            if ( $("#new_ice_breaker").find('.ice-breaker-checkbox').is(":checked") ) {
+                $("#new_ice_breaker").find('.ice-breaker-checkbox').not('.ice-breaker-checkbox:checked').attr("disabled", "true");
+            }
+        }
+        else{
+            $("#new_ice_breaker").find('.ice-breaker-checkbox').not('.ice-breaker-checkbox:checked').removeAttr("disabled");
+        }
+    }
+</script>

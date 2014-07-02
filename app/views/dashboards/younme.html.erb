@@ -21,86 +21,29 @@
         <p class="about-user">We think, <%= @opposite_user.demographic.nickname %> might be...</p>
       </div>
     </div>
+
     <div class="row">
-      <div class="col-md-8  col-sm-8 col-lg-8 col-xs-8 icons-background-image">
-            <% if @quizzes.blank? %>
-                <h1><%= get_content_for("no-quiz-taken") %></h1>
-            <% else %>
-            <div class="row">
-
-              <% @quizzes.each_with_index do |e,index| %>
-                  <% if index==4 or index ==6 %>
-                      </div>
-                      <div class="row">
-                  <% end %>
-
-                  <% if index < 4 or index > 5 %>
-                      <div class="col-md-3 col-sm-3 col-lg-3 col-xs-3">
-                        <img src=<%= get_image_from_content("quiz-" + e.name) %>>
-                        <p><%= QuizResult.where("quiz_id = ? and ? BETWEEN min_value AND max_value", e.id, e.calculate_total_score_for(params[:id])).first.name rescue "NA"%></p>
-                      </div>
-
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <% @quizzes.each_with_index do |e,index| %>
+              <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 younnme_ans_btn younme-test">
+                <!--<a style="cursor:default; width:100%;height: 100%; display:table-cell;vertical-align: middle" href="<%#= take_test_path(e.id,e.questions.first.id) %>" id="ans_test_btn">-->
+                  <!--<%#= QuizResult.where("quiz_id = ? and ? BETWEEN min_value AND max_value", e.id, e.calculate_total_score_for(params[:id])).first.name rescue "NA"%>-->
+                <!--</a>-->
+                <!--<div class="hover-text" style="display: table-cell;vertical-align: middle"> <%#= e.name %></div>-->
+                <img src="<%= get_image_from_content("quiz-" + e.name) %>" class="img-responsive" style="margin-left: 25%; max-width: 88px;">
+                <p style="color: #3E4549"><b><%= e.name %></b></p>
+                <div style="color: #906B41; font-size: 0.95em; font-weight: bold;">
+                  <% if @user_quizzes.include?(e.id) %>
+                    <%= QuizResult.where("quiz_id = ? and ? BETWEEN min_value AND max_value", e.id, e.calculate_total_score_for(params[:id])).first.name rescue "We don't know yet" %>
                   <% else %>
-                      <div class="col-md-6 col-sm-6 col-lg-6 col-xs-6">
-                        <img src="/assets/mature1.png">
-                        <p>We don't know yet</p>
-                      </div>
+                    We don't know yet
                   <% end %>
-              <% end %>
-
-              <!--<div class="col-md-3 col-sm-3 col-lg-3 col-xs-3">-->
-              <!--<img src="/assets/Expressive.png">-->
-              <!--<p>Very Expressive</p>-->
-              <!--</div>-->
-              <!--<div class="col-md-3 col-sm-3 col-lg-3 col-xs-3">-->
-              <!--<img src="/assets/careing.png">-->
-              <!--<p>Moderately caring</p>-->
-              <!--</div>-->
-              <!--<div class="col-md-3 col-sm-3 col-lg-3 col-xs-3">-->
-              <!--<img src="/assets/Romantic.png">-->
-              <!--<p>Less Romantic</p>-->
-
-              <!--</div>-->
-              <!--<div class="col-md-3 col-sm-3 col-lg-3 col-xs-3">-->
-              <!--<img src="/assets/sapiosexual.png">-->
-              <!--<p>Definately Sapiosexual</p>-->
-              <!--</div>-->
-              <!--</div>-->
-              <!--<div class="row">-->
-              <!--<div class="col-md-6 col-sm-6 col-lg-6 col-xs-6">-->
-              <!--<img src="/assets/mature1.png">-->
-              <!--<p>We don't know yet</p>-->
-              <!--</div>-->
-              <!--<div class="col-md-6 col-sm-6 col-lg-6 col-xs-6">-->
-              <!--<img src="/assets/openness.png">-->
-              <!--<p>We don't know yet</p>-->
-              <!--</div>-->
-              <!--</div>-->
-              <!--<div class="row">-->
-              <!--<div class="col-md-3 col-sm-3 col-lg-3 col-xs-3">-->
-              <!--<img src="/assets/Humorous.png">-->
-              <!--<p>Less Humurous</p>-->
-              <!--</div>-->
-              <!--<div class="col-md-3 col-sm-3 col-lg-3 col-xs-3">-->
-              <!--<img src="/assets/grammarnazi.png">-->
-              <!--<p>Budding Grammer Nazi</p>-->
-              <!--</div>-->
-              <!--<div class="col-md-3 col-sm-3 col-lg-3 col-xs-3">-->
-              <!--<img src="/assets/Stress.png">-->
-              <!--<p>Very Streesed</p>-->
-              <!--</div>-->
-              <!--<div class="col-md-3 col-sm-3 col-lg-3 col-xs-3">-->
-              <!--<img src="/assets/Agreessive.png">-->
-              <!--<p>Moderately Agressive </p>-->
-              <!--</div>-->
-              <!--</div>-->
+                </div>
               </div>
-            <% end %>
 
-
-
+          <% end %>
+        </div>
     </div>
 
-  </div>
 </div>
 </div>

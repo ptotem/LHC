@@ -11,6 +11,8 @@ gem 'rails_admin',"0.6.0"
 gem "rails_admin_import","0.1.8"
 gem "rails_12factor"
 
+gem 'newrelic_rpm'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 gem 'aws-sdk'
@@ -26,6 +28,7 @@ gem 'coffee-rails', '~> 4.0.0'
 
 gem 'execjs'
 gem 'therubyracer'
+gem 'roo'
 
 
 # Use jquery as the JavaScript library
@@ -67,6 +70,8 @@ gem "devise"
 gem "cancan"
 
 gem "paperclip", "~> 4.1"
+gem "paperclip-compression"
+#gem "paperclip-compression","~> 0.1.1"
 
 gem 'omniauth'
 gem 'omniauth-facebook'

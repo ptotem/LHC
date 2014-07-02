@@ -23,10 +23,10 @@
               </div>
               <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
                 <%= d.hidden_field :smoking, :id => "me_smoking_textfield", :class => "hidden_elems" %>
-                <ul class="demographic-smoking-options-images" style="list-style: none; margin-left: -55%; margin-top: -25%;">
-                  <li id="demographic_smoking_never"><img alt="Never" src="/assets/no_smoking.png" class="img-responsive"></li>
-                  <li id="demographic_smoking_socially" style="display: none;"><img alt="Socially" src="/assets/socially_smoking.png" class="img-responsive"></li>
-                  <li id="demographic_smoking_often" style="display: none;"><img alt="Often" src="/assets/regular_smoking.png" class="img-responsive"></li>
+                <ul class="demographic-smoking-options-images" style="list-style: none; padding-left: 0">
+                  <li id="demographic_smoking_never"><img alt="Never" src="/assets/no_smoking.png" width="80%" class="img-responsive"></li>
+                  <li id="demographic_smoking_socially" style="display: none;"><img alt="Socially" src="/assets/socially_smoking.png" width="80%" class="img-responsive"></li>
+                  <li id="demographic_smoking_often" style="display: none;"><img alt="Often" src="/assets/regular_smoking.png" width="80%" class="img-responsive"></li>
                 </ul>
                 <%= select_tag "demographic_smoking", "<option>Never</option><option>Socially</option><option>Often</option>".html_safe, {:onchange => 'get_selected_val($(this))', :class => "lhc-chosen", :style=>"width:100%; margin-top:2%"} %>
               </div>
@@ -48,11 +48,11 @@
               </div>
               <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
                 <%= c.hidden_field :smoking, :id => "opposite_person_smoking_textfield", :class => "hidden_elems" %>
-                <ul class="criterion-smoking-options-images" style="list-style: none; margin-left: -55%; margin-top: -25%;">
-                  <li id="criterion_smoking_never"><img alt="Never" src="/assets/no_smoking.png" class="img-responsive"></li>
-                  <li id="criterion_smoking_socially" style="display: none;"><img alt="Socially" src="/assets/socially_smoking.png" class="img-responsive"></li>
-                  <li id="criterion_smoking_often" style="display: none;"><img alt="Often" src="/assets/regular_smoking.png" class="img-responsive"></li>
-                  <li id="criterion_smoking_dont_care" style="display: none;"><img alt="Don't Care" src="/assets/no_smoking.png" class="img-responsive"></li>
+                <ul class="criterion-smoking-options-images" style="list-style: none; padding-left: 0">
+                  <li id="criterion_smoking_never"><img alt="Never" src="/assets/no_smoking.png" width="80%" class="img-responsive"></li>
+                  <li id="criterion_smoking_socially" style="display: none;"><img alt="Socially" src="/assets/socially_smoking.png" width="80%" class="img-responsive"></li>
+                  <li id="criterion_smoking_often" style="display: none;"><img alt="Often" src="/assets/regular_smoking.png" width="80%" class="img-responsive"></li>
+                  <li id="criterion_smoking_dont_care" style="display: none;"><img alt="Don't Care" src="/assets/no_smoking.png" width="80%" class="img-responsive"></li>
                 </ul>
                 <%= select_tag "criterion_smoking", "<option>Never</option><option>Socially</option><option>Often</option><option>Don't Care</option>".html_safe, {:onchange => 'get_selected_val($(this))',  :class => "lhc-chosen", :style=>"width:100%; margin-top:2%"} %>
               </div>

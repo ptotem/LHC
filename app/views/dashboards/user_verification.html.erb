@@ -26,8 +26,7 @@
           <i class="fa fa-check-square-o font_awesome_icon white"></i>
         </div>
         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9" style="margin-top: 20px;margin-left: 2%;">
-          <span class="white" id="verify_text">Verify</span>
-          <h5 class="white" id="yourself_text">yourself to view your match</h5>
+          <h3 class="white"><%= get_content_for("verificationPageDesc") %></h3>
         </div>
       </div>
     </div>
@@ -36,27 +35,27 @@
   <br>
   <br>
 
-  <!--<div class="row">-->
-    <!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">-->
-      <!--<%#= form_for :user, :url => url_for(:controller => 'dashboards', :action => 'verify_user_institute_email') do |user_form| %>-->
-          <!--<div class="row">-->
-            <!--<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">-->
-              <!--<%#= user_form.hidden_field :user_id, :value => current_user.id %>-->
-              <!--<%#= user_form.email_field :verification_text, :class => "col-xs-12 col-sm-12 col-md-12 col-lg-12", :placeholder => "Enter your institute email" %>-->
-            <!--</div>-->
-            <!--<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">-->
-              <!--<%#= user_form.submit "Verify", :class => "btn btn-main red-btn" %>-->
-            <!--</div>-->
-          <!--</div>-->
-      <!--<%# end %>-->
-    <!--</div>-->
-  <!--</div>-->
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <%= form_for :user, :url => url_for(:controller => 'dashboards', :action => 'verify_user_institute_email') do |user_form| %>
+          <div class="row">
+            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+              <%= user_form.hidden_field :user_id, :value => current_user.id %>
+              <%= user_form.email_field :verification_text, :class => "col-xs-12 col-sm-12 col-md-12 col-lg-12", :placeholder => "Enter your institute email" %>
+            </div>
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+              <%= user_form.submit "Verify", :class => "btn btn-main red-btn" %>
+            </div>
+          </div>
+      <% end %>
+    </div>
+  </div>
 
-  <!--<div class="row">-->
-    <!--<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">-->
-      <!--<h4 class="white text-center">OR</h4>-->
-    <!--</div>-->
-  <!--</div>-->
+  <div class="row">
+    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+      <h4 class="white text-center">OR</h4>
+    </div>
+  </div>
 
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">

@@ -310,17 +310,17 @@
                                   </div>
                                 </div>
                               </div>
-                              <div class="row">
-                                <div class="col-xs-offset-1 col-xs-10 col-sm-10 col-md-10 col-lg-10">
-                                  <div class="form-group" style="margin-bottom: 0">
-                                    <h6 class="white" style="margin-bottom: 5px;">Institution</h6>
-                                    <%= f.collection_select(:institution_ids, Institution.order('name ASC').all, :id, :name, {:include_blank => false}, {:multiple => true, :class => "multiple", :style => "background-color: #FFFFFF; width: 100%;"}) %>
-                                    <span class="help-block">
-                                          <%#= get_content_for("nicknameHelperText") %>
-                                    </span>
-                                  </div>
-                                </div>
-                              </div>
+                              <!--<div class="row">-->
+                                <!--<div class="col-xs-offset-1 col-xs-10 col-sm-10 col-md-10 col-lg-10">-->
+                                  <!--<div class="form-group" style="margin-bottom: 0">-->
+                                    <!--<h6 class="white" style="margin-bottom: 5px;">Institution</h6>-->
+                                    <!--<%#= f.collection_select(:institution_ids, Institution.order('name ASC').all, :id, :name, {:include_blank => false}, {:multiple => true, :class => "multiple", :style => "background-color: #FFFFFF; width: 100%;"}) %>-->
+                                    <!--<span class="help-block">-->
+                                          <!--<%#= get_content_for("nicknameHelperText") %>-->
+                                    <!--</span>-->
+                                  <!--</div>-->
+                                <!--</div>-->
+                              <!--</div>-->
                             </div>
                           </div>
                         </div>

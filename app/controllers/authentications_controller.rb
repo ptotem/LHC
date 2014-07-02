@@ -35,6 +35,7 @@ class AuthenticationsController < ApplicationController
             @user.criterion.male = true
 
           end
+          @user.demographic.nickname = auth.extra.raw_info.first_name
           @user.confirmed_at = Time.now
           @user.save!
           sign_in(:user, @user)
@@ -46,7 +47,7 @@ class AuthenticationsController < ApplicationController
           @user=User.where(:email=>users_email).first
           sign_in(:user, @user)
           #redirect_to authenticated_root_path
-          redirect_to fill_dates_path
+          redirect_to welcome_dashboard_path
           #render :text => "User Found, #{@user}"
           #return
         end

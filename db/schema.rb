@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140602092311) do
+ActiveRecord::Schema.define(version: 20140626054919) do
 
   create_table "about_lists", force: true do |t|
     t.string   "name"
@@ -108,6 +108,7 @@ ActiveRecord::Schema.define(version: 20140602092311) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "institute_name"
   end
 
   create_table "expectations", force: true do |t|
@@ -285,6 +286,7 @@ ActiveRecord::Schema.define(version: 20140602092311) do
     t.integer  "answer_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "shared",      default: true
   end
 
   create_table "quiz_categories", force: true do |t|
@@ -442,6 +444,10 @@ ActiveRecord::Schema.define(version: 20140602092311) do
     t.string   "provider"
     t.boolean  "verification_request_sent"
     t.datetime "verification_request_sent_at"
+    t.string   "institutional_mail"
+    t.boolean  "verified_by_lhc"
+    t.string   "gender"
+    t.string   "institute_name"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree

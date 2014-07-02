@@ -60,7 +60,7 @@ module ApplicationHelper
     if User.find(id).demographic.avatar.nil?
       "/assets/profile_pic.jpg"
     else
-      User.find(id).demographic.avatar.url
+      User.find(id).demographic.avatar.url(:medium)
     end
   end
 
@@ -126,6 +126,19 @@ module ApplicationHelper
     end
   end
 
+  def check_my_ice_breaker_sent_status(uid)
+    final_verdict_sent=false
+    if !IceBreaker.find_by_sender_id_and_receiver_id(current_user.id,uid).nil?
+      i=IceBreaker.find_by_sender_id_and_receiver_id(current_user.id,uid)
+      if i.ice_status == true
+        if i.icebreaker_answers.where(:ice_ans_status => false).blank? and i.icebreaker_answers.count > 0
+          final_verdict_sent = true
+        end
+      end
+    end
+    return (final_verdict_sent)
+  end
+
 
   def get_like_status(uid)
     if !Like.where(:sender_id => current_user.id, :receiver_id => uid).first.nil?
@@ -134,12 +147,6 @@ module ApplicationHelper
     if !Like.where(:sender_id => uid, :receiver_id => current_user.id).first.nil?
       return Like.where(:sender_id => uid, :receiver_id => current_user.id).first.status
     end
-
-
-
-
-
-
   end
 
 

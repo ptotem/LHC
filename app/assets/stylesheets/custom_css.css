@@ -1,9 +1,15 @@
-html,body{
+html, body {
     height: 100%;
 }
+
 body {
     font-family: 'Open Sans', sans-serif;
     /*overflow: hidden;*/
+}
+
+.coffee-logo-styling {
+    height: 77px;
+    margin-top: -8px;
 }
 
 .whiteblock {
@@ -27,14 +33,15 @@ body {
     text-align: left;
     font-size: 1.2em;
     color: #3E4549;
-    margin-top: 8%;
+    margin-top: 5%;
     margin-left: 4%;
 }
 
 .profile_pic_thumbnail {
-    /*height: 55px;*/
-    height: 75%;
-    margin-top: 15%;
+    height: 64px;
+    /*height: 75%;*/
+    /*margin-top: 9%;*/
+    margin-top: 14%;
     margin-left: 15%;
     max-width: 100%;
     width: 100%;
@@ -50,10 +57,10 @@ body {
 
 .recent-activity-list .left-part {
     /*position: absolute;*/
-    width: 9%;
+    width: 8%;
     display: inline-block;
     vertical-align: top;
-    height: 100%
+    /*height: 100%*/
 }
 
 .recent-activity-list .mid-part {
@@ -134,6 +141,12 @@ body {
 
 .blue-background_ice_breaker {
     background: #38c8e0;
+    padding-bottom: 0px;
+    padding-top: 25px;
+}
+
+.gray-background_ice_breaker {
+    background: #3E4549;
     padding-bottom: 0px;
     padding-top: 25px;
 }
@@ -297,7 +310,7 @@ body {
 
 #edit_profile_text {
     background-color: #FFFFFF;
-    margin:0 auto;
+    margin: 0 auto;
     padding: 5px;
     text-align: center;
     width: 60%;
@@ -401,14 +414,14 @@ input[type="radio"] + .custom-radio-btn.opposite_user_gender {
     border: none;
 }
 
-.send-icebreaker_btn{
+.send-icebreaker_btn {
     background: none repeat scroll 0 0 #FF0000;
     border: medium none;
     color: #FFFFFF;
     padding: 4%;
 }
 
-.send-message_btn{
+.send-message_btn {
     background: none repeat scroll 0 0 #FF0000;
     border: medium none;
     color: #FFFFFF;
@@ -416,8 +429,6 @@ input[type="radio"] + .custom-radio-btn.opposite_user_gender {
     padding: 4%;
     /*text-align: left;*/
 }
-
-
 
 /*input[type="radio"]:checked + #user_male_lable, input[type="radio"]:checked + .opposite_user_gender_male {*/
 /*background:url('/assets/blue_male.png');*/
@@ -437,7 +448,6 @@ input[type="radio"] + .custom-radio-btn.opposite_user_gender {
 /*margin-left: 0;*/
 /*padding: 0;*/
 /*}*/
-
 
 #music-caraousel-container, #movies-caraousel-container, #books-caraousel-container {
     overflow: auto;
@@ -485,7 +495,7 @@ input[type="radio"] + .custom-radio-btn.opposite_user_gender {
     padding: 2px 0 2px 0;
 }
 
-.music-item-category, .movie-item-category, .book-item-category{
+.music-item-category, .movie-item-category, .book-item-category {
     color: #000000;
     font-size: 0.9em;
     overflow: hidden;
@@ -494,14 +504,14 @@ input[type="radio"] + .custom-radio-btn.opposite_user_gender {
     white-space: nowrap;
 }
 
-.tabs-content-background{
+.tabs-content-background {
     /*background-color:white;*/
     margin-top: -20px;
 }
 
 /*.padding-margin-nullify{*/
-    /*margin-left: 0;*/
-    /*padding: 0;*/
+/*margin-left: 0;*/
+/*padding: 0;*/
 /*}*/
 
 #edit-profile-books-caraousel-container, #edit-profile-movies-caraousel-container, #edit-profile-musics-caraousel-container {
@@ -529,7 +539,7 @@ input[type="radio"] + .custom-radio-btn.opposite_user_gender {
 }
 
 /*.edit-profile-movie-item:hover > .edit-profile-delete-movie-item-block {*/
-    /*display: block;*/
+/*display: block;*/
 /*}*/
 .edit-profile-movie-citem:hover > .edit-profile-delete-movie-item-block {
     display: block;
@@ -543,15 +553,49 @@ input[type="radio"] + .custom-radio-btn.opposite_user_gender {
     display: block;
 }
 
+
+.edit-profile-profile-citem:hover > .edit-profile-delete-quiz-item-block{
+    display: block;
+}
+
+.edit-profile-profile-citem:hover > .edit-profile-add-quiz-item-block{
+    display: block;
+}
+
+.edit-profile-delete-quiz-item-block {
+    background-color: #38C8E0;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 0 4px;
+    position: absolute;
+    right: 23%;
+    top: 1%;
+    display: none;
+
+}
+
+.edit-profile-add-quiz-item-block {
+    background-color: #38C8E0;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 0 4px;
+    position: absolute;
+    right: 21%;
+    top: 1%;
+    display: none;
+    font-size: 1.4em;
+}
 /*.edit-profile-music-item:hover > .edit-profile-delete-music-item-block{*/
-    /*display: block;*/
+/*display: block;*/
 /*}*/
 
 /*.edit-profile-book-item:hover > .edit-profile-delete-book-item-block {*/
-    /*display: block;*/
+/*display: block;*/
 /*}*/
 
-.edit-profile-delete-movie-item-block, .edit-profile-delete-music-item-block, .edit-profile-delete-book-item-block{
+.edit-profile-delete-movie-item-block, .edit-profile-delete-music-item-block, .edit-profile-delete-book-item-block {
     background-color: #38C8E0;
     color: #FFFFFF;
     cursor: pointer;
@@ -563,8 +607,7 @@ input[type="radio"] + .custom-radio-btn.opposite_user_gender {
     display: none;
 }
 
-
-.edit-profile-book-item img, .edit-profile-movie-item img, .edit-profile-music-item img{
+.edit-profile-book-item img, .edit-profile-movie-item img, .edit-profile-music-item img {
     height: 100%;
     width: 100%;
 }
@@ -585,108 +628,158 @@ input[type="radio"] + .custom-radio-btn.opposite_user_gender {
     white-space: nowrap;
 }
 
-.button-style{
+.button-style {
     width: 110px;
 }
 
-
-
-.my-img
-{
+.my-img {
     height: 150px;
     width: 100px;
     /*margin-top:10%;*/
 }
 
-.carousel-inner{
+.carousel-inner {
     height: 100%;
 }
 
-.carousel-caption{
-    top:90%;
-    left:0;
-    color:#000000;
+.carousel-caption {
+    top: 90%;
+    left: 0;
+    color: #000000;
 }
 
-.carousel
-{
+.carousel {
     /*height: 215px;*/
     /*height: 190px;*/
     /*padding: 1%;*/
 }
 
-.custom-carousel-caption{
+.custom-carousel-caption {
     text-shadow: none;
     /*text-align: left;*/
     color: #3E4549;
 }
 
-.custom-carousel-caption-book{
+.custom-carousel-caption-book {
     text-shadow: none;
     text-align: left;
     padding-left: 7%;
 }
 
-.custom-carousel-caption-quiz{
+.custom-carousel-caption-quiz {
     text-shadow: none;
     text-align: center;
     padding-left: 14%;
 }
 
-.edit-profile-custom-carousel-caption{
+.edit-profile-custom-carousel-caption {
     text-shadow: none;
     text-align: left;
     padding-left: 7%;
 }
 
-.title-white-for-contact-page{
+.title-white-for-contact-page {
     margin-top: -1%;
 }
 
-.contact-subject-input{
+.contact-subject-input {
     width: 100%;
 }
-.student-input-margin{
+
+.student-input-margin {
     margin-top: 3%;
 }
-.logo-alignment{
+
+.logo-alignment {
     margin-left: 5%;
     margin-right: 5%;
 }
 
-.you-me-modal-body{
-    max-height:420px;
-    overflow:auto;
+.you-me-modal-body {
+    max-height: 420px;
+    overflow: auto;
     font-size: 0.6em;
     text-align: left;
 }
 
-.you-me-quest-name{
+.you-me-quest-name {
     color: #38C8E0;
     margin-bottom: 3px;
 }
 
-.you-me-text{
+.you-me-text {
     text-align: center;
     text-transform: uppercase;
 }
 
-
-.about-user{
+.about-user {
     color: white;
     font-size: 20px;
 
-
 }
-.icons-background-image{
+
+.icons-background-image {
     background-image: url('/assets/cup_background.jpg');
-    background-repeat:no-repeat;
+    background-repeat: no-repeat;
     background-size: 100% 100%;
-    color:white;
+    color: white;
     text-align: center;
     padding-top: 1%;
 }
 
-.black{
+.black {
     color: black;
+}
+
+.ovals {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.3);
+    border: 1px solid #FFFFFF;
+    border-radius: 50% 50% 50% 50%;
+    color: #FFFFFF;
+    overflow: hidden;
+    position: absolute;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+}
+
+#hobby_oval_1, #about_oval_1 {
+    height: 80px;
+    width: 80px;
+    top: 0;
+    left: 10%;
+}
+
+#hobby_oval_2, #about_oval_2 {
+    height: 68px;
+    width: 68px;
+    top: 0;
+    left: 34%;
+}
+
+#hobby_oval_3, #about_oval_3 {
+    height: 72px;
+    left: 12%;
+    top: 64px;
+    width: 72px;
+}
+
+#hobby_oval_4, #about_oval_4 {
+    height: 60px;
+    left: 30%;
+    top: 49px;
+    width: 60px;
+}
+
+#hobby_oval_5, #about_oval_5 {
+    height: 83px;
+    left: 46%;
+    top: 43px;
+    width: 83px;
+}
+
+.tab-bg {
+    /*background-image: url('/assets/cup_background.jpg');*/
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
 }

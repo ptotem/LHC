@@ -108,7 +108,7 @@
               <div style="background-color: #ffffff; margin-left: 12%;" class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
                 <div class="row">
                   <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                    <img class="img-circle" src="<%= get_user_image(e.sender_id) %>" style="width: 100%; padding-top: 5%; padding-bottom: 5%;">
+                    <img class="img-circle profile_pic_thumbnail-mobile" src="<%= get_user_image(e.sender_id) %>">
                   </div>
                   <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-left: 0; padding-top: 1%;">
                     <a href="<%= user_profile_path(e.sender_id) %>"><%= User.find(e.sender_id).demographic.nickname %></a> likes you !
@@ -155,7 +155,7 @@
                     <% if notification.sender_id.nil? %>
                         <img class="img-circle" src="/assets/notification-icon.png" style="width: 100%; padding-top: 5%; padding-bottom: 5%;">
                     <% else %>
-                        <img class="img-circle" src="<%= get_user_image(notification.sender_id) rescue nil %>" style="width: 100%; padding-top: 5%; padding-bottom: 5%;">
+                        <img class="img-circle profile_pic_thumbnail-mobile" src="<%= get_user_image(notification.sender_id) rescue nil %>">
                     <% end %>
                   </div>
                   <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-left: 0; padding-top: 1%; line-height: 1.2em;">

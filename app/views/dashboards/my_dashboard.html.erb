@@ -14,7 +14,8 @@
 <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 no-padding mob-device-scale-09">
   <%#= yield %>
   <div class="row">
-    <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12 section-head1">
+    <!--<div class="col-xs-12 col-md-12 col-sm-12 col-lg-12 section-head1">-->
+    <div class="col-lg-12 col-md-8 col-sm-8 col-xs-8 section-head1 white">
       Recent Activity
       <%#= controller.send(:_layout) %>
       <%#= current_layout %>
@@ -26,69 +27,98 @@
   <div class="recent-activity-list">
     <% if !@like_requests.blank? %>
         <% @like_requests.each do |e| %>
+            <% if RejectedMatch.where(:rejected_target=>e.sender_id, :user_id=>current_user.id).first.nil? %>
             <div class="row">
               <div class="col-lg-12 whiteblock">
                 <div class="left-part"><img class="profile_pic_thumbnail" src="<%= get_user_image(e.sender_id) %>" style="border-radius: 50%">
                 </div>
                 <div class="mid-part">
                   <div class="recentactivitytext">
-                    <a href="<%= user_profile_path(e.sender_id) %>"><%= User.find(e.sender_id).demographic.nickname %></a> likes you !
-
+                    <a href="<%= user_profile_path(e.sender_id) %>">
+                      <%#= User.find(e.sender_id).demographic.nickname %>
+                      <%= get_content_for("userLikeReceivedNotificationText") %> <%= User.find(e.sender_id).demographic.nickname %>
+                    </a>
+                    <!--likes you !-->
                   </div>
                 </div>
                 <div class="right-part">
                   <div class="recentactivitydate">
-                    <% if e.like_type == "Timed" %>
-                        <b><%=  ((3.days.since(e.created_at) - Time.now)/3600).to_i %></b><br> hours left to respond
-                    <% else %>
-                        <%= e.created_at.strftime("%d %B %Y") %>
-                    <% end %>
-                    <div class="pull-right">
-                      <% if e.status %>
-                          <button onclick="window.location = '<%= reject_request_url(e.id) %>'" class="transparent-background-btn">
-                            <i class="fa fa-thumbs-down red fa-3x"></i></button>
-                      <% else %>
+                    <div class="row">
+                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <% if e.like_type == "Timed" %>
+                            <b><%=  ((3.days.since(e.created_at) - Time.now)/3600).to_i %></b> hours left to respond
+                        <% else %>
+                            <%= e.created_at.strftime("%d %B %Y") %>
+                        <% end %>
+                      </div>
+                    </div>
+                    <!--<div class="pull-right">-->
+                      <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                           <button onclick="window.location = '<%= accept_request_url(e.id) %>'" class="transparent-background-btn">
                             <i class="fa fa-thumbs-up blue fa-3x"></i></button>
-                      <% end %>
-                      <!--<a href="<%#= accept_request_path(e.id) %>"><i class="fa fa-thumbs-up blue fa-3x"></i></a>-->
-                      <!--<a href="<%#= reject_request_path(e.id) %>"><i class="fa fa-thumbs-down red fa-3x"></i></a>-->
-                    </div>
+                          <button onclick="window.location = '<%= reject_request_url(e.id) %>'" class="transparent-background-btn">
+                            <i class="fa fa-thumbs-down red fa-3x"></i></button>
+
+                          <%# if e.status %>
+                              <!--<button onclick="window.location = '<%#= reject_request_url(e.id) %>'" class="transparent-background-btn">-->
+                                <!--<i class="fa fa-thumbs-down red fa-3x"></i></button>-->
+                          <%# else %>
+                              <!--<button onclick="window.location = '<%#= accept_request_url(e.id) %>'" class="transparent-background-btn">-->
+                                <!--<i class="fa fa-thumbs-up blue fa-3x"></i></button>-->
+                          <%# end %>
+                          <!--<a href="<%#= accept_request_path(e.id) %>"><i class="fa fa-thumbs-up blue fa-3x"></i></a>-->
+                          <!--<a href="<%#= reject_request_path(e.id) %>"><i class="fa fa-thumbs-down red fa-3x"></i></a>-->
+                        </div>
+                      </div>
+                    <!--</div>-->
                   </div>
                 </div>
               </div>
             </div>
+            <% end %>
         <% end %>
     <% end %>
 
     <% if !current_user.notifications.blank? %>
         <% current_user.notifications.reverse!.each do |notification| %>
+
+            <% if RejectedMatch.where(:rejected_target=>notification.sender_id, :user_id=>current_user.id).first.nil? %>
             <div class="row">
               <div class="col-lg-12 whiteblock">
                 <div class="left-part">
+
                   <% if notification.sender_id.nil? %>
-                    <img class="profile_pic_thumbnail img-circle123" src="/assets/notification-icon.png" style="border-radius: 50%;"> </div>
+                      <img class="profile_pic_thumbnail img-circle123" src="/assets/new_match_icon.png" style="border-radius: 50%;">
+                </div>
                   <% else %>
-                    <img class="profile_pic_thumbnail img-circle123" src="<%= get_user_image(notification.sender_id) rescue nil %>" style="border-radius: 50%;"> </div>
+                      <img class="profile_pic_thumbnail img-circle123" src="<%= get_user_image(notification.sender_id) rescue nil %>" style="border-radius: 50%;">
+                </div>
                   <% end %>
                 <div class="mid-part">
-                  <div class="recentactivitytext">
-                    <!--Your Match <a>Sagarika</a> sent you a message-->
-                    <%= link_to notification.content, notification.pointer_link %>
-                  </div>
+                    <div class="recentactivitytext">
+                      <!--Your Match <a>Sagarika</a> sent you a message-->
+                      <%= link_to notification.content, notification.pointer_link %>
+                    </div>
                 </div>
                 <div class="right-part">
-                  <div class="recentactivitydate">
-                    <% if notification.notification_type == "Timed" %>
-                    <b><%=  ((3.days.since(notification.created_at) - Time.now)/3600).to_i %></b><br> hours left to respond
-                    <% else %>
-                        <%= notification.created_at.strftime("%d %B %Y") %>
-
-                  <% end %>
-                  </div>
+                    <div class="recentactivitydate">
+                      <%#= notification.created_at.strftime("%d %B %Y") %>
+                      <!--<br>-->
+                      <!--<b><%#=  ((3.days.since(notification.created_at) - Time.now)/3600).to_i %></b> hours left to respond-->
+                      <% if notification.notification_type == "Timed" || notification.content.include?("3 new matches") %>
+                          <b><%= ((3.days.since(notification.created_at) - Time.now)/3600).to_i %></b><br> hours left to
+                          respond
+                      <% else %>
+                          <%= notification.created_at.strftime("%d %B %Y") %>
+                      <% end %>
                 </div>
               </div>
             </div>
+
+
+            </div>
+            <% end %>
         <% end %>
     <% end %>
 
@@ -140,8 +170,8 @@
     </a>
 
   <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-      <div class="match_text mob-device-match_text" style="color: white; font-weight: bold">Spread the good word and invite your friends</div>
+    <div class="col-lg-12">
+      <div class="match_text" style="color: white; font-weight: bold">Spread the good word and invite your friends</div>
     </div>
   </div>
   <div class="row">

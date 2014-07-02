@@ -64,7 +64,7 @@ class IceBreakersController < ApplicationController
 
     if question_count > 5 or question_count < 5
       @ice_breaker.destroy!
-      redirect_to start_ice_breaker_path(params[:ice_breaker][:receiver_id]) ,:notice=>"Ice-breaker not created, please select exactly 5 questions."
+      redirect_to start_ice_breaker_path(params[:ice_breaker][:receiver_id]) ,:notice=>"Ice breaker not sent, Select 5 questions."
       return
     end
     Notification.create!(:content=>"#{current_user.demographic.nickname} has sent you a ice-breaker", :user_id=>params[:ice_breaker][:receiver_id], :pointer_link=>answer_icebreaker_path(@ice_breaker.id,@ice_breaker.questions.first.id),:sender_id => params[:ice_breaker][:sender_id])
@@ -72,7 +72,7 @@ class IceBreakersController < ApplicationController
 
     respond_to do |format|
       if @ice_breaker.save
-        format.html { redirect_to user_profile_path(params[:ice_breaker][:receiver_id]), notice: 'Ice breaker was successfully created.' }
+        format.html { redirect_to user_profile_path(params[:ice_breaker][:receiver_id]), notice: 'Ice breaker was successfully sent.' }
         format.json { render action: 'show', status: :created, location: @ice_breaker }
       else
         format.html { render action: 'new' }

@@ -3,6 +3,9 @@
         transform:scale(0.5);
     }
 
+    .mob-device-margin-top-10{
+        margin-top: 10%;
+    }
     .mob-device-margin-top-n2{
         margin-top: -2%;
     }
@@ -29,6 +32,10 @@
 
     .mob-device-col-offset-3{
         margin-left: 25%;
+    }
+
+    .mob-device-col-offset-5{
+        margin-left: 38%;
     }
 
     input[type="radio"] + .mob-device-signup-radio-btn-first.my_gender {
@@ -59,9 +66,24 @@
         /*height: 100%;*/
     /*}*/
 
+    .coffee-logo-styling {
+        height: 60px;
+        margin-top: -8px;
+    }
+
+    .profile_pic_thumbnail-mobile{
+        height: 48px;
+        /*height: 75%;*/
+        /*margin-top: 9%;*/
+        margin-top: 5%;
+        margin-left: 10%;
+        max-width: 100%;
+        width: 100%;
+    }
 }
 
 @media only screen and (min-width: 480px) and (max-width: 767px) {
+
     .mob-device-mutual-like-profile-img{
         height: 195px;
         padding-left: 10%;
@@ -123,6 +145,10 @@
 
     .mob-device-col-offset-4{
         margin-left: 33.3333%;
+    }
+
+    .mob-device-col-offset-5{
+        margin-left: 38%;
     }
 
     .mob-device-full-width{

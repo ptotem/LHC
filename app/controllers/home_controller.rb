@@ -7,11 +7,11 @@ class HomeController < ApplicationController
   def resolve_layout
     puts "action_name :- #{action_name}"
     puts "device_type :- #{device_type}"
-    if action_name == "about_us" || action_name == "contact_us"
-      #if device_type == :desktop
+    #if action_name == "about_us" || action_name == "contact_us"
+      if device_type == :desktop
       #"dashboard_and_profile_layout"
-    elsif action_name == "about_us_mobile" || action_name == "contact_us_mobile"
-      #elsif device_type == :mobile
+    #elsif action_name == "about_us_mobile" || action_name == "contact_us_mobile"
+      elsif device_type == :mobile
       "dashboard_and_profile_layout_mobile"
     end
   end
@@ -44,9 +44,9 @@ class HomeController < ApplicationController
       #render :text => "render mobile pages"
       #return
       redirect_to about_us_mobile_path
-    elsif device_type == :tablet
-      render :text => "render tablet pages"
-      return
+    #elsif device_type == :tablet
+    #  render :text => "render tablet pages"
+    #  return
     else
       #render :text => "render desktop pages"
       #return
@@ -63,9 +63,9 @@ class HomeController < ApplicationController
       #render :text => "render mobile pages"
       #return
       redirect_to contact_us_mobile_path
-    elsif device_type == :tablet
-      render :text => "render tablet pages"
-      return
+    #elsif device_type == :tablet
+    #  render :text => "render tablet pages"
+    #  return
     else
       #render :text => "render desktop pages"
       #return

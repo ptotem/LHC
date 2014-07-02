@@ -9,7 +9,7 @@
         <h3 class="white"><%= @quiz.name %></h3>
       </div>
       <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-        <img src="/assets/cup4.png" class="img-responsive" style="margin-top: 20px">
+        <img src="<%= get_image_from_content("quiz-" + @quiz.name) %>" style="margin-top: 20px" class="img-responsive">
       </div>
     </div>
 

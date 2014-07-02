@@ -7,11 +7,11 @@ class QuizCategoriesController < ApplicationController
   def resolve_layout
     puts "action_name :- #{action_name}"
     puts "device_type :- #{device_type}"
-    if action_name == "start_test" || action_name == "take_test"
-    #if device_type == :desktop
+    #if action_name == "start_test" || action_name == "take_test"
+    if device_type == :desktop
       "dashboard_and_profile_layout"
-    elsif action_name == "start_test_mobile" || action_name == "take_test_mobile"
-    #elsif device_type == :mobile
+    #elsif action_name == "start_test_mobile" || action_name == "take_test_mobile"
+    elsif device_type == :mobile
       "dashboard_and_profile_layout_mobile"
     end
   end
@@ -82,9 +82,9 @@ class QuizCategoriesController < ApplicationController
       #render :text => "render mobile pages"
       #return
       redirect_to start_test_mobile_path
-    elsif device_type == :tablet
-      render :text => "render tablet pages"
-      return
+    #elsif device_type == :tablet
+    #  render :text => "render tablet pages"
+    #  return
     else
       #render :text => "render desktop pages"
       #return
@@ -101,9 +101,9 @@ class QuizCategoriesController < ApplicationController
       #render :text => "render mobile pages"
       #return
       redirect_to take_test_mobile_path
-    elsif device_type == :tablet
-      render :text => "render tablet pages"
-      return
+    #elsif device_type == :tablet
+    #  render :text => "render tablet pages"
+    #  return
     else
       #render :text => "render desktop pages"
       #return

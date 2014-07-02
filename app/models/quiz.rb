@@ -11,6 +11,7 @@ class Quiz < ActiveRecord::Base
     answers.each do |a|
       total_score = total_score + Option.find(a.answer_id).score
     end
+    #puts "total_score :- #{total_score}"
     total_score
   end
 

@@ -8,11 +8,6 @@
 
     }
 
-    .coffee-logo-styling {
-        height: 77px;
-        margin-top: -8px;
-    }
-
     /* Notification bubble css - starts */
     .animating{
         animation: animate 1s cubic-bezier(0,1,1,0);
@@ -80,35 +75,35 @@
               <% end %>
             </li>
 
-            <%# if device_type == :mobile %>
-                <li class="dropdown">
-                  <a data-toggle="dropdown" class="dropdown-toggle" href="#">Navigation Menu <b class="caret"></b></a>
-                  <ul class="dropdown-menu">
-                    <li><a href="/profile/<%= current_user.id %>">Profile</a></li>
-                    <li>
-                      <%= link_to "Matches", quick_matches_path %>
-                    </li>
-                    <li>
-                      <%= link_to "Mutual Likes", mutual_likes_path %>
-                    </li>
-                    <li>
-                      <%= link_to "Conversations", conversations_path %>
-                    </li>
-                    <li>
-                      <%= link_to "Snazz Me Up!", snazzmeup_path %>
-                    </li>
-                    <% if !@user.nil? || !@opposite_user.nil? %>
-                      <li>
-                        <% if !@user.nil? %>
-                            <%= link_to "Snapshot", younme_path(@user.id) %>
-                        <% elsif !@opposite_user.nil? %>
-                            <%= link_to "Snapshot", younme_path(@opposite_user.id) %>
-                        <% end %>
-                      </li>
-                    <% end %>
-                  </ul>
+            <% if device_type == :mobile %>
+            <li class="dropdown">
+              <a data-toggle="dropdown" class="dropdown-toggle" href="#">Links <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="/profile/<%= current_user.id %>">Profile</a></li>
+                <li>
+                  <%= link_to "Matches", quick_matches_path %>
                 </li>
-            <%# end %>
+                <li>
+                  <%= link_to "Mutual Likes", mutual_likes_path %>
+                </li>
+                <li>
+                  <%= link_to "Conversations", conversations_path %>
+                </li>
+                <li>
+                  <%= link_to "Snazz Me Up!", snazzmeup_path %>
+                </li>
+                <% if !@user.nil? || !@opposite_user.nil? %>
+                    <li>
+                      <% if !@user.nil? %>
+                          <%= link_to "Snapshot", younme_path(@user.id) %>
+                      <% elsif !@opposite_user.nil? %>
+                          <%= link_to "Snapshot", younme_path(@opposite_user.id) %>
+                      <% end %>
+                    </li>
+                <% end %>
+              </ul>
+            </li>
+            <% end %>
 
 
             <li><a href="/about_us">About</a></li>
@@ -120,9 +115,11 @@
               <a rel="nofollow" href="/users/sign_out" data-method="delete"><span class="white">Sign out</span></a>
               <%#= link_to "Sign out", destroy_user_session_path, :method => :delete %>
             </li>
-            <li>
-              <a href="javascript:void(0)" onclick="$('.interactive-div').show();" style="padding-top: 7%; padding-bottom: 0"><i class="fa fa-question-circle fa-2x"></i></a>
-            </li>
+            <% if device_type == :desktop %>
+                <li>
+                  <a href="javascript:void(0)" onclick="$('.interactive-div').show();" style="padding-top: 7%; padding-bottom: 0"><i class="fa fa-question-circle fa-2x"></i></a>
+                </li>
+            <% end  %>
           </ul>
         </div>
     <% else %>

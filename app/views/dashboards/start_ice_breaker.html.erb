@@ -1,5 +1,5 @@
 <%= content_for(:left_menu) do %>
-    <%= render :partial=>"left_menu_other" %>
+    <%= render :partial => "left_menu_other" %>
 <% end %>
 
 <%= content_for(:page_header) do %>
@@ -11,47 +11,97 @@
 
 
 <style type="text/css">
-  .question
-  {
-      margin-top:2%;
-  }
-        .question_statment
-        {
-            font-size:1.5em;
-            color:black;
-        }
+    .question {
+        margin-top: 2%;
+    }
 
-  .popover
-  {
-      min-width: 21% ! important;
-      color: black;
-      font-size: 0.8em;
-      margin-left: -114px;
-  }
+    .question_statment {
+        font-size: 1.5em;
+        color: black;
+    }
 
-  .popover.bottom .arrow{
-      left:92%;
-  }
+    .popover {
+        min-width: 21% ! important;
+        color: black;
+        font-size: 0.8em;
+        margin-left: -114px;
+    }
 
+    .popover.bottom .arrow {
+        left: 92%;
+    }
 
-  .popover h3 {
-      color: #000000;
-      text-align: center;
-  }
-        .font_awesome_ice_breaker
-        {
-            cursor: pointer;
-        }
+    .popover h3 {
+        color: #000000;
+        text-align: center;
+    }
+
+    .font_awesome_ice_breaker {
+        cursor: pointer;
+    }
 
 </style>
 
-<script>
-  $(function(){
+<div class="row">
+  <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+    <div class="row" style="margin-top: -6%;">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <h3 class="white"><%= get_content_for("startIceBreakerHeader") %></h3>
+        <h5 class="white"><%= get_content_for("startIceBreakerText") %></h5>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 white-background_ice_breaker">
+        <%= form_for(@ice_breaker) do |f| %>
+            <%= f.hidden_field :receiver_id, :value => params[:id] %>
+            <%= f.hidden_field :sender_id, :value => current_user.id %>
+            <% Question.where(:ice_breaker => true).each do |e| %>
+                <%= f.fields_for :questions do |q| %>
+                    <div class="gray-background_ice_breaker">
+                      <h4 class="text_styling_ice_breaker"><label>
+                        &nbsp;
+                      </label>
+                        <%= q.check_box e.id, :class => "ice-breaker-checkbox", :onchange => "check_limit()" %><%= e.name %>
+                        <% @option="" %>
+                        <% e.options.each do |o| %>
+                            <% @option = @option+"<li style='font-size:0.9em; line-height:1.3em;'>"+o.name+"</li>" %>
+                        <% end %>
+                        <i class="fa fa-info-circle  font_awesome_ice_breaker pop_over_style" data-placement="bottom" data-content="<ul><%= @option %></ul>" title="" data-toggle="popover" data-original-title="Options"></i>
+                      </h4>
+                    </div>
+                <% end %>
+
+            <% end %>
 
 
-      $('.font_awesome_ice_breaker').popover({
-          html: true
-      });
+
+
+
+            </div>
+            </div>
+
+            </div>
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="margin-left: -6%;">
+              <%= render :partial => "demographics/right_coffee_menu" %>
+            </div>
+            </div>
+
+            <div class="row" style="margin-top:2%">
+              <div class="col-lg-3" style="padding-left: 0">
+                <!--<button class="btn btn-block ans_btn" onclick="window.location='<%#= conversations_with_users_path %>'">Ask questions</button>-->
+                <%= f.submit "Send", :class => "btn-main ans_btn" %>
+              </div>
+            </div>
+
+        <% end %>
+
+        <script>
+            $(function () {
+
+
+                $('.font_awesome_ice_breaker').popover({
+                    html: true
+                });
 
 //      $('.font_awesome_ice_breaker').on('click', function (e) {
 //          $('[data-toggle="popover"]').each(function () {
@@ -63,55 +113,20 @@
 //          });
 //      });
 
-  })
-</script>
+            })
 
+                function check_limit(){
+                    //console.log("check_limit() called");
+                    //console.log($("#new_ice_breaker").find('.ice-breaker-checkbox:checked').size());
+                    //console.log($("#new_ice_breaker").find('.ice-breaker-checkbox').is(":checked"));
 
-
-
-  <div class="row">
-    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10" >
-      <div class="row">
-        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 white-background_ice_breaker">
-          <%= form_for(@ice_breaker) do |f| %>
-              <%= f.hidden_field :receiver_id,:value => params[:id] %>
-              <%= f.hidden_field :sender_id,:value => current_user.id %>
-              <% Question.where(:ice_breaker => true).each do |e| %>
-                  <%= f.fields_for :questions do |q| %>
-                      <div class="blue-background_ice_breaker">
-                        <h4 class="text_styling_ice_breaker"><label>
-                          &nbsp;
-                        </label>
-                          <%= q.check_box e.id %><%= e.name %>
-                          <% @option="" %>
-                          <% e.options.each do |o| %>
-                              <% @option = @option+"<li>"+o.name+"</li>" %>
-                          <% end %>
-                          <i class="fa fa-info-circle  font_awesome_ice_breaker pop_over_style" data-placement="bottom" data-content="<ul><%= @option %></ul>" title="" data-toggle="popover" data-original-title="Options"></i>
-                        </h4>
-                      </div>
-                      <% end %>
-
-              <% end %>
-
-
-
-
-
-        </div>
-      </div>
-
-    </div>
-    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="margin-left: -6%;">
-      <%= render :partial => "demographics/right_coffee_menu" %>
-    </div>
-  </div>
-
-  <div class="row" style="margin-top:2%">
-    <div class="col-lg-3" style="padding-left: 0">
-    <!--<button class="btn btn-block ans_btn" onclick="window.location='<%= conversations_with_users_path %>'">Ask questions</button>-->
-      <%= f.submit "Send", :class=>"btn-main ans_btn" %>
-    </div>
-  </div>
-
-          <% end %>
+                    if ( $("#new_ice_breaker").find('.ice-breaker-checkbox:checked').size() >= 5 ) {
+                        if ( $("#new_ice_breaker").find('.ice-breaker-checkbox').is(":checked") ) {
+                            $("#new_ice_breaker").find('.ice-breaker-checkbox').not('.ice-breaker-checkbox:checked').attr("disabled", "true");
+                        }
+                    }
+                    else{
+                        $("#new_ice_breaker").find('.ice-breaker-checkbox').not('.ice-breaker-checkbox:checked').removeAttr("disabled");
+                    }
+                }
+        </script>

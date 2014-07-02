@@ -9,19 +9,26 @@
 <% end %>
 
 <%= content_for(:dialogue_bar_header) do %>
-    Snazz me up
+    <%= get_content_for("snazMeUpHeaderBarText") %>
 <% end %>
 
 
 
 
+<div class="row">
+  <div class="col-xs-offset-2 col-xs-10 col-sm-offset-2 col-sm-10 col-md-offset-2 col-md-10 col-lg-offset-2 col-lg-10">
+    <h4><%= get_content_for('snazzmeupIntroText') %></h4>
+  </div>
+</div>
+
+
 <section id="relationship_test_section">
-
-
+  <div class="row" style="margin-top: 2%">
+    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-lg-offset-2">
       <ul class="list-inline portfolio text-center">
 
 
-        <%  QuizCategory.all.each do |e| %>
+        <%  QuizCategory.all.each_with_index do |e, index| %>
             <li data-tag="web">
               <div class="test-thumbs">
                 <!--<img src="/assets/assertiveness.jpg" class="img-responsive" alt="Image Size 430x280" style="width: 100%;">-->
@@ -29,8 +36,13 @@
                 <a href="<%= start_test_path(e.id) %>">
                         <span class="title">
                             <span class="white upper-case">
-                              <h5>Take the</h5>
-                              <h1>Test!</h1>
+                              <% if e.name.match("trivia") %>
+                                  <h1><%= get_content_for('triviaQuizHoverText') %></h1>
+                              <% elsif e.name.match("personal") %>
+                                  <h1><%= get_content_for('personalQuizHoverText') %></h1>
+                              <% end %>
+                              <!--<h5>Take the</h5>-->
+                              <!--<h1>Test!</h1>-->
                             </span>
                         </span>
                 </a>
@@ -42,6 +54,8 @@
         <% end %>
 
       </ul>
+    </div>
+  </div>
 
   <!--End Row-->
 </section>

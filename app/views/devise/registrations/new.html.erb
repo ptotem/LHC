@@ -9,17 +9,7 @@
       <div class="controls">
         <div class="row">
           <div class="col-xs-8 col-lg-8 col-lg-offset-2 mob-device-col-offset-2">
-          <%= f.email_field :email, :autofocus => true, :class => "form-control", :placeholder => "Email" %>
-            </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="control-group">
-      <div class="controls">
-        <div class="row">
-          <div class="col-xs-8 col-lg-8 col-lg-offset-2 mob-device-col-offset-2">
-          <%= f.password_field :password, :class => "form-control", :placeholder => "Password" %>
+            <%= f.email_field :email, :autofocus => true, :class => "form-control", :placeholder => "Email" %>
           </div>
         </div>
       </div>
@@ -29,66 +19,74 @@
       <div class="controls">
         <div class="row">
           <div class="col-xs-8 col-lg-8 col-lg-offset-2 mob-device-col-offset-2">
-          <%= f.password_field :password_confirmation, :class => "form-control", :placeholder => "Password Confirmation" %>
-        </div>
+            <%= f.password_field :password, :class => "form-control", :placeholder => "Password" %>
+          </div>
         </div>
       </div>
     </div>
 
-        <div class="control-group">
-          <div class="controls">
-            <div class="row">
-              <div class="col-xs-8 col-lg-8 col-lg-offset-2 mob-device-col-offset-2">
-              <!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">-->
-                <%= f.fields_for :demographic do |d| %>
-                    <%= d.text_field :nickname, :class => "form-control", :placeholder => "Enter a nickname to maintain anonymity", :size=>160 %>
+    <div class="control-group">
+      <div class="controls">
+        <div class="row">
+          <div class="col-xs-8 col-lg-8 col-lg-offset-2 mob-device-col-offset-2">
+            <%= f.password_field :password_confirmation, :class => "form-control", :placeholder => "Password Confirmation" %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <div class="controls">
+        <div class="row">
+          <div class="col-xs-8 col-lg-8 col-lg-offset-2 mob-device-col-offset-2">
+            <!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">-->
+            <%= f.fields_for :demographic do |d| %>
+                <%= d.text_field :nickname, :class => "form-control", :placeholder => "Enter a nickname to maintain anonymity", :size=>160 %>
                 <%# end %>
-              <!--</div>-->
-            </div>
-            </div>
+                <!--</div>-->
+                </div>
+                </div>
 
-                    <div class="row" >
-                      <div id="college_block" class="col-xs-8 col-sm-9 col-md-8 col-md-offset-2 col-lg-8 mob-device-col-offset-2" style="padding-bottom: 2%">
-                        <!--<label class="control-label">Last Attended</label>-->
-
-                            <%= d.collection_select(:last_institute, Institution.all, :id, :name,{}, {:class=>"lhc-dropdown mob-device-full-width"}) %>
-                      </div>
-
-                    </div>
-            <div class="row">
-              <div class="col-xs-8 col-lg-8 col-lg-offset-2 mob-device-col-offset-2" style=" color: #ffffff;">
                 <div class="row" >
-                  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                    <label class="control-label pull-left">I am a</label>
-                    <%= d.radio_button :male,true, {:class=>"my_gender lhc-radio-btn"} %>
-                    <label for="user_demographic_attributes_male_true" class="mob-device-signup-radio-btn-first custom-radio-btn male-radio-btn my_gender" id="user_male_lable"></label>
-                    <%= d.radio_button :male,false,{:class=>"my_gender lhc-radio-btn"} %>
-                    <!--<%#= c.label :male,' ',:class=>"custom-radio-btn female-radio-btn my_gender" %>-->
-                    <label for="user_demographic_attributes_male_false" class="mob-device-signup-radio-btn custom-radio-btn female-radio-btn my_gender" id="user_female_lable"></label>
-
+                  <div id="college_block" class="col-xs-8 col-sm-9 col-md-8 col-md-offset-2 col-lg-8 mob-device-col-offset-2" style="padding-bottom: 2%">
+                    <!--<label class="control-label">Last Attended</label>-->
+                    <%= d.collection_select(:last_institute, Institution.all, :id, :name,{}, {:class=>"lhc-dropdown mob-device-full-width"}) %>
                   </div>
-                <% end %>
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                <label class="control-label pull-left">Looking for</label>
-                        <%= f.fields_for :criterion do |c| %>
-                      <%= c.radio_button :male,true, {:class=>"my_gender lhc-radio-btn"} %>
-                      <label for="user_criterion_attributes_male_true" class="custom-radio-btn male-radio-btn my_gender" id="user_male_lable"></label>
-                      <%= c.radio_button :male,false,{:class=>"my_gender lhc-radio-btn"} %>
-                      <!--<%#= c.label :male,' ',:class=>"custom-radio-btn female-radio-btn my_gender" %>-->
-                      <label for="user_criterion_attributes_male_false" class="mob-device-signup-radio-btn custom-radio-btn female-radio-btn my_gender" id="user_female_lable"></label>
-
-                    <% end %>
-
-                  </div>
-
-
 
                 </div>
-              </div>
+                <div class="row">
+                  <div class="col-xs-8 col-lg-8 col-lg-offset-2 mob-device-col-offset-2" style=" color: #ffffff;">
+                    <div class="row" >
+                      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <label class="control-label pull-left">I am a</label>
+                        <%= radio_button_tag :male,true,false,{:class=>"my_gender lhc-radio-btn"} %>
+                        <label for="user_demographic_attributes_male_true" class="mob-device-signup-radio-btn-first custom-radio-btn male-radio-btn my_gender" id="user_male_lable_d" data-cg="true"></label>
+                        <%= radio_button_tag :male,false,false,{:class=>"my_gender lhc-radio-btn"} %>
+                        <label for="user_demographic_attributes_male_false" class="mob-device-signup-radio-btn custom-radio-btn female-radio-btn my_gender" id="user_female_lable_d" data-cg="false"></label>
+                        <%= d.hidden_field :male,{:id => "d_male",:class=>"my_gender lhc-radio-btn"} %>
+                      </div>
+            <% end %>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+              <label class="control-label pull-left">Looking for</label>
+              <%= f.fields_for :criterion do |c| %>
+                  <%= radio_button_tag :male,true,false, {:class=>"my_gender lhc-radio-btn"} %>
+                  <label for="user_criterion_attributes_male_true" class="custom-radio-btn male-radio-btn my_gender" id="user_male_lable_c" data-cg="true"></label>
+                  <%= radio_button_tag :male,false,false,{:class=>"my_gender lhc-radio-btn"} %>
+                  <!--<%#= c.label :male,' ',:class=>"custom-radio-btn female-radio-btn my_gender" %>-->
+                  <label for="user_criterion_attributes_male_false" class="mob-device-signup-radio-btn custom-radio-btn female-radio-btn my_gender" id="user_female_lable_c" data-cg="false"></label>
+                  <%= c.hidden_field :male,{:id => "c_male"} %>
+              <% end %>
 
             </div>
-          </div>
-        </div>
+
+
+
+            </div>
+            </div>
+
+            </div>
+            </div>
+    </div>
 
 
 
@@ -114,10 +112,10 @@
 <% end %>
 
 <style type="text/css">
-  .orange_button
-  {
-      color:#38C8E0;
-  }
+    .orange_button
+    {
+        color:#38C8E0;
+    }
 
 
 
@@ -126,9 +124,8 @@
     $(function(){
         $(".lhc-dropdown").chosen({
             placeholder_text_single:"Last attended college",
-            width: "100%"
+            width:"100%"
         });
-
         $(".gender-icons").click(function(e){
             $(".gender-icons").removeClass("orange_button");
             $(this).addClass("orange_button")
@@ -139,7 +136,39 @@
             $(this).addClass("orange_button")
         });
 
+
         $(".chosen-single").find("span").text("Last attended/Current college");
+
+
+        $("#user_male_lable_d").on("click",function(){
+            $("#d_male").val(true);
+            $(this).css('backgroundImage','url(/assets/blue_male.png)')
+            $("#user_female_lable_d").css('backgroundImage','url(/assets/white_female.png)')
+        });
+
+        $("#user_female_lable_d").on("click",function(){
+            $("#d_male").val(false);
+            $(this).css('backgroundImage','url(/assets/blue_female.png)')
+            $("#user_male_lable_d").css('backgroundImage','url(/assets/white_male.png)')
+        });
+
+        $("#user_male_lable_c").on("click",function(){
+            $("#c_male").val(true);
+            $(this).css('backgroundImage','url(/assets/blue_male.png)')
+            $("#user_female_lable_c").css('backgroundImage','url(/assets/white_female.png)')
+        });
+
+        $("#user_female_lable_c").on("click",function(){
+            $("#c_male").val(false);
+            $(this).css('backgroundImage','url(/assets/blue_female.png)')
+            $("#user_male_lable_c").css('backgroundImage','url(/assets/white_male.png)')
+        });
+
 //        $(".chosen-container").css({"width":"100%"});
     });
+
+
+
+
 </script>
+

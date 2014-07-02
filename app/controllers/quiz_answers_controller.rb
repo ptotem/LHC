@@ -8,11 +8,11 @@ class QuizAnswersController < ApplicationController
   def resolve_layout
     puts "action_name :- #{action_name}"
     puts "device_type :- #{device_type}"
-    if action_name == "retest"
-      #if device_type == :desktop
+    #if action_name == "retest"
+      if device_type == :desktop
       "dashboard_and_profile_layout"
-    elsif action_name == "retest_mobile"
-      #elsif device_type == :mobile
+    #elsif action_name == "retest_mobile"
+      elsif device_type == :mobile
       "dashboard_and_profile_layout_mobile"
     end
   end
@@ -83,13 +83,14 @@ class QuizAnswersController < ApplicationController
   end
 
   def retest
+
     if device_type == :mobile
       #render :text => "render mobile pages"
       #return
       redirect_to retest_mobile_path
-    elsif device_type == :tablet
-      render :text => "render tablet pages"
-      return
+    #elsif device_type == :tablet
+    #  render :text => "render tablet pages"
+    #  return
     else
       @quiz = Quiz.find(params[:quiz_id])
       @quiz_questions = @quiz.questions

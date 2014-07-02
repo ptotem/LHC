@@ -10,11 +10,11 @@ class DashboardsController < ApplicationController
   def resolve_layout
     puts "action_name :- #{action_name}"
     puts "device_type :- #{device_type}"
-    if action_name == "my_dashboard" || action_name == "welcome_dashboard" || action_name == "quick_matches" || action_name == "mutual_likes" || action_name == "snazzmeup"  || action_name == "conversations" || action_name == "conversations_with_users" || action_name == "younme" || action_name == "start_ice_breaker" || action_name == "answer_icebreaker" || action_name == "user_verification" || action_name == "quiz_review"
-    #if device_type == :desktop
+    #if action_name == "my_dashboard" || action_name == "welcome_dashboard" || action_name == "quick_matches" || action_name == "mutual_likes" || action_name == "snazzmeup"  || action_name == "conversations" || action_name == "conversations_with_users" || action_name == "younme" || action_name == "start_ice_breaker" || action_name == "answer_icebreaker" || action_name == "user_verification" || action_name == "quiz_review"
+    if device_type == :desktop
       "dashboard_and_profile_layout"
-    elsif action_name == "my_dashboard_mobile" || action_name == "welcome_dashboard_mobile" || action_name == "quick_matches_mobile" || action_name == "mutual_likes_mobile" || action_name == "snazzmeup_mobile"|| action_name == "conversations_mobile" || action_name == "conversations_with_users_mobile" || action_name == "younme_mobile" || action_name == "start_ice_breaker_mobile" || action_name == "answer_icebreaker_mobile" || action_name == "user_verification_mobile" || action_name == "quiz_review_mobile"
-    #elsif device_type == :mobile
+    #elsif action_name == "my_dashboard_mobile" || action_name == "welcome_dashboard_mobile" || action_name == "quick_matches_mobile" || action_name == "mutual_likes_mobile" || action_name == "snazzmeup_mobile"|| action_name == "conversations_mobile" || action_name == "conversations_with_users_mobile" || action_name == "younme_mobile" || action_name == "start_ice_breaker_mobile" || action_name == "answer_icebreaker_mobile" || action_name == "user_verification_mobile" || action_name == "quiz_review_mobile"
+    elsif device_type == :mobile
       "dashboard_and_profile_layout_mobile"
     end
   end
@@ -31,9 +31,9 @@ class DashboardsController < ApplicationController
       #render :text => "render mobile pages"
       #return
       redirect_to welcome_dashboard_mobile_path
-    elsif device_type == :tablet
-      render :text => "render tablet pages"
-      return
+    #elsif device_type == :tablet
+    #  render :text => "render tablet pages"
+    #  return
     else
       #render :text => "render desktop pages"
       #return
@@ -51,7 +51,7 @@ class DashboardsController < ApplicationController
 
   def welcome_dashboard_mobile
     @current_user_route = current_user.current_route
-    current_user.current_route = my_dashboard_path
+    #current_user.current_route = my_dashboard_path
     current_user.save!
     if current_user.last_matched_time.nil? or (Time.now - current_user.last_matched_time)/3600 > 72
       current_user.update_match_status
@@ -112,9 +112,9 @@ class DashboardsController < ApplicationController
       #render :text => "render mobile pages"
       #return
       redirect_to my_dashboard_mobile_path
-    elsif device_type == :tablet
-      render :text => "render tablet pages"
-      return
+    #elsif device_type == :tablet
+    #  render :text => "render tablet pages"
+    #  return
     else
       #render :text => "render desktop pages"
       #return
@@ -169,9 +169,9 @@ class DashboardsController < ApplicationController
       #render :text => "render mobile pages"
       #return
       redirect_to user_verification_mobile_path
-    elsif device_type == :tablet
-      render :text => "render tablet pages"
-      return
+    #elsif device_type == :tablet
+    #  render :text => "render tablet pages"
+    #  return
     else
       #render :text => "render desktop pages"
       #return
@@ -202,12 +202,42 @@ class DashboardsController < ApplicationController
     #@user = current_user
     @user = User.find(params[:user][:user_id])
     @user.verification_text = params[:user][:verification_text]
-    @user.verification_request_sent = true
     @user.verification_request_sent_at = Time.now.to_i
+    @user.institutional_mail = Devise.friendly_token
     @user.save!
+
     #redirect_to "/profile/#{@user.id}"
     redirect_to user_profile_path(current_user.id), :notice => "Your institute mail is saved for verification."
+
+    extracted_email= @user.verification_text.split("@").last
+    domain_array=DomainName.all.map(&:name)
+    if domain_array.any?{|s| s.include?(extracted_email)}
+      @inst= DomainName.where(:name => extracted_email).first
+      if @inst.institute_name == Institution.find(@user.demographic.last_institute).name
+      @user.verification_request_sent = true
+      @user.save!
+      VerMailer.ver_email(@user.verification_text,@user).deliver
+        redirect_to user_profile_path(current_user.id),:notice => "An email has been sent for verification."
+      else
+        redirect_to user_verification_path,:notice => "Please enter a valid institute email id"
+      end
+    else
+      @user.verification_request_sent = false
+      @user.save!
+      redirect_to user_verification_path,:notice => "Please enter a valid institute email id"
+    end
+
   end
+
+  def start_verify_user_institute_email
+    @user = User.find(params[:user_id])
+    if @user.institutional_mail == params[:token]
+      @user.verified = true
+      @user.save!
+      redirect_to user_profile_path(@user.id),:notice => "Your academic credentials have been verified."
+    end
+  end
+
 
   def verify_user_linkedin_url
     #@user = current_user
@@ -216,7 +246,7 @@ class DashboardsController < ApplicationController
     @user.verification_request_sent = true
     @user.verification_request_sent_at = Time.now.to_i
     @user.save!
-    redirect_to user_profile_path(current_user.id), :notice => "Your linkedin url is saved for verification."
+    redirect_to user_profile_path(current_user.id),:notice => "Great! You will be verified pretty soon. "
     return
   end
 
@@ -234,9 +264,9 @@ class DashboardsController < ApplicationController
       #render :text => "render mobile pages"
       #return
       redirect_to conversations_mobile_path
-    elsif device_type == :tablet
-      render :text => "render tablet pages"
-      return
+    #elsif device_type == :tablet
+    #  render :text => "render tablet pages"
+    #  return
     else
       #render :text => "render desktop pages"
       #return
@@ -296,9 +326,9 @@ class DashboardsController < ApplicationController
       #render :text => "render mobile pages"
       #return
       redirect_to start_ice_breaker_mobile_path
-    elsif device_type == :tablet
-      render :text => "render tablet pages"
-      return
+    #elsif device_type == :tablet
+    #  render :text => "render tablet pages"
+    #  return
     else
       #render :text => "render desktop pages"
       #return
@@ -328,9 +358,9 @@ class DashboardsController < ApplicationController
       #render :text => "render mobile pages"
       #return
       redirect_to quick_matches_mobile_path
-    elsif device_type == :tablet
-      render :text => "render tablet pages"
-      return
+    #elsif device_type == :tablet
+    #  render :text => "render tablet pages"
+    #  return
     else
       #render :text => "render desktop pages"
       #return
@@ -474,9 +504,9 @@ class DashboardsController < ApplicationController
       #render :text => "render mobile pages"
       #return
       redirect_to mutual_likes_mobile_path
-    elsif device_type == :tablet
-      render :text => "render tablet pages"
-      return
+    #elsif device_type == :tablet
+    #  render :text => "render tablet pages"
+    #  return
     else
       #render :text => "render desktop pages"
       #return
@@ -534,12 +564,13 @@ class DashboardsController < ApplicationController
       #render :text => "render mobile pages"
       #return
       redirect_to snazzmeup_mobile_path
-    elsif device_type == :tablet
-      render :text => "render tablet pages"
-      return
+    #elsif device_type == :tablet
+    #  render :text => "render tablet pages"
+    #  return
     else
-      #render :text => "render desktop pages"
-      #return
+      if current_user.current_route.include?("take_test")
+        redirect_to current_user.current_route, notice: 'Answer the questions first.'
+      end
     end
   end
 
@@ -554,14 +585,13 @@ class DashboardsController < ApplicationController
       #render :text => "render mobile pages"
       #return
       redirect_to conversations_with_users_mobile_path
-    elsif device_type == :tablet
-      render :text => "render tablet pages"
-      return
+    #elsif device_type == :tablet
+    #  render :text => "render tablet pages"
+    #  return
     else
       #render :text => "render desktop pages"
       #return
       @target_user = User.find(params[:id])
-
       @messages = current_user.sent_messages.map { |m| m if m.receiver_id == @target_user.id } + current_user.received_messages.map { |m| m if m.sender_id == @target_user.id }
       @messages.compact!
 
@@ -573,13 +603,13 @@ class DashboardsController < ApplicationController
       #return
     end
 
+
   end
 
   def conversations_with_users_mobile
     #render :text => "here is conversations_with_users_mobile"
     #return
     @target_user = User.find(params[:id])
-
     @messages = current_user.sent_messages.map { |m| m if m.receiver_id == @target_user.id } + current_user.received_messages.map { |m| m if m.sender_id == @target_user.id }
     @messages.compact!
 
@@ -588,7 +618,6 @@ class DashboardsController < ApplicationController
     end
     @messages.reverse!
     #render :text=>@messages
-    #return
   end
 
   def quiz_review
@@ -596,15 +625,17 @@ class DashboardsController < ApplicationController
       #render :text => "render mobile pages"
       #return
       redirect_to quiz_review_mobile_path
-    elsif device_type == :tablet
-      render :text => "render tablet pages"
-      return
+    #elsif device_type == :tablet
+    #  render :text => "render tablet pages"
+    #  return
     else
       @quiz = Quiz.find(params[:quiz_id])
       @user = current_user
     end
 
+
   end
+
 
   def quiz_review_mobile
     @quiz = Quiz.find(params[:quiz_id])
@@ -617,9 +648,9 @@ class DashboardsController < ApplicationController
       #render :text => "render mobile pages"
       #return
       redirect_to younme_mobile_path
-    elsif device_type == :tablet
-      render :text => "render tablet pages"
-      return
+    #elsif device_type == :tablet
+    #  render :text => "render tablet pages"
+    #  return
     else
       #render :text => "render desktop pages"
       #return
@@ -690,6 +721,27 @@ class DashboardsController < ApplicationController
       end
 
       @quizzes=QuizCategory.where(:personal => 't').first.quizzes rescue []
+
+      @user_quizzes = Array.new
+      @uquizzes = Array.new
+      @user_quiz_ans_questions = @opposite_user.quiz_answers.where(:shared=>true).map(&:question_id)
+
+
+      @user_quiz_ans_questions.each do |q|
+        if Question.find(q).quizzes.first.quiz_category.personal
+          @user_quizzes << Question.find(q).quizzes.first.id
+        end
+      end
+      @user_quizzes = @user_quizzes.uniq
+
+      @user_quizzes.each do |i|
+        @uquizzes << Quiz.find(i)
+      end
+      #render :json =>@uquizzes
+      #return
+      #@quizzes = QuizCategory.where(:personal => true).first.quizzes rescue []
+      #render :json => @quizzes
+      #return
     end
 
   end
@@ -763,7 +815,29 @@ class DashboardsController < ApplicationController
       @opposite_user_ans_name << Option.find(ouda).name
     end
 
+
     @quizzes=QuizCategory.where(:personal => 't').first.quizzes rescue []
+
+    @user_quizzes = Array.new
+    @uquizzes = Array.new
+    @user_quiz_ans_questions = @opposite_user.quiz_answers.where(:shared=>true).map(&:question_id)
+
+
+    @user_quiz_ans_questions.each do |q|
+      if Question.find(q).quizzes.first.quiz_category.personal
+        @user_quizzes << Question.find(q).quizzes.first.id
+      end
+    end
+    @user_quizzes = @user_quizzes.uniq
+
+    @user_quizzes.each do |i|
+      @uquizzes << Quiz.find(i)
+    end
+    #render :json =>@uquizzes
+    #return
+    #@quizzes = QuizCategory.where(:personal => true).first.quizzes rescue []
+   #render :json => @quizzes
+   #return
   end
 
   def answer_icebreaker
@@ -771,9 +845,9 @@ class DashboardsController < ApplicationController
       #render :text => "render mobile pages"
       #return
       redirect_to answer_icebreaker_mobile_path
-    elsif device_type == :tablet
-      render :text => "render tablet pages"
-      return
+    #elsif device_type == :tablet
+    #  render :text => "render tablet pages"
+    #  return
     else
       #render :text => "render desktop pages"
       #return
@@ -827,7 +901,7 @@ class DashboardsController < ApplicationController
       #render :text => "Request Already Sent"
       #return
       #redirect_to my_dashboard_path,:notice=>"Like request already sent !"
-      redirect_to user_profile_path(@receiver_id), :notice => "Like request already sent !"
+      redirect_to user_profile_path(@receiver_id),:notice=>"Already liked. Stay Cool!!"
       return
     else
       @like=Like.create(:receiver_id => @receiver_id, :sender_id => @sender_id, :status => false, :like_type => "Timed")
@@ -846,9 +920,9 @@ class DashboardsController < ApplicationController
     @accept.status=true
     @accept.save!
 
-    redirect_to user_profile_path(@accept.sender_id), notice: 'You have accepted the request.'
-    Notification.create!(:content => User.find(@accept.receiver_id).demographic.nickname + " likes you too !", :user_id => @accept.sender_id, :pointer_link => user_profile_path(@accept.receiver_id), :sender_id => @accept.receiver_id, :notification_type => "Timed")
-    MutualLikeMailer.mutual_like_mailer(@accept.sender_id, current_user).deliver
+   redirect_to user_profile_path(@accept.sender_id), notice: 'Great! You two like each other.'
+   Notification.create!(:content=>User.find(@accept.receiver_id).demographic.nickname + " likes you too !", :user_id=>@accept.sender_id, :pointer_link=>user_profile_path(@accept.receiver_id),:sender_id => @accept.receiver_id,:notification_type=>"Timed")
+   MutualLikeMailer.mutual_like_mailer(@accept.sender_id, current_user).deliver
 
     #return
   end
@@ -862,7 +936,7 @@ class DashboardsController < ApplicationController
     if !@reject.nil?
       @reject.status=false
       @reject.save!
-      redirect_to user_profile_path(@reject.sender_id), notice: 'You have rejected the request.'
+      redirect_to user_profile_path(@reject.sender_id), notice: 'Bummer! Better luck next time ;)'
     else
       redirect_to quick_matches_path, notice: "You haven't sent request to this person."
     end
@@ -874,10 +948,32 @@ class DashboardsController < ApplicationController
     #render :json => params[:id]
     #return
     @base_match = BaseMatch.find(params[:id])
-    @rejected_match = RejectedMatch.create(:rejected_target => @base_match.target_id, :user_id => current_user.id)
+    @rejected_match = RejectedMatch.create(:rejected_target=>@base_match.target_id, :user_id=>current_user.id)
     @rejected_match.save!
     @base_match.destroy
-    redirect_to quick_matches_path, notice: 'You have rejected the request.'
+    redirect_to quick_matches_path, notice: 'Bummer! Better luck next time ;)'
+  end
+
+  def block_user
+    @user_to_be_blocked = params[:id]
+    #render :text => @user_to_be_blocked
+    #return
+    @base_match = BaseMatch.where(:user_id => current_user.id, :target_id => @user_to_be_blocked).first
+    #render :json => @base_match
+    #return
+    @rejected_match = RejectedMatch.create(:rejected_target=>@base_match.target_id, :user_id=>current_user.id)
+    @rejected_match.save!
+    @base_match.destroy
+    redirect_to quick_matches_path, notice: 'You have blocked the user.'
+  end
+
+  def importing_institute
+    if request.post? && params[:file].present?
+      DomainName.import(params[:file])
+      #redirect_to '/employee_masters', notice: "Slides imported."
+    else
+      redirect_to '/', notice: "Slides couldn't be imported."
+    end
   end
 
 
@@ -891,6 +987,12 @@ class DashboardsController < ApplicationController
   def dashboard_params
     params[:dashboard]
   end
+
+
+  def import_domain_name
+    render :layout => false
+  end
+
 
 
 end
