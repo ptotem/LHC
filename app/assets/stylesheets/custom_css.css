@@ -7,9 +7,14 @@ body {
     /*overflow: hidden;*/
 }
 
+
 .coffee-logo-styling {
     height: 77px;
     margin-top: -8px;
+}
+
+.landing-page-slider-list-item{
+    height: 560px;
 }
 
 .whiteblock {

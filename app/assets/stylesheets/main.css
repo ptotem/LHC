@@ -1026,9 +1026,9 @@ ul.social-icons li a:hover {
         height: 580px;
     }
 
-    .bxslider li {
-        height: 500px;
-    }
+    /*.bxslider li {*/
+        /*height: 500px;*/
+    /*}*/
 
     .bx-wrapper .bx-prev, .bx-wrapper .bx-next, .bx-wrapper .bx-pager {
         display: none;
